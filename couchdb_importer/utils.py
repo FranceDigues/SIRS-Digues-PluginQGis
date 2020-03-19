@@ -1,77 +1,54 @@
 class Utils:
     @staticmethod
-    def build_query(searchedClass):
-        mango = {
-            "selector": {
-                "@class": {
-                    "$eq": "fr.sirs.core.model." + searchedClass
+    def parse_url(url):
+        split_url = url.split("://")
+        if len(split_url) == 2:
+            http = split_url[0]
+            addr = split_url[1]
+        else:
+            http = "localhost"
+            addr = "5984"
+        return http, addr
+
+    @staticmethod
+    def build_query(className, attributes=None, ids=None):
+        if ids is not None and type(ids) == list:
+            orList = []
+            for id in ids:
+                orList.append({
+                    "@class": "fr.sirs.core.model." + className,
+                    "_id": id
+                })
+            mango = {
+                "selector": {
+                    "$or": orList
                 }
             }
-        }
+            if attributes is not None:
+                mango["fields"]=attributes
+        else:
+            mango = {
+                "selector": {
+                    "@class": "fr.sirs.core.model." + className
+                }
+            }
+            if attributes is not None:
+                mango["fields"] = attributes
         return mango
 
     @staticmethod
-    def build_tuple(item, criteria):
-        list = []
-        for key in criteria:
-            if key in item.keys():
-                list.append(item[key])
-            else:
-                list.append(None)
-        return tuple(list)
-
-    @staticmethod
-    def find_criteria_from_class(type):
-        switcher = {
-            'Desordre': ['_id', \
-                         '_rev', \
-                         '@class', \
-                         'borne_debut_aval', \
-                         'borne_debut_distance', \
-                         'prDebut', \
-                         'valid', \
-                         'designation', \
-                         'longitudeMin', \
-                         'longitudaMax', \
-                         'latitudeMin', \
-                         'latitudeMax', \
-                         'editedGeoCoordinate', \
-                         'borneDebutId', \
-                         'borneFinId', \
-                         'systemRepId', \
-                         'sourceId', \
-                         'typeDesordreId', \
-                         'observations', \
-                         'foreignParentId', \
-                         'positionDebut', \
-                         'positionFin', \
-                         'geometry', \
-                         'date_debut', \
-                         'date_fin'],
-            'TronconDigue': ['_id', \
-                             '_rev', \
-                             '@class', \
-                             'libelle', \
-                             'designation', \
-                             'valid', \
-                             'digueId', \
-                             'typeRiveId', \
-                             'systemeRepDefautId', \
-                             'date_debut', \
-                             'geometry'
-                             ],
-            'TronconLit': ['_id', \
-                           '_rev', \
-                           '@class', \
-                           'libelle', \
-                           'author', \
-                           'valid', \
-                           'systemRepDefaultId', \
-                           'date_debut', \
-                           'dateMaj', \
-                           'geometry']
+    def build_query_only_id(ids):
+        orList = []
+        for id in ids:
+            orList.append({
+                "_id": id
+            })
+        mango = {
+            "selector": {
+                "$or": orList
+            }
         }
-        return switcher.get(type, 'Invalid class reference')
+        return mango
 
     @staticmethod
     def is_str_start_by_underscore(var):
@@ -80,10 +57,34 @@ class Utils:
         return False
 
     @staticmethod
-    def get_geometry_index(criteria):
-        i = 0
-        for crit in criteria:
-            if crit == "geometry":
-                return i
-            i = i + 1
-        return 0
+    def get_label(positionable):
+        if 'libelle' in positionable:
+            return positionable['libelle']
+        elif 'designation' in positionable:
+            return positionable['designation']
+        else:
+            return 'NULL'
+
+    @staticmethod
+    def build_row_name_positionable(positionable):
+        className = positionable["@class"].split("fr.sirs.core.model.")[1]
+        label = Utils.get_label(positionable)
+        id = positionable["_id"]
+        name = className + " - " + label + " - " + id
+        return name
+
+    @staticmethod
+    def build_list_from_preference(obj):
+        result = []
+        for item in obj:
+            if obj[item]:
+                result.append(item)
+        return result
+
+    @staticmethod
+    def build_list_id_from_data(data):
+        result = []
+        for className in data:
+            result.extend(data[className]["ids"].keys())
+
+        return result
