@@ -206,7 +206,7 @@ class CouchdbImporter:
 
     def complete_data_with_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'next_configuration.json')) as inFile:
+        with open(os.path.join(__location__, 'configuration.json')) as inFile:
             preference = json.load(inFile)
             for className in preference:
                 self.data[className] = {
@@ -219,7 +219,7 @@ class CouchdbImporter:
 
     def write_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'next_configuration.json'), 'w') as outFile:
+        with open(os.path.join(__location__, 'configuration.json'), 'w') as outFile:
             preference = {}
             for className in self.data:
                 preference[className] = {}
