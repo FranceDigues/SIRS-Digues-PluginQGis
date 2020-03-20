@@ -30,6 +30,9 @@ from qgis.core import QgsFeature, QgsGeometry, QgsVectorLayer, QgsProject, QgsFi
 
 import json
 
+# Initialize Qt resources from file resources.py
+from .resources import *
+
 from .couchdb_importer_dialog import CouchdbImporterDialog
 import os.path
 
@@ -83,7 +86,6 @@ class CouchdbImporter:
 
         # principal data
         self.data = {}
-        self.build_data_structure()
         self.complete_data_with_configuration()
 
         # length parameter used to determine if layer is a point
@@ -202,29 +204,22 @@ class CouchdbImporter:
                 action)
             self.iface.removeToolBarIcon(action)
 
-    def build_data_structure(self):
-        models = ["Desordre", "TronconDigue", "TronconLit"]
-        for elem in models:
-            self.data[elem] = {
-                "selected": True,
-                "ids": "all",
-                "attributes": {},
-                "style": {},
-                "crs": ""
-            }
-
     def complete_data_with_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json')) as inFile:
+        with open(os.path.join(__location__, 'next_configuration.json')) as inFile:
             preference = json.load(inFile)
             for className in preference:
-                self.data[className]["attributes"] = preference[className]["attributes"]
-                self.data[className]["style"] = preference[className]["style"]
-                self.data[className]["crs"] = preference[className]["crs"]
+                self.data[className] = {
+                    "selected": True,
+                    "ids": "all",
+                    "attributes": preference[className]["attributes"],
+                    "style": preference[className]["style"],
+                    "crs": preference[className]["crs"]
+                }
 
     def write_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json'), 'w') as outFile:
+        with open(os.path.join(__location__, 'next_configuration.json'), 'w') as outFile:
             preference = {}
             for className in self.data:
                 preference[className] = {}
@@ -522,16 +517,10 @@ class CouchdbImporter:
         # change access
         self.set_ui_access_connection()
 
-    def reset_data(self):
-        for className in self.data:
-            self.data[className]["selected"] = True
-            self.data[className]["ids"] = "all"
-        self.complete_data_with_configuration()
-
     def on_reset_database_click(self):
         # reset list object
         self.positionableSelected = []
-        self.reset_data()
+        self.complete_data_with_configuration()
         # reset list ui
         modelPositionable = self.dlg.positionable.model()
         if modelPositionable:
@@ -896,15 +885,9 @@ class CouchdbImporter:
     def is_point(self, listPoint):
         for p1 in listPoint:
             for p2 in listPoint:
-                print(p1.distance(p2))
                 if p1.distance(p2) > self.lengthParameter:
                     return False
         return True
-
-    def print_data(self):
-        for l in self.data:
-            print(l)
-            print(self.data[l])
 
     def on_add_layers_click(self):
         self.update_positionable_selected()
