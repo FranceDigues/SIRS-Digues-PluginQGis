@@ -446,9 +446,6 @@ class CouchdbImporter:
 
     def on_login_click(self):
         try:
-            if self.dlg.login.text() == '' and self.dlg.password.text() == '':
-                self.dlg.login.setText('admin')
-                self.dlg.password.setText('admin')
             http, addr = Utils.parse_url(self.dlg.url.text())
             self.connector = CouchdbConnector(http, addr, self.dlg.login.text(), self.dlg.password.text())
             connection = self.connector.getConnection()
@@ -461,6 +458,11 @@ class CouchdbImporter:
             self.build_list_positionable_class()
             self.set_ui_access_database()
         except ConnectionRefusedError:
+            widget = self.iface.messageBar().createMessage("CouchdbConnectorException",
+                                                           "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.")
+            self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
+            raise CouchdbConnectorException("Impossible de se connecter à la base")
+        except ValueError:
             widget = self.iface.messageBar().createMessage("CouchdbConnectorException",
                                                            "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.")
             self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
@@ -522,6 +524,10 @@ class CouchdbImporter:
         self.on_reset_database_click()
         # reset connection
         self.connector = None
+        # reset url, login and password fields
+        self.dlg.url.setText("")
+        self.dlg.login.setText("")
+        self.dlg.password.setText("")
         # reset database combobox
         self.dlg.database.clear()
         self.dlg.database_2.clear()
@@ -955,10 +961,10 @@ class CouchdbImporter:
             # add / update layers action
             self.dlg.addLayers.clicked.connect(self.on_add_layers_click)
             self.dlg.updateLayers.clicked.connect(self.on_update_layers_click)
-            # default url connection
-            self.dlg.url.setText("http://localhost:5984")
             # initialize ui access and data
             self.on_reset_connection_click()
+            # default url connection
+            self.dlg.url.setText("http://localhost:5984")
             # default choice of projection
             self.dlg.projete.setChecked(True)
 
