@@ -1,1 +1,415 @@
-{"Desordre": {"attributes": {"_id": true, "_rev": true, "@class": true, "borne_debut_aval": true, "borne_debut_distance": true, "prDebut": true, "borne_fin_aval": true, "borne_fin_distance": true, "prFin": true, "valid": true, "designation": true, "longitudeMin": true, "longitudeMax": true, "latitudeMin": true, "latitudeMax": true, "editedGeoCoordinate": true, "borneDebutId": true, "borneFinId": true, "systemeRepId": true, "commentaire": true, "linearId": true, "lieuDit": true, "coteId": true, "positionId": true, "sourceId": true, "typeDesordreId": true, "observations": true, "prestationIds": true, "voieDigueIds": true, "foreignParentId": true, "positionDebut": true, "positionFin": true, "geometry": true, "date_debut": true, "date_fin": true}, "style": {"default": {"color": "#000000", "width": "1.0", "capstyle": "round"}, "point": {"name": "triangle", "color": "#000000"}}, "crs": "EPSG:2154"}, "TronconDigue": {"attributes": {"_id": true, "_rev": true, "@class": true, "libelle": true, "designation": true, "valid": true, "digueId": true, "typeRiveId": true, "borneIds": true, "systemeRepDefautId": true, "date_debut": true, "geometry": true}, "style": {"default": {"color": "#ff0000", "width": "1.0", "capstyle": "round"}, "point": {"name": "triangle", "color": "#ff0000"}}, "crs": "EPSG:2154"}, "TronconLit": {"attributes": {"_id": true, "_rev": true, "@class": true, "libelle": true, "author": true, "valid": true, "borneIds": true, "systemeRepDefautId": true, "date_debut": true, "dateMaj": true, "geometry": true}, "style": {"default": {"capstyle": "round", "customdash": "5;2", "customdash_map_unit_scale": "3x:0,0,0,0,0,0", "customdash_unit": "MM", "draw_inside_polygon": "0", "joinstyle": "bevel", "line_color": "0,255,0,255", "line_style": "solid", "line_width": "1", "line_width_unit": "MM", "offset": "0", "offset_map_unit_scale": "3x:0,0,0,0,0,0", "offset_unit": "MM", "ring_filter": "0", "use_custom_dash": "0", "width_map_unit_scale": "3x:0,0,0,0,0,0"}, "point": {"angle": "0", "color": "0,255,0,255", "horizontal_anchor_point": "1", "joinstyle": "bevel", "name": "triangle", "offset": "0,0", "offset_map_unit_scale": "3x:0,0,0,0,0,0", "offset_unit": "MM", "outline_color": "35,35,35,255", "outline_style": "solid", "outline_width": "0", "outline_width_map_unit_scale": "3x:0,0,0,0,0,0", "outline_width_unit": "MM", "scale_method": "diameter", "size": "2", "size_map_unit_scale": "3x:0,0,0,0,0,0", "size_unit": "MM", "vertical_anchor_point": "1"}}, "crs": "EPSG:2154"}}
+{
+  "TronconDigue": {
+    "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
+      "borneIds": true,
+      "commentaire": true,
+      "date_debut": true,
+      "designation": true,
+      "digueId": true,
+      "geometry": true,
+      "libelle": true,
+      "systemeRepDefautId": true,
+      "typeRiveId": true,
+      "valid": true
+    },
+    "style": {
+      "default": {
+        "color": "#0100ff",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#0100ff"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "BorneDigue": {
+    "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
+      "date_debut": true,
+      "designation": true,
+      "fictive": true,
+      "geometry": true,
+      "libelle": true,
+      "valid": true
+    },
+    "style": {
+      "default": {
+        "color": "#24dbff",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#24dbff"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "SommetRisberme": {
+    "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
+      "borneDebutId": true,
+      "borneFinId": true,
+      "borne_debut_aval": true,
+      "borne_debut_distance": true,
+      "borne_fin_aval": true,
+      "borne_fin_distance": true,
+      "commentaire": true,
+      "coteId": true,
+      "date_debut": true,
+      "designation": true,
+      "editedGeoCoordinate": true,
+      "epaisseur": true,
+      "fonctionId": true,
+      "foreignParentId": true,
+      "geometry": true,
+      "latitudeMax": true,
+      "latitudeMin": true,
+      "linearId": true,
+      "longitudeMax": true,
+      "longitudeMin": true,
+      "materiauId": true,
+      "natureId": true,
+      "numCouche": true,
+      "photos": true,
+      "positionDebut": true,
+      "positionFin": true,
+      "prDebut": true,
+      "prFin": true,
+      "sourceId": true,
+      "systemeRepId": true,
+      "valid": true
+    },
+    "style": {
+      "default": {
+        "color": "#49b6ff",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#49b6ff"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "Fondation": {
+    "attributes": {},
+    "style": {
+      "default": {
+        "color": "#6d92ff",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#6d92ff"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "Epi": {
+    "attributes": {},
+    "style": {
+      "default": {
+        "color": "#926dff",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#926dff"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "Crete": {
+    "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
+      "borneDebutId": true,
+      "borneFinId": true,
+      "borne_debut_aval": true,
+      "borne_debut_distance": true,
+      "borne_fin_aval": true,
+      "borne_fin_distance": true,
+      "commentaire": true,
+      "date_debut": true,
+      "designation": true,
+      "editedGeoCoordinate": true,
+      "epaisseur": true,
+      "foreignParentId": true,
+      "geometry": true,
+      "largeurMoyenne": true,
+      "latitudeMax": true,
+      "latitudeMin": true,
+      "linearId": true,
+      "longitudeMax": true,
+      "longitudeMin": true,
+      "materiauId": true,
+      "natureId": true,
+      "numCouche": true,
+      "photos": true,
+      "positionDebut": true,
+      "positionFin": true,
+      "prDebut": true,
+      "prFin": true,
+      "sourceId": true,
+      "systemeRepId": true,
+      "valid": true
+    },
+    "style": {
+      "default": {
+        "color": "#b649ff",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#b649ff"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "OuvrageRevanche": {
+    "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
+      "borneDebutId": true,
+      "borneFinId": true,
+      "borne_debut_aval": true,
+      "borne_debut_distance": true,
+      "borne_fin_aval": true,
+      "borne_fin_distance": true,
+      "commentaire": true,
+      "coteId": true,
+      "date_debut": true,
+      "designation": true,
+      "editedGeoCoordinate": true,
+      "foreignParentId": true,
+      "geometry": true,
+      "hauteurMurette": true,
+      "largeur": true,
+      "latitudeMax": true,
+      "latitudeMin": true,
+      "linearId": true,
+      "longitudeMax": true,
+      "longitudeMin": true,
+      "materiauBasId": true,
+      "materiauHautId": true,
+      "natureBasId": true,
+      "natureHautId": true,
+      "photos": true,
+      "positionDebut": true,
+      "positionFin": true,
+      "positionId": true,
+      "prDebut": true,
+      "prFin": true,
+      "sourceId": true,
+      "systemeRepId": true,
+      "valid": true
+    },
+    "style": {
+      "default": {
+        "color": "#db24ff",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#db24ff"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "PiedDigue": {
+    "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
+      "borneDebutId": true,
+      "borneFinId": true,
+      "borne_debut_aval": true,
+      "borne_debut_distance": true,
+      "borne_fin_aval": true,
+      "borne_fin_distance": true,
+      "commentaire": true,
+      "coteId": true,
+      "date_debut": true,
+      "designation": true,
+      "editedGeoCoordinate": true,
+      "fonctionId": true,
+      "foreignParentId": true,
+      "geometry": true,
+      "latitudeMax": true,
+      "latitudeMin": true,
+      "linearId": true,
+      "longitudeMax": true,
+      "longitudeMin": true,
+      "materiauId": true,
+      "natureId": true,
+      "photos": true,
+      "positionDebut": true,
+      "positionFin": true,
+      "prDebut": true,
+      "prFin": true,
+      "sourceId": true,
+      "systemeRepId": true,
+      "valid": true
+    },
+    "style": {
+      "default": {
+        "color": "#1000ff",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#1000ff"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "TalusDigue": {
+    "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
+      "borneDebutId": true,
+      "borneFinId": true,
+      "borne_debut_aval": true,
+      "borne_debut_distance": true,
+      "borne_fin_aval": true,
+      "borne_fin_distance": true,
+      "commentaire": true,
+      "coteId": true,
+      "date_debut": true,
+      "designation": true,
+      "editedGeoCoordinate": true,
+      "epaisseurSommet": true,
+      "foreignParentId": true,
+      "geometry": true,
+      "latitudeMax": true,
+      "latitudeMin": true,
+      "linearId": true,
+      "longitudeMax": true,
+      "longitudeMin": true,
+      "longueurRampantBas": true,
+      "longueurRampantHaut": true,
+      "materiauBasId": true,
+      "materiauHautId": true,
+      "natureBasId": true,
+      "natureHautId": true,
+      "numCouche": true,
+      "penteInterieure": true,
+      "photos": true,
+      "positionDebut": true,
+      "positionFin": true,
+      "prDebut": true,
+      "prFin": true,
+      "sourceId": true,
+      "systemeRepId": true,
+      "valid": true
+    },
+    "style": {
+      "default": {
+        "color": "#dbff24",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#dbff24"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "TalusRisberme": {
+    "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
+      "borneDebutId": true,
+      "borneFinId": true,
+      "borne_debut_aval": true,
+      "borne_debut_distance": true,
+      "borne_fin_aval": true,
+      "borne_fin_distance": true,
+      "commentaire": true,
+      "coteId": true,
+      "date_debut": true,
+      "designation": true,
+      "editedGeoCoordinate": true,
+      "epaisseurSommet": true,
+      "fonctionBasId": true,
+      "fonctionHautId": true,
+      "foreignParentId": true,
+      "geometry": true,
+      "latitudeMax": true,
+      "latitudeMin": true,
+      "linearId": true,
+      "longitudeMax": true,
+      "longitudeMin": true,
+      "longueurRampantBas": true,
+      "longueurRampantHaut": true,
+      "materiauBasId": true,
+      "materiauHautId": true,
+      "natureBasId": true,
+      "natureHautId": true,
+      "numCouche": true,
+      "penteInterieure": true,
+      "photos": true,
+      "positionDebut": true,
+      "positionFin": true,
+      "prDebut": true,
+      "prFin": true,
+      "sourceId": true,
+      "systemeRepId": true,
+      "valid": true
+    },
+    "style": {
+      "default": {
+        "color": "#b6ff49",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "point": {
+        "name": "triangle",
+        "color": "#b6ff49"
+      }
+    },
+    "crs": "EPSG:2154"
+  }
+}
