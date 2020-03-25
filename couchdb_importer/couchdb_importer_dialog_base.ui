@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>738</width>
+    <width>740</width>
     <height>794</height>
    </rect>
   </property>
@@ -74,7 +74,7 @@
      <item>
       <widget class="QPushButton" name="updateLayers">
        <property name="text">
-        <string>Réactualiser les couches</string>
+        <string>Mise à jour des couches</string>
        </property>
       </widget>
      </item>

@@ -22,41 +22,30 @@
  ***************************************************************************/
 """
 
-import json
 import couchdb
 
 
-# Custom exception
 class CouchdbConnectorException(Exception):
-    pass
+    def __init__(self, *args):
+        if args:
+            self.message = args[0]
+        else:
+            self.message = None
+
+    def __str__(self):
+        if self.message:
+            return 'CouchdbConnectorException, {0} '.format(self.message)
+        else:
+            return 'CouchdbConnectorException has been raised'
 
 
-# Main class
 class CouchdbConnector(object):
-
-    # Constructor
     def __init__(self, http, url, user, password):
         self.url = url
         self.user = user
         self.password = password
         self.address = http + "://" + self.user + ":" + self.password + "@" + self.url + "/"
-
-        try:
-            self.connection = couchdb.Server(self.address)
-        except Exception:
-            raise CouchdbConnectorException("Impossible de se connecter a la base")
-
-    def getUrl(self):
-        return self.url
-
-    def getPort(self):
-        return self.port
-
-    def getUser(self):
-        return self.User
-
-    def getPassword(self):
-        return self.password
+        self.connection = couchdb.Server(self.address)
 
     def getAddress(self):
         return self.address
