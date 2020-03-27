@@ -621,6 +621,10 @@ class CouchdbImporter:
 
         # browse the layers and update geometry and attribute table list
 
+        # progress bar
+        utot = 100 / len(result)
+        completed = 0
+        self.dlg.progressBar.setValue(completed)
         for data in result:
             id = data["_id"]
             classNameComplete = data["@class"]
@@ -656,6 +660,10 @@ class CouchdbImporter:
             feature.setGeometry(formatGeom)
             provider.addFeature(feature)
             layer.updateExtents()
+            # progress bar
+            completed = completed + utot
+            self.dlg.progressBar.setValue(completed)
+        self.dlg.progressBar.setValue(0)
         self.dlg.close()
 
     def on_add_layers_click(self):
@@ -773,6 +781,10 @@ class CouchdbImporter:
         # build and add new layers if they are not in the layerTreeRoot
         root = QgsProject.instance().layerTreeRoot()
         currentLayer = self.recover_map_layer()
+        # progress bar
+        utot = 100 / len(self.positionableSelected)
+        completed = 0
+        self.dlg.progressBar.setValue(completed)
         for pos in self.positionableSelected:
             id = pos["_id"]
             classNameComplete = pos["@class"]
@@ -793,6 +805,10 @@ class CouchdbImporter:
                 group = root.addGroup(className)
             QgsProject.instance().addMapLayer(layer, False)
             group.addLayer(layer)
+            # progress bar
+            completed = completed + utot
+            self.dlg.progressBar.setValue(completed)
+        self.dlg.progressBar.setValue(0)
 
     def recover_map_layer(self):
         result = {}
@@ -963,10 +979,12 @@ class CouchdbImporter:
             self.dlg.updateLayers.clicked.connect(self.on_update_layers_click)
             # initialize ui access and data
             self.on_reset_connection_click()
-            # default url connection
+            # set default url connection
             self.dlg.url.setText("http://localhost:5984")
-            # default choice of projection
+            # set default choice of projection
             self.dlg.projete.setChecked(True)
+            # set progress bar value
+            self.dlg.progressBar.setValue(0)
 
         # show the dialog
         self.dlg.show()

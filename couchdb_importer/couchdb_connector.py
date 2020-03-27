@@ -25,7 +25,6 @@
 import os
 import sys
 import platform
-import subprocess as sub
 from pip._internal import main
 
 plugin_dir = os.path.dirname(__file__)

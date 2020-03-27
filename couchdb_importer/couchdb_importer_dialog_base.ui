@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>740</width>
-    <height>794</height>
+    <height>861</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -182,6 +182,13 @@
     <widget class="QPushButton" name="addLayers">
      <property name="text">
       <string>Ajouter les couches</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QProgressBar" name="progressBar">
+     <property name="value">
+      <number>24</number>
      </property>
     </widget>
    </item>
