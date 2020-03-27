@@ -23,8 +23,6 @@ Usage:
 # Installation
 ## Requirements
 - QGIS version 3.4 or later
-- couchdb >= 1.2  (On Linux and Mac, it will be automatically installed.
-On windows, you have to pass by 'Install missing module' section.)
 
 ## Install manually from zip file in QGIS
 You can import the zip package directly through Qgis plugin manager.
@@ -32,9 +30,3 @@ You can import the zip package directly through Qgis plugin manager.
 2. Switch to tab **Installed**, make sure the plugin `Couchdb importer` is enabled.
 3. Activate the plugin (with the checkbox).  
 4. You can see the Couchdb Importer icon at the QGIS action bar, if plugin is activated.
-
-## Install missing module
-###### Windows only
-1. Open 'OSGeo4W shell' (packed with QGIS in the start menu) as Administrator (Right-click on, select 'Run as Administrator')
-2. Run command `py3_env`
-3. Run command `python -m pip install couchdb`

@@ -24,26 +24,10 @@
 
 import os
 import sys
-import platform
-from pip._internal import main
-
-plugin_dir = os.path.dirname(__file__)
-couchdb_dir = os.path.join(plugin_dir, 'couchdb')
-
-if platform.system() == 'Linux' or platform.system() == 'Darwin':
-    try:
-        import couchdb
-    except ImportError:
-        main(['install', '--target=%s' % couchdb_dir, 'couchdb'])
-        if couchdb_dir not in sys.path:
-            sys.path.append(couchdb_dir)
-elif platform.system() == 'Windows':
-    try:
-        import couchdb
-    except ImportError:
-        print(r'## Install missing module\n###### Windows only\n1. Open "OSGeo4W shell" (packed with QGIS in the '
-              r'start menu) as Administrator (Right-click on, select "Run as Administrator")\n2. Run command '
-              r'`%APPDATA%/QGIS/QGIS3/profiles/default/python/plugins/install_couchdb.bat`')
+couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
+if couchdb_dir not in sys.path:
+    sys.path.append(couchdb_dir)
+import couchdb
 
 
 class CouchdbConnectorException(Exception):
