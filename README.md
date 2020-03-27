@@ -36,4 +36,5 @@ You can import the zip package directly through Qgis plugin manager.
 ## Install missing module
 ###### Windows only
 1. Open 'OSGeo4W shell' (packed with QGIS in the start menu) as Administrator (Right-click on, select 'Run as Administrator')
-2. Run command `%APPDATA%/QGIS/QGIS3/profiles/default/python/plugins/install_couchdb.bat`
+2. Run command `py3_env`
+3. Run command `python -m pip install couchdb`
