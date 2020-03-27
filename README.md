@@ -23,10 +23,10 @@ Usage:
 # Installation
 ## Requirements
 - QGIS version 3.4 or later
-- couchdb >= 1.2 ; On Linux and Mac, it will be automatically installed,
-on windows, you have to pass by 'Install missing module' section.
+- couchdb >= 1.2  (On Linux and Mac, it will be automatically installed.
+On windows, you have to pass by 'Install missing module' section.)
 
-### Install manually from zip file in QGIS
+## Install manually from zip file in QGIS
 You can import the zip package directly through Qgis plugin manager.
 1. In QGIS, navigate to menu **Plugins** > **Manage and Install Plugins...** > **Install from ZIP**, then select the downloaded zip file.
 2. Switch to tab **Installed**, make sure the plugin `Couchdb importer` is enabled.
