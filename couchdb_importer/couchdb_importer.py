@@ -611,8 +611,8 @@ class CouchdbImporter:
             couchdbServer = self.connector.getConnection()
             db = couchdbServer[self.dlg.database_2.currentText()]
             result = db.find(query)
-            widget = self.iface.messageBar().createMessage("Toutes les couches sont mis à jour.")
-            self.iface.messageBar().pushWidget(widget, Qgis.Info, duration=3)
+            widget = self.iface.messageBar().createMessage("Mise à jour terminée.")
+            self.iface.messageBar().pushWidget(widget, Qgis.Info, duration=5)
         except ConnectionRefusedError:
             widget = self.iface.messageBar().createMessage("CouchdbConnectorException",
                                                            "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.")
@@ -622,7 +622,7 @@ class CouchdbImporter:
         # browse the layers and update geometry and attribute table list
 
         # progress bar
-        utot = 100 / len(result)
+        utot = 100 / len(list(result))
         completed = 0
         self.dlg.progressBar.setValue(completed)
         for data in result:
@@ -646,8 +646,6 @@ class CouchdbImporter:
             layer = format[id]
             layer.setName(label)
             if layer.wkbType() == 1 and geomType != "POINT" or layer.wkbType() == 2 and geomType != "LINESTRING":
-                widget = self.iface.messageBar().createMessage("Couche " + str(layer.id()), "La mise à jour va écraser le style courant de cette donnée, souhaitez-vous effectuer la mise à jour de cette donnée ?")
-                self.iface.messageBar().pushWidget(widget, Qgis.Critical)
                 layer = self.build_new_layer(data, "projeté")
                 if layer is None:
                     continue
