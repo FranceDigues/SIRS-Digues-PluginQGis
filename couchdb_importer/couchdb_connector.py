@@ -59,9 +59,6 @@ class CouchdbConnector(object):
     def getConnection(self):
         return self.connection
 
-    def getDatabase(self, name):
-        return self.connection[name]
-
     def getFilteredConnection(self):
         result = []
         for name in self.connection:
@@ -69,17 +66,12 @@ class CouchdbConnector(object):
                 result.append(name)
         return result
 
-    def request_database_from_ids(self, database, ids):
-        query = Utils.build_query_only_id(ids)
-        db = self.connection[database]
-        return db.find(query)
-
-    def request_database_from_class(self, database, className, attribute):
-        query = Utils.build_query(className, attribute)
-        db = self.connection[database]
-        return db.find(query)
-
-    def request_database_from_class_and_ids(self, database, className, attribute, ids):
-        query = Utils.build_query(className, attribute, ids)
+    def request_database(self, database, className=None, attributes=None, ids=None):
+        if className is not None and attributes is not None:
+            query = Utils.build_query(className, attributes, ids)
+        elif className is None and attributes is None and ids is not None:
+            query = Utils.build_query_only_id(ids)
+        else:
+            raise CouchdbConnectorException("Requète inexistante.")
         db = self.connection[database]
         return db.find(query)
