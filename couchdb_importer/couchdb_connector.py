@@ -22,7 +22,13 @@
  ***************************************************************************/
 """
 
+import os
+import sys
+couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
+if couchdb_dir not in sys.path:
+    sys.path.append(couchdb_dir)
 import couchdb
+from .utils import Utils
 
 
 class CouchdbConnectorException(Exception):
@@ -52,3 +58,28 @@ class CouchdbConnector(object):
 
     def getConnection(self):
         return self.connection
+
+    def getDatabase(self, name):
+        return self.connection[name]
+
+    def getFilteredConnection(self):
+        result = []
+        for name in self.connection:
+            if not Utils.is_str_start_by_underscore(name):
+                result.append(name)
+        return result
+
+    def request_database_from_ids(self, database, ids):
+        query = Utils.build_query_only_id(ids)
+        db = self.connection[database]
+        return db.find(query)
+
+    def request_database_from_class(self, database, className, attribute):
+        query = Utils.build_query(className, attribute)
+        db = self.connection[database]
+        return db.find(query)
+
+    def request_database_from_class_and_ids(self, database, className, attribute, ids):
+        query = Utils.build_query(className, attribute, ids)
+        db = self.connection[database]
+        return db.find(query)
