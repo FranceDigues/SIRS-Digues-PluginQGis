@@ -25,18 +25,18 @@ from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt, QVari
 from qgis.PyQt.QtGui import QIcon, QStandardItem, QStandardItemModel
 from qgis.PyQt.QtWidgets import QAction, QDialog, QSizePolicy, QGridLayout, QDialogButtonBox
 
-from qgis.gui import QgsMessageBar
-from qgis.core import QgsFeature, QgsGeometry, QgsVectorLayer, QgsProject, QgsField, QgsPoint, QgsLineString, QgsLineSymbol, QgsMarkerSymbol, Qgis
+from qgis.core import QgsFeature, QgsGeometry, QgsVectorLayer, QgsProject, QgsField, QgsPoint, QgsLineString, QgsLineSymbol, QgsMarkerSymbol, Qgis, QgsWkbTypes
 
 import json
+import os.path
 
 # Initialize Qt resources from file resources.py
 from .resources import *
 
 from .couchdb_importer_dialog import CouchdbImporterDialog
-import os.path
-
 from .couchdb_connector import CouchdbConnector, CouchdbConnectorException
+from .couchdb_data import CouchdbData
+from .couchdb_layer import CouchdbBuilder
 from .utils import Utils
 
 
@@ -82,17 +82,22 @@ class CouchdbImporter:
         self.total = {}
 
         # positionable
-        self.positionableSelected = []
+        self.loadedPositionable = []
 
         # principal data
-        self.data = {}
-        self.complete_data_with_configuration()
+        self.data = CouchdbData()
+
+        # layer
+        self.provider = CouchdbBuilder()
 
         # length parameter used to determine if layer is a point
-        self.lengthParameter = 500
+        self.lengthParameter = 1
 
         # projection choice
         self.projection = "projeté"
+
+        # error message
+        self.errorMsg = {'noproj': {}, 'noabs': {}, 'nogeom': {}}
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -206,38 +211,6 @@ class CouchdbImporter:
 
     """
     /****************************************************************
-    * Methods used to read / write / update 'configuration.json' file
-    ****************************************************************/  
-    """
-
-    def complete_data_with_configuration(self):
-        __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json')) as inFile:
-            preference = json.load(inFile)
-            for className in preference:
-                self.data[className] = {
-                    "selected": True,
-                    "ids": "all",
-                    "attributes": preference[className]["attributes"],
-                    "style": preference[className]["style"],
-                    "crs": preference[className]["crs"]
-                }
-
-    def write_configuration(self):
-        __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json'), 'w') as outFile:
-            preference = {}
-            for className in self.data:
-                preference[className] = {}
-                preference[className]["attributes"] = self.data[className]["attributes"]
-                preference[className]["style"] = self.data[className]["style"]
-                preference[className]["crs"] = self.data[className]["crs"]
-            json.dump(preference, outFile)
-
-
-
-    """
-    /****************************************************************
     * Methods used to modify the principal data structure.
     * Data structure represents the user's preferences for import of
     * layers.
@@ -248,32 +221,50 @@ class CouchdbImporter:
         try:
             server = self.connector.getConnection()
             db = server[self.dlg.database.currentText()]
-            self.positionableSelected.clear()
-            for className in self.data:
-                if self.data[className]["selected"]:
-                    attributes = Utils.build_list_from_preference(self.data[className]["attributes"])
-                    if self.data[className]["ids"] == "all":
+            self.loadedPositionable.clear()
+            # progress bar
+            loadingUnit = 75 / len(self.data)
+            completed = 0
+            self.dlg.progressBar.setValue(completed)
+            for className in self.data.getClassName():
+                if self.data.getSelected(className):
+                    attributes = Utils.build_list_from_preference(self.data.getAttributes(className))
+                    if self.data.getIds(className) == "all":
                         query = Utils.build_query(className, attributes)
                     else:
-                        ids = Utils.build_list_from_preference(self.data[className]["ids"])
+                        ids = Utils.build_list_from_preference(self.data.getIds(className))
                         query = Utils.build_query(className, attributes, ids)
                     result = db.find(query)
-                    self.positionableSelected.extend(result)
+                    self.loadedPositionable.extend(result)
+                # progress bar
+                completed = completed + loadingUnit
+                self.dlg.progressBar.setValue(completed)
         except ConnectionRefusedError:
-            widget = self.iface.messageBar().createMessage("CouchdbConnectorException", "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.")
-            self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
+            self.basicErrorMessage("CouchdbConnectorException", "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.", Qgis.Warning)
             raise CouchdbConnectorException("Impossible de se connecter à la base")
 
     def complete_data_with_ids(self):
-        for className in self.data:
-            self.data[className]["ids"] = {}
-        for pos in self.positionableSelected:
+        for className in self.data.getClassName():
+            self.data.setIds(className, {})
+        for pos in self.loadedPositionable:
             className = pos["@class"].split("fr.sirs.core.model.")[1]
-            self.data[className]["ids"][pos["_id"]] = True
+            self.data.setIdValue(className, pos["_id"], True)
+
+    def collect_data_from_layers_ids(self):
+        try:
+            self.connector = None
+            http, addr = Utils.parse_url(self.dlg.url.text())
+            self.connector = CouchdbConnector(http, addr, self.dlg.login.text(), self.dlg.password.text())
+            ids = Utils.collect_ids_from_layers_filtered_by_positionable_class(self.data.getClassName())
+
+            return self.connector.request_database_from_ids(self.dlg.database.currentText(), ids)
+        except ConnectionRefusedError:
+            self.basicErrorMessage("CouchdbConnectorException", "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.", Qgis.Warning)
+            raise CouchdbConnectorException("Impossible de se connecter à la base")
 
     """
     /****************************************************************
-    * Method used to set modify UI access field.
+    * Modify UI access field.
     ****************************************************************/  
     """
 
@@ -290,7 +281,6 @@ class CouchdbImporter:
         self.dlg.updateLayers.setEnabled(False)
         # disable all other
         self.dlg.database.setEnabled(False)
-        self.dlg.database_2.setEnabled(False)
         self.dlg.detailButton.setEnabled(False)
         self.dlg.resetDatabaseButton.setEnabled(False)
         self.dlg.positionableClass.setEnabled(False)
@@ -302,7 +292,6 @@ class CouchdbImporter:
         # enable database param
         self.dlg.resetConnectionButton.setEnabled(True)
         self.dlg.database.setEnabled(True)
-        self.dlg.database_2.setEnabled(True)
         self.dlg.detailButton.setEnabled(True)
         self.dlg.resetDatabaseButton.setEnabled(True)
         self.dlg.positionableClass.setEnabled(True)
@@ -330,7 +319,6 @@ class CouchdbImporter:
         self.dlg.updateLayers.setEnabled(True)
         # disable all other
         self.dlg.database.setEnabled(False)
-        self.dlg.database_2.setEnabled(True)
         self.dlg.detailButton.setEnabled(False)
         self.dlg.positionableClass.setEnabled(False)
         self.dlg.attribute.setEnabled(False)
@@ -343,13 +331,13 @@ class CouchdbImporter:
 
     """
     /****************************************************************
-    * Method used to build listView object of UI.
+    * Build UI ListView
     ****************************************************************/  
     """
 
     def build_list_positionable_class(self):
         model = QStandardItemModel()
-        for obj in self.data:
+        for obj in self.data.getClassName():
             item = QStandardItem(obj)
             item.setCheckState(Qt.Checked)
             item.setCheckable(True)
@@ -360,14 +348,14 @@ class CouchdbImporter:
     def build_list_attribute(self):
         model = QStandardItemModel()
         defaultAttribute = ["_id", "geometry", "@class", "libelle", "designation"]
-        for attr in self.data[self.currentPositionableClass]["attributes"]:
+        for attr in self.data.getAttributes(self.currentPositionableClass):
             item = QStandardItem(attr)
             if attr in defaultAttribute:
                 item.setCheckable(False)
                 item.setCheckState(Qt.Checked)
             else:
                 item.setCheckable(True)
-                if self.data[self.currentPositionableClass]["attributes"][attr]:
+                if self.data.getAttributes(self.currentPositionableClass)[attr]:
                     item.setCheckState(Qt.Checked)
                 else:
                     item.setCheckState(Qt.Unchecked)
@@ -377,22 +365,31 @@ class CouchdbImporter:
 
     def build_list_positionable(self):
         model = QStandardItemModel()
-        for pos in self.positionableSelected:
+        # progress bar
+        loadingUnit = 25 / len(self.loadedPositionable)
+        completed = 75
+        for pos in self.loadedPositionable:
             name = Utils.build_row_name_positionable(pos)
             item = QStandardItem(name)
             item.setCheckable(True)
             item.setCheckState(Qt.Checked)
             model.appendRow(item)
+            # progress bar
+            completed = completed + loadingUnit
+            self.dlg.progressBar.setValue(completed)
         model.itemChanged.connect(self.on_positionable_list_changed)
         self.dlg.positionable.setModel(model)
+        # progress bar
+        self.dlg.progressBar.setValue(0)
 
     def change_positionable_class(self, state):
         model = QStandardItemModel()
-        for className in self.data:
-            self.data[className]["selected"] = state
+        for className in self.data.getClassName():
+            self.data.setSelected(className, state)
             item = QStandardItem(className)
             item.setCheckable(True)
             if state:
+                self.data.setIds(className, "all")
                 item.setCheckState(Qt.Checked)
             else:
                 item.setCheckState(Qt.Unchecked)
@@ -402,10 +399,10 @@ class CouchdbImporter:
 
     def change_positionable(self, state):
         model = QStandardItemModel()
-        for className in self.data:
-            for id in self.data[className]["ids"]:
-                self.data[className]["ids"][id] = state
-        for pos in self.positionableSelected:
+        for className in self.data.getClassName():
+            for id in self.data.getIds(className):
+                self.data.setIdValue(className, id, state)
+        for pos in self.loadedPositionable:
             name = Utils.build_row_name_positionable(pos)
             item = QStandardItem(name)
             item.setCheckable(True)
@@ -420,15 +417,15 @@ class CouchdbImporter:
     def change_attribute(self, state):
         model = QStandardItemModel()
         defaultAttribute = ["_id", "geometry", "@class", "libelle", "designation"]
-        for attr in self.data[self.currentPositionableClass]["attributes"]:
+        for attr in self.data.getAttributes(self.currentPositionableClass):
             item = QStandardItem(attr)
             if attr in defaultAttribute:
                 item.setCheckable(False)
                 item.setCheckState(Qt.Checked)
-                self.data[self.currentPositionableClass]["attributes"][attr] = True
+                self.data.setAttributeValue(self.currentPositionableClass, attr, True)
             else:
                 item.setCheckable(True)
-                self.data[self.currentPositionableClass]["attributes"][attr] = state
+                self.data.setAttributeValue(self.currentPositionableClass, attr, state)
                 if state:
                     item.setCheckState(Qt.Checked)
                 else:
@@ -439,8 +436,7 @@ class CouchdbImporter:
 
     """
     /****************************************************************
-    * Method used to trigger process after the user performed an
-    * action.
+    * Action methods
     ****************************************************************/  
     """
 
@@ -449,23 +445,19 @@ class CouchdbImporter:
             http, addr = Utils.parse_url(self.dlg.url.text())
             self.connector = CouchdbConnector(http, addr, self.dlg.login.text(), self.dlg.password.text())
             connection = self.connector.getConnection()
+
             filtered_connection = []
             for name in connection:
                 if not Utils.is_str_start_by_underscore(name):
                     filtered_connection.append(name)
             self.dlg.database.addItems([name for name in filtered_connection])
-            self.dlg.database_2.addItems([name for name in filtered_connection])
             self.build_list_positionable_class()
             self.set_ui_access_database()
         except ConnectionRefusedError:
-            widget = self.iface.messageBar().createMessage("CouchdbConnectorException",
-                                                           "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.")
-            self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
+            self.basicErrorMessage("CouchdbConnectorException", "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.", Qgis.Warning)
             raise CouchdbConnectorException("Impossible de se connecter à la base")
         except ValueError:
-            widget = self.iface.messageBar().createMessage("CouchdbConnectorException",
-                                                           "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.")
-            self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
+            self.basicErrorMessage("CouchdbConnectorException", "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.", Qgis.Warning)
             raise CouchdbConnectorException("Impossible de se connecter à la base")
 
     def on_detail_click(self):
@@ -486,7 +478,7 @@ class CouchdbImporter:
         rowName = model.itemFromIndex(item)
         id = str(rowName.text()).split(' - ')[-1]
         selected = None
-        for pos in self.positionableSelected:
+        for pos in self.loadedPositionable:
             if pos["_id"] == id:
                 selected = pos
                 break
@@ -496,7 +488,7 @@ class CouchdbImporter:
         model = QStandardItemModel()
         listStandardItem = []
         for s in selected:
-            self.complete_model_from_positionable(s, selected[s], listStandardItem)
+            Utils.complete_model_from_positionable(s, selected[s], listStandardItem)
         for row in listStandardItem:
             model.appendRow(row)
         self.dlg.detail.setModel(model)
@@ -530,7 +522,6 @@ class CouchdbImporter:
         self.dlg.password.setText("")
         # reset database combobox
         self.dlg.database.clear()
-        self.dlg.database_2.clear()
         # reset positionable class list
         model = self.dlg.positionableClass.model()
         if model:
@@ -540,8 +531,8 @@ class CouchdbImporter:
 
     def on_reset_database_click(self):
         # reset list object
-        self.positionableSelected = []
-        self.complete_data_with_configuration()
+        self.loadedPositionable = []
+        self.data.reset_from_configuration()
         # reset list ui
         modelPositionable = self.dlg.positionable.model()
         if modelPositionable:
@@ -559,26 +550,27 @@ class CouchdbImporter:
 
     def on_attribute_list_changed(self, item):
         attributeSelected = str(item.text())
+        state = True
         if item.checkState() == Qt.Checked:
             state = True
         if item.checkState() == Qt.Unchecked:
             state = False
-        self.data[self.currentPositionableClass]["attributes"][attributeSelected] = state
+        self.data.setAttributeValue(self.currentPositionableClass, attributeSelected, state)
 
     def on_positionable_list_changed(self, item):
         id = str(item.text()).split(' - ')[-1]
         className = str(item.text()).split(' - ')[0]
         if item.checkState() == Qt.Checked:
-            self.data[className]["ids"][id] = True
+            self.data.setIdValue(className, id, True)
         if item.checkState() == Qt.Unchecked:
-            self.data[className]["ids"][id] = False
+            self.data.setIdValue(className, id, False)
 
     def on_positionable_class_list_changed(self, item):
         if item.checkState() == Qt.Checked:
-            self.data[item.text()]["selected"] = True
-            self.data[item.text()]["ids"] = "all"
+            self.data.setSelected(item.text(), True)
+            self.data.setIds(item.text(), "all")
         if item.checkState() == Qt.Unchecked:
-            self.data[item.text()]["selected"] = False
+            self.data.setSelected(item.text(), False)
 
     def on_projection_click(self):
         if self.dlg.projete.isChecked():
@@ -587,84 +579,59 @@ class CouchdbImporter:
             self.projection = "absolu"
 
     def on_update_layers_click(self):
-
-        # recover current layer and check if they exist
-
-        layers = QgsProject.instance().mapLayers()
-        if len(layers) == 0:
-            widget = self.iface.messageBar().createMessage("Aucune couche trouvée.")
-            self.iface.messageBar().pushWidget(widget, Qgis.Warning, 5)
+        result = self.collect_data_from_layers_ids()
+        resultList = list(result)
+        l = len(resultList)
+        if l == 0:
+            self.simpleErrorMessage("Les Identifiants trouvés dans les couches ne trouvent pas de référence en base de donnée.", Qgis.Info)
             return
-
-        # retrieves the layers present in the database
-
-        try:
-            self.connector = None
-            http, addr = Utils.parse_url(self.dlg.url.text())
-            self.connector = CouchdbConnector(http, addr, self.dlg.login.text(), self.dlg.password.text())
-            format = {}
-            for l in layers:
-                firstId = self.recover_layer_id((layers[l]))
-                if firstId != -1:
-                    format[firstId] = layers[l]
-            query = Utils.build_query_only_id(format.keys())
-            couchdbServer = self.connector.getConnection()
-            db = couchdbServer[self.dlg.database_2.currentText()]
-            result = db.find(query)
-            widget = self.iface.messageBar().createMessage("Mise à jour terminée.")
-            self.iface.messageBar().pushWidget(widget, Qgis.Info, duration=5)
-        except ConnectionRefusedError:
-            widget = self.iface.messageBar().createMessage("CouchdbConnectorException",
-                                                           "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.")
-            self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
-            raise CouchdbConnectorException("Impossible de se connecter à la base")
-
-        # browse the layers and update geometry and attribute table list
-
         # progress bar
-        utot = 100 / len(list(result))
+        loadingUnit = 100 / l
         completed = 0
         self.dlg.progressBar.setValue(completed)
-        for data in result:
+        # update data
+        for data in resultList:
             id = data["_id"]
             classNameComplete = data["@class"]
             className = classNameComplete.split("fr.sirs.core.model.")[1]
-            if "libelle" in data.keys():
-                label = data["libelle"]
-            elif "designation" in data.keys():
-                label = data["designation"]
-            else:
-                label = data["_id"]
-            if "geometry" in data.keys():
-                geom = data["geometry"]
-            else:
-                widget = self.iface.messageBar().createMessage("Couche " + id, "Aucune donnée projetée trouvée.")
-                self.iface.messageBar().pushWidget(widget, Qgis.Critical, duration=5)
+            wkt = self.build_wkt(data)
+            if wkt is None:
                 continue
-            formatGeom, geomType = self.format_geometry(geom)
-            attrList, attrValueList = self.format_list_attribute(data, className)
-            layer = format[id]
-            layer.setName(label)
-            if layer.wkbType() == 1 and geomType != "POINT" or layer.wkbType() == 2 and geomType != "LINESTRING":
-                layer = self.build_new_layer(data, "projeté")
-                if layer is None:
-                    continue
+            geom = Utils.build_geometry(wkt, self.lengthParameter)
+            if geom is None:
+                self.simpleErrorMessage("Type de geometrie inconnu", Qgis.Warning)
+                continue
+            typ = geom.wkbType()
+            layer = Utils.filter_layers_by_name_and_geometry_type(className, typ)
+            ########## COMMENT FAIRE !!! ############
+            if layer.wkbType() != typ:
+                msg = "Mise à jour impossible. Pour cette donnée, le type de géométrie a changé et n'est plus celle de sa couche actuelle. Veuillez supprimer puis réimporter la couche pour éffectuer sa mise à jour."
+                self.basicErrorMessage(msg, "couche: " + layer.name() + "donnée: " + str(id), Qgis.Critical)
+
             provider = layer.dataProvider()
-            it = layer.getFeatures()
-            for feat in it:
-                provider.deleteFeatures([feat.id()])
-            feature = QgsFeature()
-            feature.setAttributes(attrValueList)
-            feature.setGeometry(formatGeom)
+            features = layer.getFeatures()
+            for feat in features:
+                if feat['_id'] == id:
+                    provider.deleteFeatures([feat.id()])
+            feature = self.provider.build_feature(data, geom, layer, self.data)
             provider.addFeature(feature)
             layer.updateExtents()
             # progress bar
-            completed = completed + utot
+            completed = completed + loadingUnit
             self.dlg.progressBar.setValue(completed)
+
+        # reset progress bar
         self.dlg.progressBar.setValue(0)
+
+        # print error message
+        self.display_error_messages()
+
+        # close current windows
         self.dlg.close()
 
     def on_add_layers_click(self):
+        self.data.write_configuration()
+        #self.write_configuration()
         self.update_positionable_selected()
         self.complete_data_with_ids()
         self.add_layers()
@@ -677,94 +644,35 @@ class CouchdbImporter:
     ****************************************************************/  
     """
 
-    def complete_model_from_positionable(self, name, obj, out):
-        if type(obj) is str:
-            it = QStandardItem(name + " : " + obj)
-            out.append(it)
-        elif type(obj) is int:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is float:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is bool:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is list:
-            for index in range(len(obj)):
-                self.complete_model_from_positionable(name + "_" + str(index), obj[index], out)
-        elif type(obj) is dict:
-            for it in obj:
-                self.complete_model_from_positionable(name + "_" + it, obj[it], out)
-        else:
-            it = QStandardItem(name + " : unknown type")
-            out.append(it)
 
-    def format_list_attribute_generic(self, name, obj, attr, value):
-        if type(obj) == str:
-            attr.append(QgsField(name, QVariant.String))
-            value.append(obj)
-        elif type(obj) == int:
-            attr.append(QgsField(name, QVariant.Int))
-            value.append(obj)
-        elif type(obj) == float:
-            attr.append(QgsField(name, QVariant.Double))
-            value.append(obj)
-        elif type(obj) == bool:
-            attr.append(QgsField(name, QVariant.Bool))
-            value.append(obj)
-        elif type(obj) == list:
-            i = 1
-            for it in obj:
-                attr2, value2 = self.format_list_attribute_generic(name + "_" + str(i), it, [], [])
-                i = i + 1
-                for j in range(len(attr2)):
-                    attr.append(attr2[j])
-                    value.append(value2[j])
-        elif type(obj) == dict:
-            i = 1
-            for it in obj:
-                attr2, value2 = self.format_list_attribute_generic(name + "_" + str(it), obj[it], [], [])
-                i = i + 1
-                for j in range(len(attr2)):
-                    attr.append(attr2[j])
-                    value.append(value2[j])
-        else:
-            attr.append(QgsField(name, QVariant.String))
-            value.append("NoneType")
-        return attr, value
 
-    def format_list_attribute(self, content, className):
-        attrList = []
-        attrValueList = []
-        pref = self.data[className]["attributes"]
-        for attr in pref:
-            if pref[attr]:
-                if attr in content.keys():
-                    if type(content[attr]) == str:
-                        attrList.append(QgsField(attr, QVariant.String))
-                        attrValueList.append(content[attr])
-                    elif type(content[attr]) == float:
-                        attrList.append(QgsField(attr, QVariant.Double))
-                        attrValueList.append(content[attr])
-                    elif type(content[attr]) == bool:
-                        attrList.append(QgsField(attr, QVariant.Bool))
-                        attrValueList.append(content[attr])
-                    elif type(content[attr]) == int:
-                        attrList.append(QgsField(attr, QVariant.Int))
-                        attrValueList.append(content[attr])
-                    elif type(content[attr]) == list or type(content[attr]) == dict:
-                        attrListRec, attrValueListRec = self.format_list_attribute_generic(attr, content[attr], [], [])
-                        for i in range(len(attrListRec)):
-                            attrList.append(attrListRec[i])
-                            attrValueList.append(attrValueListRec[i])
-                    else:
-                        attrList.append(QgsField(attr, QVariant.Invalid))
-                        attrValueList.append(content[attr])
-                else:
-                    attrList.append(QgsField(attr, QVariant.String))
-                    attrValueList.append("NULL")
-        return attrList, attrValueList
+    #def build_field_value_generic(self, name, obj, value):
+    #    if type(obj) in [str, int, float, bool]:
+    #        value[name] = obj
+    #    elif type(obj) == list:
+    #        for i in range(len(obj)):
+    #            self.build_field_value_generic(name + "." + str(i), obj[i], value)
+    #    elif type(obj) == dict:
+    #        for it in obj:
+    #            self.build_field_value_generic(name + "." + str(it), obj[it], value)
+    #    else:
+    #        value[name] = 'NULL'
+
+    #def build_field_value(self, content, className):
+    #    value = {}
+    #    pref = self.data.getAttributes(className)
+    #    for attr in pref:
+    #        if pref[attr]:
+    #            if attr in content.keys():
+    #                if type(content[attr]) in [str, float, bool, int]:
+    #                    value[attr] = content[attr]
+    #                elif type(content[attr]) == list or type(content[attr]) == dict:
+    #                    self.build_field_value_generic(attr, content[attr], value)
+    #                else:
+    #                    value[attr] = 'NULL'
+    #            else:
+    #                value[attr] = 'NULL'
+    #    return value
 
     """
     /****************************************************************
@@ -773,79 +681,110 @@ class CouchdbImporter:
     """
 
     def add_layers(self):
-        # save the current parameter
-        self.write_configuration()
-
-        # build and add new layers if they are not in the layerTreeRoot
         root = QgsProject.instance().layerTreeRoot()
-        currentLayer = self.recover_map_layer()
-        # progress bar
-        utot = 100 / len(self.positionableSelected)
-        completed = 0
-        self.dlg.progressBar.setValue(completed)
-        for pos in self.positionableSelected:
-            id = pos["_id"]
-            classNameComplete = pos["@class"]
+        ids = Utils.collect_ids_from_layers_filtered_by_user_selection(self.data.getListId())
+        llp = len(self.loadedPositionable)
+        if llp == 0:
+            widget = self.iface.messageBar().createMessage("Aucune vue sélectionné.")
+            self.iface.messageBar().pushWidget(widget, Qgis.Info, 5)
+            self.dlg.progressBar.setValue(0)
+            return
+        loadingUnit = 25 / llp
+        completed = 75
+        allLayers = {}
+        alreadyLoaded = {}
+
+        for data in self.loadedPositionable:
+            id = data["_id"]
+            classNameComplete = data["@class"]
             className = classNameComplete.split("fr.sirs.core.model.")[1]
-            if id in currentLayer.keys():
-                widget = self.iface.messageBar().createMessage("Couche " + str(id), "La couche est déjà chargée. Clickez sur 'Mise à jour des couches' pour actualiser ses données.")
-                self.iface.messageBar().pushWidget(widget, Qgis.Info, 5)
+            if id in ids:
+                if className not in alreadyLoaded:
+                    alreadyLoaded[className] = []
+                alreadyLoaded[className].append(id)
                 continue
 
-            # build new layer
-            layer = self.build_new_layer(pos, self.projection)
-            if layer is None:
+            # build geometry
+            wkt = self.build_wkt(data)
+            if wkt is None:
                 continue
+
+            geom = Utils.build_geometry(wkt, self.lengthParameter)
+            if geom is None:
+                self.basicErrorMessage("Type de géométrie non reconnu", str(id), Qgis.Warning)
+                continue
+
+            typ = geom.wkbType()
+
+            # is layer already exist
+            currentLayer = Utils.filter_layers_by_name_and_geometry_type(className, typ)
+            if currentLayer is None:
+                # build layer if not exist
+                if className not in allLayers:
+                    allLayers[className] = {}
+                if typ not in allLayers[className]:
+                    allLayers[className][typ] = self.provider.build_layer(className, geom, self.data)
+                layer = allLayers[className][typ]
+            else:
+                layer = currentLayer
+
+            # build feature
+            feature = self.provider.build_feature(data, geom, layer, self.data)
+
+            # add the new feature to the layer
+            provider = layer.dataProvider()
+            provider.addFeature(feature)
+            layer.updateExtents()
 
             # sort layers in correspond class
             group = root.findGroup(className)
             if group is None:
                 group = root.addGroup(className)
-            QgsProject.instance().addMapLayer(layer, False)
-            group.addLayer(layer)
             # progress bar
-            completed = completed + utot
+            completed = completed + loadingUnit
             self.dlg.progressBar.setValue(completed)
+
+        # complete group
+        for className in allLayers:
+            group = root.findGroup(className)
+            for type in allLayers[className]:
+                QgsProject.instance().addMapLayer(allLayers[className][type], False)
+                group.addLayer(allLayers[className][type])
+
+        # progress bar
         self.dlg.progressBar.setValue(0)
 
-    def recover_map_layer(self):
-        result = {}
-        listCurrentId = Utils.build_list_id_from_data(self.data)
-        layers = QgsProject.instance().mapLayers()
-        for l in layers:
-            id = self.recover_layer_id(layers[l])
-            if id != -1:
-                if id in listCurrentId:
-                    result[id] = layers[l]
-        return result
+        # message if data is already download
+        if len(alreadyLoaded) != 0:
+            msg = ""
+            for className in alreadyLoaded:
+                msg = msg + className.upper() + "(" + ", ".join(alreadyLoaded[className]) + ") "
+            self.basicErrorMessage("Les données suivantes sont déjà chargées. Clickez sur 'Mise à jour des couches' pour actualiser ces données", msg, Qgis.Info)
+        self.display_error_messages()
 
-    def recover_layer_id(self, layer):
-        if layer.type() != 0:
-            return -1
-        features = layer.getFeatures()
-        for f in features:
-            idx = layer.fields().indexFromName("_id")
-            if idx != -1:
-                return f["_id"]
-        return -1
+    def display_error_messages(self):
+        if bool(self.errorMsg['noproj']):
+            self.stackedErrorMessage("Aucune donnée projetée pour les objets", 'noproj', Qgis.Warning)
+        if bool(self.errorMsg['noabs']):
+            self.stackedErrorMessage("Aucune position réelle trouvée: Utilisation des données projetées pour les objets", 'noabs', Qgis.Warning)
+        if bool(self.errorMsg['nogeom']):
+            self.stackedErrorMessage("Aucune donnée de géométrie trouvée pour les objets", 'nogeom', Qgis.Warning)
+        # clear error message
+        self.errorMsg = {'noproj': {}, 'noabs': {}, 'nogeom': {}}
 
-    def recover_layer_field_index(self, layer, className):
-        if layer.type() != 0:
-            return -1
-        for attr in self.data[className]["attributes"].keys():
-            if layer.fields().indexFromName(attr) != -1:
-                return layer.fields().indexFromName(attr)
-        return -1
+    def build_wkt(self, data):
+        classNameComplete = data["@class"]
+        className = classNameComplete.split("fr.sirs.core.model.")[1]
 
-    def build_wkt(self, data, projectionType):
-        if projectionType == "projeté":
+        if self.projection == "projeté":
             if "geometry" in data.keys():
                 return data["geometry"]
             else:
-                widget = self.iface.messageBar().createMessage("Couche " + data["_id"], "Aucune donnée projetée trouvée.")
-                self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
+                if className not in self.errorMsg['noproj']:
+                    self.errorMsg['noproj'][className] = []
+                self.errorMsg['noproj'][className].append(data["_id"])
                 return None
-        elif projectionType == "absolu":
+        elif self.projection == "absolu":
             if "approximatePositionDebut" in data.keys() and "approximatePositionFin" in data.keys():
                 a = data["approximatePositionDebut"]
                 b = data["approximatePositionFin"]
@@ -853,99 +792,75 @@ class CouchdbImporter:
                 geomB = QgsGeometry.fromWkt(b)
                 return QgsLineString(geomA, geomB).asWkt()
             else:
-                widget = self.iface.messageBar().createMessage("Couche " + data["_id"],
-                                                               "Aucune position réelle trouvée: Utilisation des données projetées.")
-                self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
                 if "geometry" in data.keys():
+                    if className not in self.errorMsg['noabs']:
+                        self.errorMsg['noabs'][className] = []
+                    self.errorMsg['noabs'][className].append(data["_id"])
                     return data["geometry"]
                 else:
-                    widget = self.iface.messageBar().createMessage("Couche " + data["_id"],
-                                                                   "Aucune donnée projetée trouvée.")
-                    self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
+                    if className not in self.errorMsg['nogeom']:
+                        self.errorMsg['nogeom'][className] = []
+                    self.errorMsg['nogeom'][className].append(data["_id"])
                     return None
 
-    def build_new_layer(self, data, projectionType):
-        classNameComplete = data["@class"]
-        className = classNameComplete.split("fr.sirs.core.model.")[1]
-        if "libelle" in data.keys():
-            label = data["libelle"]
-        elif "designation" in data.keys():
-            label = data["designation"]
-        else:
-            label = data["_id"]
-        geom = self.build_wkt(data, projectionType)
-        if geom is None:
-            return None
-        crs = self.data[className]["crs"]
-        formatGeom, geomType = self.format_geometry(geom)
-        attrList, attrValueList = self.format_list_attribute(data, className)
-        layer = QgsVectorLayer(geomType + "?crs=" + crs, label, "memory")
-        if geomType == "POINT":
-            props = self.data[className]["style"]["point"]
-            symbol = QgsMarkerSymbol.createSimple(props)
-        else:
-            props = self.data[className]["style"]["default"]
-            symbol = QgsLineSymbol.createSimple(props)
-            symbol.setOpacity(0.5)
-        layer.renderer().setSymbol(symbol)
-        provider = layer.dataProvider()
-        provider.addAttributes(attrList)
-        layer.updateFields()
-        feature = QgsFeature()
-        feature.setAttributes(attrValueList)
-        feature.setGeometry(formatGeom)
-        provider.addFeature(feature)
-        layer.updateExtents()
-        return layer
+    #def build_layer(self, className, geom):
+    #    crs = self.data.getCrs(className)
+    #    attrList = self.build_layer_fields(className)
+    #    layer = QgsVectorLayer(QgsWkbTypes.displayString(geom.wkbType()) + "?crs=" + crs, className, "memory")
 
-    def format_geometry(self, wkt):
-        geomType = wkt.split(' ')[0]
-        geom = QgsGeometry.fromWkt(wkt)
-        multi_geom = QgsGeometry()
-        temp_geom = []
-        if geom.type() == 0:
-            return geom, "POINT"
-        elif geom.type() == 1:
-            if geom.isMultipart():
-                multi_geom = geom.asMultiPolyline()
-                for i in multi_geom:
-                    temp_geom.extend(i)
-            else:
-                temp_geom = geom.asPolyline()
-            if self.is_point(temp_geom):
-                # te be more rigorous, I should take the barycenter from the list
-                return QgsPoint(temp_geom[0]), "POINT"
-            else:
-                return geom, geomType
-        elif geom.type() == 2:
-            # to find the maximum length inside geometry, I apply the convexhull to recover only pertinent point,
-            # before apply empirical research
-            hull = geom.convexHull()
-            if hull.isMultipart():
-                multi_geom = hull.asMultiPolygon()
-                for i in multi_geom:
-                    for j in i:
-                        temp_geom.extend(j)
-            else:
-                multi_geom = hull.asPolygon()
-                for i in multi_geom:
-                    temp_geom.extend(i)
-            if self.is_point(temp_geom):
-                # to be more rigorous, I should take the barycenter from the list
-                return QgsPoint(temp_geom[0]), "POINT"
-            else:
-                return geom, geomType
-        else:
-            widget = self.iface.messageBar().createMessage("Type de geometrie inconnu")
-            self.iface.messageBar().pushWidget(widget, Qgis.Warning, duration=5)
-            return geom, geomType
+    #    if geom.wkbType() == QgsWkbTypes.Point:
+    #        props = self.data.getStylePoint(className)
+    #        symbol = QgsMarkerSymbol.createSimple(props)
+    #    else:
+    #        props = self.data.getStyleDefault(className)
+    #        symbol = QgsLineSymbol.createSimple(props)
+    #        symbol.setOpacity(0.5)
+    #    layer.renderer().setSymbol(symbol)
+    #    provider = layer.dataProvider()
+    #    provider.addAttributes(attrList)
+    #    layer.updateFields()
+    #    return layer
 
-    def is_point(self, listPoint):
-        for p1 in listPoint:
-            for p2 in listPoint:
-                if p1.distance(p2) > self.lengthParameter:
-                    return False
-        return True
+    #def build_feature(self, data, formatGeom, layer):
+    #    classNameComplete = data["@class"]
+    #    className = classNameComplete.split("fr.sirs.core.model.")[1]
+    #    attrValue = self.build_field_value(data, className)
+    #    feature = QgsFeature(layer.fields())
+    #    for title in attrValue:
+    #        if layer.fields().indexFromName(title) != -1:
+    #            feature.setAttribute(title, attrValue[title])
+    #    feature.setGeometry(formatGeom)
+    #    return feature
+
+    #def build_layer_fields(self, className):
+    #    target = []
+    #    fields = self.layerFields[className]
+
+    #    for title in fields:
+    #        if fields[title] == "str":
+    #            target.append(QgsField(title, QVariant.String))
+    #        elif fields[title] == "int":
+    #            target.append(QgsField(title, QVariant.Int))
+    #        elif fields[title] == "bool":
+    #            target.append(QgsField(title, QVariant.Bool))
+    #        elif fields[title] == "float":
+    #            target.append(QgsField(title, QVariant.Double))
+    #    return target
+
+    def simpleErrorMessage(self, msg, level):
+        widget = self.iface.messageBar().createMessage(msg)
+        self.iface.messageBar().pushWidget(widget, level, 5)
+
+    def basicErrorMessage(self, msg1, msg2, level):
+        widget = self.iface.messageBar().createMessage(msg1, msg2)
+        self.iface.messageBar().pushWidget(widget, level, 5)
+
+    def stackedErrorMessage(self, msg1, typ, level):
+        msg2 = ""
+        for className in self.errorMsg[typ]:
+            msg2 = msg2 + className.upper() + "(" + ", ".join(self.errorMsg[typ][className]) + "), "
+        widget = self.iface.messageBar().createMessage(msg1, msg2)
+        self.iface.messageBar().pushWidget(widget, level, 5)
 
     def run(self):
         """Run method that performs all the real work"""

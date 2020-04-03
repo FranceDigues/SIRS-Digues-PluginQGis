@@ -28,6 +28,7 @@ couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
 if couchdb_dir not in sys.path:
     sys.path.append(couchdb_dir)
 import couchdb
+from .utils import Utils
 
 
 class CouchdbConnectorException(Exception):
@@ -57,3 +58,8 @@ class CouchdbConnector(object):
 
     def getConnection(self):
         return self.connection
+
+    def request_database_from_ids(self, database, ids):
+        query = Utils.build_query_only_id(ids)
+        db = self.connection[database]
+        return db.find(query)

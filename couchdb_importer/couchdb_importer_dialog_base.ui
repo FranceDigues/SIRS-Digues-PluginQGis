@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>740</width>
-    <height>861</height>
+    <height>886</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,20 +68,6 @@
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="updateLayers">
-       <property name="text">
-        <string>Mise à jour des couches</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="database_2"/>
-     </item>
-    </layout>
    </item>
    <item>
     <widget class="Line" name="line_2">
@@ -179,11 +165,22 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="addLayers">
-     <property name="text">
-      <string>Ajouter les couches</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="updateLayers">
+       <property name="text">
+        <string>Mise à jour des couches</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="addLayers">
+       <property name="text">
+        <string>Ajouter les couches</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QProgressBar" name="progressBar">
