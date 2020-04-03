@@ -639,8 +639,10 @@ class CouchdbImporter:
                 msg = "Mise à jour impossible. Pour cette donnée, \
                 le type de géométrie a changé et n'est plus celle de\
                  sa couche actuelle. Veuillez supprimer puis réimporter\
-                  la couche pour éffectuer sa mise à jour."
-                self.basic_message(msg, "couche: " + layer.name() + "donnée: " + str(id), Qgis.Critical)
+                  la caractéristique de la couche correspondant à cette donnée\
+                   pour éffectuer sa mise à jour."
+                self.basic_message(msg, "couche: " + layer.name() + "donnée: " + str(id), Qgis.Warning)
+                continue
 
             provider = layer.dataProvider()
             features = layer.getFeatures()
