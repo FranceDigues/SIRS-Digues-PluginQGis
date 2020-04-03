@@ -64,7 +64,7 @@ class CouchdbData(object):
             return None
         return self.data[name]["ids"].keys()
 
-    def getListId(self):
+    def getAllId(self):
         result = []
         for className in self.getClassName():
             if type(self.getIds(className)) == str:

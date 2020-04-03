@@ -22,11 +22,9 @@
  ***************************************************************************/
 """
 
-from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt, QVariant
-from qgis.PyQt.QtGui import QIcon, QStandardItem, QStandardItemModel
-from qgis.PyQt.QtWidgets import QAction, QDialog, QSizePolicy, QGridLayout, QDialogButtonBox
+from qgis.PyQt.QtGui import QStandardItem
+from qgis.core import QgsGeometry, QgsProject, QgsPoint
 
-from qgis.core import QgsFeature, QgsGeometry, QgsVectorLayer, QgsProject, QgsField, QgsPoint, QgsLineString, QgsLineSymbol, QgsMarkerSymbol, Qgis, QgsWkbTypes
 
 class Utils:
     @staticmethod
@@ -104,7 +102,7 @@ class Utils:
         return name
 
     @staticmethod
-    def build_list_from_preference(obj):
+    def build_list_from_selection(obj):
         result = []
         for item in obj:
             if obj[item]:
