@@ -22,10 +22,15 @@
  ***************************************************************************/
 """
 import os.path
+import sys
+couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
+if couchdb_dir not in sys.path:
+    sys.path.append(couchdb_dir)
+import couchdb
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt
 from qgis.PyQt.QtGui import QIcon, QStandardItem, QStandardItemModel
-from qgis.PyQt.QtWidgets import QAction
+from qgis.PyQt.QtWidgets import QAction, QLineEdit
 from qgis.core import QgsGeometry, QgsProject, QgsLineString, Qgis
 
 # DO NOT DELETE. Initialize Qt resources from file resources.py.
@@ -200,25 +205,27 @@ class CouchdbImporter:
     """
 
     def collect_data_from_user_selection(self):
-        try:
-            self.loadedPositionable.clear()
-            lu = 75 / len(self.data)
-            completed = 0
+        self.loadedPositionable.clear()
+        lu = 75 / len(self.data)
+        completed = 0
+        database = self.dlg.database.currentText()
 
+        try:
             for className in self.data.getClassName():
                 if self.data.getSelected(className):
                     attributes = Utils.build_list_from_selection(self.data.getAttributes(className))
                     if self.data.getIds(className) == "all":
-                        result = self.connector.request_database_from_class(className, attributes)
+                        result = self.connector.request_database(database, className=className, attributes=attributes)
                     else:
                         ids = Utils.build_list_from_selection(self.data.getIds(className))
-                        result = self.connector.request_database_from_class_and_ids(className, attributes, ids)
+                        result = self.connector.request_database(database, className, attributes, ids)
                     self.loadedPositionable.extend(result)
                 completed = completed + lu
                 self.dlg.progressBar.setValue(completed)
-        except ConnectionRefusedError:
-            self.basic_message("CouchdbConnectorException", "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.", Qgis.Warning)
-            raise CouchdbConnectorException("Impossible de se connecter à la base")
+        except couchdb.http.Unauthorized:
+            self.simple_message("Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
+        except (ConnectionRefusedError, ValueError):
+            self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base.", Qgis.Critical)
 
     def collect_data_from_layers_ids(self):
         try:
@@ -227,10 +234,11 @@ class CouchdbImporter:
             self.connector = CouchdbConnector(http, addr, self.dlg.login.text(), self.dlg.password.text())
             ids = Utils.collect_ids_from_layers_filtered_by_positionable_class(self.data.getClassName())
 
-            return self.connector.request_database_from_ids(self.dlg.database.currentText(), ids)
-        except ConnectionRefusedError:
-            self.basic_message("CouchdbConnectorException", "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.", Qgis.Warning)
-            raise CouchdbConnectorException("Impossible de se connecter à la base")
+            return self.connector.request_database(self.dlg.database.currentText(), ids=ids)
+        except couchdb.http.Unauthorized:
+            self.simple_message("Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
+        except (ConnectionRefusedError, ValueError):
+            self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base.", Qgis.Critical)
 
     """
     /****************************************************************
@@ -457,12 +465,10 @@ class CouchdbImporter:
             self.dlg.database.addItems([name for name in fc])
             self.build_list_positionable_class()
             self.set_ui_access_database()
-        except ConnectionRefusedError:
-            self.basic_message("CouchdbConnectorException", "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.", Qgis.Warning)
-            raise CouchdbConnectorException("Impossible de se connecter à la base")
-        except ValueError:
-            self.basic_message("CouchdbConnectorException", "Impossible de se connecter, vérifier l'url ou l'ouverture de la base.", Qgis.Warning)
-            raise CouchdbConnectorException("Impossible de se connecter à la base")
+        except couchdb.http.Unauthorized:
+            self.simple_message("Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
+        except (ConnectionRefusedError, ValueError):
+            self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base.", Qgis.Critical)
 
     def on_detail_click(self):
         self.collect_data_from_user_selection()
@@ -740,7 +746,7 @@ class CouchdbImporter:
     def stacked_message(self, msg1, dictClassName, level):
         msg2 = ""
         for className in dictClassName:
-            msg2 = msg2 + className.upper() + "(" + ", ".join(dictClassName[className]) + "), "
+            msg2 = msg2 + className + " (" + ", ".join(dictClassName[className]) + "), "
         widget = self.iface.messageBar().createMessage(msg1, msg2)
         self.iface.messageBar().pushWidget(widget, level, 5)
 
@@ -778,6 +784,8 @@ class CouchdbImporter:
             self.on_reset_connection_click()
             # set default url connection
             self.dlg.url.setText("http://localhost:5984")
+            # hide password field
+            self.dlg.password.setEchoMode(QLineEdit.Password)
             # set default choice of projection
             self.dlg.projete.setChecked(True)
             # set progress bar value
