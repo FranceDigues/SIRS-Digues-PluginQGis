@@ -23,6 +23,7 @@
 """
 import os.path
 import sys
+import socket
 couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
 if couchdb_dir not in sys.path:
     sys.path.append(couchdb_dir)
@@ -467,7 +468,7 @@ class CouchdbImporter:
             self.set_ui_access_database()
         except couchdb.http.Unauthorized:
             self.simple_message("Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
-        except (ConnectionRefusedError, ValueError):
+        except (ConnectionRefusedError, ValueError, socket.gaierror):
             self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base.", Qgis.Critical)
 
     def on_detail_click(self):
@@ -793,11 +794,3 @@ class CouchdbImporter:
 
         # show the dialog
         self.dlg.show()
-        # Run the dialog event loop
-        #result = self.dlg.exec_()
-        # See if OK was pressed
-        #if result:
-        #    pass
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            # pass

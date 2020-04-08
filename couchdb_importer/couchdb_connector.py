@@ -24,6 +24,7 @@
 
 import os
 import sys
+import requests
 couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
 if couchdb_dir not in sys.path:
     sys.path.append(couchdb_dir)
@@ -63,7 +64,9 @@ class CouchdbConnector(object):
         result = []
         for name in self.connection:
             if not Utils.is_str_start_by_underscore(name):
-                result.append(name)
+                r = requests.get(self.address + name)
+                if r.status_code == 200:
+                    result.append(name)
         return result
 
     def request_database(self, database, className=None, attributes=None, ids=None):
