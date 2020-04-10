@@ -34,8 +34,8 @@ class Utils:
             http = split_url[0]
             addr = split_url[1]
         else:
-            http = "localhost"
-            addr = "5984"
+            http = "http"
+            addr = "localhost:5984"
         return http, addr
 
     @staticmethod
@@ -50,7 +50,8 @@ class Utils:
             mango = {
                 "selector": {
                     "$or": orList
-                }
+                },
+                "limit": 50000
             }
             if attributes is not None:
                 mango["fields"]=attributes
@@ -58,7 +59,8 @@ class Utils:
             mango = {
                 "selector": {
                     "@class": "fr.sirs.core.model." + className
-                }
+                },
+                "limit": 50000
             }
             if attributes is not None:
                 mango["fields"] = attributes
@@ -74,7 +76,8 @@ class Utils:
         mango = {
             "selector": {
                 "$or": orList
-            }
+            },
+            "limit": 50000
         }
         return mango
 
@@ -214,3 +217,14 @@ class Utils:
         else:
             it = QStandardItem(name + " : unknown type")
             out.append(it)
+
+    @staticmethod
+    def debut_fin_to_wkt_linestring(wktdebut, wktfin):
+        coordDebut = wktdebut.split('(')[1]
+        coordFin = wktfin.split('(')[1]
+        coordDebut = coordDebut.split(')')[0]
+        coordFin = coordFin.split(')')[0]
+
+        return "LINESTRING (" + coordDebut + ", " + coordFin + ")"
+
+

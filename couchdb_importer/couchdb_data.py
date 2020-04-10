@@ -34,7 +34,7 @@ class CouchdbData(object):
             preference = json.load(inFile)
             for className in preference:
                 self.data[className] = {
-                    "selected": True,
+                    "selected": False,
                     "ids": "all",
                     "attributes": preference[className]["attributes"],
                     "style": preference[className]["style"],
@@ -111,7 +111,7 @@ class CouchdbData(object):
             preference = json.load(inFile)
             for className in preference:
                 self.data[className] = {
-                    "selected": True,
+                    "selected": False,
                     "ids": "all",
                     "attributes": preference[className]["attributes"],
                     "style": preference[className]["style"],

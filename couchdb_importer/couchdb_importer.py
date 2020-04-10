@@ -32,7 +32,7 @@ import couchdb
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt
 from qgis.PyQt.QtGui import QIcon, QStandardItem, QStandardItemModel
 from qgis.PyQt.QtWidgets import QAction, QLineEdit
-from qgis.core import QgsGeometry, QgsProject, QgsLineString, Qgis
+from qgis.core import QgsGeometry, QgsProject, QgsLineString, Qgis, QgsPoint
 
 # DO NOT DELETE. Initialize Qt resources from file resources.py.
 from .resources import *
@@ -79,6 +79,7 @@ class CouchdbImporter:
         self.first_start = None
 
         # Couchdb mutable
+        self.isPreLoad = False
         self.connector = None
         self.currentPositionableClass = ""
         self.loadedPositionable = []
@@ -86,7 +87,7 @@ class CouchdbImporter:
         self.provider = CouchdbBuilder()
         self.lengthParameter = 1  # unit meter
         self.projection = "projeté"
-        self.alwaysSelectedAttribute = ["_id", "geometry", "@class", "libelle", "designation"]
+        self.alwaysSelectedAttribute = ["_id", "geometry", "@class", "libelle", "designation", "positionDebut", "positionFin"]
         self.errorMsg = {'noproj': {}, 'noabs': {}, 'nogeom': {}, 'alreadyloaded': {}}
 
     # noinspection PyMethodMayBeStatic
@@ -246,6 +247,9 @@ class CouchdbImporter:
     * Utils
     ****************************************************************/  
     """
+    def complete_data_with_all(self):
+        for className in self.data.getClassName():
+            self.data.setIds(className, "all")
 
     def complete_data_with_ids(self):
         for className in self.data.getClassName():
@@ -267,12 +271,13 @@ class CouchdbImporter:
                 self.errorMsg['noproj'][className].append(data["_id"])
                 return None
         elif self.projection == "absolu":
-            if "approximatePositionDebut" in data.keys() and "approximatePositionFin" in data.keys():
-                a = data["approximatePositionDebut"]
-                b = data["approximatePositionFin"]
-                geomA = QgsGeometry.fromWkt(a)
-                geomB = QgsGeometry.fromWkt(b)
-                return QgsLineString(geomA, geomB).asWkt()
+            if "positionDebut" in data.keys() and "positionFin" in data.keys():
+                return Utils.debut_fin_to_wkt_linestring(data["positionDebut"], data["positionFin"])
+                #a = data["positionDebut"]
+                #b = data["positionFin"]
+                #geomA = QgsGeometry.fromWkt(a).asPoint()
+                #geomB = QgsGeometry.fromWkt(b).asPoint()
+                #return QgsLineString(geomA, geomB).asWkt()
             else:
                 if "geometry" in data.keys():
                     if className not in self.errorMsg['noabs']:
@@ -316,7 +321,6 @@ class CouchdbImporter:
         self.dlg.resetConnectionButton.setEnabled(True)
         self.dlg.database.setEnabled(True)
         self.dlg.detailButton.setEnabled(True)
-        self.dlg.resetDatabaseButton.setEnabled(True)
         self.dlg.positionableClass.setEnabled(True)
         self.dlg.attribute.setEnabled(True)
         self.dlg.selectAllPositionableClass.setCheckable(True)
@@ -325,6 +329,7 @@ class CouchdbImporter:
         self.dlg.updateLayers.setEnabled(True)
 
         # disable all other
+        self.dlg.resetDatabaseButton.setEnabled(False)
         self.dlg.url.setEnabled(False)
         self.dlg.login.setEnabled(False)
         self.dlg.password.setEnabled(False)
@@ -360,9 +365,12 @@ class CouchdbImporter:
 
     def build_list_positionable_class(self):
         model = QStandardItemModel()
-        for obj in self.data.getClassName():
-            item = QStandardItem(obj)
-            item.setCheckState(Qt.Checked)
+        for className in self.data.getClassName():
+            item = QStandardItem(className)
+            if self.data.getSelected(className):
+                item.setCheckState(Qt.Checked)
+            else:
+                item.setCheckState(Qt.Unchecked)
             item.setCheckable(True)
             model.appendRow(item)
         model.itemChanged.connect(self.on_positionable_class_list_changed)
@@ -387,7 +395,8 @@ class CouchdbImporter:
 
     def build_list_positionable(self):
         model = QStandardItemModel()
-        lu = 25 / len(self.loadedPositionable)
+        llp = len(self.loadedPositionable)
+        lu = 25 / llp
         completed = 75
         for pos in self.loadedPositionable:
             name = Utils.build_row_name_positionable(pos)
@@ -472,7 +481,15 @@ class CouchdbImporter:
             self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base.", Qgis.Critical)
 
     def on_detail_click(self):
+        self.isPreLoad = True
         self.collect_data_from_user_selection()
+        llp = len(self.loadedPositionable)
+        if llp == 0:
+            if not self.isPreLoad:
+                self.complete_data_with_all()
+            self.simple_message("Aucune vue sélectionné.", Qgis.Info)
+            self.dlg.progressBar.setValue(0)
+            return
         self.complete_data_with_ids()
         self.build_list_positionable()
         self.set_ui_access_detail()
@@ -543,14 +560,15 @@ class CouchdbImporter:
     def on_reset_database_click(self):
         # reset list object
         self.loadedPositionable = []
-        self.data.reset_from_configuration()
+        # complete data with all
+        self.complete_data_with_all()
         # reset list ui
-        modelPositionable = self.dlg.positionable.model()
-        if modelPositionable:
-            modelPositionable.removeRows(0, modelPositionable.rowCount())
         modelAttribute = self.dlg.attribute.model()
         if modelAttribute:
             modelAttribute.removeRows(0, modelAttribute.rowCount())
+        modelPositionable = self.dlg.positionable.model()
+        if modelPositionable:
+            modelPositionable.removeRows(0, modelPositionable.rowCount())
         modelDetail = self.dlg.detail.model()
         if modelDetail:
             modelDetail.removeRows(0, modelDetail.rowCount())
@@ -558,6 +576,8 @@ class CouchdbImporter:
         self.build_list_positionable_class()
         # change access
         self.set_ui_access_database()
+        # change is preload
+        self.isPreLoad = False
 
     def on_attribute_list_changed(self, item):
         attributeSelected = str(item.text())
@@ -606,15 +626,19 @@ class CouchdbImporter:
     def on_add_layers_click(self):
         self.data.write_configuration()
         self.collect_data_from_user_selection()
-        self.complete_data_with_ids()
-        ids = Utils.collect_ids_from_layers_filtered_by_user_selection(self.data.getAllId())
         llp = len(self.loadedPositionable)
         if llp == 0:
+            if not self.isPreLoad:
+                self.complete_data_with_all()
             self.simple_message("Aucune vue sélectionné.", Qgis.Info)
             self.dlg.progressBar.setValue(0)
             self.dlg.close()
             return
+        self.complete_data_with_ids()
+        ids = Utils.collect_ids_from_layers_filtered_by_user_selection(self.data.getAllId())
         self.add_layers(ids, llp)
+        if not self.isPreLoad:
+            self.complete_data_with_all()
         self.dlg.progressBar.setValue(0)
         self.display_messages()
         self.dlg.close()
@@ -721,14 +745,14 @@ class CouchdbImporter:
     """
     /****************************************************************
     * Communicate with user
-    ****************************************************************/  
+    ****************************************************************/
     """
 
     def display_messages(self):
         if bool(self.errorMsg['noproj']):
-            self.stacked_message("Aucune donnée projetée pour les objets", self.errorMsg['noproj'], Qgis.Warning)
+            self.stacked_message("Aucune position projetée sur le système de repérage linéaire pour les objets", self.errorMsg['noproj'], Qgis.Warning)
         if bool(self.errorMsg['noabs']):
-            self.stacked_message("Aucune position réelle trouvée: Utilisation des données projetées pour les objets", self.errorMsg['noabs'], Qgis.Warning)
+            self.stacked_message("Aucune position réelle trouvée: Utilisation des positions projetées sur le système de repérage linéaire pour les objets", self.errorMsg['noabs'], Qgis.Warning)
         if bool(self.errorMsg['nogeom']):
             self.stacked_message("Aucune donnée de géométrie trouvée pour les objets", self.errorMsg['nogeom'], Qgis.Warning)
         if bool(self.errorMsg['alreadyloaded']):

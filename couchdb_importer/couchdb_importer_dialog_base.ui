@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>740</width>
-    <height>886</height>
+    <width>956</width>
+    <height>1194</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Couchdb Importer</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
@@ -78,28 +78,18 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="3">
+      <widget class="QCheckBox" name="selectAllAttribute">
+       <property name="text">
+        <string>Tout sélectionner</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="0" colspan="2">
       <widget class="QComboBox" name="database"/>
      </item>
-     <item row="2" column="2" rowspan="3">
-      <widget class="QListView" name="positionableClass"/>
-     </item>
-     <item row="2" column="3" rowspan="3">
+     <item row="2" column="3" rowspan="2">
       <widget class="QListView" name="attribute"/>
-     </item>
-     <item row="3" column="0">
-      <widget class="QPushButton" name="detailButton">
-       <property name="text">
-        <string>Detail</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QPushButton" name="resetDatabaseButton">
-       <property name="text">
-        <string>Reset</string>
-       </property>
-      </widget>
      </item>
      <item row="0" column="2">
       <widget class="QCheckBox" name="selectAllPositionableClass">
@@ -115,23 +105,45 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="3">
-      <widget class="QCheckBox" name="selectAllAttribute">
+     <item row="2" column="2" rowspan="2">
+      <widget class="QListView" name="positionableClass"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="detailButton">
        <property name="text">
-        <string>Tout sélectionner</string>
+        <string>Affiner la sélection par objet (optionnel)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="resetDatabaseButton">
+       <property name="text">
+        <string>Reset</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
+    <widget class="Line" name="line_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line_6">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QGridLayout" name="gridLayout_3">
-     <item row="2" column="1">
-      <widget class="QListView" name="positionable"/>
-     </item>
-     <item row="2" column="2">
-      <widget class="QListView" name="detail"/>
-     </item>
      <item row="0" column="1">
       <widget class="QCheckBox" name="selectAllPositionable">
        <property name="text">
@@ -139,25 +151,45 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="1">
+      <widget class="QListView" name="positionable"/>
+     </item>
+     <item row="2" column="2">
+      <widget class="QListView" name="detail"/>
+     </item>
     </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line_5">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line_4">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="projection">
      <property name="title">
-      <string>Affichage</string>
+      <string>Pour l'affichage:</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QRadioButton" name="absolu">
         <property name="text">
-         <string>absolu</string>
+         <string>Utiliser des positions réelles</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="projete">
         <property name="text">
-         <string>projeté</string>
+         <string>Utiliser des positions projetées sur le système de repérage linéaire</string>
         </property>
        </widget>
       </item>
