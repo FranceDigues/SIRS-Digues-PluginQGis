@@ -72,6 +72,16 @@ class CouchdbData(object):
             result.extend(self.data[className]["ids"].keys())
         return result
 
+    def getAllIdSelected(self):
+        result = []
+        for className in self.getClassName():
+            if type(self.getIds(className)) == str:
+                return None
+            for id in self.data[className]["ids"]:
+                if self.data[className]["ids"][id]:
+                    result.append(id)
+        return result
+
     def getAttributes(self, name):
         return self.data[name]["attributes"]
 

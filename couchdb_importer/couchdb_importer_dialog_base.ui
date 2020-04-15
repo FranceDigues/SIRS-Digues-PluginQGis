@@ -115,7 +115,7 @@
      <item>
       <widget class="QPushButton" name="detailButton">
        <property name="text">
-        <string>Affiner la sélection par objet (optionnel)</string>
+        <string>Affiner la sélection par objet (pré-chargement)</string>
        </property>
       </widget>
      </item>
@@ -176,7 +176,7 @@
    <item>
     <widget class="QGroupBox" name="projection">
      <property name="title">
-      <string>Pour l'affichage:</string>
+      <string>Choisir quelles données sont à utiliser pour le repérage des couches:</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>

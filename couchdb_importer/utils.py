@@ -27,6 +27,15 @@ from qgis.core import QgsGeometry, QgsProject, QgsPoint
 
 
 class Utils:
+
+    @staticmethod
+    def build_list_from_selection(obj):
+        result = []
+        for item in obj:
+            if obj[item]:
+                result.append(item)
+        return result
+
     @staticmethod
     def parse_url(url):
         split_url = url.split("://")
@@ -39,53 +48,31 @@ class Utils:
         return http, addr
 
     @staticmethod
-    def build_query(className, attributes=None, ids=None):
-        if ids is not None and type(ids) == list:
-            orList = []
-            for id in ids:
-                orList.append({
-                    "@class": "fr.sirs.core.model." + className,
-                    "_id": id
-                })
-            mango = {
-                "selector": {
-                    "$or": orList
-                },
-                "limit": 50000
-            }
-            if attributes is not None:
-                mango["fields"]=attributes
-        else:
-            mango = {
-                "selector": {
-                    "@class": "fr.sirs.core.model." + className
-                },
-                "limit": 50000
-            }
-            if attributes is not None:
-                mango["fields"] = attributes
-        return mango
+    def collect_ids_from_layers_filtered_by_positionable_class(positionable):
+        result = []
+        layers = QgsProject.instance().mapLayers()
+        for l in layers:
+            if layers[l].name() in positionable:
+                ids = Utils.collect_ids_from_layer(layers[l])
+                result.extend(ids)
+        return result
 
     @staticmethod
-    def build_query_only_id(ids):
-        orList = []
-        for id in ids:
-            orList.append({
-                "_id": id
-            })
-        mango = {
-            "selector": {
-                "$or": orList
-            },
-            "limit": 50000
-        }
-        return mango
+    def debut_fin_to_wkt_linestring(wktdebut, wktfin):
+        coordDebut = wktdebut.split('(')[1]
+        coordFin = wktfin.split('(')[1]
+        coordDebut = coordDebut.split(')')[0]
+        coordFin = coordFin.split(')')[0]
+
+        return "LINESTRING (" + coordDebut + ", " + coordFin + ")"
 
     @staticmethod
-    def is_str_start_by_underscore(var):
-        if type(var) is str:
-            return var.find('_') == 0
-        return False
+    def build_row_name_positionable(positionable):
+        className = positionable["@class"].split("fr.sirs.core.model.")[1]
+        label = Utils.get_label(positionable)
+        id = positionable["_id"]
+        name = className + " - " + label + " - " + id
+        return name
 
     @staticmethod
     def get_label(positionable):
@@ -97,28 +84,44 @@ class Utils:
             return 'NULL'
 
     @staticmethod
-    def build_row_name_positionable(positionable):
-        className = positionable["@class"].split("fr.sirs.core.model.")[1]
-        label = Utils.get_label(positionable)
-        id = positionable["_id"]
-        name = className + " - " + label + " - " + id
-        return name
+    def complete_model_from_positionable(name, obj, out):
+        if type(obj) is str:
+            it = QStandardItem(name + " : " + obj)
+            out.append(it)
+        elif type(obj) is int:
+            it = QStandardItem(name + " : " + str(obj))
+            out.append(it)
+        elif type(obj) is float:
+            it = QStandardItem(name + " : " + str(obj))
+            out.append(it)
+        elif type(obj) is bool:
+            it = QStandardItem(name + " : " + str(obj))
+            out.append(it)
+        elif type(obj) is list:
+            for index in range(len(obj)):
+                Utils.complete_model_from_positionable(name + "_" + str(index), obj[index], out)
+        elif type(obj) is dict:
+            for it in obj:
+                Utils.complete_model_from_positionable(name + "_" + it, obj[it], out)
+        else:
+            it = QStandardItem(name + " : unknown type")
+            out.append(it)
 
     @staticmethod
-    def build_list_from_selection(obj):
+    def collect_ids_from_layers():
         result = []
-        for item in obj:
-            if obj[item]:
-                result.append(item)
+        layers = QgsProject.instance().mapLayers()
+        for l in layers:
+            ids = Utils.collect_ids_from_layer(layers[l])
+            result.extend(ids)
         return result
 
     @staticmethod
-    def is_point(listPoint, param):
-        for p1 in listPoint:
-            for p2 in listPoint:
-                if p1.distance(p2) > param:
-                    return False
-        return True
+    def collect_ids_from_layer(layer):
+        if layer.type() != 0 or layer.fields().indexFromName("_id") == -1:
+            return []
+        features = layer.getFeatures()
+        return [f["_id"] for f in features]
 
     @staticmethod
     def build_geometry(wkt, param):
@@ -161,6 +164,14 @@ class Utils:
             return None
 
     @staticmethod
+    def is_point(listPoint, param):
+        for p1 in listPoint:
+            for p2 in listPoint:
+                if p1.distance(p2) > param:
+                    return False
+        return True
+
+    @staticmethod
     def filter_layers_by_name_and_geometry_type(name, type):
         layers = QgsProject.instance().mapLayers()
         for l in layers:
@@ -169,62 +180,50 @@ class Utils:
         return None
 
     @staticmethod
-    def collect_ids_from_layers_filtered_by_user_selection(listCurrentId):
-        result = []
-        layers = QgsProject.instance().mapLayers()
-        for l in layers:
-            ids = Utils.collect_ids_from_layer(layers[l])
-            result.extend([id for id in ids if id in listCurrentId])
-        return result
+    def is_str_start_by_underscore(var):
+        if type(var) is str:
+            return var.find('_') == 0
+        return False
 
     @staticmethod
-    def collect_ids_from_layers_filtered_by_positionable_class(positionable):
-        result = []
-        layers = QgsProject.instance().mapLayers()
-        for l in layers:
-            if layers[l].name() in positionable:
-                ids = Utils.collect_ids_from_layer(layers[l])
-                result.extend(ids)
-        return result
-
-    @staticmethod
-    def collect_ids_from_layer(layer):
-        if layer.type() != 0 or layer.fields().indexFromName("_id") == -1:
-            return []
-        features = layer.getFeatures()
-        return [f["_id"] for f in features]
-
-    @staticmethod
-    def complete_model_from_positionable(name, obj, out):
-        if type(obj) is str:
-            it = QStandardItem(name + " : " + obj)
-            out.append(it)
-        elif type(obj) is int:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is float:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is bool:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is list:
-            for index in range(len(obj)):
-                Utils.complete_model_from_positionable(name + "_" + str(index), obj[index], out)
-        elif type(obj) is dict:
-            for it in obj:
-                Utils.complete_model_from_positionable(name + "_" + it, obj[it], out)
+    def build_query(className, attributes=None, ids=None):
+        if ids is not None and type(ids) == list:
+            orList = []
+            for id in ids:
+                orList.append({
+                    "@class": "fr.sirs.core.model." + className,
+                    "_id": id
+                })
+            mango = {
+                "selector": {
+                    "$or": orList
+                },
+                "limit": 50000
+            }
+            if attributes is not None:
+                mango["fields"] = attributes
         else:
-            it = QStandardItem(name + " : unknown type")
-            out.append(it)
+            mango = {
+                "selector": {
+                    "@class": "fr.sirs.core.model." + className
+                },
+                "limit": 50000
+            }
+            if attributes is not None:
+                mango["fields"] = attributes
+        return mango
 
     @staticmethod
-    def debut_fin_to_wkt_linestring(wktdebut, wktfin):
-        coordDebut = wktdebut.split('(')[1]
-        coordFin = wktfin.split('(')[1]
-        coordDebut = coordDebut.split(')')[0]
-        coordFin = coordFin.split(')')[0]
-
-        return "LINESTRING (" + coordDebut + ", " + coordFin + ")"
-
-
+    def build_query_only_id(ids):
+        orList = []
+        for id in ids:
+            orList.append({
+                "_id": id
+            })
+        mango = {
+            "selector": {
+                "$or": orList
+            },
+            "limit": 50000
+        }
+        return mango

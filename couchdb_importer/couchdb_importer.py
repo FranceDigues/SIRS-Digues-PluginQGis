@@ -32,12 +32,12 @@ import couchdb
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt
 from qgis.PyQt.QtGui import QIcon, QStandardItem, QStandardItemModel
 from qgis.PyQt.QtWidgets import QAction, QLineEdit
-from qgis.core import QgsGeometry, QgsProject, QgsLineString, Qgis, QgsPoint
+from qgis.core import QgsProject, Qgis
 
 # DO NOT DELETE. Initialize Qt resources from file resources.py.
 from .resources import *
 from .couchdb_importer_dialog import CouchdbImporterDialog
-from .couchdb_connector import CouchdbConnector, CouchdbConnectorException
+from .couchdb_connector import CouchdbConnector
 from .couchdb_data import CouchdbData
 from .couchdb_layer import CouchdbBuilder
 from .utils import Utils
@@ -221,6 +221,7 @@ class CouchdbImporter:
                     else:
                         ids = Utils.build_list_from_selection(self.data.getIds(className))
                         result = self.connector.request_database(database, className, attributes, ids)
+                    result = list(result)
                     self.loadedPositionable.extend(result)
                 completed = completed + lu
                 self.dlg.progressBar.setValue(completed)
@@ -251,12 +252,12 @@ class CouchdbImporter:
         for className in self.data.getClassName():
             self.data.setIds(className, "all")
 
-    def complete_data_with_ids(self):
+    def complete_data_with_ids(self, state):
         for className in self.data.getClassName():
             self.data.setIds(className, {})
         for pos in self.loadedPositionable:
             className = pos["@class"].split("fr.sirs.core.model.")[1]
-            self.data.setIdValue(className, pos["_id"], True)
+            self.data.setIdValue(className, pos["_id"], state)
 
     def build_wkt(self, data):
         classNameComplete = data["@class"]
@@ -273,11 +274,6 @@ class CouchdbImporter:
         elif self.projection == "absolu":
             if "positionDebut" in data.keys() and "positionFin" in data.keys():
                 return Utils.debut_fin_to_wkt_linestring(data["positionDebut"], data["positionFin"])
-                #a = data["positionDebut"]
-                #b = data["positionFin"]
-                #geomA = QgsGeometry.fromWkt(a).asPoint()
-                #geomB = QgsGeometry.fromWkt(b).asPoint()
-                #return QgsLineString(geomA, geomB).asWkt()
             else:
                 if "geometry" in data.keys():
                     if className not in self.errorMsg['noabs']:
@@ -402,7 +398,7 @@ class CouchdbImporter:
             name = Utils.build_row_name_positionable(pos)
             item = QStandardItem(name)
             item.setCheckable(True)
-            item.setCheckState(Qt.Checked)
+            item.setCheckState(Qt.Unchecked)
             model.appendRow(item)
             completed = completed + lu
             self.dlg.progressBar.setValue(completed)
@@ -490,7 +486,7 @@ class CouchdbImporter:
             self.simple_message("Aucune vue sélectionné.", Qgis.Info)
             self.dlg.progressBar.setValue(0)
             return
-        self.complete_data_with_ids()
+        self.complete_data_with_ids(False)
         self.build_list_positionable()
         self.set_ui_access_detail()
 
@@ -610,12 +606,14 @@ class CouchdbImporter:
             self.projection = "absolu"
 
     def on_update_layers_click(self):
+        self.dlg.progressBar.setValue(1)
         result = self.collect_data_from_layers_ids()
         rl = list(result)
         ln = len(rl)
         if ln == 0:
             self.simple_message(
                 "Les Identifiants trouvés dans les couches ne trouvent pas de référence en base de donnée.", Qgis.Info)
+            self.dlg.progressBar.setValue(0)
             self.dlg.close()
             return
         self.update_layers(rl, ln)
@@ -625,7 +623,8 @@ class CouchdbImporter:
 
     def on_add_layers_click(self):
         self.data.write_configuration()
-        self.collect_data_from_user_selection()
+        if not self.isPreLoad:
+            self.collect_data_from_user_selection()
         llp = len(self.loadedPositionable)
         if llp == 0:
             if not self.isPreLoad:
@@ -634,9 +633,9 @@ class CouchdbImporter:
             self.dlg.progressBar.setValue(0)
             self.dlg.close()
             return
-        self.complete_data_with_ids()
-        ids = Utils.collect_ids_from_layers_filtered_by_user_selection(self.data.getAllId())
-        self.add_layers(ids, llp)
+        ids_from_selection = self.data.getAllIdSelected()
+        ids_from_layers = Utils.collect_ids_from_layers()
+        self.add_layers(ids_from_selection, ids_from_layers, llp)
         if not self.isPreLoad:
             self.complete_data_with_all()
         self.dlg.progressBar.setValue(0)
@@ -650,8 +649,8 @@ class CouchdbImporter:
     """
 
     def update_layers(self, loaded, ln):
-        lu = 100 / ln
-        completed = 0
+        lu = 99 / ln
+        completed = 1
 
         for data in loaded:
             id = data["_id"]
@@ -687,7 +686,7 @@ class CouchdbImporter:
             completed = completed + lu
             self.dlg.progressBar.setValue(completed)
 
-    def add_layers(self, ids, llp):
+    def add_layers(self, ids_from_selection, ids_from_layers, llp):
         root = QgsProject.instance().layerTreeRoot()
         lu = 25 / llp
         completed = 75
@@ -695,9 +694,12 @@ class CouchdbImporter:
 
         for data in self.loadedPositionable:
             id = data["_id"]
+            if ids_from_selection is not None:
+                if id not in ids_from_selection:
+                    continue
             classNameComplete = data["@class"]
             className = classNameComplete.split("fr.sirs.core.model.")[1]
-            if id in ids:
+            if id in ids_from_layers:
                 if className not in self.errorMsg['alreadyloaded']:
                     self.errorMsg['alreadyloaded'][className] = []
                 self.errorMsg['alreadyloaded'][className].append(id)
