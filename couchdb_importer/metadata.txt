@@ -6,7 +6,7 @@
 name=Couchdb Importer
 qgisMinimumVersion=3.4
 description=This plugin allows importing vector data from the couchdb database.
-version=0.2
+version=0.3
 author=MaximeGavens/Geomatys
 email=contact@geomatys.com
 
