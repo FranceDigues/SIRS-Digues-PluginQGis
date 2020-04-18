@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>956</width>
-    <height>1194</height>
+    <width>1050</width>
+    <height>876</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,7 +56,7 @@
      <item row="2" column="3">
       <widget class="QPushButton" name="resetConnectionButton">
        <property name="text">
-        <string>Reset</string>
+        <string>Réinitialiser</string>
        </property>
       </widget>
      </item>
@@ -101,7 +101,7 @@
      <item row="0" column="0" colspan="2">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Database</string>
+        <string>Base de données</string>
        </property>
       </widget>
      </item>
@@ -122,7 +122,7 @@
      <item>
       <widget class="QPushButton" name="resetDatabaseButton">
        <property name="text">
-        <string>Reset</string>
+        <string>Réinitialiser</string>
        </property>
       </widget>
      </item>
@@ -160,6 +160,34 @@
     </layout>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Bar de recherche</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="keyword"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="search">
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="resetSearch">
+       <property name="text">
+        <string>Réinitialiser</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="Line" name="line_5">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -176,20 +204,20 @@
    <item>
     <widget class="QGroupBox" name="projection">
      <property name="title">
-      <string>Choisir quelles données sont à utiliser pour le repérage des couches:</string>
+      <string>Choix du type de coordonnées de localisation à utiliser:</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QRadioButton" name="absolu">
         <property name="text">
-         <string>Utiliser des positions réelles</string>
+         <string>Positions réelles (Coordonnée)</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="projete">
         <property name="text">
-         <string>Utiliser des positions projetées sur le système de repérage linéaire</string>
+         <string>Positions projetées (Borne)</string>
         </property>
        </widget>
       </item>

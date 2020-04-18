@@ -31,7 +31,7 @@ import couchdb
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt
 from qgis.PyQt.QtGui import QIcon, QStandardItem, QStandardItemModel
-from qgis.PyQt.QtWidgets import QAction, QLineEdit
+from qgis.PyQt.QtWidgets import QAction, QLineEdit, QListView, QComboBox, QCheckBox
 from qgis.core import QgsProject, Qgis
 
 # DO NOT DELETE. Initialize Qt resources from file resources.py.
@@ -311,6 +311,9 @@ class CouchdbImporter:
         self.dlg.attribute.setEnabled(False)
         self.dlg.positionable.setEnabled(False)
         self.dlg.detail.setEnabled(False)
+        self.dlg.search.setEnabled(False)
+        self.dlg.resetSearch.setEnabled(False)
+        self.dlg.keyword.setEnabled(False)
 
     def set_ui_access_database(self):
         # enable database param
@@ -332,6 +335,9 @@ class CouchdbImporter:
         self.dlg.loginButton.setEnabled(False)
         self.dlg.positionable.setEnabled(False)
         self.dlg.detail.setEnabled(False)
+        self.dlg.search.setEnabled(False)
+        self.dlg.resetSearch.setEnabled(False)
+        self.dlg.keyword.setEnabled(False)
 
     def set_ui_access_detail(self):
         # enable database param
@@ -341,6 +347,10 @@ class CouchdbImporter:
         self.dlg.detail.setEnabled(True)
         self.dlg.addLayers.setEnabled(True)
         self.dlg.updateLayers.setEnabled(True)
+        self.dlg.search.setEnabled(True)
+        self.dlg.resetSearch.setEnabled(True)
+        self.dlg.keyword.setEnabled(True)
+
         # disable all other
         self.dlg.database.setEnabled(False)
         self.dlg.detailButton.setEnabled(False)
@@ -389,20 +399,28 @@ class CouchdbImporter:
         model.itemChanged.connect(self.on_attribute_list_changed)
         self.dlg.attribute.setModel(model)
 
-    def build_list_positionable(self):
+    def build_list_positionable(self, keyword=None):
         model = QStandardItemModel()
         llp = len(self.loadedPositionable)
         lu = 25 / llp
         completed = 75
         for pos in self.loadedPositionable:
             name = Utils.build_row_name_positionable(pos)
+            if keyword is not None:
+                if keyword not in name:
+                    continue
             item = QStandardItem(name)
             item.setCheckable(True)
-            item.setCheckState(Qt.Unchecked)
+            cli = name.split(' - ')
+            if self.data.getIdValue(cli[0], cli[-1]):
+                item.setCheckState(Qt.Checked)
+            else:
+                item.setCheckState(Qt.Unchecked)
             model.appendRow(item)
             completed = completed + lu
             self.dlg.progressBar.setValue(completed)
         model.itemChanged.connect(self.on_positionable_list_changed)
+        model.sort(0, Qt.AscendingOrder)
         self.dlg.positionable.setModel(model)
         self.dlg.progressBar.setValue(0)
 
@@ -422,40 +440,26 @@ class CouchdbImporter:
         self.dlg.positionableClass.setModel(model)
 
     def change_positionable(self, state):
-        model = QStandardItemModel()
-        for className in self.data.getClassName():
-            for id in self.data.getIds(className):
-                self.data.setIdValue(className, id, state)
-        for pos in self.loadedPositionable:
-            name = Utils.build_row_name_positionable(pos)
-            item = QStandardItem(name)
-            item.setCheckable(True)
+        model = self.dlg.positionable.model()
+
+        for i in range(model.rowCount()):
+            item = model.itemFromIndex(model.index(i, 0))
             if state:
                 item.setCheckState(Qt.Checked)
             else:
                 item.setCheckState(Qt.Unchecked)
-            model.appendRow(item)
-        model.itemChanged.connect(self.on_positionable_list_changed)
-        self.dlg.positionable.setModel(model)
 
     def change_attribute(self, state):
-        model = QStandardItemModel()
-        for attr in self.data.getAttributes(self.currentPositionableClass):
-            item = QStandardItem(attr)
-            if attr in self.alwaysSelectedAttribute:
-                item.setCheckable(False)
+        model = self.dlg.attribute.model()
+
+        for i in range(model.rowCount()):
+            item = model.itemFromIndex(model.index(i, 0))
+            if item.text() in self.alwaysSelectedAttribute:
+                continue
+            if state:
                 item.setCheckState(Qt.Checked)
-                self.data.setAttributeValue(self.currentPositionableClass, attr, True)
             else:
-                item.setCheckable(True)
-                self.data.setAttributeValue(self.currentPositionableClass, attr, state)
-                if state:
-                    item.setCheckState(Qt.Checked)
-                else:
-                    item.setCheckState(Qt.Unchecked)
-            model.appendRow(item)
-        model.itemChanged.connect(self.on_attribute_list_changed)
-        self.dlg.attribute.setModel(model)
+                item.setCheckState(Qt.Unchecked)
 
     """
     /****************************************************************
@@ -496,6 +500,11 @@ class CouchdbImporter:
         self.currentPositionableClass = model.itemFromIndex(item).text()
         self.build_list_attribute()
         model.blockSignals(False)
+        if Utils.is_all_selected_in_model(self.dlg.attribute.model()):
+            self.dlg.selectAllAttribute.setCheckState(Qt.Checked)
+        else:
+            self.dlg.selectAllAttribute.setCheckState(Qt.Unchecked)
+
 
     def on_positionable_click(self, item):
         model = self.dlg.positionable.model()
@@ -554,6 +563,8 @@ class CouchdbImporter:
         self.set_ui_access_connection()
 
     def on_reset_database_click(self):
+        # unchecked the select all positionable
+        self.dlg.selectAllPositionable.setCheckState(Qt.Unchecked)
         # reset list object
         self.loadedPositionable = []
         # complete data with all
@@ -604,6 +615,13 @@ class CouchdbImporter:
             self.projection = "projeté"
         if self.dlg.absolu.isChecked():
             self.projection = "absolu"
+
+    def on_search_click(self):
+        keyword = self.dlg.keyword.text()
+        self.build_list_positionable(keyword)
+
+    def on_reset_search_click(self):
+        self.build_list_positionable()
 
     def on_update_layers_click(self):
         self.dlg.progressBar.setValue(1)
@@ -807,6 +825,9 @@ class CouchdbImporter:
             # add / update layers action
             self.dlg.addLayers.clicked.connect(self.on_add_layers_click)
             self.dlg.updateLayers.clicked.connect(self.on_update_layers_click)
+            # research bar action
+            self.dlg.search.clicked.connect(self.on_search_click)
+            self.dlg.resetSearch.clicked.connect(self.on_reset_search_click)
             # initialize ui access and data
             self.on_reset_connection_click()
             # set default url connection

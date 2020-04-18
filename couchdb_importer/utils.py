@@ -22,8 +22,9 @@
  ***************************************************************************/
 """
 
-from qgis.PyQt.QtGui import QStandardItem
+from qgis.PyQt.QtGui import QStandardItem, QStandardItemModel
 from qgis.core import QgsGeometry, QgsProject, QgsPoint
+from qgis.PyQt.QtCore import Qt
 
 
 class Utils:
@@ -227,3 +228,11 @@ class Utils:
             "limit": 50000
         }
         return mango
+
+    @staticmethod
+    def is_all_selected_in_model(model):
+        for i in range(model.rowCount()):
+            item = model.itemFromIndex(model.index(i, 0))
+            if item.checkState() == Qt.Unchecked:
+                return False
+        return True

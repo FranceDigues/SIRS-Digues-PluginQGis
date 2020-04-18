@@ -94,6 +94,9 @@ class CouchdbData(object):
     def getCrs(self, name):
         return self.data[name]["crs"]
 
+    def getIdValue(self, name, id):
+        return self.data[name]["ids"][id]
+
     def setSelected(self, name, isSelected):
         self.data[name]["selected"] = isSelected
 
