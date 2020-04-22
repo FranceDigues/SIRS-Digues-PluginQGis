@@ -53,6 +53,7 @@ class CouchdbConnector(object):
         self.password = password
         self.address = http + "://" + self.user + ":" + self.password + "@" + self.url + "/"
         self.connection = couchdb.Server(self.address)
+        self.libelleRefId = {}
 
     def getAddress(self):
         return self.address
@@ -69,12 +70,41 @@ class CouchdbConnector(object):
                     result.append(name)
         return result
 
-    def request_database(self, database, className=None, attributes=None, ids=None):
+    def request_database(self, database, className=None, attributes=None, ids=None, single=None):
         if className is not None and attributes is not None:
             query = Utils.build_query(className, attributes, ids)
         elif className is None and attributes is None and ids is not None:
             query = Utils.build_query_only_id(ids)
+        elif single is not None:
+            query = Utils.build_query_one_id(single)
         else:
             raise CouchdbConnectorException("Requète inexistante.")
         db = self.connection[database]
         return db.find(query)
+
+    def get_and_save_label_from_id(self, database, id):
+        if database not in self.libelleRefId:
+            self.libelleRefId[database] = {}
+        if id not in self.libelleRefId[database]:
+            result = self.request_database(database, single=id)
+            result = list(result)
+            if len(result) == 0:
+                label = id
+            else:
+                label = Utils.get_label(result[0])
+            self.libelleRefId[database][id] = label
+        return self.libelleRefId[database][id]
+
+    def replace_id_by_label(self, database, target):
+        attrWithIdValue = ['author']
+
+        for elem in target:
+            for attr in elem:
+                if attr[-2:] == 'Id' or attr in attrWithIdValue:
+                    elem[attr] = self.get_and_save_label_from_id(database, elem[attr])
+                elif attr[-3:] == 'Ids' and type(elem[attr]) == list:
+                    labelList = []
+                    for val in elem[attr]:
+                        label = self.get_and_save_label_from_id(database, val)
+                        labelList.append(label)
+                    elem[attr] = labelList

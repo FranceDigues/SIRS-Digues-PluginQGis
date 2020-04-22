@@ -35,7 +35,7 @@ class CouchdbData(object):
             for className in preference:
                 self.data[className] = {
                     "selected": False,
-                    "ids": "all",
+                    "ids": {},
                     "attributes": preference[className]["attributes"],
                     "style": preference[className]["style"],
                     "crs": preference[className]["crs"]
@@ -75,8 +75,6 @@ class CouchdbData(object):
     def getAllIdSelected(self):
         result = []
         for className in self.getClassName():
-            if type(self.getIds(className)) == str:
-                return None
             for id in self.data[className]["ids"]:
                 if self.data[className]["ids"][id]:
                     result.append(id)

@@ -216,12 +216,9 @@ class CouchdbImporter:
             for className in self.data.getClassName():
                 if self.data.getSelected(className):
                     attributes = Utils.build_list_from_selection(self.data.getAttributes(className))
-                    if self.data.getIds(className) == "all":
-                        result = self.connector.request_database(database, className=className, attributes=attributes)
-                    else:
-                        ids = Utils.build_list_from_selection(self.data.getIds(className))
-                        result = self.connector.request_database(database, className, attributes, ids)
+                    result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
+                    self.connector.replace_id_by_label(database, result)
                     self.loadedPositionable.extend(result)
                 completed = completed + lu
                 self.dlg.progressBar.setValue(completed)
@@ -248,13 +245,40 @@ class CouchdbImporter:
     * Utils
     ****************************************************************/  
     """
-    def complete_data_with_all(self):
-        for className in self.data.getClassName():
-            self.data.setIds(className, "all")
+    def change_select_all_button(self, sab):
+        if sab == "type":
+            self.dlg.selectAllPositionableClass.blockSignals(True)
+            if Utils.is_all_selected_in_model(self.dlg.positionableClass.model()):
+                self.dlg.selectAllPositionableClass.setCheckState(Qt.Checked)
+            else:
+                self.dlg.selectAllPositionableClass.setCheckState(Qt.Unchecked)
+            self.dlg.selectAllPositionableClass.blockSignals(False)
+        elif sab == "attribute":
+            self.dlg.selectAllAttribute.blockSignals(True)
+            if Utils.is_all_selected_in_model(self.dlg.attribute.model()):
+                self.dlg.selectAllAttribute.setCheckState(Qt.Checked)
+            else:
+                self.dlg.selectAllAttribute.setCheckState(Qt.Unchecked)
+            self.dlg.selectAllAttribute.blockSignals(False)
+        elif sab == "object":
+            self.dlg.selectAllPositionable.blockSignals(True)
+            if Utils.is_all_selected_in_model(self.dlg.positionable.model()):
+                self.dlg.selectAllPositionable.setCheckState(Qt.Checked)
+            else:
+                self.dlg.selectAllPositionable.setCheckState(Qt.Unchecked)
+            self.dlg.selectAllPositionable.blockSignals(False)
 
-    def complete_data_with_ids(self, state):
+    #def complete_data_with_all(self):
+    #    for className in self.data.getClassName():
+    #        self.data.setIds(className, "all")
+
+    def complete_data_with_empty_dict(self):
         for className in self.data.getClassName():
             self.data.setIds(className, {})
+
+    def complete_data_with_ids(self, state):
+        #for className in self.data.getClassName():
+        #    self.data.setIds(className, {})
         for pos in self.loadedPositionable:
             className = pos["@class"].split("fr.sirs.core.model.")[1]
             self.data.setIdValue(className, pos["_id"], state)
@@ -425,23 +449,16 @@ class CouchdbImporter:
         self.dlg.progressBar.setValue(0)
 
     def change_positionable_class(self, state):
-        model = QStandardItemModel()
-        for className in self.data.getClassName():
-            self.data.setSelected(className, state)
-            item = QStandardItem(className)
-            item.setCheckable(True)
+        model = self.dlg.positionableClass.model()
+        for i in range(model.rowCount()):
+            item = model.itemFromIndex(model.index(i, 0))
             if state:
-                self.data.setIds(className, "all")
                 item.setCheckState(Qt.Checked)
             else:
                 item.setCheckState(Qt.Unchecked)
-            model.appendRow(item)
-        model.itemChanged.connect(self.on_positionable_class_list_changed)
-        self.dlg.positionableClass.setModel(model)
 
     def change_positionable(self, state):
         model = self.dlg.positionable.model()
-
         for i in range(model.rowCount()):
             item = model.itemFromIndex(model.index(i, 0))
             if state:
@@ -451,7 +468,6 @@ class CouchdbImporter:
 
     def change_attribute(self, state):
         model = self.dlg.attribute.model()
-
         for i in range(model.rowCount()):
             item = model.itemFromIndex(model.index(i, 0))
             if item.text() in self.alwaysSelectedAttribute:
@@ -485,8 +501,8 @@ class CouchdbImporter:
         self.collect_data_from_user_selection()
         llp = len(self.loadedPositionable)
         if llp == 0:
-            if not self.isPreLoad:
-                self.complete_data_with_all()
+            #if not self.isPreLoad:
+            #    self.complete_data_with_all()
             self.simple_message("Aucune vue sélectionné.", Qgis.Info)
             self.dlg.progressBar.setValue(0)
             return
@@ -496,15 +512,9 @@ class CouchdbImporter:
 
     def on_positionable_class_click(self, item):
         model = self.dlg.positionableClass.model()
-        model.blockSignals(True)
         self.currentPositionableClass = model.itemFromIndex(item).text()
         self.build_list_attribute()
-        model.blockSignals(False)
-        if Utils.is_all_selected_in_model(self.dlg.attribute.model()):
-            self.dlg.selectAllAttribute.setCheckState(Qt.Checked)
-        else:
-            self.dlg.selectAllAttribute.setCheckState(Qt.Unchecked)
-
+        self.change_select_all_button("attribute")
 
     def on_positionable_click(self, item):
         model = self.dlg.positionable.model()
@@ -516,7 +526,6 @@ class CouchdbImporter:
                 selected = pos
                 break
         if selected is None:
-            model.blockSignals(False)
             return
         model = QStandardItemModel()
         listStandardItem = []
@@ -567,8 +576,9 @@ class CouchdbImporter:
         self.dlg.selectAllPositionable.setCheckState(Qt.Unchecked)
         # reset list object
         self.loadedPositionable = []
-        # complete data with all
-        self.complete_data_with_all()
+        # complete data with empty dict
+        self.complete_data_with_empty_dict()
+        #self.complete_data_with_all()
         # reset list ui
         modelAttribute = self.dlg.attribute.model()
         if modelAttribute:
@@ -594,6 +604,7 @@ class CouchdbImporter:
         if item.checkState() == Qt.Unchecked:
             state = False
         self.data.setAttributeValue(self.currentPositionableClass, attributeSelected, state)
+        self.change_select_all_button("attribute")
 
     def on_positionable_list_changed(self, item):
         id = str(item.text()).split(' - ')[-1]
@@ -602,13 +613,15 @@ class CouchdbImporter:
             self.data.setIdValue(className, id, True)
         if item.checkState() == Qt.Unchecked:
             self.data.setIdValue(className, id, False)
+        self.change_select_all_button("object")
 
     def on_positionable_class_list_changed(self, item):
         if item.checkState() == Qt.Checked:
             self.data.setSelected(item.text(), True)
-            self.data.setIds(item.text(), "all")
+            #self.data.setIds(item.text(), "all")
         if item.checkState() == Qt.Unchecked:
             self.data.setSelected(item.text(), False)
+        self.change_select_all_button("type")
 
     def on_projection_click(self):
         if self.dlg.projete.isChecked():
@@ -645,17 +658,20 @@ class CouchdbImporter:
             self.collect_data_from_user_selection()
         llp = len(self.loadedPositionable)
         if llp == 0:
-            if not self.isPreLoad:
-                self.complete_data_with_all()
+            #if not self.isPreLoad:
+            #    self.complete_data_with_all()
             self.simple_message("Aucune vue sélectionné.", Qgis.Info)
             self.dlg.progressBar.setValue(0)
             self.dlg.close()
             return
-        ids_from_selection = self.data.getAllIdSelected()
+        if self.isPreLoad:
+            ids_from_selection = self.data.getAllIdSelected()
+        else:
+            ids_from_selection = None
         ids_from_layers = Utils.collect_ids_from_layers()
         self.add_layers(ids_from_selection, ids_from_layers, llp)
-        if not self.isPreLoad:
-            self.complete_data_with_all()
+        #if not self.isPreLoad:
+        #    self.complete_data_with_all()
         self.dlg.progressBar.setValue(0)
         self.display_messages()
         self.dlg.close()

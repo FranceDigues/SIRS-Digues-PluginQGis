@@ -1746,5 +1746,30 @@
     "commentaire": "Commentaire",
     "contactStructure": "Contact",
     "organismeStructure": "Gestionnaires"
+  },
+  "Gestion": {
+    "valid": "@valid",
+    "classPlural": "Gestionnaires",
+    "class": "Gestionnaire",
+    "author": "@author",
+    "date_fin": "Fin",
+    "classAbrege": "GO",
+    "designation": "Désignation",
+    "organismeId": "Organisme",
+    "date_debut": "Début",
+    "dateMaj": "Mise à jour"
+  },
+  "Propriete": {
+    "valid": "Validé",
+    "classPlural": "Propriétaires",
+    "contactId": "Contact",
+    "class": "Propriétaire",
+    "author": "Auteur",
+    "date_fin": "Fin de propriété",
+    "classAbrege": "PO",
+    "designation": "Désignation",
+    "organismeId": "Organisme",
+    "date_debut": "Début de propriété",
+    "dateMaj": "Mise à jour"
   }
 }

@@ -1156,6 +1156,47 @@ class CouchdbBuilder(object):
                 "linearId": "str",
                 "longitudeMax": "float",
                 "longitudeMin": "float",
+                "Dernier(e) observations @class": "str",
+                "Dernier(e) observations author": "str",
+                "Dernier(e) observations date": "str",
+                "Dernier(e) observations designation": "str",
+                "Dernier(e) observations evolution": "str",
+                "Dernier(e) observations id": "str",
+                "Dernier(e) observations nombreDesordres": "int",
+                "Dernier(e) observations observateurId": "str",
+                "Dernier(e) observations Dernier(e) photos @class": "str",
+                "Dernier(e) observations Dernier(e) photos author": "str",
+                "Dernier(e) observations Dernier(e) photos borneDebutId": "str",
+                "Dernier(e) observations Dernier(e) photos borneFinId": "str",
+                "Dernier(e) observations Dernier(e) photos borne_debut_aval": "bool",
+                "Dernier(e) observations Dernier(e) photos borne_debut_distance": "float",
+                "Dernier(e) observations Dernier(e) photos borne_fin_aval": "bool",
+                "Dernier(e) observations Dernier(e) photos borne_fin_distance": "float",
+                "Dernier(e) observations Dernier(e) photos chemin": "str",
+                "Dernier(e) observations Dernier(e) photos commentaire": "str",
+                "Dernier(e) observations Dernier(e) photos coteId": "str",
+                "Dernier(e) observations Dernier(e) photos date": "str",
+                "Dernier(e) observations Dernier(e) photos designation": "str",
+                "Dernier(e) observations Dernier(e) photos editedGeoCoordinate": "bool",
+                "Dernier(e) observations Dernier(e) photos geometry": "str",
+                "Dernier(e) observations Dernier(e) photos geometryMode": "str",
+                "Dernier(e) observations Dernier(e) photos id": "str",
+                "Dernier(e) observations Dernier(e) photos latitudeMax": "float",
+                "Dernier(e) observations Dernier(e) photos latitudeMin": "float",
+                "Dernier(e) observations Dernier(e) photos libelle": "str",
+                "Dernier(e) observations Dernier(e) photos longitudeMax": "float",
+                "Dernier(e) observations Dernier(e) photos longitudeMin": "float",
+                "Dernier(e) observations Dernier(e) photos orientationPhoto": "str",
+                "Dernier(e) observations Dernier(e) photos photographeId": "str",
+                "Dernier(e) observations Dernier(e) photos positionDebut": "str",
+                "Dernier(e) observations Dernier(e) photos positionFin": "str",
+                "Dernier(e) observations Dernier(e) photos prDebut": "float",
+                "Dernier(e) observations Dernier(e) photos prFin": "float",
+                "Dernier(e) observations Dernier(e) photos systemeRepId": "str",
+                "Dernier(e) observations Dernier(e) photos valid": "bool",
+                "Dernier(e) observations suite": "str",
+                "Dernier(e) observations urgenceId": "str",
+                "Dernier(e) observations valid": "bool",
                 "Dernier(e) photos @class": "str",
                 "Dernier(e) photos author": "str",
                 "Dernier(e) photos borneDebutId": "str",
@@ -3623,23 +3664,6 @@ class CouchdbBuilder(object):
                 target.append(QgsField(self.label_identification(className, title), QVariant.Double))
         return target
 
-    def build_layer_fields2(self, className):
-        target = []
-        fields = self.fields[className]
-
-        for title in fields:
-            if "_attachments" in title:
-                continue
-            if fields[title] == "str":
-                target.append(QgsField(title, QVariant.String))
-            elif fields[title] == "int":
-                target.append(QgsField(title, QVariant.Int))
-            elif fields[title] == "bool":
-                target.append(QgsField(title, QVariant.Bool))
-            elif fields[title] == "float":
-                target.append(QgsField(title, QVariant.Double))
-        return target
-
     def build_feature(self, positionable, formatGeom, layer, data: CouchdbData):
         classNameComplete = positionable["@class"]
         className = classNameComplete.split("fr.sirs.core.model.")[1]
@@ -3663,9 +3687,9 @@ class CouchdbBuilder(object):
                     elif type(content[attr]) == list or type(content[attr]) == dict:
                         self.build_field_value_generic(attr, content[attr], value)
                     else:
-                        value[attr] = "NULL"
+                        value[attr] = "Aucune donnée"
                 else:
-                    value[attr] = "NULL"
+                    value[attr] = "Aucune donnée"
         return value
 
     def build_field_value_generic(self, name, obj, value):
@@ -3689,20 +3713,31 @@ class CouchdbBuilder(object):
             for it in obj:
                 self.build_field_value_generic(name + " " + str(it), obj[it], value)
         else:
-            value[name] = "NULL"
+            value[name] = "Aucune donnée"
 
     def label_identification(self, className, title):
+        icn = {
+            "observations": "Observation",
+            "photos": "Photo",
+            "gestions": "Gestion",
+            "proprietes": "Propriete",
+            "pointsLeveDZ": "PointDZ",
+            "mesures": "MesureMonteeEaux",
+            "mesuresDZ": "MesureLigneEauPrZ"
+        }
+
         if ' ' in title:
             tab = title.split(' ')
-            lastattr = tab[-1]
-            className = tab[-2]
-            if className == "observations":
-                className = "Observation"
-            if className == "photos":
-                className = "Photo"
+            if len(tab) >= 3:
+                attr = tab[-1]
+                className = tab[-2]
+            elif len(tab) == 2:
+                attr = tab[1]
+            if className in icn:
+                className = icn[className]
             if className in self.labels:
-                if lastattr in self.labels[className]:
-                    tab[-1] = self.labels[className][lastattr]
+                if attr in self.labels[className]:
+                    tab[-1] = self.labels[className][attr]
             return ' '.join(tab)
         if className in self.labels:
             if title in self.labels[className]:

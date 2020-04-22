@@ -77,12 +77,16 @@ class Utils:
 
     @staticmethod
     def get_label(positionable):
-        if 'libelle' in positionable:
-            return positionable['libelle']
-        elif 'designation' in positionable:
+        if 'designation' in positionable:
             return positionable['designation']
+        elif 'libelle' in positionable:
+            return positionable['libelle']
+        elif 'login' in positionable:
+            return positionable['login']
+        elif '_id' in positionable:
+            return positionable['_id']
         else:
-            return 'NULL'
+            return 'no data'
 
     @staticmethod
     def complete_model_from_positionable(name, obj, out):
@@ -226,6 +230,15 @@ class Utils:
                 "$or": orList
             },
             "limit": 50000
+        }
+        return mango
+
+    @staticmethod
+    def build_query_one_id(id):
+        mango = {
+            "selector": {
+                "_id": id
+            }
         }
         return mango
 
