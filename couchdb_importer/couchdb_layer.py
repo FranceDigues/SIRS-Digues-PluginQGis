@@ -26,7 +26,9 @@ import os
 import json
 
 from qgis.PyQt.QtCore import QVariant
+from qgis.PyQt.QtGui import QStandardItem
 from qgis.core import QgsFeature, QgsVectorLayer, QgsField, QgsLineSymbol, QgsMarkerSymbol, QgsWkbTypes
+
 
 from .couchdb_data import CouchdbData
 
@@ -3715,6 +3717,33 @@ class CouchdbBuilder(object):
         else:
             value[name] = "Aucune donnée"
 
+    def complete_model_from_positionable(self, name, obj, out, classname):
+        if type(obj) is str:
+            name = self.label_identification(classname, name)
+            out.append([QStandardItem(name), QStandardItem(obj)])
+        elif type(obj) in [int, float, bool]:
+            name = self.label_identification(classname, name)
+            out.append([QStandardItem(name), QStandardItem(str(obj))])
+        elif type(obj) is list:
+            l = len(obj)
+            if name == "prestationIds":
+                if l == 1:
+                    self.complete_model_from_positionable("Dernier(e) " + name, obj[-1], out, classname)
+                elif l == 2:
+                    self.complete_model_from_positionable("Dernier(e) " + name, obj[-1], out)
+                    self.complete_model_from_positionable("Dernier(e) " + name + " 2", obj[-2], out, classname)
+                elif l >= 3:
+                    self.complete_model_from_positionable("Dernier(e) " + name, obj[-1], out, classname)
+                    self.complete_model_from_positionable("Dernier(e) " + name + " 2", obj[-2], out, classname)
+                    self.complete_model_from_positionable("Dernier(e) " + name + " 3", obj[-3], out, classname)
+            else:
+                self.complete_model_from_positionable("Dernier(e) " + name, obj[-1], out, classname)
+        elif type(obj) is dict:
+            for it in obj:
+                self.complete_model_from_positionable(name + " " + it, obj[it], out, classname)
+        else:
+            out.append([QStandardItem(name), QStandardItem("type inconnu")])
+
     def label_identification(self, className, title):
         icn = {
             "observations": "Observation",
@@ -3743,3 +3772,12 @@ class CouchdbBuilder(object):
             if title in self.labels[className]:
                 title = self.labels[className][title]
         return title
+
+    def get_label_from_attribute(self, className, attribute):
+        if className in self.labels:
+            if attribute in self.labels[className]:
+                return self.labels[className][attribute]
+            else:
+                return attribute
+        else:
+            return attribute

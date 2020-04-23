@@ -82,29 +82,39 @@ class CouchdbConnector(object):
         db = self.connection[database]
         return db.find(query)
 
-    def get_and_save_label_from_id(self, database, id):
+    def get_and_save_label_from_id(self, database, Id):
         if database not in self.libelleRefId:
             self.libelleRefId[database] = {}
-        if id not in self.libelleRefId[database]:
-            result = self.request_database(database, single=id)
+        if Id not in self.libelleRefId[database]:
+            result = self.request_database(database, single=Id)
             result = list(result)
             if len(result) == 0:
-                label = id
+                label = Id
             else:
                 label = Utils.get_label(result[0])
-            self.libelleRefId[database][id] = label
-        return self.libelleRefId[database][id]
+            self.libelleRefId[database][Id] = label
+        return self.libelleRefId[database][Id]
 
-    def replace_id_by_label(self, database, target):
+    def replace_id_by_label_in_result(self, database, target):
+        for elem in target:
+            self.replace_id_by_label(database, elem)
+
+    def replace_id_by_label(self, database, elem):
         attrWithIdValue = ['author']
 
-        for elem in target:
-            for attr in elem:
-                if attr[-2:] == 'Id' or attr in attrWithIdValue:
+        for attr in elem:
+            if attr[-2:] == 'Id' or attr in attrWithIdValue:
+                if elem[attr] is not None:
                     elem[attr] = self.get_and_save_label_from_id(database, elem[attr])
-                elif attr[-3:] == 'Ids' and type(elem[attr]) == list:
-                    labelList = []
-                    for val in elem[attr]:
+            elif attr[-3:] == 'Ids' and type(elem[attr]) == list:
+                labelList = []
+                for val in elem[attr]:
+                    if val is not None:
                         label = self.get_and_save_label_from_id(database, val)
-                        labelList.append(label)
-                    elem[attr] = labelList
+                    labelList.append(label)
+                elem[attr] = labelList
+            elif type(elem[attr]) == list:
+                for elem2 in elem[attr]:
+                    self.replace_id_by_label(database, elem2)
+            elif type(elem[attr]) == dict:
+                self.replace_id_by_label(database, elem[attr])

@@ -43,10 +43,12 @@ class Utils:
         if len(split_url) == 2:
             http = split_url[0]
             addr = split_url[1]
+            if http == "http" or http == "https":
+                return [http, addr]
+            else:
+                return None
         else:
-            http = "http"
-            addr = "localhost:5984"
-        return http, addr
+            return None
 
     @staticmethod
     def collect_ids_from_layers_filtered_by_positionable_class(positionable):
@@ -87,30 +89,6 @@ class Utils:
             return positionable['_id']
         else:
             return 'no data'
-
-    @staticmethod
-    def complete_model_from_positionable(name, obj, out):
-        if type(obj) is str:
-            it = QStandardItem(name + " : " + obj)
-            out.append(it)
-        elif type(obj) is int:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is float:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is bool:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is list:
-            for index in range(len(obj)):
-                Utils.complete_model_from_positionable(name + "_" + str(index), obj[index], out)
-        elif type(obj) is dict:
-            for it in obj:
-                Utils.complete_model_from_positionable(name + "_" + it, obj[it], out)
-        else:
-            it = QStandardItem(name + " : unknown type")
-            out.append(it)
 
     @staticmethod
     def collect_ids_from_layers():
