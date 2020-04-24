@@ -30,7 +30,7 @@ class CouchdbData(object):
     def __init__(self):
         self.data = {}
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json')) as inFile:
+        with open(os.path.join(__location__, 'configuration_object.json')) as inFile:
             preference = json.load(inFile)
             for className in preference:
                 self.data[className] = {
@@ -118,7 +118,7 @@ class CouchdbData(object):
 
     def reset_from_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json')) as inFile:
+        with open(os.path.join(__location__, 'configuration_object.json')) as inFile:
             preference = json.load(inFile)
             for className in preference:
                 self.data[className] = {
@@ -131,7 +131,7 @@ class CouchdbData(object):
 
     def write_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json'), 'w') as outFile:
+        with open(os.path.join(__location__, 'configuration_object.json'), 'w') as outFile:
             configuration = {}
             for className in self.data:
                 configuration[className] = {}
