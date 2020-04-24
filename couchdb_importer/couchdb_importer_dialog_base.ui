@@ -181,6 +181,9 @@
        <property name="sizeAdjustPolicy">
         <enum>QAbstractScrollArea::AdjustIgnored</enum>
        </property>
+       <property name="horizontalScrollMode">
+        <enum>QAbstractItemView::ScrollPerPixel</enum>
+       </property>
        <attribute name="horizontalHeaderVisible">
         <bool>false</bool>
        </attribute>
@@ -196,6 +199,9 @@
       <widget class="QTableView" name="detail">
        <property name="sizeAdjustPolicy">
         <enum>QAbstractScrollArea::AdjustIgnored</enum>
+       </property>
+       <property name="horizontalScrollMode">
+        <enum>QAbstractItemView::ScrollPerPixel</enum>
        </property>
        <attribute name="horizontalHeaderVisible">
         <bool>false</bool>

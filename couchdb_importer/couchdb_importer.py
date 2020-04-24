@@ -445,8 +445,8 @@ class CouchdbImporter:
         model.itemChanged.connect(self.on_positionable_list_changed)
         model.sort(0, Qt.AscendingOrder)
         self.dlg.positionable.setModel(model)
-        self.dlg.positionable.setColumnHidden(2, True)
         self.dlg.positionable.resizeColumnsToContents()
+        self.dlg.positionable.setColumnHidden(2, True)
         self.dlg.progressBar.setValue(0)
 
     def build_list_detail(self, pos):
