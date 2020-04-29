@@ -91,30 +91,31 @@ class CouchdbBuilder(object):
         className = classNameComplete.split("fr.sirs.core.model.")[1]
         attrValue = self.build_field_value(positionable, className, data)
         feature = QgsFeature(layer.fields())
-        labels = {}
 
-        for title in attrValue:
-            label = self.label_identification(className, title)
-            labels[label] = attrValue[title]
-
-        for field in layer.fields():
-            name = field.name()
-            typ = field.type()
-            if name in labels:
-                feature.setAttribute(name, labels[name])
-            elif typ == QVariant.String:
-                feature.setAttribute(name, "Aucune donnée")
-            elif typ == QVariant.Int:
-                feature.setAttribute(name, -1)
-            elif typ == QVariant.Bool:
-                feature.setAttribute(name, False)
-            elif typ == QVariant.Double:
-                feature.setAttribute(name, -1.0)
+        #labels = {}
 
         #for title in attrValue:
         #    label = self.label_identification(className, title)
-        #    if layer.fields().indexFromName(label) != -1:
-        #        feature.setAttribute(label, attrValue[title])
+        #    labels[label] = attrValue[title]
+
+        #for field in layer.fields():
+        #    name = field.name()
+        #    typ = field.type()
+        #    if name in labels:
+        #        feature.setAttribute(name, labels[name])
+        #    elif typ == QVariant.String:
+        #        feature.setAttribute(name, "Aucune donnée")
+        #    elif typ == QVariant.Int:
+        #        feature.setAttribute(name, -1)
+        #    elif typ == QVariant.Bool:
+        #        feature.setAttribute(name, False)
+        #    elif typ == QVariant.Double:
+        #        feature.setAttribute(name, -1.0)
+
+        for title in attrValue:
+            label = self.label_identification(className, title)
+            if layer.fields().indexFromName(label) != -1:
+                feature.setAttribute(label, attrValue[title])
 
         feature.setGeometry(formatGeom)
         return feature
@@ -142,16 +143,16 @@ class CouchdbBuilder(object):
             l = len(obj)
             if name == "prestationIds":
                 if l == 1:
-                    self.build_field_value_generic(name + " actuel(le)", obj[-1], value)
+                    self.build_field_value_generic(name + " actuelle:", obj[-1], value)
                 elif l == 2:
-                    self.build_field_value_generic(name + " actuel(le)", obj[-1], value)
-                    self.build_field_value_generic(name + " actuel(le)" + " 2", obj[-2], value)
+                    self.build_field_value_generic(name + " actuelle:", obj[-1], value)
+                    self.build_field_value_generic(name + " actuelle:" + " N-2", obj[-2], value)
                 elif l >= 3:
-                    self.build_field_value_generic(name + " actuel(le)", obj[-1], value)
-                    self.build_field_value_generic(name + " actuel(le)" + " 2", obj[-2], value)
-                    self.build_field_value_generic(name + " actuel(le)" + " 3", obj[-3], value)
+                    self.build_field_value_generic(name + " actuelle:", obj[-1], value)
+                    self.build_field_value_generic(name + " actuelle:" + " N-2", obj[-2], value)
+                    self.build_field_value_generic(name + " actuelle:" + " N-3", obj[-3], value)
             else:
-                self.build_field_value_generic(name + " actuel(le)", obj[-1], value)
+                self.build_field_value_generic(name + " actuelle:", obj[-1], value)
         elif type(obj) == dict:
             for it in obj:
                 self.build_field_value_generic(name + " " + str(it), obj[it], value)
@@ -169,16 +170,16 @@ class CouchdbBuilder(object):
             l = len(obj)
             if name == "prestationIds":
                 if l == 1:
-                    self.complete_model_from_positionable(name + " actuel(le)", obj[-1], out, classname)
+                    self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
                 elif l == 2:
-                    self.complete_model_from_positionable(name + " actuel(le)", obj[-1], out)
-                    self.complete_model_from_positionable(name + " actuel(le)" + " 2", obj[-2], out, classname)
+                    self.complete_model_from_positionable(name + " actuelle:", obj[-1], out)
+                    self.complete_model_from_positionable(name + " actuelle:" + " N-2", obj[-2], out, classname)
                 elif l >= 3:
-                    self.complete_model_from_positionable(name + " actuel(le)", obj[-1], out, classname)
-                    self.complete_model_from_positionable(name + " actuel(le)" + " 2", obj[-2], out, classname)
-                    self.complete_model_from_positionable(name + " actuel(le)" + " 3", obj[-3], out, classname)
+                    self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
+                    self.complete_model_from_positionable(name + " actuelle:" + " N-2", obj[-2], out, classname)
+                    self.complete_model_from_positionable(name + " actuelle:" + " N-3", obj[-3], out, classname)
             else:
-                self.complete_model_from_positionable(name + " actuel(le)", obj[-1], out, classname)
+                self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
         elif type(obj) is dict:
             for it in obj:
                 self.complete_model_from_positionable(name + " " + it, obj[it], out, classname)
@@ -195,9 +196,61 @@ class CouchdbBuilder(object):
             "mesures": "MesureMonteeEaux",
             "mesuresDZ": "MesureLigneEauPrZ"
         }
+        fem = [
+            "digueIds",
+            "bergeIds",
+            "ouvertureBatardableIds",
+            "planifications",
+            "voieDigueIds",
+            "prestationIds",
+            "voieAccesIds",
+            "borneIds",
+            "stationPompageIds",
+            "photos",
+            "observations",
+            "proprietes",
+            "mesuresDZ",
+            "mesures",
+            "gestions",
+            "prestationIds"
+        ]
+        mas = [
+            "intervenantsIds",
+            "reseauTelecomEnergieIds",
+            "reseauHydrauliqueCielOuvertIds",
+            "ouvrageTelecomEnergieIds",
+            "articleIds",
+            "ouvrageFranchissementIds",
+            "ouvrageRevancheIds",
+            "ouvrageHydrauliqueAssocieIds",
+            "levePositionIds",
+            "desordreIds",
+            "reseauHydrauliqueFermeIds",
+            "evenementHydrauliqueIds",
+            "seuilIds",
+            "rapportEtudeIds",
+            "pointsLeveDZ",
+        ]
 
         if ' ' in title:
+            # Prestation management
+            if title == "prestationIds actuelle:":
+                return "Prestation actuelle"
+            if title == "prestationIds actuelle: N-2":
+                return "Avant derniere Prestation"
+                #return "Prestation actuelle N-2"
+            if title == "prestationIds actuelle: N-3":
+                return "Prestation N-3"
+                #return "Prestation actuelle N-3"
+
             tab = title.split(' ')
+            # Define the adjective matches
+            for i in range(len(tab)):
+                if tab[i] == "actuelle:":
+                    if tab[i-1] in mas:
+                        tab[i] = "actuel:"
+
+            # Convert SIRS id into label
             if len(tab) == 3 or len(tab) == 5:
                 attr = tab[-1]
                 className = tab[-3]
@@ -219,6 +272,17 @@ class CouchdbBuilder(object):
                 attr = tab[2]
                 if attr in icn:
                     tab[2] = icn[attr]
+
+            # Remove 's' at the end of word
+            if len(tab) == 2:
+                if "actuel" in tab[1] and tab[0][-1] == 's':
+                    tab[0] = tab[0][:-1]
+
+            # Remove ':' at the end of actuel adjective
+            if len(tab) == 2:
+                if "actuel" in tab[1] and tab[1][-1] == ':':
+                    tab[1] = tab[1][:-1]
+
             return ' '.join(tab)
 
         if className in self.labels:
