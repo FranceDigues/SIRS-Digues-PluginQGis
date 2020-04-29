@@ -444,6 +444,8 @@ class CouchdbImporter:
             self.dlg.progressBar.setValue(completed)
         model.itemChanged.connect(self.on_positionable_list_changed)
         model.sort(0, Qt.AscendingOrder)
+        model.setHorizontalHeaderLabels(["Objet", "Désignation"])
+        self.dlg.positionable.setSortingEnabled(True)
         self.dlg.positionable.setModel(model)
         self.dlg.positionable.resizeColumnsToContents()
         self.dlg.positionable.setColumnHidden(2, True)

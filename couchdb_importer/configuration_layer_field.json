@@ -12,12 +12,12 @@
     "designation": "str",
     "digueId": "str",
     "geometry": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) date_fin": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "libelle": "str",
@@ -71,7 +71,7 @@
     "materiauId": "str",
     "natureId": "str",
     "numCouche": "int",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borne_debut_aval": "bool",
@@ -170,7 +170,7 @@
     "linearId": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borne_debut_aval": "bool",
     "photos actuel(le) borne_debut_distance": "float",
@@ -183,7 +183,7 @@
     "photos actuel(le) designation": "str",
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -241,7 +241,7 @@
     "materiauId": "str",
     "natureId": "str",
     "numCouche": "int",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -257,7 +257,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -312,7 +312,7 @@
     "natureBasId": "str",
     "natureHautId": "str",
     "ouvertureBatardableIds actuel(le)": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -327,7 +327,7 @@
     "photos actuel(le) designation": "str",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -378,7 +378,7 @@
     "longitudeMin": "float",
     "materiauId": "str",
     "natureId": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -394,7 +394,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -453,7 +453,7 @@
     "natureHautId": "str",
     "numCouche": "int",
     "penteInterieure": "float",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -469,7 +469,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -527,7 +527,7 @@
     "natureHautId": "str",
     "numCouche": "int",
     "penteInterieure": "float",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borne_debut_aval": "bool",
@@ -542,7 +542,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -590,7 +590,7 @@
     "linearId": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -606,7 +606,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -683,11 +683,11 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "largeur": "float",
@@ -698,7 +698,7 @@
     "longitudeMax": "float",
     "longitudeMin": "float",
     "ouvrageFranchissementIds actuel(le)": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -714,7 +714,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -768,12 +768,12 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) date_fin": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "hauteur": "float",
@@ -791,7 +791,7 @@
     "organismeManipulateurId": "str",
     "organismeStockantId": "str",
     "ouvrageRevancheIds actuel(le)": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -807,7 +807,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -866,11 +866,11 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "latitudeMax": "float",
@@ -879,7 +879,7 @@
     "linearId": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borne_debut_aval": "bool",
@@ -894,7 +894,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -938,10 +938,10 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "largeur": "float",
@@ -954,7 +954,7 @@
     "materiauId": "str",
     "numeroSecteur": "int",
     "ouvrageFranchissementIds actuel(le)": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borne_debut_aval": "bool",
@@ -969,7 +969,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -1020,10 +1020,10 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "largeur": "float",
@@ -1034,7 +1034,7 @@
     "longitudeMax": "float",
     "longitudeMin": "float",
     "orientationOuvrageId": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borne_debut_aval": "bool",
@@ -1049,7 +1049,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -1107,10 +1107,10 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) valid": "bool",
     "latitudeMax": "float",
     "latitudeMin": "float",
@@ -1118,15 +1118,15 @@
     "linearId": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "observations actuel(le) @class": "str",
+
     "observations actuel(le) author": "str",
     "observations actuel(le) date": "str",
     "observations actuel(le) designation": "str",
     "observations actuel(le) evolution": "str",
-    "observations actuel(le) id": "str",
+
     "observations actuel(le) nombreDesordres": "int",
     "observations actuel(le) observateurId": "str",
-    "observations actuel(le) photos actuel(le) @class": "str",
+
     "observations actuel(le) photos actuel(le) author": "str",
     "observations actuel(le) photos actuel(le) borneDebutId": "str",
     "observations actuel(le) photos actuel(le) borneFinId": "str",
@@ -1142,7 +1142,7 @@
     "observations actuel(le) photos actuel(le) editedGeoCoordinate": "bool",
     "observations actuel(le) photos actuel(le) geometry": "str",
     "observations actuel(le) photos actuel(le) geometryMode": "str",
-    "observations actuel(le) photos actuel(le) id": "str",
+
     "observations actuel(le) photos actuel(le) latitudeMax": "float",
     "observations actuel(le) photos actuel(le) latitudeMin": "float",
     "observations actuel(le) photos actuel(le) libelle": "str",
@@ -1159,7 +1159,7 @@
     "observations actuel(le) suite": "str",
     "observations actuel(le) urgenceId": "str",
     "observations actuel(le) valid": "bool",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borne_debut_aval": "bool",
@@ -1173,7 +1173,7 @@
     "photos actuel(le) designation": "str",
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -1279,12 +1279,12 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) date_fin": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "latitudeMax": "float",
@@ -1294,15 +1294,15 @@
     "linearId2": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "observations actuel(le) @class": "str",
+
     "observations actuel(le) author": "str",
     "observations actuel(le) date": "str",
     "observations actuel(le) designation": "str",
     "observations actuel(le) evolution": "str",
-    "observations actuel(le) id": "str",
+
     "observations actuel(le) nombreDesordres": "int",
     "observations actuel(le) observateurId": "str",
-    "observations actuel(le) photos actuel(le) @class": "str",
+
     "observations actuel(le) photos actuel(le) author": "str",
     "observations actuel(le) photos actuel(le) borneDebutId": "str",
     "observations actuel(le) photos actuel(le) borneFinId": "str",
@@ -1318,7 +1318,7 @@
     "observations actuel(le) photos actuel(le) editedGeoCoordinate": "bool",
     "observations actuel(le) photos actuel(le) geometry": "str",
     "observations actuel(le) photos actuel(le) geometryMode": "str",
-    "observations actuel(le) photos actuel(le) id": "str",
+
     "observations actuel(le) photos actuel(le) latitudeMax": "float",
     "observations actuel(le) photos actuel(le) latitudeMin": "float",
     "observations actuel(le) photos actuel(le) libelle": "str",
@@ -1335,7 +1335,7 @@
     "observations actuel(le) suite": "str",
     "observations actuel(le) urgenceId": "str",
     "observations actuel(le) valid": "bool",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -1351,7 +1351,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -1410,11 +1410,11 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "latitudeMax": "float",
@@ -1423,15 +1423,15 @@
     "linearId": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "observations actuel(le) @class": "str",
+
     "observations actuel(le) author": "str",
     "observations actuel(le) date": "str",
     "observations actuel(le) designation": "str",
     "observations actuel(le) evolution": "str",
-    "observations actuel(le) id": "str",
+
     "observations actuel(le) nombreDesordres": "int",
     "observations actuel(le) observateurId": "str",
-    "observations actuel(le) photos actuel(le) @class": "str",
+
     "observations actuel(le) photos actuel(le) author": "str",
     "observations actuel(le) photos actuel(le) borne_debut_aval": "bool",
     "observations actuel(le) photos actuel(le) borne_debut_distance": "float",
@@ -1445,7 +1445,7 @@
     "observations actuel(le) photos actuel(le) editedGeoCoordinate": "bool",
     "observations actuel(le) photos actuel(le) geometry": "str",
     "observations actuel(le) photos actuel(le) geometryMode": "str",
-    "observations actuel(le) photos actuel(le) id": "str",
+
     "observations actuel(le) photos actuel(le) latitudeMax": "float",
     "observations actuel(le) photos actuel(le) latitudeMin": "float",
     "observations actuel(le) photos actuel(le) libelle": "str",
@@ -1460,7 +1460,7 @@
     "observations actuel(le) photos actuel(le) valid": "bool",
     "observations actuel(le) suite": "str",
     "observations actuel(le) valid": "bool",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -1476,7 +1476,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -1600,11 +1600,11 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "implantationId": "str",
@@ -1615,14 +1615,14 @@
     "linearId2": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "observations actuel(le) @class": "str",
+
     "observations actuel(le) author": "str",
     "observations actuel(le) date": "str",
     "observations actuel(le) designation": "str",
     "observations actuel(le) evolution": "str",
-    "observations actuel(le) id": "str",
+
     "observations actuel(le) observateurId": "str",
-    "observations actuel(le) photos actuel(le) @class": "str",
+
     "observations actuel(le) photos actuel(le) author": "str",
     "observations actuel(le) photos actuel(le) borneDebutId": "str",
     "observations actuel(le) photos actuel(le) borneFinId": "str",
@@ -1638,7 +1638,7 @@
     "observations actuel(le) photos actuel(le) editedGeoCoordinate": "bool",
     "observations actuel(le) photos actuel(le) geometry": "str",
     "observations actuel(le) photos actuel(le) geometryMode": "str",
-    "observations actuel(le) photos actuel(le) id": "str",
+
     "observations actuel(le) photos actuel(le) latitudeMax": "float",
     "observations actuel(le) photos actuel(le) latitudeMin": "float",
     "observations actuel(le) photos actuel(le) libelle": "str",
@@ -1655,7 +1655,7 @@
     "observations actuel(le) suite": "str",
     "observations actuel(le) valid": "bool",
     "ouvrageHydrauliqueAssocieIds actuel(le)": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -1671,7 +1671,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -1729,11 +1729,11 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "latitudeMax": "float",
@@ -1742,7 +1742,7 @@
     "linearId": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -1758,7 +1758,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -1817,7 +1817,7 @@
     "linearId": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -1832,7 +1832,7 @@
     "photos actuel(le) designation": "str",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -1891,10 +1891,10 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "hauteur": "float",
@@ -1906,7 +1906,7 @@
     "longitudeMax": "float",
     "longitudeMin": "float",
     "ouvrageTelecomEnergieIds actuel(le)": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -1922,7 +1922,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -1967,10 +1967,10 @@
     "foreignParentId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "latitudeMax": "float",
@@ -1979,7 +1979,7 @@
     "linearId": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -1995,7 +1995,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -2156,15 +2156,15 @@
     "linearId2": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "observations actuel(le) @class": "str",
+
     "observations actuel(le) author": "str",
     "observations actuel(le) date": "str",
     "observations actuel(le) designation": "str",
     "observations actuel(le) evolution": "str",
-    "observations actuel(le) id": "str",
+
     "observations actuel(le) nombreDesordres": "int",
     "observations actuel(le) observateurId": "str",
-    "observations actuel(le) photos actuel(le) @class": "str",
+
     "observations actuel(le) photos actuel(le) author": "str",
     "observations actuel(le) photos actuel(le) borneDebutId": "str",
     "observations actuel(le) photos actuel(le) borneFinId": "str",
@@ -2180,7 +2180,7 @@
     "observations actuel(le) photos actuel(le) editedGeoCoordinate": "bool",
     "observations actuel(le) photos actuel(le) geometry": "str",
     "observations actuel(le) photos actuel(le) geometryMode": "str",
-    "observations actuel(le) photos actuel(le) id": "str",
+
     "observations actuel(le) photos actuel(le) latitudeMax": "float",
     "observations actuel(le) photos actuel(le) latitudeMin": "float",
     "observations actuel(le) photos actuel(le) libelle": "str",
@@ -2246,7 +2246,7 @@
     "longitudeMax": "float",
     "longitudeMin": "float",
     "marcheId": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -2262,7 +2262,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -2378,7 +2378,7 @@
     "mesures actuel(le) referenceHauteurId": "str",
     "mesures actuel(le) sourceId": "str",
     "mesures actuel(le) valid": "bool",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -2393,7 +2393,7 @@
     "photos actuel(le) designation": "str",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -2447,7 +2447,7 @@
     "longitudeMax": "float",
     "longitudeMin": "float",
     "observateurId": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) borneDebutId": "str",
     "photos actuel(le) borneFinId": "str",
@@ -2463,7 +2463,7 @@
     "photos actuel(le) editedGeoCoordinate": "bool",
     "photos actuel(le) geometry": "str",
     "photos actuel(le) geometryMode": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) latitudeMax": "float",
     "photos actuel(le) latitudeMin": "float",
     "photos actuel(le) libelle": "str",
@@ -2754,10 +2754,10 @@
     "geometrieCreteId": "str",
     "geometry": "str",
     "geometryMode": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "hauteurChute": "float",
@@ -2821,15 +2821,15 @@
     "linearId": "str",
     "longitudeMax": "float",
     "longitudeMin": "float",
-    "observations actuel(le) @class": "str",
+
     "observations actuel(le) author": "str",
     "observations actuel(le) date": "str",
     "observations actuel(le) designation": "str",
     "observations actuel(le) evolution": "str",
-    "observations actuel(le) id": "str",
+
     "observations actuel(le) nombreDesordres": "int",
     "observations actuel(le) observateurId": "str",
-    "observations actuel(le) photos actuel(le) @class": "str",
+
     "observations actuel(le) photos actuel(le) author": "str",
     "observations actuel(le) photos actuel(le) borneDebutId": "str",
     "observations actuel(le) photos actuel(le) borneFinId": "str",
@@ -2844,7 +2844,7 @@
     "observations actuel(le) photos actuel(le) editedGeoCoordinate": "bool",
     "observations actuel(le) photos actuel(le) geometry": "str",
     "observations actuel(le) photos actuel(le) geometryMode": "str",
-    "observations actuel(le) photos actuel(le) id": "str",
+
     "observations actuel(le) photos actuel(le) latitudeMax": "float",
     "observations actuel(le) photos actuel(le) latitudeMin": "float",
     "observations actuel(le) photos actuel(le) libelle": "str",
@@ -3076,19 +3076,19 @@
     "date_debut": "str",
     "designation": "str",
     "geometry": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "libelle": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) chemin": "str",
     "photos actuel(le) commentaire": "str",
     "photos actuel(le) date": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) libelle": "str",
     "photos actuel(le) photographeId": "str",
     "photos actuel(le) valid": "bool",
@@ -3125,12 +3125,12 @@
     "destinationId": "str",
     "geometry": "str",
     "libelle": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) chemin": "str",
     "photos actuel(le) commentaire": "str",
     "photos actuel(le) date": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) libelle": "str",
     "photos actuel(le) photographeId": "str",
     "photos actuel(le) valid": "bool",
@@ -3146,12 +3146,12 @@
     "designation": "str",
     "geometry": "str",
     "libelle": "str",
-    "photos actuel(le) @class": "str",
+
     "photos actuel(le) author": "str",
     "photos actuel(le) chemin": "str",
     "photos actuel(le) commentaire": "str",
     "photos actuel(le) date": "str",
-    "photos actuel(le) id": "str",
+
     "photos actuel(le) libelle": "str",
     "photos actuel(le) photographeId": "str",
     "photos actuel(le) valid": "bool",
@@ -3169,10 +3169,10 @@
     "geometry": "str",
     "lieuDit": "str",
     "linearId": "str",
-    "observations actuel(le) @class": "str",
+
     "observations actuel(le) author": "str",
     "observations actuel(le) designation": "str",
-    "observations actuel(le) id": "str",
+
     "observations actuel(le) nombreDesordres": "int",
     "observations actuel(le) valid": "bool",
     "valid": "bool"
@@ -3190,11 +3190,11 @@
     "designation": "str",
     "digueId": "str",
     "geometry": "str",
-    "gestions actuel(le) @class": "str",
+
     "gestions actuel(le) author": "str",
     "gestions actuel(le) date_debut": "str",
     "gestions actuel(le) designation": "str",
-    "gestions actuel(le) id": "str",
+
     "gestions actuel(le) organismeId": "str",
     "gestions actuel(le) valid": "bool",
     "libelle": "str",

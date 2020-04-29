@@ -116,6 +116,9 @@
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>200</number>
        </attribute>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>false</bool>
+       </attribute>
        <attribute name="horizontalHeaderStretchLastSection">
         <bool>true</bool>
        </attribute>
@@ -207,7 +210,10 @@
         <enum>QAbstractItemView::ScrollPerPixel</enum>
        </property>
        <attribute name="horizontalHeaderVisible">
-        <bool>false</bool>
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>true</bool>
        </attribute>
        <attribute name="horizontalHeaderStretchLastSection">
         <bool>false</bool>
