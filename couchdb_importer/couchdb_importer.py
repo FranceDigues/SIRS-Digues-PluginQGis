@@ -31,12 +31,13 @@ import couchdb
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt, QModelIndex
 from qgis.PyQt.QtGui import QIcon, QStandardItem, QStandardItemModel
-from qgis.PyQt.QtWidgets import QAction, QLineEdit, QHeaderView
+from qgis.PyQt.QtWidgets import QAction, QLineEdit, QHeaderView, QWidget, QDialog
 from qgis.core import QgsProject, Qgis
 
 # DO NOT DELETE. Initialize Qt resources from file resources.py.
 from .resources import *
 from .couchdb_importer_dialog import CouchdbImporterDialog
+from .couchdb_summary_dialog import CouchdbSummaryDialog
 from .couchdb_connector import CouchdbConnector
 from .couchdb_data import CouchdbData
 from .couchdb_layer import CouchdbBuilder
@@ -280,26 +281,45 @@ class CouchdbImporter:
 
         if self.projection == "projeté":
             if "geometry" in data.keys():
-                return data["geometry"]
+                return data["geometry"], "projected"
             else:
-                if className not in self.errorMsg['noproj']:
-                    self.errorMsg['noproj'][className] = []
-                self.errorMsg['noproj'][className].append(data["_id"])
-                return None
+                if "positionDebut" in data.keys() and "positionFin" in data.keys():
+                    if className not in self.errorMsg['noproj']:
+                        self.errorMsg['noproj'][className] = []
+                    self.errorMsg['noproj'][className].append(data["_id"])
+                    return Utils.debut_fin_to_wkt_linestring(data["positionDebut"], data["positionFin"]), "real"
+                else:
+                    if className not in self.errorMsg['nogeom']:
+                        self.errorMsg['nogeom'][className] = []
+                    self.errorMsg['nogeom'][className].append(data["_id"])
+                    return None, None
         elif self.projection == "absolu":
             if "positionDebut" in data.keys() and "positionFin" in data.keys():
-                return Utils.debut_fin_to_wkt_linestring(data["positionDebut"], data["positionFin"])
+                return Utils.debut_fin_to_wkt_linestring(data["positionDebut"], data["positionFin"]), "real"
             else:
                 if "geometry" in data.keys():
                     if className not in self.errorMsg['noabs']:
                         self.errorMsg['noabs'][className] = []
                     self.errorMsg['noabs'][className].append(data["_id"])
-                    return data["geometry"]
+                    return data["geometry"], "projected"
                 else:
                     if className not in self.errorMsg['nogeom']:
                         self.errorMsg['nogeom'][className] = []
                     self.errorMsg['nogeom'][className].append(data["_id"])
-                    return None
+                    return None, None
+
+    def open_recap_dialog(self):
+        if self.dlg.summary.checkState() == Qt.Checked:
+            self.summary.show()
+
+    def reset_summary(self):
+        self.summary.layerImported.setText("0")
+        self.summary.objectImported.setText("0")
+        self.summary.realPosition.setText("0")
+        self.summary.projectedPosition.setText("0")
+        self.summary.withoutPosition.setText("0")
+        self.summary.layerUpdated.setText("0")
+        self.summary.objectUpdated.setText("0")
 
     """
     /****************************************************************
@@ -657,6 +677,7 @@ class CouchdbImporter:
         self.change_select_all_button("object")
 
     def on_update_layers_click(self):
+        self.reset_summary()
         self.dlg.progressBar.setValue(1)
         result = self.collect_data_from_layers_ids()
         rl = list(result)
@@ -666,13 +687,16 @@ class CouchdbImporter:
                 "Les Identifiants trouvés dans les couches ne trouvent pas de référence en base de donnée.", Qgis.Info)
             self.dlg.progressBar.setValue(0)
             self.dlg.close()
+            self.open_recap_dialog()
             return
         self.update_layers(rl, ln)
         self.dlg.progressBar.setValue(0)
         self.display_messages()
         self.dlg.close()
+        self.open_recap_dialog()
 
     def on_add_layers_click(self):
+        self.reset_summary()
         self.data.write_configuration()
         if not self.isPreLoad:
             self.collect_data_from_user_selection()
@@ -681,6 +705,7 @@ class CouchdbImporter:
             self.simple_message("Aucune vue sélectionné.", Qgis.Info)
             self.dlg.progressBar.setValue(0)
             self.dlg.close()
+            self.open_recap_dialog()
             return
         if self.isPreLoad:
             ids_from_selection = self.data.getAllIdSelected()
@@ -691,6 +716,10 @@ class CouchdbImporter:
         self.dlg.progressBar.setValue(0)
         self.display_messages()
         self.dlg.close()
+        self.open_recap_dialog()
+
+    def on_ok_summary_click(self):
+        self.summary.close()
 
     """
     /****************************************************************
@@ -702,11 +731,14 @@ class CouchdbImporter:
         lu = 99 / ln
         completed = 1
 
+        cn = set()
+        ou = 0
+
         for data in loaded:
             id = data["_id"]
             classNameComplete = data["@class"]
             className = classNameComplete.split("fr.sirs.core.model.")[1]
-            wkt = self.build_wkt(data)
+            wkt, position = self.build_wkt(data)
             if wkt is None:
                 continue
             geom = Utils.build_geometry(wkt, self.lengthParameter)
@@ -719,10 +751,13 @@ class CouchdbImporter:
                 msg = "Mise à jour impossible. Pour cette donnée, \
                 le type de géométrie a changé et n'est plus celle de\
                  sa couche actuelle. Veuillez supprimer puis réimporter\
-                  la caractéristique de la couche correspondant à cette donnée\
+                  l'objet de la couche correspondant à cette donnée\
                    pour éffectuer sa mise à jour."
                 self.basic_message(msg, "couche: " + layer.name() + "donnée: " + str(id), Qgis.Warning)
                 continue
+
+            cn.add(className+str(typ))
+            ou = ou + 1
 
             provider = layer.dataProvider()
             features = layer.getFeatures()
@@ -735,12 +770,19 @@ class CouchdbImporter:
             # progress bar
             completed = completed + lu
             self.dlg.progressBar.setValue(completed)
+        # complete summary
+        self.summary.layerUpdated.setText(str(len(cn)))
+        self.summary.objectUpdated.setText(str(ou))
 
     def add_layers(self, ids_from_selection, ids_from_layers, llp):
         root = QgsProject.instance().layerTreeRoot()
         lu = 25 / llp
         completed = 75
         allLayers = {}
+        li = 0
+        rp = 0
+        pp = 0
+        wp = 0
 
         for data in self.loadedPositionable:
             id = data["_id"]
@@ -755,13 +797,18 @@ class CouchdbImporter:
                 self.errorMsg['alreadyloaded'][className].append(id)
                 continue
             # build geometry
-            wkt = self.build_wkt(data)
+            wkt, position = self.build_wkt(data)
             if wkt is None:
+                wp = wp + 1
                 continue
             geom = Utils.build_geometry(wkt, self.lengthParameter)
             if geom is None:
                 self.basic_message("Type de géométrie non reconnu", str(id), Qgis.Warning)
                 continue
+            if position == "real":
+                rp = rp + 1
+            if position == "projected":
+                pp = pp + 1
             typ = geom.wkbType()
             # is layer already exist
             currentLayer = Utils.filter_layers_by_name_and_geometry_type(className, typ)
@@ -791,8 +838,15 @@ class CouchdbImporter:
         for className in allLayers:
             group = root.findGroup(className)
             for type in allLayers[className]:
+                li = li + 1
                 QgsProject.instance().addMapLayer(allLayers[className][type], False)
                 group.addLayer(allLayers[className][type])
+        # complete summary
+        self.summary.layerImported.setText(str(li))
+        self.summary.objectImported.setText(str(llp))
+        self.summary.realPosition.setText(str(rp))
+        self.summary.projectedPosition.setText(str(pp))
+        self.summary.withoutPosition.setText(str(wp))
 
     """
     /****************************************************************
@@ -838,6 +892,7 @@ class CouchdbImporter:
         if self.first_start == True:
             self.first_start = False
             self.dlg = CouchdbImporterDialog()
+            self.summary = CouchdbSummaryDialog()
             # load action
             self.dlg.loginButton.clicked.connect(self.on_login_click)
             self.dlg.detailButton.clicked.connect(self.on_detail_click)
@@ -860,6 +915,8 @@ class CouchdbImporter:
             # research bar action
             self.dlg.search.clicked.connect(self.on_search_click)
             self.dlg.resetSearch.clicked.connect(self.on_reset_search_click)
+            # summary action
+            self.summary.ok.clicked.connect(self.on_ok_summary_click)
             # initialize ui access and data
             self.on_reset_connection_click()
             # set default url connection
@@ -868,6 +925,8 @@ class CouchdbImporter:
             self.dlg.password.setEchoMode(QLineEdit.Password)
             # set default choice of projection
             self.dlg.projete.setChecked(True)
+            # set summary activate
+            self.dlg.summary.setChecked(True)
             # set progress bar value
             self.dlg.progressBar.setValue(0)
 
