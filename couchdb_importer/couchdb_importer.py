@@ -684,7 +684,7 @@ class CouchdbImporter:
         ln = len(rl)
         if ln == 0:
             self.simple_message(
-                "Les Identifiants trouvés dans les couches ne trouvent pas de référence en base de donnée.", Qgis.Info)
+                "Les couches actuelles ne trouvent aucune référence en base de données.", Qgis.Info)
             self.dlg.progressBar.setValue(0)
             self.dlg.close()
             self.open_recap_dialog()
