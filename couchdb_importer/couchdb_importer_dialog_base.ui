@@ -104,6 +104,9 @@
      </item>
      <item row="2" column="3" rowspan="2">
       <widget class="QTableView" name="attribute">
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
        <property name="showGrid">
         <bool>false</bool>
        </property>
@@ -138,6 +141,9 @@
      </item>
      <item row="2" column="2" rowspan="2">
       <widget class="QTableView" name="positionableClass">
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
        <property name="showGrid">
         <bool>false</bool>
        </property>
@@ -206,6 +212,9 @@
        <property name="sizeAdjustPolicy">
         <enum>QAbstractScrollArea::AdjustIgnored</enum>
        </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
        <property name="horizontalScrollMode">
         <enum>QAbstractItemView::ScrollPerPixel</enum>
        </property>
@@ -227,6 +236,9 @@
       <widget class="QTableView" name="detail">
        <property name="sizeAdjustPolicy">
         <enum>QAbstractScrollArea::AdjustIgnored</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
        </property>
        <property name="horizontalScrollMode">
         <enum>QAbstractItemView::ScrollPerPixel</enum>
