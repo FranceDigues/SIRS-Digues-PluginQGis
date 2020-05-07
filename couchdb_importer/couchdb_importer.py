@@ -628,18 +628,15 @@ class CouchdbImporter:
         # change is preload
         self.isPreLoad = False
 
-    def on_attribute_list_changed(self, it):
+    def on_attribute_list_changed(self, item):
         model: QStandardItemModel = self.dlg.attribute.model()
-        row = model.indexFromItem(it).row()
-        item = model.item(row, 1)
-        attributeSelected = str(item.text())
-        state = True
+        row = model.indexFromItem(item).row()
+        attributeName = model.item(row, 1).text()
 
         if item.checkState() == Qt.Checked:
-            state = True
+            self.data.setAttributeValue(self.currentPositionableClass, attributeName, True)
         if item.checkState() == Qt.Unchecked:
-            state = False
-        self.data.setAttributeValue(self.currentPositionableClass, attributeSelected, state)
+            self.data.setAttributeValue(self.currentPositionableClass, attributeName, False)
         self.change_select_all_button("attribute")
 
     def on_positionable_list_changed(self, item):
