@@ -91,7 +91,7 @@ class CouchdbConnector(object):
             if len(result) == 0:
                 label = Id
             else:
-                label = Utils.get_label(result[0])
+                label = Utils.get_label_reference(result[0])
             self.libelleRefId[database][Id] = label
         return self.libelleRefId[database][Id]
 

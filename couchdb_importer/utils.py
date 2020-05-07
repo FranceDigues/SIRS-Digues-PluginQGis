@@ -91,6 +91,17 @@ class Utils:
             return 'no data'
 
     @staticmethod
+    def get_label_reference(positionable):
+        if 'libelle' in positionable:
+            return positionable['libelle']
+        elif 'designation' in positionable:
+            return positionable['designation']
+        elif '_id' in positionable:
+            return positionable['_id']
+        else:
+            return 'no data'
+
+    @staticmethod
     def collect_ids_from_layers():
         result = []
         layers = QgsProject.instance().mapLayers()
