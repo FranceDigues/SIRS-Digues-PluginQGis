@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1050</width>
-    <height>937</height>
+    <height>994</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -362,6 +362,20 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_6">
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Pour la Màj des couches, ne pas modifier: le nom des couches, le type de géométrie des couches et l'attribut _id</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QProgressBar" name="progressBar">
