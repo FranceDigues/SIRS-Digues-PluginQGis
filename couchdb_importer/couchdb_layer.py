@@ -115,7 +115,13 @@ class CouchdbBuilder(object):
         for title in attrValue:
             label = self.label_identification(className, title)
             if layer.fields().indexFromName(label) != -1:
-                feature.setAttribute(label, attrValue[title])
+                if 'Borne de début: Amont/Aval' in label or 'Borne de fin: Amont/Aval' in label:
+                    if attrValue[title]:
+                        feature.setAttribute(label, "Aval")
+                    else:
+                        feature.setAttribute(label, "Amont")
+                else:
+                    feature.setAttribute(label, attrValue[title])
 
         feature.setGeometry(formatGeom)
         return feature
