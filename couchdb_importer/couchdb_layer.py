@@ -243,15 +243,12 @@ class CouchdbBuilder(object):
         ]
 
         if ' ' in title:
-            # Prestation management
             if title == "prestationIds actuelle:":
                 return "Prestation actuelle"
             if title == "prestationIds actuelle: N-2":
                 return "Avant derniere Prestation"
-                #return "Prestation actuelle N-2"
             if title == "prestationIds actuelle: N-3":
                 return "Prestation N-3"
-                #return "Prestation actuelle N-3"
 
             tab = title.split(' ')
             # Define the adjective matches
