@@ -82,7 +82,7 @@ class CouchdbConnector(object):
         db = self.connection[database]
         return db.find(query)
 
-    def get_and_save_label_from_id(self, database, Id):
+    def get_and_save_label_from_id(self, database, Id, double):
         if database not in self.libelleRefId:
             self.libelleRefId[database] = {}
         if Id not in self.libelleRefId[database]:
@@ -91,7 +91,10 @@ class CouchdbConnector(object):
             if len(result) == 0:
                 label = Id
             else:
-                label = Utils.get_label_reference(result[0])
+                if double:
+                    label = Utils.get_label_and_designation_reference(result[0])
+                else:
+                    label = Utils.get_label_reference(result[0])
             self.libelleRefId[database][Id] = label
         return self.libelleRefId[database][Id]
 
@@ -105,12 +108,18 @@ class CouchdbConnector(object):
         for attr in elem:
             if attr[-2:] == 'Id' or attr in attrWithIdValue:
                 if elem[attr] is not None:
-                    elem[attr] = self.get_and_save_label_from_id(database, elem[attr])
+                    if attr in ['borneDebutId', 'borneFinId', 'tronconId']:
+                        elem[attr] = self.get_and_save_label_from_id(database, elem[attr], True)
+                    else:
+                        elem[attr] = self.get_and_save_label_from_id(database, elem[attr], False)
             elif attr[-3:] == 'Ids' and type(elem[attr]) == list:
                 labelList = []
                 for val in elem[attr]:
                     if val is not None:
-                        label = self.get_and_save_label_from_id(database, val)
+                        if attr == 'prestationIds':
+                            label = self.get_and_save_label_from_id(database, val, True)
+                        else:
+                            label = self.get_and_save_label_from_id(database, val, False)
                     labelList.append(label)
                 elem[attr] = labelList
             elif type(elem[attr]) == list:

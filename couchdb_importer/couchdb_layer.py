@@ -75,7 +75,14 @@ class CouchdbBuilder(object):
         for title in fields:
             if "_attachments" in title:
                 continue
+
             label = self.label_identification(className, title)
+
+            if 'borneDebutId' in title or 'borneFinId' in title or 'tronconId' in title or 'prestationIds' in title:
+                target.append(QgsField(label + ' libelle', QVariant.String))
+                target.append(QgsField(label + ' designation', QVariant.String))
+                continue
+
             if fields[title] == "str":
                 target.append(QgsField(label, QVariant.String))
             elif fields[title] == "int":
@@ -92,28 +99,25 @@ class CouchdbBuilder(object):
         attrValue = self.build_field_value(positionable, className, data)
         feature = QgsFeature(layer.fields())
 
-        #labels = {}
-
-        #for title in attrValue:
-        #    label = self.label_identification(className, title)
-        #    labels[label] = attrValue[title]
-
-        #for field in layer.fields():
-        #    name = field.name()
-        #    typ = field.type()
-        #    if name in labels:
-        #        feature.setAttribute(name, labels[name])
-        #    elif typ == QVariant.String:
-        #        feature.setAttribute(name, "Aucune donnée")
-        #    elif typ == QVariant.Int:
-        #        feature.setAttribute(name, -1)
-        #    elif typ == QVariant.Bool:
-        #        feature.setAttribute(name, False)
-        #    elif typ == QVariant.Double:
-        #        feature.setAttribute(name, -1.0)
-
         for title in attrValue:
             label = self.label_identification(className, title)
+
+            if 'borneDebutId' in title or 'borneFinId' in title or 'tronconId' in title or 'prestationIds' in title:
+                label1 = label + ' libelle'
+                label2 = label + ' designation'
+                if ' - ' in attrValue[title]:
+                    value1, value2 = attrValue[title].split(' - ')
+                    if layer.fields().indexFromName(label1) != -1:
+                        feature.setAttribute(label1, value1)
+                    if layer.fields().indexFromName(label2) != -1:
+                        feature.setAttribute(label2, value2)
+                else:
+                    if layer.fields().indexFromName(label1) != -1:
+                        feature.setAttribute(label1, attrValue[title])
+                    if layer.fields().indexFromName(label2) != -1:
+                        feature.setAttribute(label2, attrValue[title])
+                continue
+
             if layer.fields().indexFromName(label) != -1:
                 if 'Borne de début: Amont/Aval' in label or 'Borne de fin: Amont/Aval' in label:
                     if attrValue[title]:

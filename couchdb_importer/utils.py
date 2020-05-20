@@ -102,6 +102,26 @@ class Utils:
             return 'no data'
 
     @staticmethod
+    def get_label_and_designation_reference(positionable):
+        if 'libelle' in positionable and 'designation' in positionable:
+            return positionable['libelle'] + ' - ' + positionable['designation']
+        elif '_id' in positionable:
+            if 'libelle' in positionable and 'designation' not in positionable:
+                return positionable['libelle'] + ' - ' + positionable['_id']
+            elif 'libelle' not in positionable and 'designation' in positionable:
+                return positionable['_id'] + ' - ' + positionable['designation']
+            else:
+                return positionable['_id'] + ' - ' + positionable['_id']
+        else:
+            if 'libelle' in positionable and 'designation' not in positionable:
+                return positionable['libelle'] + ' - no data'
+            elif 'libelle' not in positionable and 'designation' in positionable:
+                return 'no data - ' + positionable['designation']
+            else:
+                return 'no data - no data'
+
+
+    @staticmethod
     def collect_ids_from_layers():
         result = []
         layers = QgsProject.instance().mapLayers()
