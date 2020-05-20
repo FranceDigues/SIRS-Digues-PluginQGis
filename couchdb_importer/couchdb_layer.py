@@ -117,9 +117,9 @@ class CouchdbBuilder(object):
             if layer.fields().indexFromName(label) != -1:
                 if 'Borne de début: Amont/Aval' in label or 'Borne de fin: Amont/Aval' in label:
                     if attrValue[title]:
-                        feature.setAttribute(label, "Aval")
-                    else:
                         feature.setAttribute(label, "Amont")
+                    else:
+                        feature.setAttribute(label, "Aval")
                 else:
                     feature.setAttribute(label, attrValue[title])
 
