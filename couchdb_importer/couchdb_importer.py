@@ -890,6 +890,8 @@ class CouchdbImporter:
             self.first_start = False
             self.dlg = CouchdbImporterDialog()
             self.summary = CouchdbSummaryDialog()
+            # set title
+            self.dlg.setWindowTitle('Importation BdD SIRS Digues')
             # load action
             self.dlg.loginButton.clicked.connect(self.on_login_click)
             self.dlg.detailButton.clicked.connect(self.on_detail_click)
