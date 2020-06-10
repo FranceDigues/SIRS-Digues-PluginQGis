@@ -444,31 +444,39 @@ class CouchdbImporter:
         completed = 75
         for pos in self.loadedPositionable:
             className = pos["@class"].split("fr.sirs.core.model.")[1]
+            designation = Utils.get_designation(pos)
             label = Utils.get_label(pos)
             id = pos["_id"]
 
+            troncon = ""
+            if "linearId" in pos:
+                troncon = pos["linearId"]
+
             if keyword is not None:
-                if keyword not in label and keyword not in className:
+                if keyword not in label and keyword not in className and keyword not in designation and keyword not in label:
                     continue
 
             item1 = QStandardItem(className)
-            item2 = QStandardItem(label)
-            item3 = QStandardItem(id)
+            item2 = QStandardItem(designation)
+            item3 = QStandardItem(troncon)
+            item4 = QStandardItem(label)
+            item5 = QStandardItem(id)
             item1.setCheckable(True)
+
             if self.data.getIdValue(className, id):
                 item1.setCheckState(Qt.Checked)
             else:
                 item1.setCheckState(Qt.Unchecked)
-            model.appendRow([item1, item2, item3])
+            model.appendRow([item1, item2, item3, item4, item5])
             completed = completed + lu
             self.dlg.progressBar.setValue(completed)
         model.itemChanged.connect(self.on_positionable_list_changed)
         model.sort(0, Qt.AscendingOrder)
-        model.setHorizontalHeaderLabels(["Objet", "Désignation"])
+        model.setHorizontalHeaderLabels(["Objet", "Désignation", "Tronçon", "Libellé"])
         self.dlg.positionable.setSortingEnabled(True)
         self.dlg.positionable.setModel(model)
         self.dlg.positionable.resizeColumnsToContents()
-        self.dlg.positionable.setColumnHidden(2, True)
+        self.dlg.positionable.setColumnHidden(4, True)
         self.dlg.progressBar.setValue(0)
 
     def build_list_detail(self, pos):
@@ -557,7 +565,7 @@ class CouchdbImporter:
     def on_positionable_click(self, it):
         model = self.dlg.positionable.model()
         row = it.row()
-        id = model.item(row, 2).text()
+        id = model.item(row, 4).text()
         selected = None
 
         for pos in self.loadedPositionable:
@@ -642,7 +650,7 @@ class CouchdbImporter:
     def on_positionable_list_changed(self, item):
         model: QStandardItemModel = self.dlg.positionable.model()
         row = model.indexFromItem(item).row()
-        id = model.item(row, 2).text()
+        id = model.item(row, 4).text()
         className = model.item(row, 0).text()
 
         if item.checkState() == Qt.Checked:

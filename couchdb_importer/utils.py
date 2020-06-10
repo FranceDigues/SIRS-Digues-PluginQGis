@@ -71,16 +71,15 @@ class Utils:
 
     @staticmethod
     def get_label(positionable):
+        if 'libelle' in positionable:
+            return positionable['libelle']
+        return ''
+
+    @staticmethod
+    def get_designation(positionable):
         if 'designation' in positionable:
             return positionable['designation']
-        elif 'libelle' in positionable:
-            return positionable['libelle']
-        elif 'login' in positionable:
-            return positionable['login']
-        elif '_id' in positionable:
-            return positionable['_id']
-        else:
-            return 'no data'
+        return ''
 
     @staticmethod
     def get_label_reference(positionable):
