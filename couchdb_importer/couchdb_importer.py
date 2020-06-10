@@ -759,7 +759,7 @@ class CouchdbImporter:
             provider = layer.dataProvider()
             features = layer.getFeatures()
             for feat in features:
-                if feat['_id'] == id:
+                if feat['_id (ne pas modifier/supprimer)'] == id:
                     provider.deleteFeatures([feat.id()])
             feature = self.provider.build_feature(data, geom, layer, self.data)
             provider.addFeature(feature)
@@ -776,7 +776,10 @@ class CouchdbImporter:
         lu = 25 / llp
         completed = 75
         allLayers = {}
+
+        # init summary var
         li = 0
+        to = 0
         rp = 0
         pp = 0
         wp = 0
@@ -806,6 +809,7 @@ class CouchdbImporter:
                 rp = rp + 1
             if position == "projected":
                 pp = pp + 1
+            to = to + 1
             typ = geom.wkbType()
             # is layer already exist
             currentLayer = Utils.filter_layers_by_name_and_geometry_type(className, typ)
@@ -840,7 +844,7 @@ class CouchdbImporter:
                 group.addLayer(allLayers[className][type])
         # complete summary
         self.summary.layerImported.setText(str(li))
-        self.summary.objectImported.setText(str(llp))
+        self.summary.objectImported.setText(str(to))
         self.summary.realPosition.setText(str(rp))
         self.summary.projectedPosition.setText(str(pp))
         self.summary.withoutPosition.setText(str(wp))

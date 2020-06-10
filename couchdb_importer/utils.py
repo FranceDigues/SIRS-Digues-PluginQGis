@@ -70,14 +70,6 @@ class Utils:
         return "LINESTRING (" + coordDebut + ", " + coordFin + ")"
 
     @staticmethod
-    def build_row_name_positionable(positionable):
-        className = positionable["@class"].split("fr.sirs.core.model.")[1]
-        label = Utils.get_label(positionable)
-        id = positionable["_id"]
-        name = className + " - " + label + " - " + id
-        return name
-
-    @staticmethod
     def get_label(positionable):
         if 'designation' in positionable:
             return positionable['designation']
@@ -132,10 +124,10 @@ class Utils:
 
     @staticmethod
     def collect_ids_from_layer(layer):
-        if layer.type() != 0 or layer.fields().indexFromName("_id") == -1:
+        if layer.type() != 0 or layer.fields().indexFromName("_id (ne pas modifier/supprimer)") == -1:
             return []
         features = layer.getFeatures()
-        return [f["_id"] for f in features]
+        return [f["_id (ne pas modifier/supprimer)"] for f in features]
 
     @staticmethod
     def build_geometry(wkt, param):
