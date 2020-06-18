@@ -219,6 +219,7 @@ class CouchdbImporter:
                     attributes = Utils.build_list_from_selection(self.data.getAttributes(className))
                     result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
+                    Utils.filter_positionable_list_attribute(result)
                     self.connector.replace_id_by_label_in_result(database, result)
                     self.loadedPositionable.extend(result)
                 completed = completed + lu

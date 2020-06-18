@@ -95,21 +95,21 @@ class Utils:
     @staticmethod
     def get_label_and_designation_reference(positionable):
         if 'libelle' in positionable and 'designation' in positionable:
-            return positionable['libelle'] + ' - ' + positionable['designation']
+            return positionable['libelle'] + ' ||| ' + positionable['designation']
         elif '_id' in positionable:
             if 'libelle' in positionable and 'designation' not in positionable:
-                return positionable['libelle'] + ' - ' + positionable['_id']
+                return positionable['libelle'] + ' ||| ' + positionable['_id']
             elif 'libelle' not in positionable and 'designation' in positionable:
-                return positionable['_id'] + ' - ' + positionable['designation']
+                return positionable['_id'] + ' ||| ' + positionable['designation']
             else:
-                return positionable['_id'] + ' - ' + positionable['_id']
+                return positionable['_id'] + ' ||| ' + positionable['_id']
         else:
             if 'libelle' in positionable and 'designation' not in positionable:
-                return positionable['libelle'] + ' - no data'
+                return positionable['libelle'] + ' ||| no data'
             elif 'libelle' not in positionable and 'designation' in positionable:
-                return 'no data - ' + positionable['designation']
+                return 'no data ||| ' + positionable['designation']
             else:
-                return 'no data - no data'
+                return 'no data ||| no data'
 
 
     @staticmethod
@@ -249,3 +249,21 @@ class Utils:
             if item.checkState() == Qt.Unchecked:
                 return False
         return True
+
+    @staticmethod
+    def filter_last_n_elements(elements, n):
+        if len(elements) in range(n + 1):
+            return elements
+        else:
+            return elements[-n:]
+
+    @staticmethod
+    def filter_positionable_list_attribute(target):
+        for elem in target:
+            for attr in elem:
+                if type(elem[attr]) == list and len(elem[attr]) != 0:
+                    if attr == 'prestationIds':
+                        elem[attr] = Utils.filter_last_n_elements(elem[attr], 3)
+                    else:
+                        elem[attr] = [elem[attr][-1]]
+

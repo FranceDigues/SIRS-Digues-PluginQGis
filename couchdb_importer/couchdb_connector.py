@@ -103,7 +103,7 @@ class CouchdbConnector(object):
             self.replace_id_by_label(database, elem)
 
     def replace_id_by_label(self, database, elem):
-        attrWithIdValue = ['author', 'orientationPhoto']
+        attrWithIdValue = ['author', 'orientationPhoto', 'Author']
 
         for attr in elem:
             if attr[-2:] == 'Id' or attr in attrWithIdValue:

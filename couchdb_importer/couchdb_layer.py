@@ -105,8 +105,8 @@ class CouchdbBuilder(object):
             if 'borneDebutId' in title or 'borneFinId' in title or 'tronconId' in title or 'prestationIds' in title:
                 label1 = label + ' libelle'
                 label2 = label + ' designation'
-                if ' - ' in attrValue[title]:
-                    value1, value2 = attrValue[title].split(' - ')
+                if ' ||| ' in attrValue[title]:
+                    value1, value2 = attrValue[title].split(' ||| ')
                     if layer.fields().indexFromName(label1) != -1:
                         feature.setAttribute(label1, value1)
                     if layer.fields().indexFromName(label2) != -1:
@@ -150,19 +150,22 @@ class CouchdbBuilder(object):
         if type(obj) in [str, int, float, bool]:
             value[name] = obj
         elif type(obj) == list:
-            l = len(obj)
-            if name == "prestationIds":
-                if l == 1:
-                    self.build_field_value_generic(name + " actuelle:", obj[-1], value)
-                elif l == 2:
-                    self.build_field_value_generic(name + " actuelle:", obj[-1], value)
-                    self.build_field_value_generic(name + " actuelle:" + " N-2", obj[-2], value)
-                elif l >= 3:
-                    self.build_field_value_generic(name + " actuelle:", obj[-1], value)
-                    self.build_field_value_generic(name + " actuelle:" + " N-2", obj[-2], value)
-                    self.build_field_value_generic(name + " actuelle:" + " N-3", obj[-3], value)
+            length = len(obj)
+            if length == 0:
+                self.build_field_value_generic(name + " actuelle:", "Aucune donnée", value)
             else:
-                self.build_field_value_generic(name + " actuelle:", obj[-1], value)
+                if name == "prestationIds":
+                    if length == 1:
+                        self.build_field_value_generic(name + " actuelle:", obj[-1], value)
+                    elif length == 2:
+                        self.build_field_value_generic(name + " actuelle:", obj[-1], value)
+                        self.build_field_value_generic(name + " actuelle:" + " N-2", obj[-2], value)
+                    elif length >= 3:
+                        self.build_field_value_generic(name + " actuelle:", obj[-1], value)
+                        self.build_field_value_generic(name + " actuelle:" + " N-2", obj[-2], value)
+                        self.build_field_value_generic(name + " actuelle:" + " N-3", obj[-3], value)
+                else:
+                    self.build_field_value_generic(name + " actuelle:", obj[-1], value)
         elif type(obj) == dict:
             for it in obj:
                 self.build_field_value_generic(name + " " + str(it), obj[it], value)
@@ -177,19 +180,22 @@ class CouchdbBuilder(object):
             name = self.label_identification(classname, name)
             out.append([QStandardItem(name), QStandardItem(str(obj))])
         elif type(obj) is list:
-            l = len(obj)
-            if name == "prestationIds":
-                if l == 1:
-                    self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
-                elif l == 2:
-                    self.complete_model_from_positionable(name + " actuelle:", obj[-1], out)
-                    self.complete_model_from_positionable(name + " actuelle:" + " N-2", obj[-2], out, classname)
-                elif l >= 3:
-                    self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
-                    self.complete_model_from_positionable(name + " actuelle:" + " N-2", obj[-2], out, classname)
-                    self.complete_model_from_positionable(name + " actuelle:" + " N-3", obj[-3], out, classname)
+            length = len(obj)
+            if length == 0:
+                self.complete_model_from_positionable(name + " actuelle:", "Aucune donnée", out, classname)
             else:
-                self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
+                if name == "prestationIds":
+                    if length == 1:
+                        self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
+                    elif length == 2:
+                        self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
+                        self.complete_model_from_positionable(name + " actuelle:" + " N-2", obj[-2], out, classname)
+                    elif length >= 3:
+                        self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
+                        self.complete_model_from_positionable(name + " actuelle:" + " N-2", obj[-2], out, classname)
+                        self.complete_model_from_positionable(name + " actuelle:" + " N-3", obj[-3], out, classname)
+                else:
+                    self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
         elif type(obj) is dict:
             for it in obj:
                 self.complete_model_from_positionable(name + " " + it, obj[it], out, classname)
