@@ -56,6 +56,13 @@ class CouchdbData(object):
     def getSelected(self, name):
         return self.data[name]["selected"]
 
+    def getSelectedCount(self):
+        count = 0
+
+        for name in self.data:
+            count += self.data[name]["selected"]
+        return count
+
     def getIds(self, name):
         return self.data[name]["ids"]
 

@@ -43,6 +43,7 @@ from .couchdb_data import CouchdbData
 from .couchdb_layer import CouchdbBuilder
 from .utils import Utils
 
+from http.client import InvalidURL
 
 class CouchdbImporter:
     """QGIS Plugin Implementation."""
@@ -220,7 +221,7 @@ class CouchdbImporter:
                     result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
                     Utils.filter_positionable_list_attribute(result)
-                    self.connector.replace_id_by_label_in_result(database, result)
+                    self.connector.replace_id_by_label_in_result(database, result, className)
                     self.loadedPositionable.extend(result)
                 completed = completed + lu
                 self.dlg.progressBar.setValue(completed)
@@ -537,12 +538,18 @@ class CouchdbImporter:
             self.connector = None
             self.connector = CouchdbConnector(rc[0], rc[1], self.dlg.login.text(), self.dlg.password.text())
             fc = self.connector.getFilteredConnection()
-            self.dlg.database.addItems([name for name in fc])
+            list_accessible_databases = [name for name in fc]
+            self.dlg.database.addItems(list_accessible_databases)
+
+            # Add Qgis specific view on all accessible databases
+            for addb in list_accessible_databases:
+                self.connector.create_or_update_specific_view(addb)
+
             self.build_list_positionable_class()
             self.set_ui_access_database()
         except couchdb.http.Unauthorized:
             self.simple_message("Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
-        except (ConnectionRefusedError, ValueError, socket.gaierror):
+        except (ConnectionRefusedError, ValueError, socket.gaierror, InvalidURL):
             self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base.", Qgis.Warning)
 
     def on_detail_click(self):

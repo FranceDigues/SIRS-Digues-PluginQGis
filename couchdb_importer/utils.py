@@ -243,6 +243,34 @@ class Utils:
         return mango
 
     @staticmethod
+    def build_query_one_id_with_class(className, id):
+        mango = {
+            "selector": {
+                    "@class": "fr.sirs.core.model." + className,
+                    "_id": id
+                }
+        }
+        return mango
+
+    @staticmethod
+    def create_specific_view():
+        doc = {
+            "_id": "_design/SpecQgis",
+            "views": {
+                "byClass": {
+                    "map": "function(doc) {if(doc['@class']) {emit(doc['@class'], doc)}}"
+                },
+                "byId": {
+                    "map": "function(doc) {if(doc['_id']) {emit(doc['_id'], doc)}}"
+                },
+                "byClassAndId": {
+                    "map": "function(doc) {if(doc['@class'] && doc['_id']) {emit([doc['@class'], doc['_id']], doc)}}"
+                }
+            }
+        }
+        return doc
+
+    @staticmethod
     def is_all_selected_in_model(model):
         for i in range(model.rowCount()):
             item = model.itemFromIndex(model.index(i, 0))
@@ -267,3 +295,10 @@ class Utils:
                     else:
                         elem[attr] = [elem[attr][-1]]
 
+    @staticmethod
+    def filter_object_by_attributes(obj, attributes):
+        target = obj.copy()
+
+        for attr in target:
+            if attr not in attributes:
+                del obj[attr]
