@@ -3,10 +3,10 @@
 # This file should be included when you package your plugin.# Mandatory items:
 
 [general]
-name=Couchdb Importer
-qgisMinimumVersion=3.0
+name=Importation BdD SIRS Digues
+qgisMinimumVersion=3.4
 description=This plugin allows importing vector data from the couchdb database.
-version=0.1
+version=1.0
 author=MaximeGavens/Geomatys
 email=contact@geomatys.com
 
