@@ -30,12 +30,12 @@ class CouchdbData(object):
     def __init__(self):
         self.data = {}
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json')) as inFile:
+        with open(os.path.join(__location__, 'configuration_object.json')) as inFile:
             preference = json.load(inFile)
             for className in preference:
                 self.data[className] = {
-                    "selected": True,
-                    "ids": "all",
+                    "selected": False,
+                    "ids": {},
                     "attributes": preference[className]["attributes"],
                     "style": preference[className]["style"],
                     "crs": preference[className]["crs"]
@@ -56,6 +56,13 @@ class CouchdbData(object):
     def getSelected(self, name):
         return self.data[name]["selected"]
 
+    def getSelectedCount(self):
+        count = 0
+
+        for name in self.data:
+            count += self.data[name]["selected"]
+        return count
+
     def getIds(self, name):
         return self.data[name]["ids"]
 
@@ -72,6 +79,14 @@ class CouchdbData(object):
             result.extend(self.data[className]["ids"].keys())
         return result
 
+    def getAllIdSelected(self):
+        result = []
+        for className in self.getClassName():
+            for id in self.data[className]["ids"]:
+                if self.data[className]["ids"][id]:
+                    result.append(id)
+        return result
+
     def getAttributes(self, name):
         return self.data[name]["attributes"]
 
@@ -83,6 +98,9 @@ class CouchdbData(object):
 
     def getCrs(self, name):
         return self.data[name]["crs"]
+
+    def getIdValue(self, name, id):
+        return self.data[name]["ids"][id]
 
     def setSelected(self, name, isSelected):
         self.data[name]["selected"] = isSelected
@@ -107,11 +125,11 @@ class CouchdbData(object):
 
     def reset_from_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json')) as inFile:
+        with open(os.path.join(__location__, 'configuration_object.json')) as inFile:
             preference = json.load(inFile)
             for className in preference:
                 self.data[className] = {
-                    "selected": True,
+                    "selected": False,
                     "ids": "all",
                     "attributes": preference[className]["attributes"],
                     "style": preference[className]["style"],
@@ -120,7 +138,7 @@ class CouchdbData(object):
 
     def write_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration.json'), 'w') as outFile:
+        with open(os.path.join(__location__, 'configuration_object.json'), 'w') as outFile:
             configuration = {}
             for className in self.data:
                 configuration[className] = {}
