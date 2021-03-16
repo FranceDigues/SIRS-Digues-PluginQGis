@@ -221,7 +221,7 @@ class CouchdbImporter:
                     result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
                     Utils.filter_positionable_list_attribute(result)
-                    self.connector.replace_id_by_label_in_result(database, result, className)
+                    self.connector.replace_id_by_label_in_result(database, result)
                     self.loadedPositionable.extend(result)
                 completed = completed + lu
                 self.dlg.progressBar.setValue(completed)
@@ -230,11 +230,11 @@ class CouchdbImporter:
         except (ConnectionRefusedError, ValueError):
             self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base.", Qgis.Critical)
 
-    def collect_data_from_layers_ids(self):
+    def collect_data_from_layers_ids(self, database):
         try:
             ids = Utils.collect_ids_from_layers_filtered_by_positionable_class(self.data.getClassName())
 
-            return self.connector.request_database(self.dlg.database.currentText(), ids=ids)
+            return self.connector.request_database(database, ids=ids)
         except couchdb.http.Unauthorized:
             self.simple_message("Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
         except (ConnectionRefusedError, ValueError):
@@ -690,19 +690,34 @@ class CouchdbImporter:
         self.change_select_all_button("object")
 
     def on_update_layers_click(self):
+        # Reset the report displayed at the end of the import
         self.reset_summary()
+        # Reset the progress bar value
         self.dlg.progressBar.setValue(1)
-        result = self.collect_data_from_layers_ids()
-        rl = list(result)
-        ln = len(rl)
-        if ln == 0:
+
+        # Retrieve the current database input
+        database = self.dlg.database.currentText()
+
+        # Request the data layers from the ids present into Qgis data layers
+        result = self.collect_data_from_layers_ids(database)
+        result_list = list(result)
+        size_result_list = len(result_list)
+
+        # Behavior when the result is empty
+        if size_result_list == 0:
             self.simple_message(
                 "Les couches actuelles ne trouvent aucune référence en base de données.", Qgis.Info)
             self.dlg.progressBar.setValue(0)
             self.dlg.close()
             self.open_recap_dialog()
             return
-        self.update_layers(rl, ln)
+
+        # Replaces in the recovered data, the identifiers by the corresponding label
+        self.connector.replace_id_by_label_in_result(database, result)
+
+        # Update Qgis layers
+        self.update_layers(result_list, size_result_list)
+
         self.dlg.progressBar.setValue(0)
         self.display_messages()
         self.dlg.close()
@@ -711,6 +726,8 @@ class CouchdbImporter:
     def on_add_layers_click(self):
         self.reset_summary()
         self.data.write_configuration()
+
+        # If the data is not already preloaded, collect them
         if not self.isPreLoad:
             self.collect_data_from_user_selection()
         llp = len(self.loadedPositionable)
