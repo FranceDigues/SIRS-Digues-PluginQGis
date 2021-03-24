@@ -336,11 +336,13 @@ class CouchdbImporter:
         self.dlg.password.setEnabled(True)
         self.dlg.loginButton.setEnabled(True)
         self.dlg.resetConnectionButton.setEnabled(True)
+
+        # disable all other
         self.dlg.selectAllPositionableClass.setCheckable(False)
+        self.dlg.selectAllPositionable.setCheckable(False)
         self.dlg.selectAllAttribute.setCheckable(False)
         self.dlg.addLayers.setEnabled(False)
         self.dlg.updateLayers.setEnabled(False)
-        # disable all other
         self.dlg.database.setEnabled(False)
         self.dlg.detailButton.setEnabled(False)
         self.dlg.resetDatabaseButton.setEnabled(False)
@@ -375,12 +377,14 @@ class CouchdbImporter:
         self.dlg.search.setEnabled(False)
         self.dlg.resetSearch.setEnabled(False)
         self.dlg.keyword.setEnabled(False)
+        self.dlg.selectAllPositionable.setCheckable(False)
 
     def set_ui_access_detail(self):
         # enable database param
         self.dlg.resetConnectionButton.setEnabled(True)
         self.dlg.resetDatabaseButton.setEnabled(True)
         self.dlg.positionable.setEnabled(True)
+        self.dlg.selectAllPositionable.setCheckable(True)
         self.dlg.detail.setEnabled(True)
         self.dlg.addLayers.setEnabled(True)
         self.dlg.updateLayers.setEnabled(True)
