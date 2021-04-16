@@ -336,11 +336,13 @@ class CouchdbImporter:
         self.dlg.password.setEnabled(True)
         self.dlg.loginButton.setEnabled(True)
         self.dlg.resetConnectionButton.setEnabled(True)
+
+        # disable all other
         self.dlg.selectAllPositionableClass.setCheckable(False)
+        self.dlg.selectAllPositionable.setCheckable(False)
         self.dlg.selectAllAttribute.setCheckable(False)
         self.dlg.addLayers.setEnabled(False)
         self.dlg.updateLayers.setEnabled(False)
-        # disable all other
         self.dlg.database.setEnabled(False)
         self.dlg.detailButton.setEnabled(False)
         self.dlg.resetDatabaseButton.setEnabled(False)
@@ -360,11 +362,11 @@ class CouchdbImporter:
         self.dlg.positionableClass.setEnabled(True)
         self.dlg.attribute.setEnabled(True)
         self.dlg.selectAllPositionableClass.setCheckable(True)
-        self.dlg.selectAllAttribute.setCheckable(True)
         self.dlg.addLayers.setEnabled(True)
         self.dlg.updateLayers.setEnabled(True)
 
         # disable all other
+        self.dlg.selectAllAttribute.setCheckable(False)
         self.dlg.resetDatabaseButton.setEnabled(False)
         self.dlg.url.setEnabled(False)
         self.dlg.login.setEnabled(False)
@@ -375,12 +377,14 @@ class CouchdbImporter:
         self.dlg.search.setEnabled(False)
         self.dlg.resetSearch.setEnabled(False)
         self.dlg.keyword.setEnabled(False)
+        self.dlg.selectAllPositionable.setCheckable(False)
 
     def set_ui_access_detail(self):
         # enable database param
         self.dlg.resetConnectionButton.setEnabled(True)
         self.dlg.resetDatabaseButton.setEnabled(True)
         self.dlg.positionable.setEnabled(True)
+        self.dlg.selectAllPositionable.setCheckable(True)
         self.dlg.detail.setEnabled(True)
         self.dlg.addLayers.setEnabled(True)
         self.dlg.updateLayers.setEnabled(True)
@@ -398,7 +402,7 @@ class CouchdbImporter:
         self.dlg.password.setEnabled(False)
         self.dlg.loginButton.setEnabled(False)
         self.dlg.selectAllPositionableClass.setCheckable(False)
-        self.dlg.selectAllAttribute.setCheckable(True)
+        self.dlg.selectAllAttribute.setCheckable(False)
 
     """
     /****************************************************************
@@ -494,6 +498,9 @@ class CouchdbImporter:
 
     def change_positionable_class(self, state):
         model = self.dlg.positionableClass.model()
+        if model is None:
+            self.simple_message("Le modèle de la liste des classes de positionable est null.", Qgis.Critical)
+            return
         for i in range(model.rowCount()):
             item = model.item(i, 0)
             if state:
@@ -503,6 +510,9 @@ class CouchdbImporter:
 
     def change_positionable(self, state):
         model = self.dlg.positionable.model()
+        if model is None:
+            self.simple_message("Le modèle de la liste des positionables est null.", Qgis.Critical)
+            return
         for i in range(model.rowCount()):
             item = model.item(i, 0)
             if state:
@@ -512,6 +522,9 @@ class CouchdbImporter:
 
     def change_attribute(self, state):
         model = self.dlg.attribute.model()
+        if model is None:
+            self.simple_message("Le modèle de la liste des attributs est null.", Qgis.Critical)
+            return
         for i in range(model.rowCount()):
             item1 = model.item(i, 0)
             item2 = model.item(i, 1)
@@ -565,6 +578,7 @@ class CouchdbImporter:
         self.set_ui_access_detail()
 
     def on_positionable_class_click(self, item):
+        self.dlg.selectAllAttribute.setCheckable(True)
         model = self.dlg.positionableClass.model()
         self.currentPositionableClass = model.itemFromIndex(item).text()
         self.build_list_attribute()
