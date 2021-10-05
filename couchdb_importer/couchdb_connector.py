@@ -86,8 +86,6 @@ class CouchdbConnector(object):
     def create_or_update_specific_view(self, database):
         if self.is_not_existing_specific_view(database):
             self.create_specific_view(database)
-        #else:
-        #    self.update_specific_view(database)
 
     def request_database(self, database, className=None, attributes=None, ids=None, single=None):
         if className is not None and attributes is not None and ids is None and single is None:
@@ -103,20 +101,6 @@ class CouchdbConnector(object):
         else:
             raise CouchdbConnectorException("Requète inexistante.")
         return result
-
-    # def request_database(self, database, className=None, attributes=None, ids=None, single=None):
-    #     if className is not None and attributes is not None:
-    #         query = Utils.build_query(className, attributes, ids)
-    #     elif className is None and attributes is None and ids is not None:
-    #         query = Utils.build_query_only_id(ids)
-    #     elif single is not None and className is not None:
-    #         query = Utils.build_query_one_id_with_class(className, single)
-    #     elif single is not None:
-    #         query = Utils.build_query_one_id(single)
-    #     else:
-    #         raise CouchdbConnectorException("Requète inexistante.")
-    #     db = self.connection[database]
-    #     return db.find(query)
 
     def request_by_class_and_attributes(self, database, className, attributes):
         target = []

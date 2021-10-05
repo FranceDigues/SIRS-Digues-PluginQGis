@@ -15,15 +15,15 @@
     },
     "style": {
       "default": {
-        "color": "#ffcc33",
+        "color": "#0100ff",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "flat",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "circle",
-        "color": "#ffcc33"
+        "name": "triangle",
+        "color": "#0100ff"
       }
     },
     "crs": "EPSG:2154"
@@ -71,15 +71,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff0100",
+        "color": "#2ad5ff",
         "width": "1.0",
-        "capstyle": "square",
-        "line_style": "dash",
-        "joinstyle": "bevel"
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "cross",
-        "color": "#ff0100"
+        "name": "triangle",
+        "color": "#2ad5ff"
       }
     },
     "crs": "EPSG:2154"
@@ -101,15 +101,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff9966",
+        "color": "#55aaff",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "flat",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "circle",
-        "color": "#ff9966"
+        "name": "triangle",
+        "color": "#55aaff"
       }
     },
     "crs": "EPSG:2154"
@@ -158,15 +158,15 @@
     },
     "style": {
       "default": {
-        "color": "#9966ff",
+        "color": "#8080ff",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "flat",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "circle",
-        "color": "#9966ff"
+        "name": "triangle",
+        "color": "#8080ff"
       }
     },
     "crs": "EPSG:2154"
@@ -194,15 +194,15 @@
     },
     "style": {
       "default": {
-        "color": "#0100ff",
+        "color": "#aa55ff",
         "width": "1.0",
-        "capstyle": "square",
-        "line_style": "dash",
-        "joinstyle": "bevel"
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "cross",
-        "color": "#0100ff"
+        "name": "triangle",
+        "color": "#aa55ff"
       }
     },
     "crs": "EPSG:2154"
@@ -224,7 +224,7 @@
     },
     "style": {
       "default": {
-        "color": "#33ccff",
+        "color": "#d52aff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
@@ -232,7 +232,7 @@
       },
       "point": {
         "name": "triangle",
-        "color": "#33ccff"
+        "color": "#d52aff"
       }
     },
     "crs": "EPSG:2154"
@@ -254,15 +254,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff6699",
+        "color": "#1000ff",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "flat",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "circle",
-        "color": "#ff6699"
+        "name": "triangle",
+        "color": "#1000ff"
       }
     },
     "crs": "EPSG:2154"
@@ -315,7 +315,7 @@
     },
     "style": {
       "default": {
-        "color": "#1000ff",
+        "color": "#ff0100",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
@@ -323,7 +323,7 @@
       },
       "point": {
         "name": "triangle",
-        "color": "#1000ff"
+        "color": "#ff0100"
       }
     },
     "crs": "EPSG:2154"
@@ -372,15 +372,15 @@
     },
     "style": {
       "default": {
-        "color": "#66ff99",
+        "color": "#ff24db",
         "width": "1.0",
-        "capstyle": "square",
-        "line_style": "dash",
-        "joinstyle": "bevel"
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "cross",
-        "color": "#66ff99"
+        "name": "triangle",
+        "color": "#ff24db"
       }
     },
     "crs": "EPSG:2154"
@@ -451,15 +451,15 @@
     },
     "style": {
       "default": {
-        "color": "#ccff33",
+        "color": "#ff49b6",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "flat",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "square",
-        "color": "#ccff33"
+        "name": "triangle",
+        "color": "#ff49b6"
       }
     },
     "crs": "EPSG:2154"
@@ -522,15 +522,15 @@
     },
     "style": {
       "default": {
-        "color": "#1000ff",
+        "color": "#ff6d92",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "flat",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "circle",
-        "color": "#1000ff"
+        "name": "triangle",
+        "color": "#ff6d92"
       }
     },
     "crs": "EPSG:2154"
@@ -576,7 +576,7 @@
     },
     "style": {
       "default": {
-        "color": "#33ffcc",
+        "color": "#ff926d",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
@@ -584,7 +584,7 @@
       },
       "point": {
         "name": "triangle",
-        "color": "#33ffcc"
+        "color": "#ff926d"
       }
     },
     "crs": "EPSG:2154"
@@ -623,15 +623,15 @@
     },
     "style": {
       "default": {
-        "color": "#99ff66",
+        "color": "#ffb649",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "flat",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "circle",
-        "color": "#99ff66"
+        "name": "triangle",
+        "color": "#ffb649"
       }
     },
     "crs": "EPSG:2154"
@@ -679,15 +679,15 @@
     },
     "style": {
       "default": {
-        "color": "#cc33ff",
+        "color": "#ffdb24",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "flat",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "square",
-        "color": "#cc33ff"
+        "name": "triangle",
+        "color": "#ffdb24"
       }
     },
     "crs": "EPSG:2154"
@@ -732,7 +732,7 @@
     },
     "style": {
       "default": {
-        "color": "#cc33ff",
+        "color": "#100ff0",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
@@ -740,7 +740,7 @@
       },
       "point": {
         "name": "triangle",
-        "color": "#cc33ff"
+        "color": "#100ff0"
       }
     },
     "crs": "EPSG:2154"
@@ -788,15 +788,15 @@
     },
     "style": {
       "default": {
-        "color": "#100ff0",
+        "color": "#dbff24",
         "width": "1.0",
-        "capstyle": "square",
-        "line_style": "dash",
-        "joinstyle": "bevel"
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "cross",
-        "color": "#100ff0"
+        "name": "triangle",
+        "color": "#dbff24"
       }
     },
     "crs": "EPSG:2154"
@@ -845,7 +845,7 @@
     },
     "style": {
       "default": {
-        "color": "#9966ff",
+        "color": "#b6ff49",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
@@ -853,7 +853,7 @@
       },
       "point": {
         "name": "triangle",
-        "color": "#9966ff"
+        "color": "#b6ff49"
       }
     },
     "crs": "EPSG:2154"
@@ -902,15 +902,15 @@
     },
     "style": {
       "default": {
-        "color": "#ccff33",
+        "color": "#92ff6d",
         "width": "1.0",
-        "capstyle": "square",
-        "line_style": "dash",
-        "joinstyle": "bevel"
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "cross",
-        "color": "#ccff33"
+        "name": "triangle",
+        "color": "#92ff6d"
       }
     },
     "crs": "EPSG:2154"
@@ -946,15 +946,15 @@
     },
     "style": {
       "default": {
-        "color": "#ffcc33",
+        "color": "#6dff92",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "flat",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "square",
-        "color": "#ffcc33"
+        "name": "triangle",
+        "color": "#6dff92"
       }
     },
     "crs": "EPSG:2154"
@@ -999,15 +999,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff33cc",
+        "color": "#49ffb6",
         "width": "1.0",
-        "capstyle": "square",
-        "line_style": "dash",
-        "joinstyle": "bevel"
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
       },
       "point": {
-        "name": "cross",
-        "color": "#ff33cc"
+        "name": "triangle",
+        "color": "#49ffb6"
       }
     },
     "crs": "EPSG:2154"
@@ -1056,15 +1056,15 @@
     },
     "style": {
       "default": {
-        "color": "#cc33ff",
+        "color": "#0100ff",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "circle",
-        "color": "#cc33ff"
+        "name": "square",
+        "color": "#0100ff"
       }
     },
     "crs": "EPSG:2154"
@@ -1111,15 +1111,15 @@
     },
     "style": {
       "default": {
-        "color": "#33ffcc",
+        "color": "#2ad5ff",
         "width": "1.0",
         "capstyle": "square",
-        "line_style": "dash",
+        "line_style": "solid",
         "joinstyle": "bevel"
       },
       "point": {
-        "name": "cross",
-        "color": "#33ffcc"
+        "name": "square",
+        "color": "#2ad5ff"
       }
     },
     "crs": "EPSG:2154"
@@ -1170,7 +1170,7 @@
     },
     "style": {
       "default": {
-        "color": "#0ff100",
+        "color": "#55aaff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
@@ -1178,7 +1178,7 @@
       },
       "point": {
         "name": "square",
-        "color": "#0ff100"
+        "color": "#55aaff"
       }
     },
     "crs": "EPSG:2154"
@@ -1221,15 +1221,15 @@
     },
     "style": {
       "default": {
-        "color": "#0ff100",
+        "color": "#8080ff",
         "width": "1.0",
-        "capstyle": "flat",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "miter"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#0ff100"
+        "name": "square",
+        "color": "#8080ff"
       }
     },
     "crs": "EPSG:2154"
@@ -1267,15 +1267,15 @@
     },
     "style": {
       "default": {
-        "color": "#33ffcc",
+        "color": "#aa55ff",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "circle",
-        "color": "#33ffcc"
+        "name": "square",
+        "color": "#aa55ff"
       }
     },
     "crs": "EPSG:2154"
@@ -1320,7 +1320,7 @@
     },
     "style": {
       "default": {
-        "color": "#66ff99",
+        "color": "#d52aff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
@@ -1328,7 +1328,7 @@
       },
       "point": {
         "name": "square",
-        "color": "#66ff99"
+        "color": "#d52aff"
       }
     },
     "crs": "EPSG:2154"
@@ -1376,7 +1376,7 @@
     },
     "style": {
       "default": {
-        "color": "#33ffcc",
+        "color": "#1000ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
@@ -1384,7 +1384,7 @@
       },
       "point": {
         "name": "square",
-        "color": "#33ffcc"
+        "color": "#1000ff"
       }
     },
     "crs": "EPSG:2154"
@@ -1425,12 +1425,12 @@
       "default": {
         "color": "#ff0100",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "circle",
+        "name": "square",
         "color": "#ff0100"
       }
     },
@@ -1499,15 +1499,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff33cc",
+        "color": "#ff24db",
         "width": "1.0",
-        "capstyle": "flat",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "miter"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#ff33cc"
+        "name": "square",
+        "color": "#ff24db"
       }
     },
     "crs": "EPSG:2154"
@@ -1543,15 +1543,15 @@
     },
     "style": {
       "default": {
-        "color": "#100ff0",
+        "color": "#ff49b6",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "circle",
-        "color": "#100ff0"
+        "name": "square",
+        "color": "#ff49b6"
       }
     },
     "crs": "EPSG:2154"
@@ -1617,15 +1617,15 @@
     },
     "style": {
       "default": {
-        "color": "#ffcc33",
+        "color": "#ff6d92",
         "width": "1.0",
-        "capstyle": "flat",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "miter"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#ffcc33"
+        "name": "square",
+        "color": "#ff6d92"
       }
     },
     "crs": "EPSG:2154"
@@ -1685,7 +1685,7 @@
     },
     "style": {
       "default": {
-        "color": "#0100ff",
+        "color": "#ff926d",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
@@ -1693,7 +1693,7 @@
       },
       "point": {
         "name": "square",
-        "color": "#0100ff"
+        "color": "#ff926d"
       }
     },
     "crs": "EPSG:2154"
@@ -1746,7 +1746,7 @@
     },
     "style": {
       "default": {
-        "color": "#9966ff",
+        "color": "#ffb649",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
@@ -1754,7 +1754,7 @@
       },
       "point": {
         "name": "square",
-        "color": "#9966ff"
+        "color": "#ffb649"
       }
     },
     "crs": "EPSG:2154"
@@ -1806,15 +1806,15 @@
     },
     "style": {
       "default": {
-        "color": "#100ff0",
+        "color": "#ffdb24",
         "width": "1.0",
-        "capstyle": "flat",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "miter"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#100ff0"
+        "name": "square",
+        "color": "#ffdb24"
       }
     },
     "crs": "EPSG:2154"
@@ -1867,15 +1867,15 @@
     },
     "style": {
       "default": {
-        "color": "#cc33ff",
+        "color": "#100ff0",
         "width": "1.0",
         "capstyle": "square",
-        "line_style": "dash",
+        "line_style": "solid",
         "joinstyle": "bevel"
       },
       "point": {
-        "name": "cross",
-        "color": "#cc33ff"
+        "name": "square",
+        "color": "#100ff0"
       }
     },
     "crs": "EPSG:2154"
@@ -1928,7 +1928,7 @@
     },
     "style": {
       "default": {
-        "color": "#100ff0",
+        "color": "#dbff24",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
@@ -1936,7 +1936,7 @@
       },
       "point": {
         "name": "square",
-        "color": "#100ff0"
+        "color": "#dbff24"
       }
     },
     "crs": "EPSG:2154"
@@ -1989,15 +1989,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff6699",
+        "color": "#b6ff49",
         "width": "1.0",
-        "capstyle": "flat",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "miter"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#ff6699"
+        "name": "square",
+        "color": "#b6ff49"
       }
     },
     "crs": "EPSG:2154"
@@ -2021,15 +2021,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff33cc",
+        "color": "#92ff6d",
         "width": "1.0",
-        "capstyle": "round",
+        "capstyle": "square",
         "line_style": "solid",
-        "joinstyle": "round"
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "circle",
-        "color": "#ff33cc"
+        "name": "square",
+        "color": "#92ff6d"
       }
     },
     "crs": "EPSG:2154"
@@ -2072,15 +2072,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff6699",
+        "color": "#6dff92",
         "width": "1.0",
         "capstyle": "square",
-        "line_style": "dash",
+        "line_style": "solid",
         "joinstyle": "bevel"
       },
       "point": {
-        "name": "cross",
-        "color": "#ff6699"
+        "name": "square",
+        "color": "#6dff92"
       }
     },
     "crs": "EPSG:2154"
@@ -2115,7 +2115,7 @@
     },
     "style": {
       "default": {
-        "color": "#66ff99",
+        "color": "#0100ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
@@ -2123,7 +2123,7 @@
       },
       "point": {
         "name": "circle",
-        "color": "#66ff99"
+        "color": "#0100ff"
       }
     },
     "crs": "EPSG:2154"
@@ -2174,15 +2174,15 @@
     },
     "style": {
       "default": {
-        "color": "#0ff100",
+        "color": "#2ad5ff",
         "width": "1.0",
-        "capstyle": "square",
-        "line_style": "dash",
-        "joinstyle": "bevel"
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
       },
       "point": {
-        "name": "cross",
-        "color": "#0ff100"
+        "name": "circle",
+        "color": "#2ad5ff"
       }
     },
     "crs": "EPSG:2154"
@@ -2227,15 +2227,15 @@
     },
     "style": {
       "default": {
-        "color": "#6699ff",
+        "color": "#55aaff",
         "width": "1.0",
-        "capstyle": "square",
-        "line_style": "dash",
-        "joinstyle": "bevel"
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
       },
       "point": {
-        "name": "cross",
-        "color": "#6699ff"
+        "name": "circle",
+        "color": "#55aaff"
       }
     },
     "crs": "EPSG:2154"
@@ -2282,15 +2282,15 @@
     },
     "style": {
       "default": {
-        "color": "#ccff33",
+        "color": "#8080ff",
         "width": "1.0",
-        "capstyle": "flat",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "miter"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "triangle",
-        "color": "#ccff33"
+        "name": "circle",
+        "color": "#8080ff"
       }
     },
     "crs": "EPSG:2154"
@@ -2336,7 +2336,7 @@
     },
     "style": {
       "default": {
-        "color": "#33ccff",
+        "color": "#aa55ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
@@ -2344,7 +2344,7 @@
       },
       "point": {
         "name": "circle",
-        "color": "#33ccff"
+        "color": "#aa55ff"
       }
     },
     "crs": "EPSG:2154"
@@ -2384,15 +2384,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff1000",
+        "color": "#d52aff",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "square",
-        "color": "#ff1000"
+        "name": "circle",
+        "color": "#d52aff"
       }
     },
     "crs": "EPSG:2154"
@@ -2430,15 +2430,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff0100",
+        "color": "#1000ff",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "square",
-        "color": "#ff0100"
+        "name": "circle",
+        "color": "#1000ff"
       }
     },
     "crs": "EPSG:2154"
@@ -2478,15 +2478,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff33cc",
+        "color": "#ff0100",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "square",
-        "color": "#ff33cc"
+        "name": "circle",
+        "color": "#ff0100"
       }
     },
     "crs": "EPSG:2154"
@@ -2557,15 +2557,15 @@
     },
     "style": {
       "default": {
-        "color": "#99ff66",
+        "color": "#ff2ad5",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "square",
-        "color": "#99ff66"
+        "name": "circle",
+        "color": "#ff2ad5"
       }
     },
     "crs": "EPSG:2154"
@@ -2615,15 +2615,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff6699",
+        "color": "#ff55aa",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "square",
-        "color": "#ff6699"
+        "name": "circle",
+        "color": "#ff55aa"
       }
     },
     "crs": "EPSG:2154"
@@ -2666,15 +2666,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff9966",
+        "color": "#ff8080",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "square",
-        "color": "#ff9966"
+        "name": "circle",
+        "color": "#ff8080"
       }
     },
     "crs": "EPSG:2154"
@@ -2709,7 +2709,7 @@
     },
     "style": {
       "default": {
-        "color": "#0ff100",
+        "color": "#ffaa55",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
@@ -2717,7 +2717,7 @@
       },
       "point": {
         "name": "circle",
-        "color": "#0ff100"
+        "color": "#ffaa55"
       }
     },
     "crs": "EPSG:2154"
@@ -2770,15 +2770,15 @@
     },
     "style": {
       "default": {
-        "color": "#33ccff",
+        "color": "#ffd52a",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "square",
-        "color": "#33ccff"
+        "name": "circle",
+        "color": "#ffd52a"
       }
     },
     "crs": "EPSG:2154"
@@ -2843,15 +2843,15 @@
     },
     "style": {
       "default": {
-        "color": "#6699ff",
+        "color": "#100ff0",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "square",
-        "color": "#6699ff"
+        "name": "circle",
+        "color": "#100ff0"
       }
     },
     "crs": "EPSG:2154"
@@ -2906,15 +2906,15 @@
     },
     "style": {
       "default": {
-        "color": "#1000ff",
+        "color": "#d5ff2a",
         "width": "1.0",
-        "capstyle": "square",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "bevel"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "square",
-        "color": "#1000ff"
+        "name": "circle",
+        "color": "#d5ff2a"
       }
     },
     "crs": "EPSG:2154"
@@ -2987,7 +2987,7 @@
     },
     "style": {
       "default": {
-        "color": "#6699ff",
+        "color": "#aaff55",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
@@ -2995,7 +2995,7 @@
       },
       "point": {
         "name": "circle",
-        "color": "#6699ff"
+        "color": "#aaff55"
       }
     },
     "crs": "EPSG:2154"
@@ -3039,15 +3039,15 @@
     },
     "style": {
       "default": {
-        "color": "#1000ff",
+        "color": "#80ff80",
         "width": "1.0",
-        "capstyle": "square",
-        "line_style": "dash",
-        "joinstyle": "bevel"
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
       },
       "point": {
-        "name": "cross",
-        "color": "#1000ff"
+        "name": "circle",
+        "color": "#80ff80"
       }
     },
     "crs": "EPSG:2154"
@@ -3097,15 +3097,15 @@
     },
     "style": {
       "default": {
-        "color": "#6699ff",
+        "color": "#55ffaa",
         "width": "1.0",
-        "capstyle": "flat",
+        "capstyle": "round",
         "line_style": "solid",
-        "joinstyle": "miter"
+        "joinstyle": "round"
       },
       "point": {
-        "name": "triangle",
-        "color": "#6699ff"
+        "name": "circle",
+        "color": "#55ffaa"
       }
     },
     "crs": "EPSG:2154"
@@ -3157,15 +3157,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff1000",
+        "color": "#0100ff",
         "width": "1.0",
-        "capstyle": "flat",
-        "line_style": "solid",
-        "joinstyle": "miter"
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#ff1000"
+        "name": "cross",
+        "color": "#0100ff"
       }
     },
     "crs": "EPSG:2154"
@@ -3214,7 +3214,7 @@
     },
     "style": {
       "default": {
-        "color": "#9966ff",
+        "color": "#2ad5ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
@@ -3222,7 +3222,7 @@
       },
       "point": {
         "name": "cross",
-        "color": "#9966ff"
+        "color": "#2ad5ff"
       }
     },
     "crs": "EPSG:2154"
@@ -3278,15 +3278,15 @@
     },
     "style": {
       "default": {
-        "color": "#99ff66",
+        "color": "#55aaff",
         "width": "1.0",
-        "capstyle": "flat",
-        "line_style": "solid",
-        "joinstyle": "miter"
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#99ff66"
+        "name": "cross",
+        "color": "#55aaff"
       }
     },
     "crs": "EPSG:2154"
@@ -3341,15 +3341,15 @@
     },
     "style": {
       "default": {
-        "color": "#66ff99",
+        "color": "#8080ff",
         "width": "1.0",
-        "capstyle": "flat",
-        "line_style": "solid",
-        "joinstyle": "miter"
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#66ff99"
+        "name": "cross",
+        "color": "#8080ff"
       }
     },
     "crs": "EPSG:2154"
@@ -3405,7 +3405,7 @@
     },
     "style": {
       "default": {
-        "color": "#99ff66",
+        "color": "#aa55ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
@@ -3413,7 +3413,7 @@
       },
       "point": {
         "name": "cross",
-        "color": "#99ff66"
+        "color": "#aa55ff"
       }
     },
     "crs": "EPSG:2154"
@@ -3432,7 +3432,7 @@
     },
     "style": {
       "default": {
-        "color": "#33ccff",
+        "color": "#d52aff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
@@ -3440,7 +3440,7 @@
       },
       "point": {
         "name": "cross",
-        "color": "#33ccff"
+        "color": "#d52aff"
       }
     },
     "crs": "EPSG:2154"
@@ -3471,15 +3471,15 @@
     },
     "style": {
       "default": {
-        "color": "#0100ff",
+        "color": "#1000ff",
         "width": "1.0",
-        "capstyle": "flat",
-        "line_style": "solid",
-        "joinstyle": "miter"
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#0100ff"
+        "name": "cross",
+        "color": "#1000ff"
       }
     },
     "crs": "EPSG:2154"
@@ -3506,15 +3506,15 @@
     },
     "style": {
       "default": {
-        "color": "#0100ff",
+        "color": "#ff0100",
         "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "circle",
-        "color": "#0100ff"
+        "name": "cross",
+        "color": "#ff0100"
       }
     },
     "crs": "EPSG:2154"
@@ -3569,15 +3569,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff9966",
+        "color": "#ff2ad5",
         "width": "1.0",
-        "capstyle": "flat",
-        "line_style": "solid",
-        "joinstyle": "miter"
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#ff9966"
+        "name": "cross",
+        "color": "#ff2ad5"
       }
     },
     "crs": "EPSG:2154"
@@ -3635,15 +3635,15 @@
     },
     "style": {
       "default": {
-        "color": "#ff0100",
+        "color": "#ff55aa",
         "width": "1.0",
-        "capstyle": "flat",
-        "line_style": "solid",
-        "joinstyle": "miter"
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "triangle",
-        "color": "#ff0100"
+        "name": "cross",
+        "color": "#ff55aa"
       }
     },
     "crs": "EPSG:2154"
@@ -3681,28 +3681,25 @@
     },
     "style": {
       "default": {
-        "color": "#ccff33",
+        "color": "#ff8080",
         "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
       },
       "point": {
-        "name": "circle",
-        "color": "#ccff33"
+        "name": "cross",
+        "color": "#ff8080"
       }
     },
     "crs": "EPSG:2154"
   },
   "AmenagementHydraulique": {
     "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
       "author": true,
-      "borneDebutId": true,
-      "borneFinId": true,
-      "borne_debut_aval": true,
-      "borne_debut_distance": true,
-      "borne_fin_aval": true,
-      "borne_fin_distance": true,
       "capaciteStockage": true,
       "class": true,
       "classAbrege": true,
@@ -3722,47 +3719,46 @@
       "gestionnaire": true,
       "gestionnaireIds": true,
       "gestions": true,
-      "latitudeMax": true,
-      "latitudeMin": true,
       "libelle": true,
-      "linearId": true,
-      "longitudeMax": true,
-      "longitudeMin": true,
       "observationGenerale": true,
       "observationIds": true,
       "ouvrageAssocieIds": true,
       "photos": true,
-      "positionDebut": true,
-      "positionFin": true,
-      "prDebut": true,
-      "prFin": true,
       "prestationIds": true,
       "profondeurMoyenne": true,
-      "proprietaire": true,
       "proprietaireIds": true,
       "proprietes": true,
       "structureIds": true,
       "superficie": true,
-      "systemeRepId": true,
       "traitIds": true,
-      "traits": true,
       "tronconIds": true,
       "type": true,
       "valid": true,
       "vegetationIds": true
-    }
+    },
+    "style": {
+      "default": {
+        "color": "#ffaa55",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
+      },
+      "point": {
+        "name": "cross",
+        "color": "#ffaa55"
+      }
+    },
+    "crs": "EPSG:2154"
   },
   "DesordreDependance": {
     "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
       "amenagementHydrauliqueId": true,
       "articleIds": true,
       "author": true,
-      "borneDebutId": true,
-      "borneFinId": true,
-      "borne_debut_aval": true,
-      "borne_debut_distance": true,
-      "borne_fin_aval": true,
-      "borne_fin_distance": true,
       "categorieDesordreId": true,
       "class": true,
       "classAbrege": true,
@@ -3778,37 +3774,38 @@
       "evenementHydrauliqueIds": true,
       "geometry": true,
       "geometryMode": true,
-      "latitudeMax": true,
-      "latitudeMin": true,
       "lieuDit": true,
-      "linearId": true,
-      "longitudeMax": true,
-      "longitudeMin": true,
       "observations": true,
       "ouvrageAssocieAH": true,
       "ouvrageAssocieIds": true,
-      "positionDebut": true,
-      "positionFin": true,
       "positionId": true,
-      "prDebut": true,
-      "prFin": true,
       "prestationIds": true,
       "sourceId": true,
-      "systemeRepId": true,
       "typeDesordreId": true,
       "valid": true
-    }
+    },
+    "style": {
+      "default": {
+        "color": "#ffd52a",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
+      },
+      "point": {
+        "name": "cross",
+        "color": "#ffd52a"
+      }
+    },
+    "crs": "EPSG:2154"
   },
   "OrganeProtectionCollective": {
     "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
       "amenagementHydrauliqueId": true,
       "author": true,
-      "borneDebutId": true,
-      "borneFinId": true,
-      "borne_debut_aval": true,
-      "borne_debut_distance": true,
-      "borne_fin_aval": true,
-      "borne_fin_distance": true,
       "class": true,
       "classAbrege": true,
       "classPlural": true,
@@ -3821,32 +3818,34 @@
       "editedGeoCoordinate": true,
       "geometry": true,
       "geometryMode": true,
-      "latitudeMax": true,
-      "latitudeMin": true,
-      "longitudeMax": true,
-      "longitudeMin": true,
       "observations": true,
       "photos": true,
-      "positionDebut": true,
-      "positionFin": true,
-      "prDebut": true,
-      "prFin": true,
-      "systemeRepId": true,
       "type": true,
       "valid": true
-    }
+    },
+    "style": {
+      "default": {
+        "color": "#100ff0",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
+      },
+      "point": {
+        "name": "cross",
+        "color": "#100ff0"
+      }
+    },
+    "crs": "EPSG:2154"
   },
   "OuvrageAssocieAmenagementHydraulique": {
     "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
       "amenagementHydrauliqueAssocieIds": true,
       "amenagementHydrauliqueId": true,
       "author": true,
-      "borneDebutId": true,
-      "borneFinId": true,
-      "borne_debut_aval": true,
-      "borne_debut_distance": true,
-      "borne_fin_aval": true,
-      "borne_fin_distance": true,
       "class": true,
       "classAbrege": true,
       "classPlural": true,
@@ -3863,47 +3862,45 @@
       "fonctionnement": true,
       "geometry": true,
       "geometryMode": true,
-      "gestionnaire": true,
       "gestionnaireIds": true,
       "hauteur": true,
-      "latitudeMax": true,
-      "latitudeMin": true,
-      "linearId": true,
-      "longitudeMax": true,
-      "longitudeMin": true,
       "materiauId": true,
       "nombre": true,
       "numCouche": true,
       "observations": true,
       "ouvrageDerversant": true,
       "photos": true,
-      "positionDebut": true,
-      "positionFin": true,
-      "prDebut": true,
-      "prFin": true,
       "profondeur": true,
-      "proprietaire": true,
       "proprietaireIds": true,
       "section": true,
       "sourceId": true,
-      "structureDetaillee": true,
       "structureDetaillees": true,
       "superficie": true,
-      "systemeRepId": true,
       "typeOuvrage": true,
       "valid": true
-    }
+    },
+    "style": {
+      "default": {
+        "color": "#d5ff2a",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
+      },
+      "point": {
+        "name": "cross",
+        "color": "#d5ff2a"
+      }
+    },
+    "crs": "EPSG:2154"
   },
   "PrestationAmenagementHydraulique": {
     "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
       "amenagementHydrauliqueId": true,
       "author": true,
-      "borneDebutId": true,
-      "borneFinId": true,
-      "borne_debut_aval": true,
-      "borne_debut_distance": true,
-      "borne_fin_aval": true,
-      "borne_fin_distance": true,
       "class": true,
       "classAbrege": true,
       "classPlural": true,
@@ -3919,31 +3916,38 @@
       "editedGeoCoordinate": true,
       "geometry": true,
       "geometryMode": true,
-      "latitudeMax": true,
-      "latitudeMin": true,
       "libelle": true,
-      "linearId": true,
       "longitudeMax": true,
-      "longitudeMin": true,
       "marcheId": true,
       "mesureDiverse": true,
       "observationIds": true,
-      "ouvrageAssocieAmenagementHydraulique": true,
       "ouvrageAssocieAmenagementHydrauliqueIds": true,
       "photos": true,
-      "positionDebut": true,
-      "positionFin": true,
-      "prDebut": true,
-      "prFin": true,
       "realisationInterne": true,
       "sourceId": true,
-      "systemeRepId": true,
       "typePrestationId": true,
       "valid": true
-    }
+    },
+    "style": {
+      "default": {
+        "color": "#aaff55",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
+      },
+      "point": {
+        "name": "cross",
+        "color": "#aaff55"
+      }
+    },
+    "crs": "EPSG:2154"
   },
   "StructureAmenagementHydraulique": {
     "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
       "amenagementHydrauliqueId": true,
       "author": true,
       "class": true,
@@ -3957,10 +3961,27 @@
       "photos": true,
       "sourceId": true,
       "valid": true
-    }
+    },
+    "style": {
+      "default": {
+        "color": "#80ff80",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
+      },
+      "point": {
+        "name": "cross",
+        "color": "#80ff80"
+      }
+    },
+    "crs": "EPSG:2154"
   },
   "TraitAmenagementHydraulique": {
     "attributes": {
+      "@class": true,
+      "_id": true,
+      "_rev": true,
       "amenagementHydrauliqueId": true,
       "author": true,
       "class": true,
@@ -3972,6 +3993,20 @@
       "designation": true,
       "geometry": true,
       "valid": true
-    }
+    },
+    "style": {
+      "default": {
+        "color": "#55ffaa",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
+      },
+      "point": {
+        "name": "cross",
+        "color": "#55ffaa"
+      }
+    },
+    "crs": "EPSG:2154"
   }
 }
