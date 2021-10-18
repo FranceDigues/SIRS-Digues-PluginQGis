@@ -177,6 +177,12 @@ if __name__ == "__main__":
         elif sys.argv[1] == "-a":
             at = load_attribute_type_from_labels()
             pretty_print_json(at)
+        else:
+            print("\totpion1 = -l (display labels)\n\toption2 = -p (display"
+                  " preferences)\n\toption3 = -a (display attributes)")
+    else:
+        print("\totpion1 = -l (display labels)\n\toption2 = -p (display"
+              " preferences)\n\toption3 = -a (display attributes)")
 
 
 

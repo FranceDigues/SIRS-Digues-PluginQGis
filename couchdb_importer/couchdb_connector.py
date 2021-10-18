@@ -198,7 +198,7 @@ class CouchdbConnector(object):
     def replace_id_by_label(self, database, elem):
         if type(elem) == dict:
             for attr in elem:
-                if attr[-2:] == 'Id' or attr in ['author', 'orientationPhoto', 'Author']:
+                if attr[-2:] == 'Id' or attr in ['author', 'orientationPhoto', 'Author', 'Type', 'type']:
                     if elem[attr] is not None:
                         if attr in ['borneDebutId', 'borneFinId', 'tronconId']:
                             elem[attr] = self.get_and_save_label_from_id(database, elem[attr], True)
