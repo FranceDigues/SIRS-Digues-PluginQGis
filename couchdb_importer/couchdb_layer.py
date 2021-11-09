@@ -35,19 +35,19 @@ from .couchdb_data import CouchdbData
 class CouchdbBuilder(object):
     def __init__(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration_label.json')) as labelFile:
+        with open(os.path.join(__location__, 'label_correspondence.json')) as labelFile:
             self.labels = json.load(labelFile)
-        with open(os.path.join(__location__, 'configuration_layer_field.json')) as fieldFile:
+        with open(os.path.join(__location__, 'attribute_type_correspondence.json')) as fieldFile:
             self.fields = json.load(fieldFile)
 
     def reset_from_labels_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration_label.json')) as inFile:
+        with open(os.path.join(__location__, 'label_correspondence.json')) as inFile:
             self.labels = json.load(inFile)
 
     def reset_from_layer_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'configuration_layer_field.json')) as inFile:
+        with open(os.path.join(__location__, 'attribute_type_correspondence.json')) as inFile:
             self.fields = json.load(inFile)
 
     def build_layer(self, className, geom, data: CouchdbData):

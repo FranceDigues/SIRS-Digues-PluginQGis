@@ -87,6 +87,8 @@ class Utils:
             return positionable['libelle']
         elif 'designation' in positionable:
             return positionable['designation']
+        elif 'login' in positionable:
+            return positionable['login']
         elif '_id' in positionable:
             return positionable['_id']
         else:
