@@ -25,12 +25,8 @@ def load_labels_from_properties():
     return propertieDictionnary
 
 
-def print_new_labels():
-    print(json.dumps(load_labels_from_properties(), sort_keys=True, indent=2))
-
-
 def pretty_print_json(js):
-    print(json.dumps(js, sort_keys=True, indent=2))
+    print(json.dumps(js, sort_keys=True, indent=2, ensure_ascii=False))
 
 
 def load_user_preferences_from_labels():

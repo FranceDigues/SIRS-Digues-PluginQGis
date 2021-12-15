@@ -210,7 +210,7 @@ class CouchdbImporter:
 
     def collect_data_from_user_selection(self):
         self.loadedPositionable.clear()
-        lu = 75 / len(self.data)
+        lu = 75 / len(self.data.getPositionable())
         completed = 0
         database = self.dlg.database.currentText()
 
@@ -218,10 +218,11 @@ class CouchdbImporter:
             for className in self.data.getClassName():
                 if self.data.getSelected(className):
                     attributes = Utils.build_list_from_selection(self.data.getAttributes(className))
+                    attributes = ["_id", "@class"] + attributes
                     result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
                     Utils.filter_positionable_list_attribute(result)
-                    self.connector.replace_id_by_label_in_result(database, result)
+                    #self.connector.replace_id_by_label_in_result(database, result)
                     self.loadedPositionable.extend(result)
                 completed = completed + lu
                 self.dlg.progressBar.setValue(completed)
@@ -412,7 +413,9 @@ class CouchdbImporter:
 
     def build_list_positionable_class(self):
         model = QStandardItemModel()
-        for className in self.data.getClassName():
+        classNameList = list(self.data.getClassName())
+        classNameList.sort()
+        for className in classNameList:
             item = QStandardItem(className)
             if self.data.getSelected(className):
                 item.setCheckState(Qt.Checked)
@@ -434,7 +437,7 @@ class CouchdbImporter:
                 item.setCheckState(Qt.Checked)
             else:
                 item.setCheckable(True)
-                if self.data.getAttributes(self.currentPositionableClass)[attr]:
+                if self.data.isAttributeSelected(self.currentPositionableClass, attr):
                     item.setCheckState(Qt.Checked)
                 else:
                     item.setCheckState(Qt.Unchecked)
@@ -486,11 +489,9 @@ class CouchdbImporter:
         self.dlg.progressBar.setValue(0)
 
     def build_list_detail(self, pos):
-        classname = pos["@class"].split("fr.sirs.core.model.")[1]
+        database = self.dlg.database.currentText()
         model = QStandardItemModel()
-        listStandardItem = []
-        for s in pos:
-            self.provider.complete_model_from_positionable(s, pos[s], listStandardItem, classname)
+        listStandardItem = self.provider.complete_model_from_positionable(pos, database, self.connector)
         for row in listStandardItem:
             model.appendRow(row)
         self.dlg.detail.setModel(model)
@@ -549,6 +550,8 @@ class CouchdbImporter:
                                     Qgis.Warning)
                 return
             self.connector = None
+            self.dlg.login.setText("geouser")
+            self.dlg.password.setText("geopw")
             self.connector = CouchdbConnector(rc[0], rc[1], self.dlg.login.text(), self.dlg.password.text())
             fc = self.connector.getFilteredConnection()
             list_accessible_databases = [name for name in fc]
@@ -726,9 +729,6 @@ class CouchdbImporter:
             self.open_recap_dialog()
             return
 
-        # Replaces in the recovered data, the identifiers by the corresponding label
-        self.connector.replace_id_by_label_in_result(database, result)
-
         # Update Qgis layers
         self.update_layers(result_list, size_result_list)
 
@@ -772,6 +772,8 @@ class CouchdbImporter:
     """
 
     def update_layers(self, loaded, ln):
+        # Retrieve the current database input
+        database = self.dlg.database.currentText()
         lu = 99 / ln
         completed = 1
 
@@ -787,6 +789,7 @@ class CouchdbImporter:
                 continue
             geom = Utils.build_geometry(wkt, self.lengthParameter)
             if geom is None:
+                print("[UNKNOWN GEOM TYPE]: " + str(wkt))
                 self.simple_message("Type de geometrie inconnu", Qgis.Warning)
                 continue
             typ = geom.wkbType()
@@ -808,7 +811,7 @@ class CouchdbImporter:
             for feat in features:
                 if feat['_id (ne pas modifier/supprimer)'] == id:
                     provider.deleteFeatures([feat.id()])
-            feature = self.provider.build_feature(data, geom, layer, self.data)
+            feature = self.provider.build_feature(data, geom, layer, self.data, self.connector, database)
             provider.addFeature(feature)
             layer.updateExtents()
             # progress bar
@@ -823,6 +826,7 @@ class CouchdbImporter:
         lu = 25 / llp
         completed = 75
         allLayers = {}
+        database = self.dlg.database.currentText()
 
         # init summary var
         li = 0
@@ -832,7 +836,10 @@ class CouchdbImporter:
         wp = 0
 
         for data in self.loadedPositionable:
-            id = data["_id"]
+            try:
+                id = data["_id"]
+            except KeyError:
+                raise Exception("Key _id not found in " + str(data))
             if ids_from_selection is not None:
                 if id not in ids_from_selection:
                     continue
@@ -850,6 +857,7 @@ class CouchdbImporter:
                 continue
             geom = Utils.build_geometry(wkt, self.lengthParameter)
             if geom is None:
+                print("[UNKNOWN GEOM TYPE]: " + str(wkt))
                 self.basic_message("Type de géométrie non reconnu", str(id), Qgis.Warning)
                 continue
             if position == "real":
@@ -865,12 +873,20 @@ class CouchdbImporter:
                 if className not in allLayers:
                     allLayers[className] = {}
                 if typ not in allLayers[className]:
-                    allLayers[className][typ] = self.provider.build_layer(className, geom, self.data)
+                    layerBuild = self.provider.build_layer(className, geom, self.data)
+                    if layerBuild is None:
+                        self.simple_message("Type de géométrie non traité. class: " + className + ", id: " + id, Qgis.Warning)
+                        continue
+                    allLayers[className][typ] = layerBuild
                 layer = allLayers[className][typ]
             else:
                 layer = currentLayer
+            if layer is None:
+                print(className)
+                print(currentLayer)
+                print(allLayers)
             # build feature
-            feature = self.provider.build_feature(data, geom, layer, self.data)
+            feature = self.provider.build_feature(data, geom, layer, self.data, self.connector, database)
             # add the new feature to the layer
             provider = layer.dataProvider()
             provider.addFeature(feature)
@@ -925,7 +941,11 @@ class CouchdbImporter:
     def stacked_message(self, msg1, dictClassName, level):
         msg2 = ""
         for className in dictClassName:
-            msg2 = msg2 + className + " (" + ", ".join(dictClassName[className]) + "), "
+            msg2 = msg2 + "\n" + className + " ("
+            for ref in dictClassName[className]:
+                msg2 = msg2 + ref + ", "
+            msg2 = msg2[:-2]
+            msg2 = msg2 + ")"
         widget = self.iface.messageBar().createMessage(msg1, msg2)
         self.iface.messageBar().pushWidget(widget, level, 5)
 

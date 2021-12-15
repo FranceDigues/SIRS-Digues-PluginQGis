@@ -92,7 +92,7 @@ class Utils:
         elif '_id' in positionable:
             return positionable['_id']
         else:
-            return 'no data'
+            return "Aucune donnée"
 
     @staticmethod
     def get_label_and_designation_reference(positionable):

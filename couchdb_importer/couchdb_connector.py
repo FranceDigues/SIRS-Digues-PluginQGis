@@ -31,6 +31,7 @@ if couchdb_dir not in sys.path:
 import couchdb
 from .utils import Utils
 import logging
+from functools import lru_cache
 
 
 class CouchdbConnectorException(Exception):
@@ -190,6 +191,25 @@ class CouchdbConnector(object):
                     label = Utils.get_label_reference(result[0])
             self.libelleRefId[database][Id] = label
         return self.libelleRefId[database][Id]
+
+    @lru_cache(maxsize=None)
+    def get_label_from_id(self, database, Id):
+        """
+        Care with the usage of this methods, it can cause memory saturation problems.
+        """
+        result = list(self.request_database(database, single=Id))
+        return Id if len(result) == 0 else Utils.get_label_reference(result[0])
+
+    @lru_cache(maxsize=None)
+    def get_value_or_id_from_id(self, database, Id, attribute):
+        """
+        Care with the usage of this methods, it can cause memory saturation problems.
+        """
+        result = list(self.request_database(database, single=Id))
+        if len(result) == 0:
+            return Id
+        else:
+            return result[0][attribute] if attribute in result[0] else Id
 
     def replace_id_by_label_in_result(self, database, target):
         for elem in target:

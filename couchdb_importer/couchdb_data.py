@@ -25,15 +25,54 @@
 import os
 import json
 
+POSITIONABLES = ["AireStockageDependance", "AmenagementHydraulique", "ArbreVegetation", "AutreDependance",
+                 "AutreOuvrageLit", "Berge", "BorneDigue", "CheminAccesDependance", "Crete", "CreteBerge",
+                 "Desordre", "DesordreDependance", "DesordreLit", "Deversoir", "DomanialiteLit",
+                 "EchelleLimnimetrique", "Epi", "EpiBerge", "Fondation", "FondationBerge", "GardeTroncon",
+                 "HerbaceeVegetation", "IleBancLit", "InvasiveVegetation", "LaisseCrue", "LargeurFrancBord",
+                 "LargeurLit", "LigneEau", "MonteeEaux", "OccupationRiveraineLit", "OrganeProtectionCollective",
+                 "OuvertureBatardable", "OuvrageAssocieAmenagementHydraulique", "OuvrageAssocieLit",
+                 "OuvrageFranchissement", "OuvrageHydrauliqueAssocie", "OuvrageParticulier", "OuvrageRevanche",
+                 "OuvrageRevancheBerge", "OuvrageTelecomEnergie", "OuvrageVoirie", "OuvrageVoirieDependance",
+                 "ParcelleVegetation", "PenteLit", "PeuplementVegetation", "Photo", "PiedBerge", "PiedDigue",
+                 "PlageDepotLit", "PositionConvention", "PositionDocument", "PositionProfilTravers", "Prestation",
+                 "PrestationAmenagementHydraulique", "ProfilLong", "ProprieteTroncon", "RegimeEcoulementLit",
+                 "ReseauHydrauliqueCielOuvert", "ReseauHydrauliqueFerme", "ReseauTelecomEnergie", "SeuilLit",
+                 "SommetBerge", "SommetRisberme", "StationPompage", "StructureAmenagementHydraulique", "TalusBerge",
+                 "TalusDigue", "TalusRisberme", "TalusRisbermeBerge", "TraitAmenagementHydraulique", "TraitBerge",
+                 "TronconDigue", "TronconLit", "VoieAcces", "VoieDigue", "ZoneAtterrissementLit"]
+
+CONTAINMENT_CLASSES = ["Seuil", "Pompe", "MateriauDependance", "CoucheSeuilLit", "TraitementZoneVegetation",
+                       "GardeObjet", "ObservationVoieDigue", "ObservationOuvrageVoirie",
+                       "ObservationReseauTelecomEnergie", "InspectionSeuilLit", "PrZProfilLong", "OuvrageFreineurLit",
+                       "ObservationStationPompage", "XYZProfilLong", "AutreOuvrageRegulationLit", "BarrageLit",
+                       "ObservationDependance", "ParametreHydrauliqueProfilLong", "GestionTroncon",
+                       "ObservationOuvertureBatardable", "Observation", "MesureMonteeEaux",
+                       "ObservationEchelleLimnimetrique", "ObservationOuvrageHydrauliqueAssocie",
+                       "ObservationReseauHydrauliqueFerme", "ObservationVoieAcces", "DispositifFusible",
+                       "ObservationReseauHydrauliqueCielOuvert", "ProprieteObjet", "GestionObjet", "PlanSeuilLit",
+                       "FosseDissipation", "ObservationPrestation", "MesureLigneEauXYZ",
+                       "ObservationOuvrageParticulier", "MesureLigneEauPrZ", "ObservationOuvrageFranchissement",
+                       "TraitementParcelleVegetation", "PhotoDependance", "ObservationOuvrageTelecomEnergie", "Photo"]
+
 
 class CouchdbData(object):
     def __init__(self):
-        self.data = {}
+        self.positionable = {}
+        self.containment = {}
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'user_preference_correspondence.json')) as inFile:
+        with open(os.path.join(__location__, "user_preference_correspondence.json")) as inFile:
             preference = json.load(inFile)
-            for className in preference:
-                self.data[className] = {
+            for className in POSITIONABLES:
+                self.positionable[className] = {
+                    "selected": False,
+                    "ids": {},
+                    "attributes": preference[className]["attributes"],
+                    "style": preference[className]["style"],
+                    "crs": preference[className]["crs"]
+                }
+            for className in CONTAINMENT_CLASSES:
+                self.containment[className] = {
                     "selected": False,
                     "ids": {},
                     "attributes": preference[className]["attributes"],
@@ -41,108 +80,118 @@ class CouchdbData(object):
                     "crs": preference[className]["crs"]
                 }
 
-    def __len__(self):
-        return len(self.data)
+    def getPositionable(self):
+        return self.positionable
 
-    def getData(self):
-        return self.data
-
-    def getDataClass(self, name):
-        return self.data[name]
+    def getPositionableClass(self, name):
+        return self.positionable[name]
 
     def getClassName(self):
-        return self.data.keys()
+        return self.positionable.keys()
 
     def getSelected(self, name):
-        return self.data[name]["selected"]
+        return self.positionable[name]["selected"]
 
     def getSelectedCount(self):
         count = 0
 
-        for name in self.data:
-            count += self.data[name]["selected"]
+        for name in self.positionable:
+            count += self.positionable[name]["selected"]
         return count
 
     def getIds(self, name):
-        return self.data[name]["ids"]
+        return self.positionable[name]["ids"]
 
     def getListId(self, name):
-        if type(self.data[name]["ids"]) == str:
+        if type(self.positionable[name]["ids"]) == str:
             return None
-        return self.data[name]["ids"].keys()
+        return self.positionable[name]["ids"].keys()
 
     def getAllId(self):
         result = []
         for className in self.getClassName():
             if type(self.getIds(className)) == str:
                 return None
-            result.extend(self.data[className]["ids"].keys())
+            result.extend(self.positionable[className]["ids"].keys())
         return result
 
     def getAllIdSelected(self):
         result = []
         for className in self.getClassName():
-            for id in self.data[className]["ids"]:
-                if self.data[className]["ids"][id]:
+            for id in self.positionable[className]["ids"]:
+                if self.positionable[className]["ids"][id]:
                     result.append(id)
         return result
 
-    def getAttributes(self, name):
-        return self.data[name]["attributes"]
+    def getAttributeSelected(self, className):
+        attributes = []
+        ca = self.positionable[className]["attributes"]
+        for a in ca:
+            if ca[a]:
+                attributes.append(a)
+        return attributes
+
+    def getAttributes(self, className, fromContainment=False):
+        try:
+            if fromContainment:
+                return self.containment[className]["attributes"]
+            else:
+                return self.positionable[className]["attributes"]
+        except KeyError:
+            print("[UNKNOWN CLASS]: class not found in preference files: " + className)
+            return {}
+
+    def isAttributeSelected(self, className, attribute):
+        return self.positionable[className]["attributes"][attribute]
 
     def getStylePoint(self, name):
-        return self.data[name]["style"]["point"]
+        return self.positionable[name]["style"]["point"]
 
-    def getStyleDefault(self, name):
-        return self.data[name]["style"]["default"]
+    def getStyleLine(self, name):
+        return self.positionable[name]["style"]["line"]
+
+    def getStylePolygon(self, name):
+        return self.positionable[name]["style"]["polygon"]
 
     def getCrs(self, name):
-        return self.data[name]["crs"]
+        return self.positionable[name]["crs"]
 
     def getIdValue(self, name, id):
-        return self.data[name]["ids"][id]
+        return self.positionable[name]["ids"][id]
 
     def setSelected(self, name, isSelected):
-        self.data[name]["selected"] = isSelected
+        self.positionable[name]["selected"] = isSelected
 
     def setIds(self, name, ids):
-        self.data[name]["ids"] = ids
+        self.positionable[name]["ids"] = ids
 
     def setAttributes(self, name, attributes):
-        self.data[name]["attributes"] = attributes
+        self.positionable[name]["attributes"] = attributes
 
     def setStyle(self, name, style):
-        self.data[name]["style"] = style
+        self.positionable[name]["style"] = style
 
     def setCrs(self, name, crs):
-        self.data[name]["crs"] = crs
+        self.positionable[name]["crs"] = crs
 
     def setAttributeValue(self, name, attribute, value):
-        self.data[name]["attributes"][attribute] = value
+        self.positionable[name]["attributes"][attribute] = value
 
     def setIdValue(self, name, id, isSelected):
-        self.data[name]["ids"][id] = isSelected
-
-    def reset_from_configuration(self):
-        __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'user_preference_correspondence.json')) as inFile:
-            preference = json.load(inFile)
-            for className in preference:
-                self.data[className] = {
-                    "selected": False,
-                    "ids": "all",
-                    "attributes": preference[className]["attributes"],
-                    "style": preference[className]["style"],
-                    "crs": preference[className]["crs"]
-                }
+        self.positionable[name]["ids"][id] = isSelected
 
     def write_configuration(self):
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'user_preference_correspondence.json'), 'w') as outFile:
+        with open(os.path.join(__location__, "user_preference_correspondence.json"), "w") as outFile:
             configuration = {}
-            for className in self.data:
+            for className in self.positionable:
                 configuration[className] = {}
-                configuration[className]["attributes"] = self.data[className]["attributes"]
-                configuration[className]["style"] = self.data[className]["style"]
-                configuration[className]["crs"] = self.data[className]["crs"]
-            json.dump(configuration, outFile)
+                configuration[className]["attributes"] = self.positionable[className]["attributes"]
+                configuration[className]["style"] = self.positionable[className]["style"]
+                configuration[className]["crs"] = self.positionable[className]["crs"]
+            for className in self.containment:
+                configuration[className] = {}
+                configuration[className]["attributes"] = self.containment[className]["attributes"]
+                configuration[className]["style"] = self.containment[className]["style"]
+                configuration[className]["crs"] = self.containment[className]["crs"]
+            json.dump(configuration, outFile, indent=2)

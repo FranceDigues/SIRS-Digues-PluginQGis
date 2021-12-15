@@ -27,28 +27,18 @@ import json
 
 from qgis.PyQt.QtCore import QVariant
 from qgis.PyQt.QtGui import QStandardItem
-from qgis.core import QgsFeature, QgsVectorLayer, QgsField, QgsLineSymbol, QgsMarkerSymbol, QgsWkbTypes, QgsDefaultValue
+from qgis.core import QgsFeature, QgsVectorLayer, QgsField, QgsLineSymbol, QgsMarkerSymbol, QgsWkbTypes, QgsFillSymbol
 
 from .couchdb_data import CouchdbData
+from .couchdb_connector import CouchdbConnector
 
 
 class CouchdbBuilder(object):
     def __init__(self):
+        self.gender_map = self.init_gender_map()
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'label_correspondence.json')) as labelFile:
-            self.labels = json.load(labelFile)
-        with open(os.path.join(__location__, 'attribute_type_correspondence.json')) as fieldFile:
-            self.fields = json.load(fieldFile)
-
-    def reset_from_labels_configuration(self):
-        __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'label_correspondence.json')) as inFile:
-            self.labels = json.load(inFile)
-
-    def reset_from_layer_configuration(self):
-        __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, 'attribute_type_correspondence.json')) as inFile:
-            self.fields = json.load(inFile)
+        with open(os.path.join(__location__, 'formTemplatePilote.json')) as confFile:
+            self.configuration = json.load(confFile)
 
     def build_layer(self, className, geom, data: CouchdbData):
         crs = data.getCrs(className)
@@ -58,10 +48,18 @@ class CouchdbBuilder(object):
         if geom.wkbType() == QgsWkbTypes.Point:
             props = data.getStylePoint(className)
             symbol = QgsMarkerSymbol.createSimple(props)
-        else:
-            props = data.getStyleDefault(className)
+        elif geom.wkbType() == QgsWkbTypes.LineString:
+            props = data.getStyleLine(className)
             symbol = QgsLineSymbol.createSimple(props)
-            symbol.setOpacity(0.5)
+            symbol.setOpacity(0.7)
+        elif geom.wkbType() == QgsWkbTypes.Polygon:
+            props = data.getStylePolygon(className)
+            symbol = QgsFillSymbol.createSimple(props)
+            symbol.setOpacity(0.4)
+        else:
+            print("[UNKNOWN GEOM TYPE]: " + str(geom))
+            return None
+
         layer.renderer().setSymbol(symbol)
         provider = layer.dataProvider()
         provider.addAttributes(fields)
@@ -69,180 +67,306 @@ class CouchdbBuilder(object):
         return layer
 
     def build_layer_fields(self, className):
-        target = []
-        fields = self.fields[className]
+        target = [QgsField("_id (ne pas modifier/supprimer)", QVariant.String), QgsField("@class", QVariant.String)]
+        fields = self.configuration[className]
 
-        for title in fields:
-            if "_attachments" in title:
-                continue
+        for attribute in fields:
+            conf = fields[attribute]
 
-            label = self.label_identification(className, title)
+            name = conf["name"]
+            label = conf["label"]
+            ttype = conf["type"]
+            ref = conf["reference"]
 
-            if 'borneDebutId' in title or 'borneFinId' in title or 'tronconId' in title or 'prestationIds' in title:
-                target.append(QgsField(label + ' libelle', QVariant.String))
-                target.append(QgsField(label + ' designation', QVariant.String))
-                continue
-
-            if fields[title] == "str":
-                target.append(QgsField(label, QVariant.String))
-            elif fields[title] == "int":
-                target.append(QgsField(label, QVariant.Int))
-            elif fields[title] == "bool":
-                target.append(QgsField(label, QVariant.Bool))
-            elif fields[title] == "float":
-                target.append(QgsField(label, QVariant.Double))
+            if ref:
+                multiple = conf.get("multiple", 1)
+                label_suffix = "actuel"
+                if name in self.gender_map:
+                    label_suffix = self.gender_map.get(name, "actuel")
+                else:
+                    print("[KEY NOT FOUND]: no gender for: " + str(name))
+                # single reference
+                if multiple == 1:
+                    if conf.get("containment", False):
+                        for cf in self.build_layer_fields(ttype):
+                            cf.setName(label + " " + cf.name())
+                            target.append(cf)
+                    else:
+                        if name in ["borneDebutId", "borneFinId", "tronconId"]:
+                            target.append(QgsField(label + " libellé", QVariant.String))
+                            target.append(QgsField(label + " désignation", QVariant.String))
+                        else:
+                            target.append(QgsField(label, QVariant.String))
+                # multiple references
+                elif multiple == -1:
+                    # remove the plural mark
+                    label = label[:-1] if (len(label) != 0 and label[-1] == "s") else label
+                    if conf.get("containment", False):
+                        for cf in self.build_layer_fields(ttype):
+                            cf.setName(label + " " + cf.name())
+                            target.append(cf)
+                    else:
+                        if name == "prestationIds":
+                            for p in self.__treat_prestations():
+                                target.append(QgsField(p[0], QVariant.String))
+                        else:
+                            target.append(QgsField(label + " " + label_suffix, QVariant.String))
+            else:
+                qgs_field = self.__treat_primitive_type_fields(name, ttype, label)
+                if qgs_field is not None:
+                    target.append(qgs_field)
         return target
 
-    def build_feature(self, positionable, formatGeom, layer, data: CouchdbData):
-        classNameComplete = positionable["@class"]
-        className = classNameComplete.split("fr.sirs.core.model.")[1]
-        attrValue = self.build_field_value(positionable, className, data)
+    def build_feature(self, positionable, formatGeom, layer, data: CouchdbData, connector: CouchdbConnector, database):
+        attrValue = self.build_field_value(positionable, data, connector, database)
+
+        # complete with class and id
+        ID = positionable.get("_id", None)
+        if ID is None:
+            print("[ERROR DATABASE]: object without _id: " + str(positionable))
+            return None
+        attrValue["_id (ne pas modifier/supprimer)"] = ID
+        attrValue["@class"] = positionable["@class"].split("fr.sirs.core.model.")[1]
+
         feature = QgsFeature(layer.fields())
-
-        for title in attrValue:
-            label = self.label_identification(className, title)
-
-            if 'borneDebutId' in title or 'borneFinId' in title or 'tronconId' in title or 'prestationIds' in title:
-                label1 = label + ' libelle'
-                label2 = label + ' designation'
-                if ' ||| ' in attrValue[title]:
-                    value1, value2 = attrValue[title].split(' ||| ')
-                    if layer.fields().indexFromName(label1) != -1:
-                        feature.setAttribute(label1, value1)
-                    if layer.fields().indexFromName(label2) != -1:
-                        feature.setAttribute(label2, value2)
-                else:
-                    if layer.fields().indexFromName(label1) != -1:
-                        feature.setAttribute(label1, attrValue[title])
-                    if layer.fields().indexFromName(label2) != -1:
-                        feature.setAttribute(label2, attrValue[title])
-                continue
-
-            if layer.fields().indexFromName(label) != -1:
-                if 'Borne de début: Amont/Aval' in label or 'Borne de fin: Amont/Aval' in label:
-                    if attrValue[title]:
-                        feature.setAttribute(label, "Amont")
-                    else:
-                        feature.setAttribute(label, "Aval")
-                else:
-                    feature.setAttribute(label, attrValue[title])
-
         feature.setGeometry(formatGeom)
+        for label in attrValue:
+            if layer.fields().indexFromName(label) != -1:
+                feature.setAttribute(label, attrValue[label])
+            else:
+                print("[FIELD NOT FOUND]: " + label)
         return feature
 
-    def build_field_value(self, content, className, data: CouchdbData):
-        value = {}
-        pref = data.getAttributes(className)
+    def build_field_value(self, content, data: CouchdbData, connector: CouchdbConnector, database, containment=False):
+        values = {}
+        className = content["@class"].split("fr.sirs.core.model.")[1]
+        pref = data.getAttributes(className, containment)
+        fields = self.configuration[className]
+
         for attr in pref:
             if pref[attr]:
-                if attr in content.keys():
-                    if type(content[attr]) in [str, float, bool, int]:
-                        value[attr] = content[attr]
-                    elif type(content[attr]) == list or type(content[attr]) == dict:
-                        self.build_field_value_generic(attr, content[attr], value)
+                conf = fields.get(attr, None)
+                if conf is None:
+                    print("[NOT FOUND IN FIELDS]: class: " + className + "; attribute: " + attr)
+                    continue
+
+                val = content.get(attr, None)
+                if val is None:
+                    continue
+
+                name = conf["name"]
+                label = conf["label"]
+                ttype = conf["type"]
+                ref = conf["reference"]
+
+                if ref:
+                    multiple = conf.get("multiple", 1)
+                    label_suffix = self.gender_map.get(name, "actuel")
+                    # single reference
+                    if multiple == 1:
+                        if conf.get("containment", False):
+                            containment_values = self.build_field_value(val, data, connector, database, True)
+                            self.__treat_containment(values, val, containment_values, label)
+                        else:
+                            if name in ["borneDebutId", "borneFinId", "tronconId"]:
+                                values[label + " libellé"] = connector.get_value_or_id_from_id(database, val, 'libelle')
+                                values[label + " désignation"] = connector.get_value_or_id_from_id(database, val, 'designation')
+                            else:
+                                values[label] = connector.get_label_from_id(database, val)
+                    # multiple references
+                    elif multiple == -1:
+                        lenca = len(val)
+                        # remove the plural mark
+                        label = label[:-1] if (len(label) != 0 and label[-1] == "s") else label
+                        if conf.get("containment", False) and lenca >= 1:
+                            containment_values = self.build_field_value(val[-1], data, connector, database, True)
+                            self.__treat_containment(values, val[-1], containment_values, label)
+                        else:
+                            if name == "prestationIds":
+                                for p in self.__treat_prestations(val, database, connector):
+                                    values[p[0]] = p[1]
+                            else:
+                                if lenca >= 1:
+                                    values[label + " " + label_suffix] = connector.get_label_from_id(database, val[-1])
+                else:
+                    lv = self.__treat_primitive_type_values(conf, val, database, connector)
+                    if lv is not None:
+                        values[lv[0]] = lv[1]
+        return values
+
+    def complete_model_from_positionable(self, obj, database, connector: CouchdbConnector):
+        className = obj["@class"].split("fr.sirs.core.model.")[1]
+        ID = obj["_id"] if "_id" in obj else obj["id"]
+        out = [[QStandardItem("_id"), QStandardItem(ID)], [QStandardItem("@class"), QStandardItem(className)]]
+        attributes = self.configuration[className]
+
+        for att in attributes:
+            conf = attributes[att]
+            name = conf["name"]
+            label = conf["label"]
+            ttype = conf["type"]
+            ref = conf["reference"]
+            try:
+                val = obj[name]
+            except KeyError:
+                continue
+
+            if ref:
+                multiple = conf.get("multiple", 1)
+                label_suffix = self.gender_map.get(name, "actuel")
+                # single reference
+                if multiple == 1:
+                    if name in ["borneDebutId", "borneFinId", "tronconId"]:
+                        out.append([QStandardItem(label + " libellé"),
+                                    QStandardItem(connector.get_value_or_id_from_id(database, val, 'libelle'))])
+                        out.append([QStandardItem(label + " désignation"),
+                                    QStandardItem(connector.get_value_or_id_from_id(database, val, 'designation'))])
                     else:
-                        value[attr] = "Aucune donnée"
-                else:
-                    value[attr] = "Aucune donnée"
-        return value
-
-    def build_field_value_generic(self, name, obj, value):
-        if type(obj) in [str, int, float, bool]:
-            value[name] = obj
-        elif type(obj) == list:
-            length = len(obj)
-            if length == 0:
-                self.build_field_value_generic(name + " actuelle:", "Aucune donnée", value)
+                        out.append([QStandardItem(label), QStandardItem(connector.get_label_from_id(database, val))])
+                # multiple references
+                elif multiple == -1:
+                    lenca = len(val)
+                    # remove the plural mark
+                    label = label[:-1] if (len(label) != 0 and label[-1] == "s") else label
+                    if conf.get("containment", False) and lenca >= 1:
+                        out2 = self.complete_model_from_positionable(val[-1], database, connector)
+                        for row in out2:
+                            row[0].setText(label + " " + row[0].text())
+                            out.append(row)
+                    else:
+                        if name == "prestationIds":
+                            for p in self.__treat_prestations(val, database, connector):
+                                out.append([QStandardItem(p[0]), QStandardItem(p[1])])
+                        else:
+                            if lenca >= 1:
+                                out.append([QStandardItem(label + " " + label_suffix),
+                                            QStandardItem(connector.get_label_from_id(database, val[-1]))])
             else:
-                if name == "prestationIds":
-                    if length == 1:
-                        self.build_field_value_generic(name + " actuelle:", obj[-1], value)
-                    elif length == 2:
-                        self.build_field_value_generic(name + " actuelle:", obj[-1], value)
-                        self.build_field_value_generic(name + " actuelle:" + " N-2", obj[-2], value)
-                    elif length >= 3:
-                        self.build_field_value_generic(name + " actuelle:", obj[-1], value)
-                        self.build_field_value_generic(name + " actuelle:" + " N-2", obj[-2], value)
-                        self.build_field_value_generic(name + " actuelle:" + " N-3", obj[-3], value)
-                else:
-                    self.build_field_value_generic(name + " actuelle:", obj[-1], value)
-        elif type(obj) == dict:
-            for it in obj:
-                self.build_field_value_generic(name + " " + str(it), obj[it], value)
-        else:
-            value[name] = "Aucune donnée"
+                lv = self.__treat_primitive_type_values(name, ttype, label, connector)
+                if lv is not None:
+                    out.append([QStandardItem(lv[0]), QStandardItem(lv[1])])
+        return out
 
-    def complete_model_from_positionable(self, name, obj, out, classname):
-        if type(obj) is str:
-            name = self.label_identification(classname, name)
-            out.append([QStandardItem(name), QStandardItem(obj)])
-        elif type(obj) in [int, float, bool]:
-            name = self.label_identification(classname, name)
-            out.append([QStandardItem(name), QStandardItem(str(obj))])
-        elif type(obj) is list:
-            length = len(obj)
-            if length == 0:
-                self.complete_model_from_positionable(name + " actuelle:", "Aucune donnée", out, classname)
-            else:
-                if name == "prestationIds":
-                    if length == 1:
-                        self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
-                    elif length == 2:
-                        self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
-                        self.complete_model_from_positionable(name + " actuelle:" + " N-2", obj[-2], out, classname)
-                    elif length >= 3:
-                        self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
-                        self.complete_model_from_positionable(name + " actuelle:" + " N-2", obj[-2], out, classname)
-                        self.complete_model_from_positionable(name + " actuelle:" + " N-3", obj[-3], out, classname)
-                else:
-                    self.complete_model_from_positionable(name + " actuelle:", obj[-1], out, classname)
-        elif type(obj) is dict:
-            for it in obj:
-                self.complete_model_from_positionable(name + " " + it, obj[it], out, classname)
-        else:
-            out.append([QStandardItem(name), QStandardItem("type inconnu")])
+    def __treat_containment(self, values, val, containment_values, label):
+        for k in containment_values:
+            l = label + " " + k
+            values[l] = containment_values[k]
+        values[label + " _id (ne pas modifier/supprimer)"] = val[-1]["id"]
+        values[label + " @class"] = val[-1]["@class"].split("fr.sirs.core.model.")[1]
 
-    def label_identification(self, className, title):
-        icn = {
-            "observations": "Observation",
-            "photos": "Photo",
-            "gestions": "Gestion",
-            "proprietes": "Propriete",
-            "pointsLeveDZ": "PointDZ",
-            "mesures": "MesureMonteeEaux",
-            "mesuresDZ": "MesureLigneEauPrZ"
-        }
+    def __treat_prestations(self, val=(), database=None, connector: CouchdbConnector=None):
+        l = len(val)
+        yield ("Prestation actuelle libellé", connector.get_value_or_id_from_id(database, val[-1],
+                                                                                            'libelle') if l >= 1 else "Aucune donnée")
+        yield ("Prestation actuelle désignation", connector.get_value_or_id_from_id(database, val[-1],
+                                                                                                'designation') if l >= 1 else "Aucune donnée")
+        yield("Avant dernière Prestation libellé", connector.get_value_or_id_from_id(database, val[-2],
+                                                                                                  'libelle') if l >= 2 else "Aucune donnée")
+        yield("Avant dernière Prestation désignation", connector.get_value_or_id_from_id(database, val[-2],
+                                                                                                      'designation') if l >= 2 else "Aucune donnée")
+        yield("Prestation N-3 libellé", connector.get_value_or_id_from_id(database, val[-3],
+                                                                                       'libelle') if l >= 3 else "Aucune donnée")
+        yield("Prestation N-3 désignation", connector.get_value_or_id_from_id(database, val[-3],
+                                                                                           'designation') if l >= 3 else "Aucune donnée")
+
+    def __treat_primitive_type_fields(self, name, ttype, label):
+        if name == "borne_debut_aval":
+            return QgsField("Borne de début: Amont/Aval", QVariant.String)
+        elif name == "borne_fin_aval":
+            return QgsField("Borne de fin: Amont/Aval", QVariant.String)
+        elif ttype in ["EString", "EDate", "Point", "Geometry"]:
+            return QgsField(label, QVariant.String)
+        elif ttype == "EInt":
+            return QgsField(label, QVariant.Int)
+        elif ttype == "EBoolean" or ttype == "EBooleanObject":
+            return QgsField(label, QVariant.Bool)
+        elif ttype == "EFloat" or ttype == "EDouble":
+            return QgsField(label, QVariant.Double)
+        else:
+            print("[TYPE NOT FOUND]: " + ttype)
+            return None
+
+    def __treat_primitive_type_values(self, conf, val, database, connector: CouchdbConnector):
+        name = conf["name"]
+        label = conf["label"]
+        ttype = conf["type"]
+
+        if name == "author":
+            return label, connector.get_value_or_id_from_id(database, val, "login")
+        elif name == "borne_debut_aval":
+            return "Borne de début: Amont/Aval", "Amont" if val else "Aval"
+        elif name == "borne_fin_aval":
+            return "Borne de fin: Amont/Aval", "Amont" if val else "Aval"
+        elif ttype in ["EString", "EDate", "EInt", "EBoolean", "EFloat", "EDouble", "Point", "Geometry", "EBooleanObject"]:
+            return label, val
+        else:
+            print("[UNEXPECTED BEHAVIOUR]: Unknow conf type: " + str(ttype))
+            return None
+
+    def init_gender_map(self):
         fem = [
             "digueIds",
+            "digueId",
             "bergeIds",
+            "bergeId",
             "crueSubmersionIds",
             "echelleLimnimetriqueIds",
             "ouvertureBatardableIds",
             "planifications",
             "voieDigueIds",
-            "prestationIds",
             "voieAccesIds",
             "borneIds",
             "stationPompageIds",
             "photos",
             "observations",
-            "ouvrageParticulierIds",
             "proprietes",
             "mesuresDZ",
             "mesures",
             "gestions",
-            "prestationIds"
+            "prestationIds",
+            "structureIds",
+            "borneDebutId",
+            "borneFinId",
+            "coteId",
+            "positionId",
+            "sourceId",
+            "categorieDesordreId",
+            "orientationPhoto",
+            "urgenceId",
+            "destinationId",
+            "fonctionId",
+            "natureId",
+            "dependanceId",
+            "referenceHauteurId",
+            "positionHautId",
+            "positionBasId",
+            "orientationOuvrageId",
+            "globalPrestationIds",
+            "origineProfilLongId",
+            "positionProfilLongSurDigueId",
+            "fonctionBasId",
+            "fonctionHautId",
+            "natureBasId",
+            "natureHautId",
+            "implantationId",
+            "utilisationConduiteId",
+            "fosse",
+            "mesuresXYZ",
+            "pompes",
+            "parcelleId",
+            "hauteurId"
         ]
         mas = [
             "intervenantsIds",
             "reseauTelecomEnergieIds",
             "reseauHydrauliqueCielOuvertIds",
-            "ouvrageTelecomEnergieIds",
             "articleIds",
+            "ouvrageTelecomEnergieIds",
             "ouvrageFranchissementIds",
             "ouvrageRevancheIds",
             "ouvrageHydrauliqueAssocieIds",
             "ouvrageVoirieIds",
+            "ouvrageParticulierIds",
             "levePositionIds",
             "desordreIds",
             "reseauHydrauliqueFermeIds",
@@ -250,68 +374,78 @@ class CouchdbBuilder(object):
             "seuilIds",
             "rapportEtudeIds",
             "pointsLeveDZ",
+            "systemeRepId",
+            "linearId",
+            "typeDesordreId",
+            "observateurId",
+            "photographeId",
+            "amenagementHydrauliqueId",
+            "typeRiveId",
+            "typeTronconId",
+            "systemeRepDefautId",
+            "organismeId",
+            "typeId",
+            "etatId",
+            "contactId",
+            "materiauId",
+            "ouvrageAssocieIds",
+            "gestionnaireIds",
+            "fonctionnementId",
+            "tronconIds",
+            "proprietaireIds",
+            "typePrestationId",
+            "marcheId",
+            "ouvrageAssocieAmenagementHydrauliqueIds",
+            "intervenantIds",
+            "materiaux",
+            "typeMateriauId",
+            "amenagementHydrauliqueAssocieIds",
+            "desordreDependanceAssocieIds",
+            "revetementId",
+            "gardes",
+            "evenementHydrauliqueId",
+            "typeLargeurFrancBord",
+            "revetementHautId",
+            "revetementBasId",
+            "typeOuvrageFranchissementId",
+            "usageId",
+            "typeOuvrageHydroAssocieId",
+            "typeOuvrageParticulierId",
+            "typeOuvrageTelecomEnergieId",
+            "typeOuvrageVoirieId",
+            "sirsdocument",
+            "documentGrandeEchelleIds",
+            "rapportEtudeId",
+            "organismeCreateurId",
+            "typeSystemesReleveId",
+            "pointsLeveXYZ",
+            "systemeRepDzId",
+            "typeVoieDigueId",
+            "materiauBasId",
+            "materiauHautId",
+            "parametresHydrauliques",
+            "typeProprietaireId",
+            "ecoulementId",
+            "typeConduiteFermeeId",
+            "typeReseauTelecomEnergieId",
+            "raccordementId",
+            "fusible",
+            "seuil",
+            "typeReseauHydroCielOuvertId",
+            "traitement",
+            "typePositionId",
+            "typeCoteId",
+            "diametreId"
         ]
-
-        if ' ' in title:
-            if title == "prestationIds actuelle:":
-                return "Prestation actuelle"
-            if title == "prestationIds actuelle: N-2":
-                return "Avant derniere Prestation"
-            if title == "prestationIds actuelle: N-3":
-                return "Prestation N-3"
-
-            tab = title.split(' ')
-            # Define the adjective matches
-            for i in range(len(tab)):
-                if tab[i] == "actuelle:":
-                    if tab[i-1] in mas:
-                        tab[i] = "actuel:"
-
-            # Convert SIRS id into label
-            if len(tab) == 3 or len(tab) == 5:
-                attr = tab[-1]
-                className = tab[-3]
-                if className in icn:
-                    className = icn[className]
-                if className in self.labels:
-                    if attr in self.labels[className]:
-                        tab[-1] = self.labels[className][attr]
-            if len(tab) == 2:
-                attr = tab[0]
-                if className in self.labels:
-                    if attr in self.labels[className]:
-                        tab[0] = self.labels[className][attr]
-            if len(tab) == 3 or len(tab) == 5:
-                attr = tab[0]
-                if attr in icn:
-                    tab[0] = icn[attr]
-            if len(tab) == 5:
-                attr = tab[2]
-                if attr in icn:
-                    tab[2] = icn[attr]
-
-            # Remove 's' at the end of word
-            if len(tab) == 2:
-                if "actuel" in tab[1] and tab[0][-1] == 's':
-                    tab[0] = tab[0][:-1]
-
-            # Remove ':' at the end of actuel adjective
-            if len(tab) == 2:
-                if "actuel" in tab[1] and tab[1][-1] == ':':
-                    tab[1] = tab[1][:-1]
-
-            return ' '.join(tab)
-
-        if className in self.labels:
-            if title in self.labels[className]:
-                title = self.labels[className][title]
-        return title
+        gmap = {}
+        for f in fem:
+            gmap[f] = "actuelle"
+        for m in mas:
+            gmap[m] = "actuel"
+        return gmap
 
     def get_label_from_attribute(self, className, attribute):
-        if className in self.labels:
-            if attribute in self.labels[className]:
-                return self.labels[className][attribute]
-            else:
-                return attribute
-        else:
+        try:
+            return self.configuration[className][attribute]["label"]
+        except KeyError:
             return attribute
