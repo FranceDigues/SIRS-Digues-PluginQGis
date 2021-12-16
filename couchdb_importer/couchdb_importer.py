@@ -24,6 +24,9 @@
 import os.path
 import sys
 import socket
+
+from PyQt5.QtWidgets import QMessageBox
+
 couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
 if couchdb_dir not in sys.path:
     sys.path.append(couchdb_dir)
@@ -31,8 +34,9 @@ import couchdb
 
 from qgis.PyQt.QtCore import QSettings, QTranslator, QCoreApplication, Qt, QModelIndex
 from qgis.PyQt.QtGui import QIcon, QStandardItem, QStandardItemModel
-from qgis.PyQt.QtWidgets import QAction, QLineEdit, QHeaderView, QWidget, QDialog
+from qgis.PyQt.QtWidgets import QAction, QLineEdit, QWidget, QDialog, QSizePolicy, QGridLayout, QDialogButtonBox
 from qgis.core import QgsProject, Qgis
+from qgis.gui import QgsMessageBar
 
 # DO NOT DELETE. Initialize Qt resources from file resources.py.
 from .resources import *
@@ -44,6 +48,7 @@ from .couchdb_layer import CouchdbBuilder
 from .utils import Utils
 
 from http.client import InvalidURL
+
 
 class CouchdbImporter:
     """QGIS Plugin Implementation."""
@@ -222,7 +227,6 @@ class CouchdbImporter:
                     result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
                     Utils.filter_positionable_list_attribute(result)
-                    #self.connector.replace_id_by_label_in_result(database, result)
                     self.loadedPositionable.extend(result)
                 completed = completed + lu
                 self.dlg.progressBar.setValue(completed)
@@ -550,8 +554,6 @@ class CouchdbImporter:
                                     Qgis.Warning)
                 return
             self.connector = None
-            self.dlg.login.setText("geouser")
-            self.dlg.password.setText("geopw")
             self.connector = CouchdbConnector(rc[0], rc[1], self.dlg.login.text(), self.dlg.password.text())
             fc = self.connector.getFilteredConnection()
             list_accessible_databases = [name for name in fc]
@@ -707,6 +709,11 @@ class CouchdbImporter:
         self.change_select_all_button("object")
 
     def on_update_layers_click(self):
+        # Confirmation popup
+        isYes = self.confirmation_message("La mise à jour va s'éffectuer sur toutes les couches de données Sirs déjà importées.")
+        if not isYes:
+            return
+
         # Reset the report displayed at the end of the import
         self.reset_summary()
         # Reset the progress bar value
@@ -716,11 +723,9 @@ class CouchdbImporter:
         database = self.dlg.database.currentText()
 
         # Request the data layers from the ids present into Qgis data layers
-        result = self.collect_data_from_layers_ids(database)
-        result_list = list(result)
+        result_list = list(self.collect_data_from_layers_ids(database))
         size_result_list = len(result_list)
 
-        # Behavior when the result is empty
         if size_result_list == 0:
             self.simple_message(
                 "Les couches actuelles ne trouvent aucune référence en base de données.", Qgis.Info)
@@ -948,6 +953,10 @@ class CouchdbImporter:
             msg2 = msg2 + ")"
         widget = self.iface.messageBar().createMessage(msg1, msg2)
         self.iface.messageBar().pushWidget(widget, level, 5)
+
+    def confirmation_message(self, msg):
+        reply = QMessageBox.question(self.iface.mainWindow(), 'Continuez?', msg, QMessageBox.Yes, QMessageBox.No)
+        return reply == QMessageBox.Yes
 
     """
     /****************************************************************

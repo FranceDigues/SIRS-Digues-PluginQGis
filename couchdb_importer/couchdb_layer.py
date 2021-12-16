@@ -242,7 +242,7 @@ class CouchdbBuilder(object):
                                 out.append([QStandardItem(label + " " + label_suffix),
                                             QStandardItem(connector.get_label_from_id(database, val[-1]))])
             else:
-                lv = self.__treat_primitive_type_values(name, ttype, label, connector)
+                lv = self.__treat_primitive_type_values(conf, val, database, connector)
                 if lv is not None:
                     out.append([QStandardItem(lv[0]), QStandardItem(lv[1])])
         return out
@@ -251,8 +251,8 @@ class CouchdbBuilder(object):
         for k in containment_values:
             l = label + " " + k
             values[l] = containment_values[k]
-        values[label + " _id (ne pas modifier/supprimer)"] = val[-1]["id"]
-        values[label + " @class"] = val[-1]["@class"].split("fr.sirs.core.model.")[1]
+        values[label + " _id (ne pas modifier/supprimer)"] = val["id"]
+        values[label + " @class"] = val["@class"].split("fr.sirs.core.model.")[1]
 
     def __treat_prestations(self, val=(), database=None, connector: CouchdbConnector=None):
         l = len(val)
@@ -274,7 +274,7 @@ class CouchdbBuilder(object):
             return QgsField("Borne de début: Amont/Aval", QVariant.String)
         elif name == "borne_fin_aval":
             return QgsField("Borne de fin: Amont/Aval", QVariant.String)
-        elif ttype in ["EString", "EDate", "Point", "Geometry"]:
+        elif ttype in ["EString", "EDate", "Point", "Geometry", "GeometryType"]:
             return QgsField(label, QVariant.String)
         elif ttype == "EInt":
             return QgsField(label, QVariant.Int)
@@ -297,7 +297,7 @@ class CouchdbBuilder(object):
             return "Borne de début: Amont/Aval", "Amont" if val else "Aval"
         elif name == "borne_fin_aval":
             return "Borne de fin: Amont/Aval", "Amont" if val else "Aval"
-        elif ttype in ["EString", "EDate", "EInt", "EBoolean", "EFloat", "EDouble", "Point", "Geometry", "EBooleanObject"]:
+        elif ttype in ["EString", "EDate", "EInt", "EBoolean", "EFloat", "EDouble", "Point", "Geometry", "EBooleanObject", "GeometryType"]:
             return label, val
         else:
             print("[UNEXPECTED BEHAVIOUR]: Unknow conf type: " + str(ttype))
@@ -354,7 +354,14 @@ class CouchdbBuilder(object):
             "mesuresXYZ",
             "pompes",
             "parcelleId",
-            "hauteurId"
+            "hauteurId",
+            "frequenceId",
+            "prestation",
+            "fonctionSeuilId",
+            "geometrieCreteId",
+            "inspections",
+            "couches",
+            "positionStructureId"
         ]
         mas = [
             "intervenantsIds",
@@ -435,7 +442,20 @@ class CouchdbBuilder(object):
             "traitement",
             "typePositionId",
             "typeCoteId",
-            "diametreId"
+            "diametreId",
+            "typeTraitementPonctuelId",
+            "sousTypeTraitementPonctuelId",
+            "typeTraitementId",
+            "sousTypeTraitementId",
+            "traitements",
+            "planId",
+            "typeVegetationId",
+            "materiauPrincipalA",
+            "materiauPrincipalB",
+            "profilCoursierId",
+            "plans",
+            "typeInspectionId"
+            "litId"
         ]
         gmap = {}
         for f in fem:
