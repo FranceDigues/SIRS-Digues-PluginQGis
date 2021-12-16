@@ -31,10 +31,3 @@ You can import the zip package directly through Qgis plugin manager.
 3. Activate the plugin (with the checkbox).
 4. You can see the Couchdb Importer icon at the QGIS action bar, if plugin is activated.
 
-# New Objects
-######TODO should pursue the same goal  but with java class of object<br />
-You can integrate new objects from property files generate by SIRS, modulate some adjustments.
-  - Add to the newModel folder, the property files of object to be integrated.
-  - Run the script displayJsonEquivalentFromPropertyFiles.py from this folder, and use the option -a, -l or -p according to the configuration you want to watch as json format
-  - Copy/paste the printing objects to the according file.
-  - Launch the script updateStyles.py from the folder to update the defined style contained in the user_preference_correspondence.json
