@@ -273,7 +273,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -320,6 +320,14 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "ProfilTravers": {
@@ -1967,7 +1975,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -2014,6 +2022,14 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "RefPosition": {
@@ -3825,7 +3841,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationOuvrageTelecomEnergie",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -3844,6 +3860,28 @@
       "label": "Prestations",
       "reference": true,
       "multiple": -1,
+      "containment": false
+    },
+    "dimensionVerticale": {
+      "name": "dimensionVerticale",
+      "type": "EFloat",
+      "label": "Dimension verticale/diamètre (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "dimensionHorizontale": {
+      "name": "dimensionHorizontale",
+      "type": "EFloat",
+      "label": "Dimension horizontale (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "securiteId": {
+      "name": "securiteId",
+      "type": "RefSecurite",
+      "label": "Sécurité",
+      "reference": true,
+      "multiple": 1,
       "containment": false
     }
   },
@@ -4271,6 +4309,50 @@
       "name": "abrege",
       "type": "EString",
       "label": "Abrégé",
+      "reference": false,
+      "min": null
+    }
+  },
+  "RefManoeuvre": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "abrege": {
+      "name": "abrege",
+      "type": "EString",
+      "label": "@abrege",
       "reference": false,
       "min": null
     }
@@ -5425,7 +5507,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -5472,6 +5554,74 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageId": {
+      "name": "etatOuvrageId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatAccessoireId": {
+      "name": "etatAccessoireId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État des accessoires",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatGenieCivilId": {
+      "name": "etatGenieCivilId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État du génie civil",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "manoeuvreOuvrageId": {
+      "name": "manoeuvreOuvrageId",
+      "type": "RefManoeuvre",
+      "label": "Manoeuvre de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageCom": {
+      "name": "etatOuvrageCom",
+      "type": "EString",
+      "label": "État de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatAccessoireCom": {
+      "name": "etatAccessoireCom",
+      "type": "EString",
+      "label": "État des accessoires - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatGenieCivilCom": {
+      "name": "etatGenieCivilCom",
+      "type": "EString",
+      "label": "État du génie civil - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "manoeuvreOuvrageCom": {
+      "name": "manoeuvreOuvrageCom",
+      "type": "EString",
+      "label": "Manoeuvre de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
     }
   },
   "ReferenceType": {
@@ -5944,7 +6094,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationOuvertureBatardable",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -6073,7 +6223,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite à apporter",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -6120,6 +6270,74 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageId": {
+      "name": "etatOuvrageId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatAccessoireId": {
+      "name": "etatAccessoireId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État des accessoires",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatGenieCivilId": {
+      "name": "etatGenieCivilId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État du génie civil",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "manoeuvreOuvrageId": {
+      "name": "manoeuvreOuvrageId",
+      "type": "RefManoeuvre",
+      "label": "Manoeuvre de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageCom": {
+      "name": "etatOuvrageCom",
+      "type": "EString",
+      "label": "État de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatAccessoireCom": {
+      "name": "etatAccessoireCom",
+      "type": "EString",
+      "label": "État des accessoires - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatGenieCivilCom": {
+      "name": "etatGenieCivilCom",
+      "type": "EString",
+      "label": "État du génie civil - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "manoeuvreOuvrageCom": {
+      "name": "manoeuvreOuvrageCom",
+      "type": "EString",
+      "label": "Manoeuvre de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
     }
   },
   "OuvrageVoirie": {
@@ -6391,7 +6609,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationOuvrageVoirie",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -6672,7 +6890,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite à apporter",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -6719,6 +6937,14 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     },
     "urgenceId": {
       "name": "urgenceId",
@@ -6922,7 +7148,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite à apporter",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -6969,6 +7195,74 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageId": {
+      "name": "etatOuvrageId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatAccessoireId": {
+      "name": "etatAccessoireId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État des accessoires",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatGenieCivilId": {
+      "name": "etatGenieCivilId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État du génie civil",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "manoeuvreOuvrageId": {
+      "name": "manoeuvreOuvrageId",
+      "type": "RefManoeuvre",
+      "label": "Manoeuvre de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageCom": {
+      "name": "etatOuvrageCom",
+      "type": "EString",
+      "label": "État de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatAccessoireCom": {
+      "name": "etatAccessoireCom",
+      "type": "EString",
+      "label": "État des accessoires - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatGenieCivilCom": {
+      "name": "etatGenieCivilCom",
+      "type": "EString",
+      "label": "État du génie civil - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "manoeuvreOuvrageCom": {
+      "name": "manoeuvreOuvrageCom",
+      "type": "EString",
+      "label": "Manoeuvre de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
     }
   },
   "OuvrageFranchissement": {
@@ -7319,7 +7613,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationOuvrageFranchissement",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -7894,7 +8188,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationOuvrageParticulier",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -7913,6 +8207,28 @@
       "label": "Prestations",
       "reference": true,
       "multiple": -1,
+      "containment": false
+    },
+    "dimensionVerticale": {
+      "name": "dimensionVerticale",
+      "type": "EFloat",
+      "label": "Dimension verticale/diamètre (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "dimensionHorizontale": {
+      "name": "dimensionHorizontale",
+      "type": "EFloat",
+      "label": "Dimension horizontale (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "securiteId": {
+      "name": "securiteId",
+      "type": "RefSecurite",
+      "label": "Sécurité",
+      "reference": true,
+      "multiple": 1,
       "containment": false
     }
   },
@@ -8204,6 +8520,28 @@
       "label": "Prestations",
       "reference": true,
       "multiple": -1,
+      "containment": false
+    },
+    "dimensionVerticale": {
+      "name": "dimensionVerticale",
+      "type": "EFloat",
+      "label": "Dimension verticale/diamètre (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "dimensionHorizontale": {
+      "name": "dimensionHorizontale",
+      "type": "EFloat",
+      "label": "Dimension horizontale (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "securiteId": {
+      "name": "securiteId",
+      "type": "RefSecurite",
+      "label": "Sécurité",
+      "reference": true,
+      "multiple": 1,
       "containment": false
     }
   },
@@ -8912,6 +9250,14 @@
       "label": "Aménagement hydraulique",
       "reference": false,
       "min": null
+    },
+    "photos": {
+      "name": "photos",
+      "type": "Photo",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
     }
   },
   "ObservationOuvrageTelecomEnergie": {
@@ -8932,7 +9278,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -8979,6 +9325,74 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageId": {
+      "name": "etatOuvrageId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatAccessoireId": {
+      "name": "etatAccessoireId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État des accessoires",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatGenieCivilId": {
+      "name": "etatGenieCivilId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État du génie civil",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "manoeuvreOuvrageId": {
+      "name": "manoeuvreOuvrageId",
+      "type": "RefManoeuvre",
+      "label": "Manoeuvre de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageCom": {
+      "name": "etatOuvrageCom",
+      "type": "EString",
+      "label": "État de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatAccessoireCom": {
+      "name": "etatAccessoireCom",
+      "type": "EString",
+      "label": "État des accessoires - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatGenieCivilCom": {
+      "name": "etatGenieCivilCom",
+      "type": "EString",
+      "label": "État du génie civil - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "manoeuvreOuvrageCom": {
+      "name": "manoeuvreOuvrageCom",
+      "type": "EString",
+      "label": "Manoeuvre de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
     }
   },
   "RefMateriau": {
@@ -9412,7 +9826,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -9459,6 +9873,14 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "RefUsageVoie": {
@@ -9846,7 +10268,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationEchelleLimnimetrique",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -10461,7 +10883,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationVoieAcces",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -10913,6 +11335,28 @@
       "reference": true,
       "multiple": -1,
       "containment": false
+    },
+    "dimensionVerticale": {
+      "name": "dimensionVerticale",
+      "type": "EFloat",
+      "label": "Dimension verticale/diamètre (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "dimensionHorizontale": {
+      "name": "dimensionHorizontale",
+      "type": "EFloat",
+      "label": "Dimension horizontale (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "securiteId": {
+      "name": "securiteId",
+      "type": "RefSecurite",
+      "label": "Sécurité",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "AbstractPositionDocumentAssociable": {
@@ -11176,7 +11620,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -11223,6 +11667,14 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "GestionObjet": {
@@ -11840,7 +12292,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite à apporter",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -11887,6 +12339,74 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageId": {
+      "name": "etatOuvrageId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatAccessoireId": {
+      "name": "etatAccessoireId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État des accessoires",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatGenieCivilId": {
+      "name": "etatGenieCivilId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État du génie civil",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "manoeuvreOuvrageId": {
+      "name": "manoeuvreOuvrageId",
+      "type": "RefManoeuvre",
+      "label": "Manoeuvre de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageCom": {
+      "name": "etatOuvrageCom",
+      "type": "EString",
+      "label": "État de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatAccessoireCom": {
+      "name": "etatAccessoireCom",
+      "type": "EString",
+      "label": "État des accessoires - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatGenieCivilCom": {
+      "name": "etatGenieCivilCom",
+      "type": "EString",
+      "label": "État du génie civil - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "manoeuvreOuvrageCom": {
+      "name": "manoeuvreOuvrageCom",
+      "type": "EString",
+      "label": "Manoeuvre de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
     }
   },
   "ReseauHydrauliqueFerme": {
@@ -12134,7 +12654,7 @@
     "diametre": {
       "name": "diametre",
       "type": "EFloat",
-      "label": "Diamètre (mm)",
+      "label": "Diamètre global (mm)",
       "reference": false,
       "min": 0
     },
@@ -12232,6 +12752,28 @@
       "reference": true,
       "multiple": -1,
       "containment": false
+    },
+    "dimensionVerticale": {
+      "name": "dimensionVerticale",
+      "type": "EFloat",
+      "label": "Dimension verticale/diamètre (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "dimensionHorizontale": {
+      "name": "dimensionHorizontale",
+      "type": "EFloat",
+      "label": "Dimension horizontale (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "securiteId": {
+      "name": "securiteId",
+      "type": "RefSecurite",
+      "label": "Sécurité",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "RefOuvrageParticulier": {
@@ -12318,6 +12860,50 @@
       "name": "abrege",
       "type": "EString",
       "label": "abrege",
+      "reference": false,
+      "min": null
+    }
+  },
+  "RefEtatOuvAccGC": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "abrege": {
+      "name": "abrege",
+      "type": "EString",
+      "label": "Abrégé",
       "reference": false,
       "min": null
     }
@@ -12766,7 +13352,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -12813,6 +13399,14 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "Organisme": {
@@ -14485,7 +15079,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationVoieDigue",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -14525,7 +15119,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -14572,6 +15166,74 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageId": {
+      "name": "etatOuvrageId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatAccessoireId": {
+      "name": "etatAccessoireId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État des accessoires",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatGenieCivilId": {
+      "name": "etatGenieCivilId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État du génie civil",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "manoeuvreOuvrageId": {
+      "name": "manoeuvreOuvrageId",
+      "type": "RefManoeuvre",
+      "label": "Manoeuvre de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageCom": {
+      "name": "etatOuvrageCom",
+      "type": "EString",
+      "label": "État de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatAccessoireCom": {
+      "name": "etatAccessoireCom",
+      "type": "EString",
+      "label": "État des accessoires - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatGenieCivilCom": {
+      "name": "etatGenieCivilCom",
+      "type": "EString",
+      "label": "État du génie civil - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "manoeuvreOuvrageCom": {
+      "name": "manoeuvreOuvrageCom",
+      "type": "EString",
+      "label": "Manoeuvre de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
     }
   },
   "ObservationOuvrageParticulier": {
@@ -14592,7 +15254,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -14639,6 +15301,74 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageId": {
+      "name": "etatOuvrageId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatAccessoireId": {
+      "name": "etatAccessoireId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État des accessoires",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatGenieCivilId": {
+      "name": "etatGenieCivilId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État du génie civil",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "manoeuvreOuvrageId": {
+      "name": "manoeuvreOuvrageId",
+      "type": "RefManoeuvre",
+      "label": "Manoeuvre de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageCom": {
+      "name": "etatOuvrageCom",
+      "type": "EString",
+      "label": "État de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatAccessoireCom": {
+      "name": "etatAccessoireCom",
+      "type": "EString",
+      "label": "État des accessoires - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatGenieCivilCom": {
+      "name": "etatGenieCivilCom",
+      "type": "EString",
+      "label": "État du génie civil - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "manoeuvreOuvrageCom": {
+      "name": "manoeuvreOuvrageCom",
+      "type": "EString",
+      "label": "Manoeuvre de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
     }
   },
   "LevePositionProfilTravers": {
@@ -15925,7 +16655,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -15972,6 +16702,14 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "RefEcoulement": {
@@ -16302,7 +17040,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationReseauTelecomEnergie",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -16322,6 +17060,72 @@
       "reference": true,
       "multiple": -1,
       "containment": false
+    },
+    "dimensionVerticale": {
+      "name": "dimensionVerticale",
+      "type": "EFloat",
+      "label": "Dimension verticale/diamètre (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "dimensionHorizontale": {
+      "name": "dimensionHorizontale",
+      "type": "EFloat",
+      "label": "Dimension horizontale (mm)",
+      "reference": false,
+      "min": 0
+    },
+    "securiteId": {
+      "name": "securiteId",
+      "type": "RefSecurite",
+      "label": "Sécurité",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "RefSuiteApporter": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "abrege": {
+      "name": "abrege",
+      "type": "EString",
+      "label": "@abrege",
+      "reference": false,
+      "min": null
     }
   },
   "ObservationEchelleLimnimetrique": {
@@ -16342,7 +17146,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -16389,6 +17193,74 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageId": {
+      "name": "etatOuvrageId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatAccessoireId": {
+      "name": "etatAccessoireId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État des accessoires",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatGenieCivilId": {
+      "name": "etatGenieCivilId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État du génie civil",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "manoeuvreOuvrageId": {
+      "name": "manoeuvreOuvrageId",
+      "type": "RefManoeuvre",
+      "label": "Manoeuvre de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageCom": {
+      "name": "etatOuvrageCom",
+      "type": "EString",
+      "label": "État de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatAccessoireCom": {
+      "name": "etatAccessoireCom",
+      "type": "EString",
+      "label": "État des accessoires - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatGenieCivilCom": {
+      "name": "etatGenieCivilCom",
+      "type": "EString",
+      "label": "État du génie civil - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "manoeuvreOuvrageCom": {
+      "name": "manoeuvreOuvrageCom",
+      "type": "EString",
+      "label": "Manoeuvre de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
     }
   },
   "SystemeEndiguement": {
@@ -16541,7 +17413,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite à apporter",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -16588,6 +17460,74 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageId": {
+      "name": "etatOuvrageId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatAccessoireId": {
+      "name": "etatAccessoireId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État des accessoires",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatGenieCivilId": {
+      "name": "etatGenieCivilId",
+      "type": "RefEtatOuvAccGC",
+      "label": "État du génie civil",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "manoeuvreOuvrageId": {
+      "name": "manoeuvreOuvrageId",
+      "type": "RefManoeuvre",
+      "label": "Manoeuvre de l'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "etatOuvrageCom": {
+      "name": "etatOuvrageCom",
+      "type": "EString",
+      "label": "État de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatAccessoireCom": {
+      "name": "etatAccessoireCom",
+      "type": "EString",
+      "label": "État des accessoires - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "etatGenieCivilCom": {
+      "name": "etatGenieCivilCom",
+      "type": "EString",
+      "label": "État du génie civil - Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "manoeuvreOuvrageCom": {
+      "name": "manoeuvreOuvrageCom",
+      "type": "EString",
+      "label": "Manoeuvre de l'ouvrage - Commentaire",
+      "reference": false,
+      "min": null
     }
   },
   "Marche": {
@@ -16718,7 +17658,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite à apporter",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -16765,6 +17705,14 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "RefTypeGlissiere": {
@@ -17073,7 +18021,7 @@
     "suite": {
       "name": "suite",
       "type": "EString",
-      "label": "Suite",
+      "label": "Suite à apporter (complément)",
       "reference": false,
       "min": null
     },
@@ -17120,6 +18068,14 @@
       "reference": true,
       "multiple": -1,
       "containment": true
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
     }
   },
   "Prestation": {
@@ -17428,7 +18384,7 @@
     "observations": {
       "name": "observations",
       "type": "ObservationPrestation",
-      "label": "observations",
+      "label": "Observations",
       "reference": true,
       "multiple": -1,
       "containment": true
@@ -17546,454 +18502,7 @@
       "containment": false
     }
   },
-  "RefEtat": {
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "@libelle",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "@date Maj",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "@author",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "@designation",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "@valid",
-      "reference": false,
-      "min": null
-    }
-  },
-  "OuvrageAssocieAmenagementHydraulique": {
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "Geometrie",
-      "reference": false,
-      "min": null
-    },
-    "amenagementHydrauliqueId": {
-      "name": "amenagementHydrauliqueId",
-      "type": "AmenagementHydraulique",
-      "label": "Aménagement hydraulique",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "Mise à jour",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "superficie": {
-      "name": "superficie",
-      "type": "EFloat",
-      "label": "Superficie",
-      "reference": false,
-      "min": 0
-    },
-    "hauteur": {
-      "name": "hauteur",
-      "type": "EFloat",
-      "label": "Hauteur",
-      "reference": false,
-      "min": 0
-    },
-    "profondeur": {
-      "name": "profondeur",
-      "type": "EFloat",
-      "label": "Profondeur",
-      "reference": false,
-      "min": 0
-    },
-    "nombre": {
-      "name": "nombre",
-      "type": "EInt",
-      "label": "Nombre",
-      "reference": false,
-      "min": 0
-    },
-    "typeId": {
-      "name": "typeId",
-      "type": "RefOuvrageAssocieAH",
-      "label": "Type d'ouvrage",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "ouvrageDeversant": {
-      "name": "ouvrageDeversant",
-      "type": "EBoolean",
-      "label": "Ouvrage Deversant",
-      "reference": false,
-      "min": null
-    },
-    "materiauId": {
-      "name": "materiauId",
-      "type": "RefMateriau",
-      "label": "Materiau",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "amenagementHydrauliqueAssocieIds": {
-      "name": "amenagementHydrauliqueAssocieIds",
-      "type": "AmenagementHydraulique",
-      "label": "Aménagements hydrauliques",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "desordreDependanceAssocieIds": {
-      "name": "desordreDependanceAssocieIds",
-      "type": "DesordreDependance",
-      "label": "Désordres",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "proprietaireIds": {
-      "name": "proprietaireIds",
-      "type": "Contact",
-      "label": "Proprietaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "gestionnaireIds": {
-      "name": "gestionnaireIds",
-      "type": "Organisme",
-      "label": "Gestionnaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "observations": {
-      "name": "observations",
-      "type": "ObservationDependance",
-      "label": "Observations",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "numCouche": {
-      "name": "numCouche",
-      "type": "EInt",
-      "label": "Numéro de couche",
-      "reference": false,
-      "min": 0
-    },
-    "sourceId": {
-      "name": "sourceId",
-      "type": "RefSource",
-      "label": "Source",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "diametre": {
-      "name": "diametre",
-      "type": "EFloat",
-      "label": "Diamètre",
-      "reference": false,
-      "min": 0
-    },
-    "cote": {
-      "name": "cote",
-      "type": "EFloat",
-      "label": "Côte",
-      "reference": false,
-      "min": 0
-    },
-    "section": {
-      "name": "section",
-      "type": "EFloat",
-      "label": "Section",
-      "reference": false,
-      "min": 0
-    },
-    "etatId": {
-      "name": "etatId",
-      "type": "RefEtat",
-      "label": "État",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "fonctionnementId": {
-      "name": "fonctionnementId",
-      "type": "RefFonctionnementOAAH",
-      "label": "Fonctionnement",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    }
-  },
-  "AireStockageDependance": {
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "Géometrie",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    },
-    "proprietes": {
-      "name": "proprietes",
-      "type": "ProprieteObjet",
-      "label": "Propriétaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "gestions": {
-      "name": "gestions",
-      "type": "GestionObjet",
-      "label": "Gestionnaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "materiaux": {
-      "name": "materiaux",
-      "type": "MateriauDependance",
-      "label": "Matériaux",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    }
-  },
-  "PhotoDependance": {
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "date": {
-      "name": "date",
-      "type": "EDate",
-      "label": "Date",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "chemin": {
-      "name": "chemin",
-      "type": "EString",
-      "label": "Chemin",
-      "reference": false,
-      "min": null
-    },
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    },
-    "photographeId": {
-      "name": "photographeId",
-      "type": "Contact",
-      "label": "Photographe",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    }
-  },
-  "RefFonctionnementAH": {
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "@libelle",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "@date Maj",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "@author",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "@designation",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "@valid",
-      "reference": false,
-      "min": null
-    }
-  },
-  "RefOuvrageVoirieDependance": {
+  "RefSecurite": {
     "libelle": {
       "name": "libelle",
       "type": "EString",
@@ -18028,1548 +18537,13 @@
       "label": "Validé",
       "reference": false,
       "min": null
-    }
-  },
-  "RefTypeOrganeProtectionCollective": {
-    "libelle": {
-      "name": "libelle",
+    },
+    "abrege": {
+      "name": "abrege",
       "type": "EString",
-      "label": "@libelle",
+      "label": "@abrege",
       "reference": false,
       "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "@date Maj",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "@author",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "@designation",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "@valid",
-      "reference": false,
-      "min": null
-    }
-  },
-  "PrestationAmenagementHydraulique": {
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "Géométrie",
-      "reference": false,
-      "min": null
-    },
-    "amenagementHydrauliqueId": {
-      "name": "amenagementHydrauliqueId",
-      "type": "AmenagementHydraulique",
-      "label": "Aménagement hydraulique",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "Mise à jour",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    },
-    "coutMetre": {
-      "name": "coutMetre",
-      "type": "EFloat",
-      "label": "Coût au mètre (euros HT)",
-      "reference": false,
-      "min": 0
-    },
-    "coutGlobal": {
-      "name": "coutGlobal",
-      "type": "EFloat",
-      "label": "Coût global (euros HT)",
-      "reference": false,
-      "min": 0
-    },
-    "realisationInterne": {
-      "name": "realisationInterne",
-      "type": "EBoolean",
-      "label": "Réalisation Interne",
-      "reference": false,
-      "min": null
-    },
-    "cote": {
-      "name": "cote",
-      "type": "EFloat",
-      "label": "Côte",
-      "reference": false,
-      "min": 0
-    },
-    "sourceId": {
-      "name": "sourceId",
-      "type": "RefSource",
-      "label": "Source",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "mesureDiverse": {
-      "name": "mesureDiverse",
-      "type": "EFloat",
-      "label": "Mesure Diverse",
-      "reference": false,
-      "min": 0
-    },
-    "typePrestationId": {
-      "name": "typePrestationId",
-      "type": "RefPrestation",
-      "label": "Type de prestation",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "marcheId": {
-      "name": "marcheId",
-      "type": "Marche",
-      "label": "Marché",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "desordreIds": {
-      "name": "desordreIds",
-      "type": "DesordreDependance",
-      "label": "Désordres",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "ouvrageAssocieAmenagementHydrauliqueIds": {
-      "name": "ouvrageAssocieAmenagementHydrauliqueIds",
-      "type": "OuvrageAssocieAmenagementHydraulique",
-      "label": "Ouvrages associés",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "intervenantIds": {
-      "name": "intervenantIds",
-      "type": "Contact",
-      "label": "Intervenants",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "rapportEtudeIds": {
-      "name": "rapportEtudeIds",
-      "type": "RapportEtude",
-      "label": "Rapport d'études",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "evenementHydrauliqueIds": {
-      "name": "evenementHydrauliqueIds",
-      "type": "EvenementHydraulique",
-      "label": "Événements hydrauliques",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "observations": {
-      "name": "observations",
-      "type": "ObservationDependance",
-      "label": "Observations",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    }
-  },
-  "AmenagementHydraulique": {
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "Géométrie",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    },
-    "proprietes": {
-      "name": "proprietes",
-      "type": "ProprieteObjet",
-      "label": "Proprietes",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "gestions": {
-      "name": "gestions",
-      "type": "GestionObjet",
-      "label": "Gestions",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "superficie": {
-      "name": "superficie",
-      "type": "EFloat",
-      "label": "Superficie (m²)",
-      "reference": false,
-      "min": 0
-    },
-    "capaciteStockage": {
-      "name": "capaciteStockage",
-      "type": "EFloat",
-      "label": "Capacité de stockage (m³)",
-      "reference": false,
-      "min": 0
-    },
-    "profondeurMoyenne": {
-      "name": "profondeurMoyenne",
-      "type": "EFloat",
-      "label": "Profondeur moyenne (m)",
-      "reference": false,
-      "min": 0
-    },
-    "gestionnaireIds": {
-      "name": "gestionnaireIds",
-      "type": "Organisme",
-      "label": "Gestionnaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "fonctionnementId": {
-      "name": "fonctionnementId",
-      "type": "RefFonctionnementAH",
-      "label": "Fonctionnement",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "typeId": {
-      "name": "typeId",
-      "type": "RefTypeAmenagementHydraulique",
-      "label": "Type",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "tronconIds": {
-      "name": "tronconIds",
-      "type": "TronconDigue",
-      "label": "Tronçons",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "observations": {
-      "name": "observations",
-      "type": "ObservationDependance",
-      "label": "Observations",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "proprietaireIds": {
-      "name": "proprietaireIds",
-      "type": "Contact",
-      "label": "Proprietaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "organismeId": {
-      "name": "organismeId",
-      "type": "Organisme",
-      "label": "Collectivité compétente",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    }
-  },
-  "ObservationDependance": {
-    "evolution": {
-      "name": "evolution",
-      "type": "EString",
-      "label": "Evolution",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "date": {
-      "name": "date",
-      "type": "EDate",
-      "label": "Date",
-      "reference": false,
-      "min": null
-    },
-    "suite": {
-      "name": "suite",
-      "type": "EString",
-      "label": "Suite",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "Mise à jour",
-      "reference": false,
-      "min": null
-    },
-    "nombreDesordres": {
-      "name": "nombreDesordres",
-      "type": "EInt",
-      "label": "Nombre de désordres",
-      "reference": false,
-      "min": 0
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "urgenceId": {
-      "name": "urgenceId",
-      "type": "RefUrgence",
-      "label": "Niveau d'urgence",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    }
-  },
-  "DesordreDependance": {
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "Géométrie",
-      "reference": false,
-      "min": null
-    },
-    "amenagementHydrauliqueId": {
-      "name": "amenagementHydrauliqueId",
-      "type": "AmenagementHydraulique",
-      "label": "Aménagement hydraulique",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "Mise à jour",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "dependanceId": {
-      "name": "dependanceId",
-      "type": "AbstractDependance",
-      "label": "Dépendance",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "lieuDit": {
-      "name": "lieuDit",
-      "type": "EString",
-      "label": "Lieu dit",
-      "reference": false,
-      "min": null
-    },
-    "cote": {
-      "name": "cote",
-      "type": "EFloat",
-      "label": "Côte",
-      "reference": false,
-      "min": 0
-    },
-    "sourceId": {
-      "name": "sourceId",
-      "type": "RefSource",
-      "label": "Source",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "positionId": {
-      "name": "positionId",
-      "type": "RefPosition",
-      "label": "Position",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "categorieDesordreId": {
-      "name": "categorieDesordreId",
-      "type": "RefCategorieDesordre",
-      "label": "Catégorie de désordre",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "typeDesordreId": {
-      "name": "typeDesordreId",
-      "type": "RefTypeDesordre",
-      "label": "Type de désordre",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "observations": {
-      "name": "observations",
-      "type": "ObservationDependance",
-      "label": "Observations",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "evenementHydrauliqueIds": {
-      "name": "evenementHydrauliqueIds",
-      "type": "EvenementHydraulique",
-      "label": "Evènements hydrauliques",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "ouvrageAssocieIds": {
-      "name": "ouvrageAssocieIds",
-      "type": "OuvrageAssocieAmenagementHydraulique",
-      "label": "Ouvrages associés",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "prestationIds": {
-      "name": "prestationIds",
-      "type": "PrestationAmenagementHydraulique",
-      "label": "Prestations",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    },
-    "articleIds": {
-      "name": "articleIds",
-      "type": "ArticleJournal",
-      "label": "Articles",
-      "reference": true,
-      "multiple": -1,
-      "containment": false
-    }
-  },
-  "CheminAccesDependance": {
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "@geometry",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    },
-    "proprietes": {
-      "name": "proprietes",
-      "type": "ProprieteObjet",
-      "label": "Propriétaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "gestions": {
-      "name": "gestions",
-      "type": "GestionObjet",
-      "label": "Gestionnaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "largeur": {
-      "name": "largeur",
-      "type": "EDouble",
-      "label": "Largeur (m)",
-      "reference": false,
-      "min": null
-    },
-    "statut": {
-      "name": "statut",
-      "type": "EBoolean",
-      "label": "Privé",
-      "reference": false,
-      "min": null
-    },
-    "revetementId": {
-      "name": "revetementId",
-      "type": "RefRevetement",
-      "label": "Revêtement",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    }
-  },
-  "StructureAmenagementHydraulique": {
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "Géometrie",
-      "reference": false,
-      "min": null
-    },
-    "amenagementHydrauliqueId": {
-      "name": "amenagementHydrauliqueId",
-      "type": "AmenagementHydraulique",
-      "label": "Aménagement hydraulique",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "Mise à jour",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "numCouche": {
-      "name": "numCouche",
-      "type": "EInt",
-      "label": "Numéro de couche",
-      "reference": false,
-      "min": 0
-    },
-    "materiauId": {
-      "name": "materiauId",
-      "type": "RefMateriau",
-      "label": "Materiau",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "observations": {
-      "name": "observations",
-      "type": "ObservationDependance",
-      "label": "Observations",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "sourceId": {
-      "name": "sourceId",
-      "type": "RefSource",
-      "label": "Source",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "epaisseur": {
-      "name": "epaisseur",
-      "type": "EFloat",
-      "label": "Épaisseur (m)",
-      "reference": false,
-      "min": 0
-    },
-    "fonctionId": {
-      "name": "fonctionId",
-      "type": "RefFonction",
-      "label": "Fonction",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "natureId": {
-      "name": "natureId",
-      "type": "RefNature",
-      "label": "Nature",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    }
-  },
-  "AbstractAmenagementHydraulique": {
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "@author",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "@valid",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "@designation",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "@geometry",
-      "reference": false,
-      "min": null
-    },
-    "amenagementHydrauliqueId": {
-      "name": "amenagementHydrauliqueId",
-      "type": "AmenagementHydraulique",
-      "label": "@amenagement Hydraulique Id",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "@date debut",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "@date fin",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "@date Maj",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "@commentaire",
-      "reference": false,
-      "min": null
-    }
-  },
-  "AutreDependance": {
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "@geometry",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    },
-    "proprietes": {
-      "name": "proprietes",
-      "type": "ProprieteObjet",
-      "label": "Propriétaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "gestions": {
-      "name": "gestions",
-      "type": "GestionObjet",
-      "label": "Gestionnaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "destinationId": {
-      "name": "destinationId",
-      "type": "RefDestinationDependance",
-      "label": "Destination",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    }
-  },
-  "RefFonctionnementOAAH": {
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "@libelle",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "@date Maj",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "@author",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "@designation",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "@valid",
-      "reference": false,
-      "min": null
-    }
-  },
-  "RefOuvrageAssocieAH": {
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "@libelle",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "@date Maj",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "@author",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "@designation",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "@valid",
-      "reference": false,
-      "min": null
-    }
-  },
-  "OuvrageVoirieDependance": {
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "@geometry",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    },
-    "proprietes": {
-      "name": "proprietes",
-      "type": "ProprieteObjet",
-      "label": "Propriétaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "gestions": {
-      "name": "gestions",
-      "type": "GestionObjet",
-      "label": "Gestionnaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "typeId": {
-      "name": "typeId",
-      "type": "RefOuvrageVoirieDependance",
-      "label": "Type",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    }
-  },
-  "MateriauDependance": {
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "volume": {
-      "name": "volume",
-      "type": "EDouble",
-      "label": "Volume (m3)",
-      "reference": false,
-      "min": null
-    },
-    "date": {
-      "name": "date",
-      "type": "EDate",
-      "label": "Date",
-      "reference": false,
-      "min": null
-    },
-    "typeMateriauId": {
-      "name": "typeMateriauId",
-      "type": "RefMateriau",
-      "label": "Type de matériau",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    }
-  },
-  "TraitAmenagementHydraulique": {
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "Géométrie",
-      "reference": false,
-      "min": null
-    },
-    "amenagementHydrauliqueId": {
-      "name": "amenagementHydrauliqueId",
-      "type": "AmenagementHydraulique",
-      "label": "Aménagement hydraulique",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "Mise à jour",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    }
-  },
-  "RefTypeAmenagementHydraulique": {
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libelle",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "Mise à jour",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    }
-  },
-  "RefDestinationDependance": {
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "Mise à jour",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    }
-  },
-  "AbstractDependance": {
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Auteur",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "@geometry",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "libelle": {
-      "name": "libelle",
-      "type": "EString",
-      "label": "Libellé",
-      "reference": false,
-      "min": null
-    },
-    "proprietes": {
-      "name": "proprietes",
-      "type": "ProprieteObjet",
-      "label": "Propriétaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "gestions": {
-      "name": "gestions",
-      "type": "GestionObjet",
-      "label": "Gestionnaires",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    }
-  },
-  "OrganeProtectionCollective": {
-    "author": {
-      "name": "author",
-      "type": "EString",
-      "label": "Author",
-      "reference": false,
-      "min": null
-    },
-    "valid": {
-      "name": "valid",
-      "type": "EBoolean",
-      "label": "Validé",
-      "reference": false,
-      "min": null
-    },
-    "designation": {
-      "name": "designation",
-      "type": "EString",
-      "label": "Désignation",
-      "reference": false,
-      "min": null
-    },
-    "geometry": {
-      "name": "geometry",
-      "type": "Geometry",
-      "label": "Géometrie",
-      "reference": false,
-      "min": null
-    },
-    "amenagementHydrauliqueId": {
-      "name": "amenagementHydrauliqueId",
-      "type": "AmenagementHydraulique",
-      "label": "Aménagement hydraulique",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "date_debut": {
-      "name": "date_debut",
-      "type": "EDate",
-      "label": "Date de début",
-      "reference": false,
-      "min": null
-    },
-    "date_fin": {
-      "name": "date_fin",
-      "type": "EDate",
-      "label": "Date de fin",
-      "reference": false,
-      "min": null
-    },
-    "dateMaj": {
-      "name": "dateMaj",
-      "type": "EDate",
-      "label": "Mise à jour",
-      "reference": false,
-      "min": null
-    },
-    "commentaire": {
-      "name": "commentaire",
-      "type": "EString",
-      "label": "Commentaire",
-      "reference": false,
-      "min": null
-    },
-    "cote": {
-      "name": "cote",
-      "type": "EFloat",
-      "label": "Côte",
-      "reference": false,
-      "min": 0
-    },
-    "observations": {
-      "name": "observations",
-      "type": "ObservationDependance",
-      "label": "Observations",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "typeId": {
-      "name": "typeId",
-      "type": "RefTypeOrganeProtectionCollective",
-      "label": "Type",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
-    },
-    "photos": {
-      "name": "photos",
-      "type": "PhotoDependance",
-      "label": "Photos",
-      "reference": true,
-      "multiple": -1,
-      "containment": true
-    },
-    "etatId": {
-      "name": "etatId",
-      "type": "RefEtat",
-      "label": "État",
-      "reference": true,
-      "multiple": 1,
-      "containment": false
     }
   },
   "PositionConvention": {
@@ -20089,6 +19063,2068 @@
       "name": "typeConventionPJId",
       "type": "RefConventionPJ",
       "label": "Type",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "RefEtat": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    }
+  },
+  "OuvrageAssocieAmenagementHydraulique": {
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "Geometrie",
+      "reference": false,
+      "min": null
+    },
+    "amenagementHydrauliqueId": {
+      "name": "amenagementHydrauliqueId",
+      "type": "AmenagementHydraulique",
+      "label": "Aménagement hydraulique",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "superficie": {
+      "name": "superficie",
+      "type": "EFloat",
+      "label": "Superficie",
+      "reference": false,
+      "min": 0
+    },
+    "hauteur": {
+      "name": "hauteur",
+      "type": "EFloat",
+      "label": "Hauteur",
+      "reference": false,
+      "min": 0
+    },
+    "profondeur": {
+      "name": "profondeur",
+      "type": "EFloat",
+      "label": "Profondeur",
+      "reference": false,
+      "min": 0
+    },
+    "nombre": {
+      "name": "nombre",
+      "type": "EInt",
+      "label": "Nombre",
+      "reference": false,
+      "min": 0
+    },
+    "typeId": {
+      "name": "typeId",
+      "type": "RefOuvrageAssocieAH",
+      "label": "Type d'ouvrage",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "ouvrageDeversant": {
+      "name": "ouvrageDeversant",
+      "type": "EBoolean",
+      "label": "Ouvrage Deversant",
+      "reference": false,
+      "min": null
+    },
+    "materiauId": {
+      "name": "materiauId",
+      "type": "RefMateriau",
+      "label": "Materiau",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "amenagementHydrauliqueAssocieIds": {
+      "name": "amenagementHydrauliqueAssocieIds",
+      "type": "AmenagementHydraulique",
+      "label": "Aménagements hydrauliques",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "desordreDependanceAssocieIds": {
+      "name": "desordreDependanceAssocieIds",
+      "type": "DesordreDependance",
+      "label": "Désordres",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "proprietaireIds": {
+      "name": "proprietaireIds",
+      "type": "Contact",
+      "label": "Proprietaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "gestionnaireIds": {
+      "name": "gestionnaireIds",
+      "type": "Organisme",
+      "label": "Gestionnaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "observations": {
+      "name": "observations",
+      "type": "ObservationDependance",
+      "label": "Observations",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "numCouche": {
+      "name": "numCouche",
+      "type": "EInt",
+      "label": "Numéro de couche",
+      "reference": false,
+      "min": 0
+    },
+    "sourceId": {
+      "name": "sourceId",
+      "type": "RefSource",
+      "label": "Source",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "diametre": {
+      "name": "diametre",
+      "type": "EFloat",
+      "label": "Diamètre",
+      "reference": false,
+      "min": 0
+    },
+    "cote": {
+      "name": "cote",
+      "type": "EFloat",
+      "label": "Côte",
+      "reference": false,
+      "min": 0
+    },
+    "section": {
+      "name": "section",
+      "type": "EFloat",
+      "label": "Section",
+      "reference": false,
+      "min": 0
+    },
+    "etatId": {
+      "name": "etatId",
+      "type": "RefEtat",
+      "label": "État",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "fonctionnementId": {
+      "name": "fonctionnementId",
+      "type": "RefFonctionnementOAAH",
+      "label": "Fonctionnement",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "AireStockageDependance": {
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "Géometrie",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "proprietes": {
+      "name": "proprietes",
+      "type": "ProprieteObjet",
+      "label": "Propriétaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "gestions": {
+      "name": "gestions",
+      "type": "GestionObjet",
+      "label": "Gestionnaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "materiaux": {
+      "name": "materiaux",
+      "type": "MateriauDependance",
+      "label": "Matériaux",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    }
+  },
+  "PhotoDependance": {
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "date": {
+      "name": "date",
+      "type": "EDate",
+      "label": "Date",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "chemin": {
+      "name": "chemin",
+      "type": "EString",
+      "label": "Chemin",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "photographeId": {
+      "name": "photographeId",
+      "type": "Contact",
+      "label": "Photographe",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "RefFonctionnementAH": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    }
+  },
+  "RefOuvrageVoirieDependance": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    }
+  },
+  "RefTypeOrganeProtectionCollective": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    }
+  },
+  "PrestationAmenagementHydraulique": {
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "Géométrie",
+      "reference": false,
+      "min": null
+    },
+    "amenagementHydrauliqueId": {
+      "name": "amenagementHydrauliqueId",
+      "type": "AmenagementHydraulique",
+      "label": "Aménagement hydraulique",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "coutMetre": {
+      "name": "coutMetre",
+      "type": "EFloat",
+      "label": "Coût au mètre (euros HT)",
+      "reference": false,
+      "min": 0
+    },
+    "coutGlobal": {
+      "name": "coutGlobal",
+      "type": "EFloat",
+      "label": "Coût global (euros HT)",
+      "reference": false,
+      "min": 0
+    },
+    "realisationInterne": {
+      "name": "realisationInterne",
+      "type": "EBoolean",
+      "label": "Réalisation Interne",
+      "reference": false,
+      "min": null
+    },
+    "cote": {
+      "name": "cote",
+      "type": "EFloat",
+      "label": "Côte",
+      "reference": false,
+      "min": 0
+    },
+    "sourceId": {
+      "name": "sourceId",
+      "type": "RefSource",
+      "label": "Source",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "mesureDiverse": {
+      "name": "mesureDiverse",
+      "type": "EFloat",
+      "label": "Mesure Diverse",
+      "reference": false,
+      "min": 0
+    },
+    "typePrestationId": {
+      "name": "typePrestationId",
+      "type": "RefPrestation",
+      "label": "Type de prestation",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "marcheId": {
+      "name": "marcheId",
+      "type": "Marche",
+      "label": "Marché",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "desordreIds": {
+      "name": "desordreIds",
+      "type": "DesordreDependance",
+      "label": "Désordres",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "ouvrageAssocieAmenagementHydrauliqueIds": {
+      "name": "ouvrageAssocieAmenagementHydrauliqueIds",
+      "type": "OuvrageAssocieAmenagementHydraulique",
+      "label": "Ouvrages associés",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "intervenantIds": {
+      "name": "intervenantIds",
+      "type": "Contact",
+      "label": "Intervenants",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "rapportEtudeIds": {
+      "name": "rapportEtudeIds",
+      "type": "RapportEtude",
+      "label": "Rapport d'études",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "evenementHydrauliqueIds": {
+      "name": "evenementHydrauliqueIds",
+      "type": "EvenementHydraulique",
+      "label": "Événements hydrauliques",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "observations": {
+      "name": "observations",
+      "type": "ObservationDependance",
+      "label": "Observations",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    }
+  },
+  "AmenagementHydraulique": {
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "Géométrie",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "proprietes": {
+      "name": "proprietes",
+      "type": "ProprieteObjet",
+      "label": "Proprietes",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "gestions": {
+      "name": "gestions",
+      "type": "GestionObjet",
+      "label": "Gestions",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "superficie": {
+      "name": "superficie",
+      "type": "EFloat",
+      "label": "Superficie (m²)",
+      "reference": false,
+      "min": 0
+    },
+    "capaciteStockage": {
+      "name": "capaciteStockage",
+      "type": "EFloat",
+      "label": "Capacité de stockage (m³)",
+      "reference": false,
+      "min": 0
+    },
+    "profondeurMoyenne": {
+      "name": "profondeurMoyenne",
+      "type": "EFloat",
+      "label": "Profondeur moyenne (m)",
+      "reference": false,
+      "min": 0
+    },
+    "gestionnaireIds": {
+      "name": "gestionnaireIds",
+      "type": "Organisme",
+      "label": "Gestionnaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "fonctionnementId": {
+      "name": "fonctionnementId",
+      "type": "RefFonctionnementAH",
+      "label": "Fonctionnement",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "typeId": {
+      "name": "typeId",
+      "type": "RefTypeAmenagementHydraulique",
+      "label": "Type",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "tronconIds": {
+      "name": "tronconIds",
+      "type": "TronconDigue",
+      "label": "Tronçons",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "observations": {
+      "name": "observations",
+      "type": "ObservationDependance",
+      "label": "Observations",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "proprietaireIds": {
+      "name": "proprietaireIds",
+      "type": "Contact",
+      "label": "Proprietaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "organismeId": {
+      "name": "organismeId",
+      "type": "Organisme",
+      "label": "Collectivité compétente",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "ObservationDependance": {
+    "evolution": {
+      "name": "evolution",
+      "type": "EString",
+      "label": "Evolution",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "date": {
+      "name": "date",
+      "type": "EDate",
+      "label": "Date",
+      "reference": false,
+      "min": null
+    },
+    "suite": {
+      "name": "suite",
+      "type": "EString",
+      "label": "Suite à apporter (complément)",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "nombreDesordres": {
+      "name": "nombreDesordres",
+      "type": "EInt",
+      "label": "Nombre de désordres",
+      "reference": false,
+      "min": 0
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "urgenceId": {
+      "name": "urgenceId",
+      "type": "RefUrgence",
+      "label": "Niveau d'urgence",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "suiteApporterId": {
+      "name": "suiteApporterId",
+      "type": "RefSuiteApporter",
+      "label": "Suite à apporter",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "DesordreDependance": {
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "Géométrie",
+      "reference": false,
+      "min": null
+    },
+    "amenagementHydrauliqueId": {
+      "name": "amenagementHydrauliqueId",
+      "type": "AmenagementHydraulique",
+      "label": "Aménagement hydraulique",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dependanceId": {
+      "name": "dependanceId",
+      "type": "AbstractDependance",
+      "label": "Dépendance",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "lieuDit": {
+      "name": "lieuDit",
+      "type": "EString",
+      "label": "Lieu dit",
+      "reference": false,
+      "min": null
+    },
+    "cote": {
+      "name": "cote",
+      "type": "EFloat",
+      "label": "Côte",
+      "reference": false,
+      "min": 0
+    },
+    "sourceId": {
+      "name": "sourceId",
+      "type": "RefSource",
+      "label": "Source",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "positionId": {
+      "name": "positionId",
+      "type": "RefPosition",
+      "label": "Position",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "categorieDesordreId": {
+      "name": "categorieDesordreId",
+      "type": "RefCategorieDesordre",
+      "label": "Catégorie de désordre",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "typeDesordreId": {
+      "name": "typeDesordreId",
+      "type": "RefTypeDesordre",
+      "label": "Type de désordre",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "observations": {
+      "name": "observations",
+      "type": "ObservationDependance",
+      "label": "Observations",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "evenementHydrauliqueIds": {
+      "name": "evenementHydrauliqueIds",
+      "type": "EvenementHydraulique",
+      "label": "Evènements hydrauliques",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "ouvrageAssocieIds": {
+      "name": "ouvrageAssocieIds",
+      "type": "OuvrageAssocieAmenagementHydraulique",
+      "label": "Ouvrages associés",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "prestationIds": {
+      "name": "prestationIds",
+      "type": "PrestationAmenagementHydraulique",
+      "label": "Prestations",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    },
+    "articleIds": {
+      "name": "articleIds",
+      "type": "ArticleJournal",
+      "label": "Articles",
+      "reference": true,
+      "multiple": -1,
+      "containment": false
+    }
+  },
+  "CheminAccesDependance": {
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "@geometry",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "proprietes": {
+      "name": "proprietes",
+      "type": "ProprieteObjet",
+      "label": "Propriétaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "gestions": {
+      "name": "gestions",
+      "type": "GestionObjet",
+      "label": "Gestionnaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "largeur": {
+      "name": "largeur",
+      "type": "EDouble",
+      "label": "Largeur (m)",
+      "reference": false,
+      "min": null
+    },
+    "statut": {
+      "name": "statut",
+      "type": "EBoolean",
+      "label": "Privé",
+      "reference": false,
+      "min": null
+    },
+    "revetementId": {
+      "name": "revetementId",
+      "type": "RefRevetement",
+      "label": "Revêtement",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "StructureAmenagementHydraulique": {
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "Géometrie",
+      "reference": false,
+      "min": null
+    },
+    "amenagementHydrauliqueId": {
+      "name": "amenagementHydrauliqueId",
+      "type": "AmenagementHydraulique",
+      "label": "Aménagement hydraulique",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "numCouche": {
+      "name": "numCouche",
+      "type": "EInt",
+      "label": "Numéro de couche",
+      "reference": false,
+      "min": 0
+    },
+    "materiauId": {
+      "name": "materiauId",
+      "type": "RefMateriau",
+      "label": "Materiau",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "observations": {
+      "name": "observations",
+      "type": "ObservationDependance",
+      "label": "Observations",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "sourceId": {
+      "name": "sourceId",
+      "type": "RefSource",
+      "label": "Source",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "epaisseur": {
+      "name": "epaisseur",
+      "type": "EFloat",
+      "label": "Épaisseur (m)",
+      "reference": false,
+      "min": 0
+    },
+    "fonctionId": {
+      "name": "fonctionId",
+      "type": "RefFonction",
+      "label": "Fonction",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "natureId": {
+      "name": "natureId",
+      "type": "RefNature",
+      "label": "Nature",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "AbstractAmenagementHydraulique": {
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "@author",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "@valid",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "@designation",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "@geometry",
+      "reference": false,
+      "min": null
+    },
+    "amenagementHydrauliqueId": {
+      "name": "amenagementHydrauliqueId",
+      "type": "AmenagementHydraulique",
+      "label": "@amenagement Hydraulique Id",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "@date debut",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "@date fin",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "@date Maj",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "@commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "@libelle",
+      "reference": false,
+      "min": null
+    }
+  },
+  "AutreDependance": {
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "@geometry",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "proprietes": {
+      "name": "proprietes",
+      "type": "ProprieteObjet",
+      "label": "Propriétaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "gestions": {
+      "name": "gestions",
+      "type": "GestionObjet",
+      "label": "Gestionnaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "destinationId": {
+      "name": "destinationId",
+      "type": "RefDestinationDependance",
+      "label": "Destination",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "RefFonctionnementOAAH": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    }
+  },
+  "RefOuvrageAssocieAH": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    }
+  },
+  "OuvrageVoirieDependance": {
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "@geometry",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "proprietes": {
+      "name": "proprietes",
+      "type": "ProprieteObjet",
+      "label": "Propriétaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "gestions": {
+      "name": "gestions",
+      "type": "GestionObjet",
+      "label": "Gestionnaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "typeId": {
+      "name": "typeId",
+      "type": "RefOuvrageVoirieDependance",
+      "label": "Type",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "MateriauDependance": {
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "volume": {
+      "name": "volume",
+      "type": "EDouble",
+      "label": "Volume (m3)",
+      "reference": false,
+      "min": null
+    },
+    "date": {
+      "name": "date",
+      "type": "EDate",
+      "label": "Date",
+      "reference": false,
+      "min": null
+    },
+    "typeMateriauId": {
+      "name": "typeMateriauId",
+      "type": "RefMateriau",
+      "label": "Type de matériau",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    }
+  },
+  "TraitAmenagementHydraulique": {
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "Géométrie",
+      "reference": false,
+      "min": null
+    },
+    "amenagementHydrauliqueId": {
+      "name": "amenagementHydrauliqueId",
+      "type": "AmenagementHydraulique",
+      "label": "Aménagement hydraulique",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    }
+  },
+  "RefTypeAmenagementHydraulique": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libelle",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    }
+  },
+  "RefDestinationDependance": {
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    }
+  },
+  "AbstractDependance": {
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Auteur",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "@geometry",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "proprietes": {
+      "name": "proprietes",
+      "type": "ProprieteObjet",
+      "label": "Propriétaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "gestions": {
+      "name": "gestions",
+      "type": "GestionObjet",
+      "label": "Gestionnaires",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    }
+  },
+  "OrganeProtectionCollective": {
+    "author": {
+      "name": "author",
+      "type": "EString",
+      "label": "Author",
+      "reference": false,
+      "min": null
+    },
+    "valid": {
+      "name": "valid",
+      "type": "EBoolean",
+      "label": "Validé",
+      "reference": false,
+      "min": null
+    },
+    "designation": {
+      "name": "designation",
+      "type": "EString",
+      "label": "Désignation",
+      "reference": false,
+      "min": null
+    },
+    "geometry": {
+      "name": "geometry",
+      "type": "Geometry",
+      "label": "Géometrie",
+      "reference": false,
+      "min": null
+    },
+    "amenagementHydrauliqueId": {
+      "name": "amenagementHydrauliqueId",
+      "type": "AmenagementHydraulique",
+      "label": "Aménagement hydraulique",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "date_debut": {
+      "name": "date_debut",
+      "type": "EDate",
+      "label": "Date de début",
+      "reference": false,
+      "min": null
+    },
+    "date_fin": {
+      "name": "date_fin",
+      "type": "EDate",
+      "label": "Date de fin",
+      "reference": false,
+      "min": null
+    },
+    "dateMaj": {
+      "name": "dateMaj",
+      "type": "EDate",
+      "label": "Mise à jour",
+      "reference": false,
+      "min": null
+    },
+    "commentaire": {
+      "name": "commentaire",
+      "type": "EString",
+      "label": "Commentaire",
+      "reference": false,
+      "min": null
+    },
+    "libelle": {
+      "name": "libelle",
+      "type": "EString",
+      "label": "Libellé",
+      "reference": false,
+      "min": null
+    },
+    "cote": {
+      "name": "cote",
+      "type": "EFloat",
+      "label": "Côte",
+      "reference": false,
+      "min": 0
+    },
+    "observations": {
+      "name": "observations",
+      "type": "ObservationDependance",
+      "label": "Observations",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "typeId": {
+      "name": "typeId",
+      "type": "RefTypeOrganeProtectionCollective",
+      "label": "Type",
+      "reference": true,
+      "multiple": 1,
+      "containment": false
+    },
+    "photos": {
+      "name": "photos",
+      "type": "PhotoDependance",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
+    },
+    "etatId": {
+      "name": "etatId",
+      "type": "RefEtat",
+      "label": "État",
       "reference": true,
       "multiple": 1,
       "containment": false
@@ -21712,6 +22748,14 @@
       "label": "Aménagement hydraulique",
       "reference": false,
       "min": null
+    },
+    "photos": {
+      "name": "photos",
+      "type": "Photo",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
     },
     "litId": {
       "name": "litId",
@@ -25231,6 +26275,14 @@
       "label": "Aménagement hydraulique",
       "reference": false,
       "min": null
+    },
+    "photos": {
+      "name": "photos",
+      "type": "Photo",
+      "label": "Photos",
+      "reference": true,
+      "multiple": -1,
+      "containment": true
     }
   },
   "FondationBerge": {
@@ -26966,7 +28018,7 @@
     "dateMaj": {
       "name": "dateMaj",
       "type": "EDate",
-      "label": "@date Maj",
+      "label": "Mise à jour",
       "reference": false,
       "min": null
     },
@@ -26987,7 +28039,7 @@
     "valid": {
       "name": "valid",
       "type": "EBoolean",
-      "label": "@valid",
+      "label": "Validé",
       "reference": false,
       "min": null
     },
@@ -27010,7 +28062,7 @@
     "dateMaj": {
       "name": "dateMaj",
       "type": "EDate",
-      "label": "@date Maj",
+      "label": "Mise à jour",
       "reference": false,
       "min": null
     },
@@ -27031,7 +28083,7 @@
     "valid": {
       "name": "valid",
       "type": "EBoolean",
-      "label": "@valid",
+      "label": "Validé",
       "reference": false,
       "min": null
     },
@@ -27061,7 +28113,7 @@
     "dateMaj": {
       "name": "dateMaj",
       "type": "EDate",
-      "label": "@date Maj",
+      "label": "Mise à jour",
       "reference": false,
       "min": null
     },
@@ -27173,7 +28225,7 @@
     "dateMaj": {
       "name": "dateMaj",
       "type": "EDate",
-      "label": "@date Maj",
+      "label": "Mise à jour",
       "reference": false,
       "min": null
     },

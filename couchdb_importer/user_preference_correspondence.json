@@ -88,22 +88,23 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true
     },
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#17e8ff"
+        "color": "#16e9ff"
       },
       "line": {
-        "color": "#17e8ff",
+        "color": "#16e9ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#17e8ff",
+        "color": "#16e9ff",
         "outline_color": "black"
       }
     },
@@ -123,17 +124,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#22ddff"
+        "color": "#21deff"
       },
       "line": {
-        "color": "#22ddff",
+        "color": "#21deff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#22ddff",
+        "color": "#21deff",
         "outline_color": "black"
       }
     },
@@ -157,17 +158,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#2ed1ff"
+        "color": "#2cd3ff"
       },
       "line": {
-        "color": "#2ed1ff",
+        "color": "#2cd3ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#2ed1ff",
+        "color": "#2cd3ff",
         "outline_color": "black"
       }
     },
@@ -195,17 +196,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#3ac5ff"
+        "color": "#37c8ff"
       },
       "line": {
-        "color": "#3ac5ff",
+        "color": "#37c8ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#3ac5ff",
+        "color": "#37c8ff",
         "outline_color": "black"
       }
     },
@@ -238,17 +239,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#45baff"
+        "color": "#42bdff"
       },
       "line": {
-        "color": "#45baff",
+        "color": "#42bdff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#45baff",
+        "color": "#42bdff",
         "outline_color": "black"
       }
     },
@@ -300,17 +301,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#51aeff"
+        "color": "#4db2ff"
       },
       "line": {
-        "color": "#51aeff",
+        "color": "#4db2ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#51aeff",
+        "color": "#4db2ff",
         "outline_color": "black"
       }
     },
@@ -356,17 +357,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#5da2ff"
+        "color": "#59a6ff"
       },
       "line": {
-        "color": "#5da2ff",
+        "color": "#59a6ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#5da2ff",
+        "color": "#59a6ff",
         "outline_color": "black"
       }
     },
@@ -384,17 +385,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#6897ff"
+        "color": "#649bff"
       },
       "line": {
-        "color": "#6897ff",
+        "color": "#649bff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#6897ff",
+        "color": "#649bff",
         "outline_color": "black"
       }
     },
@@ -411,17 +412,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#748bff"
+        "color": "#6f90ff"
       },
       "line": {
-        "color": "#748bff",
+        "color": "#6f90ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#748bff",
+        "color": "#6f90ff",
         "outline_color": "black"
       }
     },
@@ -470,17 +471,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#8080ff"
+        "color": "#7a85ff"
       },
       "line": {
-        "color": "#8080ff",
+        "color": "#7a85ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#8080ff",
+        "color": "#7a85ff",
         "outline_color": "black"
       }
     },
@@ -498,17 +499,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#8b74ff"
+        "color": "#857aff"
       },
       "line": {
-        "color": "#8b74ff",
+        "color": "#857aff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#8b74ff",
+        "color": "#857aff",
         "outline_color": "black"
       }
     },
@@ -525,17 +526,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#9768ff"
+        "color": "#906fff"
       },
       "line": {
-        "color": "#9768ff",
+        "color": "#906fff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#9768ff",
+        "color": "#906fff",
         "outline_color": "black"
       }
     },
@@ -573,17 +574,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#a25dff"
+        "color": "#9b64ff"
       },
       "line": {
-        "color": "#a25dff",
+        "color": "#9b64ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#a25dff",
+        "color": "#9b64ff",
         "outline_color": "black"
       }
     },
@@ -600,17 +601,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ae51ff"
+        "color": "#a659ff"
       },
       "line": {
-        "color": "#ae51ff",
+        "color": "#a659ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ae51ff",
+        "color": "#a659ff",
         "outline_color": "black"
       }
     },
@@ -626,22 +627,23 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true
     },
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ba45ff"
+        "color": "#b24dff"
       },
       "line": {
-        "color": "#ba45ff",
+        "color": "#b24dff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ba45ff",
+        "color": "#b24dff",
         "outline_color": "black"
       }
     },
@@ -659,17 +661,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#c53aff"
+        "color": "#bd42ff"
       },
       "line": {
-        "color": "#c53aff",
+        "color": "#bd42ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#c53aff",
+        "color": "#bd42ff",
         "outline_color": "black"
       }
     },
@@ -711,17 +713,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#d12eff"
+        "color": "#c837ff"
       },
       "line": {
-        "color": "#d12eff",
+        "color": "#c837ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#d12eff",
+        "color": "#c837ff",
         "outline_color": "black"
       }
     },
@@ -739,17 +741,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#dd22ff"
+        "color": "#d32cff"
       },
       "line": {
-        "color": "#dd22ff",
+        "color": "#d32cff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#dd22ff",
+        "color": "#d32cff",
         "outline_color": "black"
       }
     },
@@ -772,17 +774,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#e817ff"
+        "color": "#de21ff"
       },
       "line": {
-        "color": "#e817ff",
+        "color": "#de21ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#e817ff",
+        "color": "#de21ff",
         "outline_color": "black"
       }
     },
@@ -828,17 +830,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#f4bff"
+        "color": "#e916ff"
       },
       "line": {
-        "color": "#f4bff",
+        "color": "#e916ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#f4bff",
+        "color": "#e916ff",
         "outline_color": "black"
       }
     },
@@ -878,17 +880,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#1000ff"
+        "color": "#f4bff"
       },
       "line": {
-        "color": "#1000ff",
+        "color": "#f4bff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#1000ff",
+        "color": "#f4bff",
         "outline_color": "black"
       }
     },
@@ -905,17 +907,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff0100"
+        "color": "#1000ff"
       },
       "line": {
-        "color": "#ff0100",
+        "color": "#1000ff",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff0100",
+        "color": "#1000ff",
         "outline_color": "black"
       }
     },
@@ -966,17 +968,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ffbf4"
+        "color": "#ff0100"
       },
       "line": {
-        "color": "#ffbf4",
+        "color": "#ff0100",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ffbf4",
+        "color": "#ff0100",
         "outline_color": "black"
       }
     },
@@ -1037,17 +1039,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff16e9"
+        "color": "#ffbf4"
       },
       "line": {
-        "color": "#ff16e9",
+        "color": "#ffbf4",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff16e9",
+        "color": "#ffbf4",
         "outline_color": "black"
       }
     },
@@ -1093,22 +1095,25 @@
       "reseauTelecomEnergieIds": true,
       "observations": true,
       "desordreIds": true,
-      "prestationIds": true
+      "prestationIds": true,
+      "dimensionVerticale": true,
+      "dimensionHorizontale": true,
+      "securiteId": true
     },
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff21de"
+        "color": "#ff17e8"
       },
       "line": {
-        "color": "#ff21de",
+        "color": "#ff17e8",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff21de",
+        "color": "#ff17e8",
         "outline_color": "black"
       }
     },
@@ -1152,17 +1157,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff2cd3"
+        "color": "#ff22dd"
       },
       "line": {
-        "color": "#ff2cd3",
+        "color": "#ff22dd",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff2cd3",
+        "color": "#ff22dd",
         "outline_color": "black"
       }
     },
@@ -1180,17 +1185,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff37c8"
+        "color": "#ff2ed1"
       },
       "line": {
-        "color": "#ff37c8",
+        "color": "#ff2ed1",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff37c8",
+        "color": "#ff2ed1",
         "outline_color": "black"
       }
     },
@@ -1208,17 +1213,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff42bd"
+        "color": "#ff3ac5"
       },
       "line": {
-        "color": "#ff42bd",
+        "color": "#ff3ac5",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff42bd",
+        "color": "#ff3ac5",
         "outline_color": "black"
       }
     },
@@ -1238,17 +1243,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff4db2"
+        "color": "#ff45ba"
       },
       "line": {
-        "color": "#ff4db2",
+        "color": "#ff45ba",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff4db2",
+        "color": "#ff45ba",
         "outline_color": "black"
       }
     },
@@ -1266,17 +1271,45 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff59a6"
+        "color": "#ff51ae"
       },
       "line": {
-        "color": "#ff59a6",
+        "color": "#ff51ae",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff59a6",
+        "color": "#ff51ae",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefManoeuvre": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true,
+      "abrege": true
+    },
+    "style": {
+      "point": {
+        "name": "triangle",
+        "color": "#ff5da2"
+      },
+      "line": {
+        "color": "#ff5da2",
+        "width": "1.0",
+        "capstyle": "flat",
+        "line_style": "solid",
+        "joinstyle": "miter"
+      },
+      "polygon": {
+        "color": "#ff5da2",
         "outline_color": "black"
       }
     },
@@ -1293,17 +1326,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff649b"
+        "color": "#ff6897"
       },
       "line": {
-        "color": "#ff649b",
+        "color": "#ff6897",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff649b",
+        "color": "#ff6897",
         "outline_color": "black"
       }
     },
@@ -1339,17 +1372,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff6f90"
+        "color": "#ff748b"
       },
       "line": {
-        "color": "#ff6f90",
+        "color": "#ff748b",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff6f90",
+        "color": "#ff748b",
         "outline_color": "black"
       }
     },
@@ -1372,17 +1405,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff7a85"
+        "color": "#ff8080"
       },
       "line": {
-        "color": "#ff7a85",
+        "color": "#ff8080",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff7a85",
+        "color": "#ff8080",
         "outline_color": "black"
       }
     },
@@ -1420,17 +1453,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff857a"
+        "color": "#ff8b74"
       },
       "line": {
-        "color": "#ff857a",
+        "color": "#ff8b74",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff857a",
+        "color": "#ff8b74",
         "outline_color": "black"
       }
     },
@@ -1441,17 +1474,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff906f"
+        "color": "#ff9768"
       },
       "line": {
-        "color": "#ff906f",
+        "color": "#ff9768",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff906f",
+        "color": "#ff9768",
         "outline_color": "black"
       }
     },
@@ -1491,17 +1524,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ff9b64"
+        "color": "#ffa25d"
       },
       "line": {
-        "color": "#ff9b64",
+        "color": "#ffa25d",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ff9b64",
+        "color": "#ffa25d",
         "outline_color": "black"
       }
     },
@@ -1519,17 +1552,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ffa659"
+        "color": "#ffae51"
       },
       "line": {
-        "color": "#ffa659",
+        "color": "#ffae51",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ffa659",
+        "color": "#ffae51",
         "outline_color": "black"
       }
     },
@@ -1547,17 +1580,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ffb24d"
+        "color": "#ffba45"
       },
       "line": {
-        "color": "#ffb24d",
+        "color": "#ffba45",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ffb24d",
+        "color": "#ffba45",
         "outline_color": "black"
       }
     },
@@ -1577,17 +1610,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ffbd42"
+        "color": "#ffc53a"
       },
       "line": {
-        "color": "#ffbd42",
+        "color": "#ffc53a",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ffbd42",
+        "color": "#ffc53a",
         "outline_color": "black"
       }
     },
@@ -1639,17 +1672,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ffc837"
+        "color": "#ffd12e"
       },
       "line": {
-        "color": "#ffc837",
+        "color": "#ffd12e",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ffc837",
+        "color": "#ffd12e",
         "outline_color": "black"
       }
     },
@@ -1665,22 +1698,31 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true,
+      "etatOuvrageId": true,
+      "etatAccessoireId": true,
+      "etatGenieCivilId": true,
+      "manoeuvreOuvrageId": true,
+      "etatOuvrageCom": true,
+      "etatAccessoireCom": true,
+      "etatGenieCivilCom": true,
+      "manoeuvreOuvrageCom": true
     },
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ffd32c"
+        "color": "#ffdd22"
       },
       "line": {
-        "color": "#ffd32c",
+        "color": "#ffdd22",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ffd32c",
+        "color": "#ffdd22",
         "outline_color": "black"
       }
     },
@@ -1697,17 +1739,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ffde21"
+        "color": "#ffe817"
       },
       "line": {
-        "color": "#ffde21",
+        "color": "#ffe817",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ffde21",
+        "color": "#ffe817",
         "outline_color": "black"
       }
     },
@@ -1724,17 +1766,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#ffe916"
+        "color": "#fff4b"
       },
       "line": {
-        "color": "#ffe916",
+        "color": "#fff4b",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#ffe916",
+        "color": "#fff4b",
         "outline_color": "black"
       }
     },
@@ -1752,17 +1794,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#fff4b"
+        "color": "#100ff0"
       },
       "line": {
-        "color": "#fff4b",
+        "color": "#100ff0",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#fff4b",
+        "color": "#100ff0",
         "outline_color": "black"
       }
     },
@@ -1824,17 +1866,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#100ff0"
+        "color": "#f4ffb"
       },
       "line": {
-        "color": "#100ff0",
+        "color": "#f4ffb",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#100ff0",
+        "color": "#f4ffb",
         "outline_color": "black"
       }
     },
@@ -1853,17 +1895,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#f4ffb"
+        "color": "#e8ff17"
       },
       "line": {
-        "color": "#f4ffb",
+        "color": "#e8ff17",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#f4ffb",
+        "color": "#e8ff17",
         "outline_color": "black"
       }
     },
@@ -1880,17 +1922,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#e9ff16"
+        "color": "#ddff22"
       },
       "line": {
-        "color": "#e9ff16",
+        "color": "#ddff22",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#e9ff16",
+        "color": "#ddff22",
         "outline_color": "black"
       }
     },
@@ -1906,22 +1948,31 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true,
+      "etatOuvrageId": true,
+      "etatAccessoireId": true,
+      "etatGenieCivilId": true,
+      "manoeuvreOuvrageId": true,
+      "etatOuvrageCom": true,
+      "etatAccessoireCom": true,
+      "etatGenieCivilCom": true,
+      "manoeuvreOuvrageCom": true
     },
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#deff21"
+        "color": "#d1ff2e"
       },
       "line": {
-        "color": "#deff21",
+        "color": "#d1ff2e",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#deff21",
+        "color": "#d1ff2e",
         "outline_color": "black"
       }
     },
@@ -1973,17 +2024,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#d3ff2c"
+        "color": "#c5ff3a"
       },
       "line": {
-        "color": "#d3ff2c",
+        "color": "#c5ff3a",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#d3ff2c",
+        "color": "#c5ff3a",
         "outline_color": "black"
       }
     },
@@ -2021,17 +2072,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#c8ff37"
+        "color": "#baff45"
       },
       "line": {
-        "color": "#c8ff37",
+        "color": "#baff45",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#c8ff37",
+        "color": "#baff45",
         "outline_color": "black"
       }
     },
@@ -2049,17 +2100,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#bdff42"
+        "color": "#aeff51"
       },
       "line": {
-        "color": "#bdff42",
+        "color": "#aeff51",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#bdff42",
+        "color": "#aeff51",
         "outline_color": "black"
       }
     },
@@ -2076,23 +2127,24 @@
       "designation": true,
       "valid": true,
       "photos": true,
+      "suiteApporterId": true,
       "urgenceId": true,
       "nombreDesordres": true
     },
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#b2ff4d"
+        "color": "#a2ff5d"
       },
       "line": {
-        "color": "#b2ff4d",
+        "color": "#a2ff5d",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#b2ff4d",
+        "color": "#a2ff5d",
         "outline_color": "black"
       }
     },
@@ -2110,17 +2162,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#a6ff59"
+        "color": "#97ff68"
       },
       "line": {
-        "color": "#a6ff59",
+        "color": "#97ff68",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#a6ff59",
+        "color": "#97ff68",
         "outline_color": "black"
       }
     },
@@ -2142,17 +2194,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#9bff64"
+        "color": "#8bff74"
       },
       "line": {
-        "color": "#9bff64",
+        "color": "#8bff74",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#9bff64",
+        "color": "#8bff74",
         "outline_color": "black"
       }
     },
@@ -2171,17 +2223,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#90ff6f"
+        "color": "#80ff80"
       },
       "line": {
-        "color": "#90ff6f",
+        "color": "#80ff80",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#90ff6f",
+        "color": "#80ff80",
         "outline_color": "black"
       }
     },
@@ -2197,22 +2249,31 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true,
+      "etatOuvrageId": true,
+      "etatAccessoireId": true,
+      "etatGenieCivilId": true,
+      "manoeuvreOuvrageId": true,
+      "etatOuvrageCom": true,
+      "etatAccessoireCom": true,
+      "etatGenieCivilCom": true,
+      "manoeuvreOuvrageCom": true
     },
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#85ff7a"
+        "color": "#74ff8b"
       },
       "line": {
-        "color": "#85ff7a",
+        "color": "#74ff8b",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#85ff7a",
+        "color": "#74ff8b",
         "outline_color": "black"
       }
     },
@@ -2273,17 +2334,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#7aff85"
+        "color": "#68ff97"
       },
       "line": {
-        "color": "#7aff85",
+        "color": "#68ff97",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#7aff85",
+        "color": "#68ff97",
         "outline_color": "black"
       }
     },
@@ -2301,17 +2362,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#6fff90"
+        "color": "#5dffa2"
       },
       "line": {
-        "color": "#6fff90",
+        "color": "#5dffa2",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#6fff90",
+        "color": "#5dffa2",
         "outline_color": "black"
       }
     },
@@ -2329,17 +2390,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#64ff9b"
+        "color": "#51ffae"
       },
       "line": {
-        "color": "#64ff9b",
+        "color": "#51ffae",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#64ff9b",
+        "color": "#51ffae",
         "outline_color": "black"
       }
     },
@@ -2373,17 +2434,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#59ffa6"
+        "color": "#45ffba"
       },
       "line": {
-        "color": "#59ffa6",
+        "color": "#45ffba",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#59ffa6",
+        "color": "#45ffba",
         "outline_color": "black"
       }
     },
@@ -2401,17 +2462,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#4dffb2"
+        "color": "#3affc5"
       },
       "line": {
-        "color": "#4dffb2",
+        "color": "#3affc5",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#4dffb2",
+        "color": "#3affc5",
         "outline_color": "black"
       }
     },
@@ -2456,22 +2517,25 @@
       "typeOuvrageParticulierId": true,
       "observations": true,
       "desordreIds": true,
-      "prestationIds": true
+      "prestationIds": true,
+      "dimensionVerticale": true,
+      "dimensionHorizontale": true,
+      "securiteId": true
     },
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#42ffbd"
+        "color": "#2effd1"
       },
       "line": {
-        "color": "#42ffbd",
+        "color": "#2effd1",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#42ffbd",
+        "color": "#2effd1",
         "outline_color": "black"
       }
     },
@@ -2517,22 +2581,25 @@
       "observations": true,
       "reseauHydrauliqueFermeIds": true,
       "desordreIds": true,
-      "prestationIds": true
+      "prestationIds": true,
+      "dimensionVerticale": true,
+      "dimensionHorizontale": true,
+      "securiteId": true
     },
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#37ffc8"
+        "color": "#22ffdd"
       },
       "line": {
-        "color": "#37ffc8",
+        "color": "#22ffdd",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#37ffc8",
+        "color": "#22ffdd",
         "outline_color": "black"
       }
     },
@@ -2572,17 +2639,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#2cffd3"
+        "color": "#17ffe8"
       },
       "line": {
-        "color": "#2cffd3",
+        "color": "#17ffe8",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#2cffd3",
+        "color": "#17ffe8",
         "outline_color": "black"
       }
     },
@@ -2600,17 +2667,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#21ffde"
+        "color": "#bfff4"
       },
       "line": {
-        "color": "#21ffde",
+        "color": "#bfff4",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#21ffde",
+        "color": "#bfff4",
         "outline_color": "black"
       }
     },
@@ -2628,17 +2695,17 @@
     "style": {
       "point": {
         "name": "triangle",
-        "color": "#16ffe9"
+        "color": "#0ff100"
       },
       "line": {
-        "color": "#16ffe9",
+        "color": "#0ff100",
         "width": "1.0",
         "capstyle": "flat",
         "line_style": "solid",
         "joinstyle": "miter"
       },
       "polygon": {
-        "color": "#16ffe9",
+        "color": "#0ff100",
         "outline_color": "black"
       }
     },
@@ -2745,22 +2812,23 @@
       "designation": true,
       "valid": true,
       "gestions": true,
-      "amenagementHydrauliqueId": true
+      "amenagementHydrauliqueId": true,
+      "photos": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#17e8ff"
+        "color": "#16e9ff"
       },
       "line": {
-        "color": "#17e8ff",
+        "color": "#16e9ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#17e8ff",
+        "color": "#16e9ff",
         "outline_color": "black"
       }
     },
@@ -2776,22 +2844,31 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true,
+      "etatOuvrageId": true,
+      "etatAccessoireId": true,
+      "etatGenieCivilId": true,
+      "manoeuvreOuvrageId": true,
+      "etatOuvrageCom": true,
+      "etatAccessoireCom": true,
+      "etatGenieCivilCom": true,
+      "manoeuvreOuvrageCom": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#22ddff"
+        "color": "#21deff"
       },
       "line": {
-        "color": "#22ddff",
+        "color": "#21deff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#22ddff",
+        "color": "#21deff",
         "outline_color": "black"
       }
     },
@@ -2809,17 +2886,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#2ed1ff"
+        "color": "#2cd3ff"
       },
       "line": {
-        "color": "#2ed1ff",
+        "color": "#2cd3ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#2ed1ff",
+        "color": "#2cd3ff",
         "outline_color": "black"
       }
     },
@@ -2837,17 +2914,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#3ac5ff"
+        "color": "#37c8ff"
       },
       "line": {
-        "color": "#3ac5ff",
+        "color": "#37c8ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#3ac5ff",
+        "color": "#37c8ff",
         "outline_color": "black"
       }
     },
@@ -2864,17 +2941,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#45baff"
+        "color": "#42bdff"
       },
       "line": {
-        "color": "#45baff",
+        "color": "#42bdff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#45baff",
+        "color": "#42bdff",
         "outline_color": "black"
       }
     },
@@ -2920,17 +2997,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#51aeff"
+        "color": "#4db2ff"
       },
       "line": {
-        "color": "#51aeff",
+        "color": "#4db2ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#51aeff",
+        "color": "#4db2ff",
         "outline_color": "black"
       }
     },
@@ -2947,17 +3024,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#5da2ff"
+        "color": "#59a6ff"
       },
       "line": {
-        "color": "#5da2ff",
+        "color": "#59a6ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#5da2ff",
+        "color": "#59a6ff",
         "outline_color": "black"
       }
     },
@@ -2973,22 +3050,23 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#6897ff"
+        "color": "#649bff"
       },
       "line": {
-        "color": "#6897ff",
+        "color": "#649bff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#6897ff",
+        "color": "#649bff",
         "outline_color": "black"
       }
     },
@@ -3006,17 +3084,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#748bff"
+        "color": "#6f90ff"
       },
       "line": {
-        "color": "#748bff",
+        "color": "#6f90ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#748bff",
+        "color": "#6f90ff",
         "outline_color": "black"
       }
     },
@@ -3034,17 +3112,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#8080ff"
+        "color": "#7a85ff"
       },
       "line": {
-        "color": "#8080ff",
+        "color": "#7a85ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#8080ff",
+        "color": "#7a85ff",
         "outline_color": "black"
       }
     },
@@ -3062,17 +3140,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#8b74ff"
+        "color": "#857aff"
       },
       "line": {
-        "color": "#8b74ff",
+        "color": "#857aff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#8b74ff",
+        "color": "#857aff",
         "outline_color": "black"
       }
     },
@@ -3121,17 +3199,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#9768ff"
+        "color": "#906fff"
       },
       "line": {
-        "color": "#9768ff",
+        "color": "#906fff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#9768ff",
+        "color": "#906fff",
         "outline_color": "black"
       }
     },
@@ -3149,17 +3227,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#a25dff"
+        "color": "#9b64ff"
       },
       "line": {
-        "color": "#a25dff",
+        "color": "#9b64ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#a25dff",
+        "color": "#9b64ff",
         "outline_color": "black"
       }
     },
@@ -3177,17 +3255,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ae51ff"
+        "color": "#a659ff"
       },
       "line": {
-        "color": "#ae51ff",
+        "color": "#a659ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ae51ff",
+        "color": "#a659ff",
         "outline_color": "black"
       }
     },
@@ -3206,17 +3284,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ba45ff"
+        "color": "#b24dff"
       },
       "line": {
-        "color": "#ba45ff",
+        "color": "#b24dff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ba45ff",
+        "color": "#b24dff",
         "outline_color": "black"
       }
     },
@@ -3234,17 +3312,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#c53aff"
+        "color": "#bd42ff"
       },
       "line": {
-        "color": "#c53aff",
+        "color": "#bd42ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#c53aff",
+        "color": "#bd42ff",
         "outline_color": "black"
       }
     },
@@ -3262,17 +3340,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#d12eff"
+        "color": "#c837ff"
       },
       "line": {
-        "color": "#d12eff",
+        "color": "#c837ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#d12eff",
+        "color": "#c837ff",
         "outline_color": "black"
       }
     },
@@ -3293,17 +3371,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#dd22ff"
+        "color": "#d32cff"
       },
       "line": {
-        "color": "#dd22ff",
+        "color": "#d32cff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#dd22ff",
+        "color": "#d32cff",
         "outline_color": "black"
       }
     },
@@ -3359,17 +3437,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#e817ff"
+        "color": "#de21ff"
       },
       "line": {
-        "color": "#e817ff",
+        "color": "#de21ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#e817ff",
+        "color": "#de21ff",
         "outline_color": "black"
       }
     },
@@ -3383,6 +3461,34 @@
       "valid": true,
       "x": true,
       "y": true
+    },
+    "style": {
+      "point": {
+        "name": "square",
+        "color": "#e916ff"
+      },
+      "line": {
+        "color": "#e916ff",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "solid",
+        "joinstyle": "bevel"
+      },
+      "polygon": {
+        "color": "#e916ff",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefOrigineProfilLong": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true,
+      "abrege": true
     },
     "style": {
       "point": {
@@ -3403,14 +3509,14 @@
     },
     "crs": "EPSG:2154"
   },
-  "RefOrigineProfilLong": {
+  "SystemeReperageBorne": {
     "attributes": {
-      "libelle": true,
       "dateMaj": true,
+      "valeurPR": true,
+      "borneId": true,
       "author": true,
       "designation": true,
-      "valid": true,
-      "abrege": true
+      "valid": true
     },
     "style": {
       "point": {
@@ -3426,34 +3532,6 @@
       },
       "polygon": {
         "color": "#1000ff",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "SystemeReperageBorne": {
-    "attributes": {
-      "dateMaj": true,
-      "valeurPR": true,
-      "borneId": true,
-      "author": true,
-      "designation": true,
-      "valid": true
-    },
-    "style": {
-      "point": {
-        "name": "square",
-        "color": "#ff0100"
-      },
-      "line": {
-        "color": "#ff0100",
-        "width": "1.0",
-        "capstyle": "square",
-        "line_style": "solid",
-        "joinstyle": "bevel"
-      },
-      "polygon": {
-        "color": "#ff0100",
         "outline_color": "black"
       }
     },
@@ -3499,22 +3577,25 @@
       "observations": true,
       "reseauHydrauliqueFermeIds": true,
       "desordreIds": true,
-      "prestationIds": true
+      "prestationIds": true,
+      "dimensionVerticale": true,
+      "dimensionHorizontale": true,
+      "securiteId": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#ffbf4"
+        "color": "#ff0100"
       },
       "line": {
-        "color": "#ffbf4",
+        "color": "#ff0100",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffbf4",
+        "color": "#ff0100",
         "outline_color": "black"
       }
     },
@@ -3548,17 +3629,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff16e9"
+        "color": "#ffbf4"
       },
       "line": {
-        "color": "#ff16e9",
+        "color": "#ffbf4",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff16e9",
+        "color": "#ffbf4",
         "outline_color": "black"
       }
     },
@@ -3576,17 +3657,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff21de"
+        "color": "#ff17e8"
       },
       "line": {
-        "color": "#ff21de",
+        "color": "#ff17e8",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff21de",
+        "color": "#ff17e8",
         "outline_color": "black"
       }
     },
@@ -3603,17 +3684,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff2cd3"
+        "color": "#ff22dd"
       },
       "line": {
-        "color": "#ff2cd3",
+        "color": "#ff22dd",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff2cd3",
+        "color": "#ff22dd",
         "outline_color": "black"
       }
     },
@@ -3629,22 +3710,23 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff37c8"
+        "color": "#ff2ed1"
       },
       "line": {
-        "color": "#ff37c8",
+        "color": "#ff2ed1",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff37c8",
+        "color": "#ff2ed1",
         "outline_color": "black"
       }
     },
@@ -3663,17 +3745,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff42bd"
+        "color": "#ff3ac5"
       },
       "line": {
-        "color": "#ff42bd",
+        "color": "#ff3ac5",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff42bd",
+        "color": "#ff3ac5",
         "outline_color": "black"
       }
     },
@@ -3691,17 +3773,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff4db2"
+        "color": "#ff45ba"
       },
       "line": {
-        "color": "#ff4db2",
+        "color": "#ff45ba",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff4db2",
+        "color": "#ff45ba",
         "outline_color": "black"
       }
     },
@@ -3730,17 +3812,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff59a6"
+        "color": "#ff51ae"
       },
       "line": {
-        "color": "#ff59a6",
+        "color": "#ff51ae",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff59a6",
+        "color": "#ff51ae",
         "outline_color": "black"
       }
     },
@@ -3785,17 +3867,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff649b"
+        "color": "#ff5da2"
       },
       "line": {
-        "color": "#ff649b",
+        "color": "#ff5da2",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff649b",
+        "color": "#ff5da2",
         "outline_color": "black"
       }
     },
@@ -3813,17 +3895,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff6f90"
+        "color": "#ff6897"
       },
       "line": {
-        "color": "#ff6f90",
+        "color": "#ff6897",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff6f90",
+        "color": "#ff6897",
         "outline_color": "black"
       }
     },
@@ -3841,17 +3923,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff7a85"
+        "color": "#ff748b"
       },
       "line": {
-        "color": "#ff7a85",
+        "color": "#ff748b",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff7a85",
+        "color": "#ff748b",
         "outline_color": "black"
       }
     },
@@ -3869,17 +3951,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff857a"
+        "color": "#ff8080"
       },
       "line": {
-        "color": "#ff857a",
+        "color": "#ff8080",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff857a",
+        "color": "#ff8080",
         "outline_color": "black"
       }
     },
@@ -3895,22 +3977,31 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true,
+      "etatOuvrageId": true,
+      "etatAccessoireId": true,
+      "etatGenieCivilId": true,
+      "manoeuvreOuvrageId": true,
+      "etatOuvrageCom": true,
+      "etatAccessoireCom": true,
+      "etatGenieCivilCom": true,
+      "manoeuvreOuvrageCom": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff906f"
+        "color": "#ff8b74"
       },
       "line": {
-        "color": "#ff906f",
+        "color": "#ff8b74",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff906f",
+        "color": "#ff8b74",
         "outline_color": "black"
       }
     },
@@ -3963,22 +4054,25 @@
       "reseauHydrauliqueCielOuvertIds": true,
       "ouvrageHydrauliqueAssocieIds": true,
       "desordreIds": true,
-      "prestationIds": true
+      "prestationIds": true,
+      "dimensionVerticale": true,
+      "dimensionHorizontale": true,
+      "securiteId": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#ff9b64"
+        "color": "#ff9768"
       },
       "line": {
-        "color": "#ff9b64",
+        "color": "#ff9768",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff9b64",
+        "color": "#ff9768",
         "outline_color": "black"
       }
     },
@@ -3996,17 +4090,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ffa659"
+        "color": "#ffa25d"
       },
       "line": {
-        "color": "#ffa659",
+        "color": "#ffa25d",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffa659",
+        "color": "#ffa25d",
         "outline_color": "black"
       }
     },
@@ -4024,17 +4118,45 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ffb24d"
+        "color": "#ffae51"
       },
       "line": {
-        "color": "#ffb24d",
+        "color": "#ffae51",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffb24d",
+        "color": "#ffae51",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefEtatOuvAccGC": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true,
+      "abrege": true
+    },
+    "style": {
+      "point": {
+        "name": "square",
+        "color": "#ffba45"
+      },
+      "line": {
+        "color": "#ffba45",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "solid",
+        "joinstyle": "bevel"
+      },
+      "polygon": {
+        "color": "#ffba45",
         "outline_color": "black"
       }
     },
@@ -4052,17 +4174,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ffbd42"
+        "color": "#ffc53a"
       },
       "line": {
-        "color": "#ffbd42",
+        "color": "#ffc53a",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffbd42",
+        "color": "#ffc53a",
         "outline_color": "black"
       }
     },
@@ -4080,17 +4202,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ffc837"
+        "color": "#ffd12e"
       },
       "line": {
-        "color": "#ffc837",
+        "color": "#ffd12e",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffc837",
+        "color": "#ffd12e",
         "outline_color": "black"
       }
     },
@@ -4109,17 +4231,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ffd32c"
+        "color": "#ffdd22"
       },
       "line": {
-        "color": "#ffd32c",
+        "color": "#ffdd22",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffd32c",
+        "color": "#ffdd22",
         "outline_color": "black"
       }
     },
@@ -4165,17 +4287,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ffde21"
+        "color": "#ffe817"
       },
       "line": {
-        "color": "#ffde21",
+        "color": "#ffe817",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffde21",
+        "color": "#ffe817",
         "outline_color": "black"
       }
     },
@@ -4192,17 +4314,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#ffe916"
+        "color": "#fff4b"
       },
       "line": {
-        "color": "#ffe916",
+        "color": "#fff4b",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffe916",
+        "color": "#fff4b",
         "outline_color": "black"
       }
     },
@@ -4218,22 +4340,23 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#fff4b"
+        "color": "#100ff0"
       },
       "line": {
-        "color": "#fff4b",
+        "color": "#100ff0",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#fff4b",
+        "color": "#100ff0",
         "outline_color": "black"
       }
     },
@@ -4260,17 +4383,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#100ff0"
+        "color": "#f4ffb"
       },
       "line": {
-        "color": "#100ff0",
+        "color": "#f4ffb",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#100ff0",
+        "color": "#f4ffb",
         "outline_color": "black"
       }
     },
@@ -4311,17 +4434,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#f4ffb"
+        "color": "#e8ff17"
       },
       "line": {
-        "color": "#f4ffb",
+        "color": "#e8ff17",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#f4ffb",
+        "color": "#e8ff17",
         "outline_color": "black"
       }
     },
@@ -4339,17 +4462,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#e9ff16"
+        "color": "#ddff22"
       },
       "line": {
-        "color": "#e9ff16",
+        "color": "#ddff22",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#e9ff16",
+        "color": "#ddff22",
         "outline_color": "black"
       }
     },
@@ -4367,17 +4490,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#deff21"
+        "color": "#d1ff2e"
       },
       "line": {
-        "color": "#deff21",
+        "color": "#d1ff2e",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#deff21",
+        "color": "#d1ff2e",
         "outline_color": "black"
       }
     },
@@ -4427,17 +4550,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#d3ff2c"
+        "color": "#c5ff3a"
       },
       "line": {
-        "color": "#d3ff2c",
+        "color": "#c5ff3a",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#d3ff2c",
+        "color": "#c5ff3a",
         "outline_color": "black"
       }
     },
@@ -4484,17 +4607,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#c8ff37"
+        "color": "#baff45"
       },
       "line": {
-        "color": "#c8ff37",
+        "color": "#baff45",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#c8ff37",
+        "color": "#baff45",
         "outline_color": "black"
       }
     },
@@ -4533,17 +4656,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#bdff42"
+        "color": "#aeff51"
       },
       "line": {
-        "color": "#bdff42",
+        "color": "#aeff51",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#bdff42",
+        "color": "#aeff51",
         "outline_color": "black"
       }
     },
@@ -4580,17 +4703,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#b2ff4d"
+        "color": "#a2ff5d"
       },
       "line": {
-        "color": "#b2ff4d",
+        "color": "#a2ff5d",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#b2ff4d",
+        "color": "#a2ff5d",
         "outline_color": "black"
       }
     },
@@ -4608,17 +4731,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#a6ff59"
+        "color": "#97ff68"
       },
       "line": {
-        "color": "#a6ff59",
+        "color": "#97ff68",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#a6ff59",
+        "color": "#97ff68",
         "outline_color": "black"
       }
     },
@@ -4673,17 +4796,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#9bff64"
+        "color": "#8bff74"
       },
       "line": {
-        "color": "#9bff64",
+        "color": "#8bff74",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#9bff64",
+        "color": "#8bff74",
         "outline_color": "black"
       }
     },
@@ -4699,22 +4822,31 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true,
+      "etatOuvrageId": true,
+      "etatAccessoireId": true,
+      "etatGenieCivilId": true,
+      "manoeuvreOuvrageId": true,
+      "etatOuvrageCom": true,
+      "etatAccessoireCom": true,
+      "etatGenieCivilCom": true,
+      "manoeuvreOuvrageCom": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#90ff6f"
+        "color": "#80ff80"
       },
       "line": {
-        "color": "#90ff6f",
+        "color": "#80ff80",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#90ff6f",
+        "color": "#80ff80",
         "outline_color": "black"
       }
     },
@@ -4730,22 +4862,31 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true,
+      "etatOuvrageId": true,
+      "etatAccessoireId": true,
+      "etatGenieCivilId": true,
+      "manoeuvreOuvrageId": true,
+      "etatOuvrageCom": true,
+      "etatAccessoireCom": true,
+      "etatGenieCivilCom": true,
+      "manoeuvreOuvrageCom": true
     },
     "style": {
       "point": {
         "name": "square",
-        "color": "#85ff7a"
+        "color": "#74ff8b"
       },
       "line": {
-        "color": "#85ff7a",
+        "color": "#74ff8b",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#85ff7a",
+        "color": "#74ff8b",
         "outline_color": "black"
       }
     },
@@ -4768,17 +4909,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#7aff85"
+        "color": "#68ff97"
       },
       "line": {
-        "color": "#7aff85",
+        "color": "#68ff97",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#7aff85",
+        "color": "#68ff97",
         "outline_color": "black"
       }
     },
@@ -4805,17 +4946,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#6fff90"
+        "color": "#5dffa2"
       },
       "line": {
-        "color": "#6fff90",
+        "color": "#5dffa2",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#6fff90",
+        "color": "#5dffa2",
         "outline_color": "black"
       }
     },
@@ -4833,17 +4974,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#64ff9b"
+        "color": "#51ffae"
       },
       "line": {
-        "color": "#64ff9b",
+        "color": "#51ffae",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#64ff9b",
+        "color": "#51ffae",
         "outline_color": "black"
       }
     },
@@ -4876,17 +5017,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#59ffa6"
+        "color": "#45ffba"
       },
       "line": {
-        "color": "#59ffa6",
+        "color": "#45ffba",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#59ffa6",
+        "color": "#45ffba",
         "outline_color": "black"
       }
     },
@@ -4903,17 +5044,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#4dffb2"
+        "color": "#3affc5"
       },
       "line": {
-        "color": "#4dffb2",
+        "color": "#3affc5",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#4dffb2",
+        "color": "#3affc5",
         "outline_color": "black"
       }
     },
@@ -4931,17 +5072,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#42ffbd"
+        "color": "#2effd1"
       },
       "line": {
-        "color": "#42ffbd",
+        "color": "#2effd1",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#42ffbd",
+        "color": "#2effd1",
         "outline_color": "black"
       }
     },
@@ -4984,17 +5125,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#37ffc8"
+        "color": "#22ffdd"
       },
       "line": {
-        "color": "#37ffc8",
+        "color": "#22ffdd",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#37ffc8",
+        "color": "#22ffdd",
         "outline_color": "black"
       }
     },
@@ -5014,17 +5155,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#2cffd3"
+        "color": "#17ffe8"
       },
       "line": {
-        "color": "#2cffd3",
+        "color": "#17ffe8",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#2cffd3",
+        "color": "#17ffe8",
         "outline_color": "black"
       }
     },
@@ -5044,17 +5185,17 @@
     "style": {
       "point": {
         "name": "square",
-        "color": "#21ffde"
+        "color": "#bfff4"
       },
       "line": {
-        "color": "#21ffde",
+        "color": "#bfff4",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "solid",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#21ffde",
+        "color": "#bfff4",
         "outline_color": "black"
       }
     },
@@ -5130,17 +5271,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#17e8ff"
+        "color": "#16e9ff"
       },
       "line": {
-        "color": "#17e8ff",
+        "color": "#16e9ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#17e8ff",
+        "color": "#16e9ff",
         "outline_color": "black"
       }
     },
@@ -5182,17 +5323,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#22ddff"
+        "color": "#21deff"
       },
       "line": {
-        "color": "#22ddff",
+        "color": "#21deff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#22ddff",
+        "color": "#21deff",
         "outline_color": "black"
       }
     },
@@ -5209,17 +5350,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#2ed1ff"
+        "color": "#2cd3ff"
       },
       "line": {
-        "color": "#2ed1ff",
+        "color": "#2cd3ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#2ed1ff",
+        "color": "#2cd3ff",
         "outline_color": "black"
       }
     },
@@ -5237,17 +5378,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#3ac5ff"
+        "color": "#37c8ff"
       },
       "line": {
-        "color": "#3ac5ff",
+        "color": "#37c8ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#3ac5ff",
+        "color": "#37c8ff",
         "outline_color": "black"
       }
     },
@@ -5263,22 +5404,23 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true
     },
     "style": {
       "point": {
         "name": "circle",
-        "color": "#45baff"
+        "color": "#42bdff"
       },
       "line": {
-        "color": "#45baff",
+        "color": "#42bdff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#45baff",
+        "color": "#42bdff",
         "outline_color": "black"
       }
     },
@@ -5296,17 +5438,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#51aeff"
+        "color": "#4db2ff"
       },
       "line": {
-        "color": "#51aeff",
+        "color": "#4db2ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#51aeff",
+        "color": "#4db2ff",
         "outline_color": "black"
       }
     },
@@ -5354,22 +5496,53 @@
       "ouvrageTelecomEnergieIds": true,
       "observations": true,
       "desordreIds": true,
-      "prestationIds": true
+      "prestationIds": true,
+      "dimensionVerticale": true,
+      "dimensionHorizontale": true,
+      "securiteId": true
     },
     "style": {
       "point": {
         "name": "circle",
-        "color": "#5da2ff"
+        "color": "#59a6ff"
       },
       "line": {
-        "color": "#5da2ff",
+        "color": "#59a6ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#5da2ff",
+        "color": "#59a6ff",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefSuiteApporter": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true,
+      "abrege": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#649bff"
+      },
+      "line": {
+        "color": "#649bff",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#649bff",
         "outline_color": "black"
       }
     },
@@ -5385,22 +5558,31 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true,
+      "etatOuvrageId": true,
+      "etatAccessoireId": true,
+      "etatGenieCivilId": true,
+      "manoeuvreOuvrageId": true,
+      "etatOuvrageCom": true,
+      "etatAccessoireCom": true,
+      "etatGenieCivilCom": true,
+      "manoeuvreOuvrageCom": true
     },
     "style": {
       "point": {
         "name": "circle",
-        "color": "#6897ff"
+        "color": "#6f90ff"
       },
       "line": {
-        "color": "#6897ff",
+        "color": "#6f90ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#6897ff",
+        "color": "#6f90ff",
         "outline_color": "black"
       }
     },
@@ -5424,17 +5606,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#748bff"
+        "color": "#7a85ff"
       },
       "line": {
-        "color": "#748bff",
+        "color": "#7a85ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#748bff",
+        "color": "#7a85ff",
         "outline_color": "black"
       }
     },
@@ -5452,17 +5634,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#8080ff"
+        "color": "#857aff"
       },
       "line": {
-        "color": "#8080ff",
+        "color": "#857aff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#8080ff",
+        "color": "#857aff",
         "outline_color": "black"
       }
     },
@@ -5478,22 +5660,31 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true,
+      "etatOuvrageId": true,
+      "etatAccessoireId": true,
+      "etatGenieCivilId": true,
+      "manoeuvreOuvrageId": true,
+      "etatOuvrageCom": true,
+      "etatAccessoireCom": true,
+      "etatGenieCivilCom": true,
+      "manoeuvreOuvrageCom": true
     },
     "style": {
       "point": {
         "name": "circle",
-        "color": "#8b74ff"
+        "color": "#906fff"
       },
       "line": {
-        "color": "#8b74ff",
+        "color": "#906fff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#8b74ff",
+        "color": "#906fff",
         "outline_color": "black"
       }
     },
@@ -5520,17 +5711,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#9768ff"
+        "color": "#9b64ff"
       },
       "line": {
-        "color": "#9768ff",
+        "color": "#9b64ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#9768ff",
+        "color": "#9b64ff",
         "outline_color": "black"
       }
     },
@@ -5546,22 +5737,23 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true
     },
     "style": {
       "point": {
         "name": "circle",
-        "color": "#a25dff"
+        "color": "#a659ff"
       },
       "line": {
-        "color": "#a25dff",
+        "color": "#a659ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#a25dff",
+        "color": "#a659ff",
         "outline_color": "black"
       }
     },
@@ -5579,17 +5771,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#ae51ff"
+        "color": "#b24dff"
       },
       "line": {
-        "color": "#ae51ff",
+        "color": "#b24dff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#ae51ff",
+        "color": "#b24dff",
         "outline_color": "black"
       }
     },
@@ -5607,17 +5799,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#ba45ff"
+        "color": "#bd42ff"
       },
       "line": {
-        "color": "#ba45ff",
+        "color": "#bd42ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#ba45ff",
+        "color": "#bd42ff",
         "outline_color": "black"
       }
     },
@@ -5635,17 +5827,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#c53aff"
+        "color": "#c837ff"
       },
       "line": {
-        "color": "#c53aff",
+        "color": "#c837ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#c53aff",
+        "color": "#c837ff",
         "outline_color": "black"
       }
     },
@@ -5663,17 +5855,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#d12eff"
+        "color": "#d32cff"
       },
       "line": {
-        "color": "#d12eff",
+        "color": "#d32cff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#d12eff",
+        "color": "#d32cff",
         "outline_color": "black"
       }
     },
@@ -5694,17 +5886,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#dd22ff"
+        "color": "#de21ff"
       },
       "line": {
-        "color": "#dd22ff",
+        "color": "#de21ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#dd22ff",
+        "color": "#de21ff",
         "outline_color": "black"
       }
     },
@@ -5722,17 +5914,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#e817ff"
+        "color": "#e916ff"
       },
       "line": {
-        "color": "#e817ff",
+        "color": "#e916ff",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#e817ff",
+        "color": "#e916ff",
         "outline_color": "black"
       }
     },
@@ -5748,7 +5940,8 @@
       "author": true,
       "designation": true,
       "valid": true,
-      "photos": true
+      "photos": true,
+      "suiteApporterId": true
     },
     "style": {
       "point": {
@@ -5847,13 +6040,14 @@
     },
     "crs": "EPSG:2154"
   },
-  "RefEtat": {
+  "RefSecurite": {
     "attributes": {
       "libelle": true,
       "dateMaj": true,
       "author": true,
       "designation": true,
-      "valid": true
+      "valid": true,
+      "abrege": true
     },
     "style": {
       "point": {
@@ -5869,778 +6063,6 @@
       },
       "polygon": {
         "color": "#ff0100",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "OuvrageAssocieAmenagementHydraulique": {
-    "attributes": {
-      "author": true,
-      "valid": true,
-      "designation": true,
-      "geometry": true,
-      "amenagementHydrauliqueId": true,
-      "date_debut": true,
-      "date_fin": true,
-      "dateMaj": true,
-      "commentaire": true,
-      "superficie": true,
-      "hauteur": true,
-      "profondeur": true,
-      "nombre": true,
-      "typeId": true,
-      "ouvrageDeversant": true,
-      "materiauId": true,
-      "amenagementHydrauliqueAssocieIds": true,
-      "desordreDependanceAssocieIds": true,
-      "proprietaireIds": true,
-      "gestionnaireIds": true,
-      "observations": true,
-      "photos": true,
-      "numCouche": true,
-      "sourceId": true,
-      "diametre": true,
-      "cote": true,
-      "section": true,
-      "etatId": true,
-      "fonctionnementId": true,
-      "libelle": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ffbf4"
-      },
-      "line": {
-        "color": "#ffbf4",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ffbf4",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "AireStockageDependance": {
-    "attributes": {
-      "valid": true,
-      "designation": true,
-      "author": true,
-      "geometry": true,
-      "date_fin": true,
-      "date_debut": true,
-      "commentaire": true,
-      "libelle": true,
-      "proprietes": true,
-      "gestions": true,
-      "photos": true,
-      "materiaux": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff16e9"
-      },
-      "line": {
-        "color": "#ff16e9",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff16e9",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "PhotoDependance": {
-    "attributes": {
-      "author": true,
-      "designation": true,
-      "valid": true,
-      "date": true,
-      "commentaire": true,
-      "chemin": true,
-      "libelle": true,
-      "photographeId": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff21de"
-      },
-      "line": {
-        "color": "#ff21de",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff21de",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "RefFonctionnementAH": {
-    "attributes": {
-      "libelle": true,
-      "dateMaj": true,
-      "author": true,
-      "designation": true,
-      "valid": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff2cd3"
-      },
-      "line": {
-        "color": "#ff2cd3",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff2cd3",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "RefOuvrageVoirieDependance": {
-    "attributes": {
-      "libelle": true,
-      "dateMaj": true,
-      "author": true,
-      "designation": true,
-      "valid": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff37c8"
-      },
-      "line": {
-        "color": "#ff37c8",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff37c8",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "RefTypeOrganeProtectionCollective": {
-    "attributes": {
-      "libelle": true,
-      "dateMaj": true,
-      "author": true,
-      "designation": true,
-      "valid": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff42bd"
-      },
-      "line": {
-        "color": "#ff42bd",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff42bd",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "PrestationAmenagementHydraulique": {
-    "attributes": {
-      "author": true,
-      "valid": true,
-      "designation": true,
-      "geometry": true,
-      "amenagementHydrauliqueId": true,
-      "date_debut": true,
-      "date_fin": true,
-      "dateMaj": true,
-      "commentaire": true,
-      "libelle": true,
-      "coutMetre": true,
-      "coutGlobal": true,
-      "realisationInterne": true,
-      "cote": true,
-      "sourceId": true,
-      "mesureDiverse": true,
-      "typePrestationId": true,
-      "marcheId": true,
-      "desordreIds": true,
-      "ouvrageAssocieAmenagementHydrauliqueIds": true,
-      "photos": true,
-      "intervenantIds": true,
-      "rapportEtudeIds": true,
-      "evenementHydrauliqueIds": true,
-      "observations": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff4db2"
-      },
-      "line": {
-        "color": "#ff4db2",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff4db2",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "AmenagementHydraulique": {
-    "attributes": {
-      "valid": true,
-      "designation": true,
-      "author": true,
-      "geometry": true,
-      "date_fin": true,
-      "date_debut": true,
-      "commentaire": true,
-      "libelle": true,
-      "proprietes": true,
-      "gestions": true,
-      "photos": true,
-      "superficie": true,
-      "capaciteStockage": true,
-      "profondeurMoyenne": true,
-      "gestionnaireIds": true,
-      "fonctionnementId": true,
-      "typeId": true,
-      "tronconIds": true,
-      "observations": true,
-      "proprietaireIds": true,
-      "organismeId": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff59a6"
-      },
-      "line": {
-        "color": "#ff59a6",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff59a6",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "ObservationDependance": {
-    "attributes": {
-      "evolution": true,
-      "author": true,
-      "valid": true,
-      "date": true,
-      "suite": true,
-      "designation": true,
-      "dateMaj": true,
-      "nombreDesordres": true,
-      "photos": true,
-      "urgenceId": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff649b"
-      },
-      "line": {
-        "color": "#ff649b",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff649b",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "DesordreDependance": {
-    "attributes": {
-      "author": true,
-      "valid": true,
-      "designation": true,
-      "geometry": true,
-      "amenagementHydrauliqueId": true,
-      "date_debut": true,
-      "date_fin": true,
-      "dateMaj": true,
-      "commentaire": true,
-      "dependanceId": true,
-      "lieuDit": true,
-      "cote": true,
-      "sourceId": true,
-      "positionId": true,
-      "categorieDesordreId": true,
-      "typeDesordreId": true,
-      "observations": true,
-      "evenementHydrauliqueIds": true,
-      "ouvrageAssocieIds": true,
-      "prestationIds": true,
-      "articleIds": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff6f90"
-      },
-      "line": {
-        "color": "#ff6f90",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff6f90",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "CheminAccesDependance": {
-    "attributes": {
-      "valid": true,
-      "designation": true,
-      "author": true,
-      "geometry": true,
-      "date_fin": true,
-      "date_debut": true,
-      "commentaire": true,
-      "libelle": true,
-      "proprietes": true,
-      "gestions": true,
-      "photos": true,
-      "largeur": true,
-      "statut": true,
-      "revetementId": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff7a85"
-      },
-      "line": {
-        "color": "#ff7a85",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff7a85",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "StructureAmenagementHydraulique": {
-    "attributes": {
-      "author": true,
-      "valid": true,
-      "designation": true,
-      "geometry": true,
-      "amenagementHydrauliqueId": true,
-      "date_debut": true,
-      "date_fin": true,
-      "dateMaj": true,
-      "commentaire": true,
-      "numCouche": true,
-      "materiauId": true,
-      "observations": true,
-      "sourceId": true,
-      "photos": true,
-      "epaisseur": true,
-      "fonctionId": true,
-      "natureId": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff857a"
-      },
-      "line": {
-        "color": "#ff857a",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff857a",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "AbstractAmenagementHydraulique": {
-    "attributes": {
-      "author": true,
-      "valid": true,
-      "designation": true,
-      "geometry": true,
-      "amenagementHydrauliqueId": true,
-      "date_debut": true,
-      "date_fin": true,
-      "dateMaj": true,
-      "commentaire": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff906f"
-      },
-      "line": {
-        "color": "#ff906f",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff906f",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "AutreDependance": {
-    "attributes": {
-      "valid": true,
-      "designation": true,
-      "author": true,
-      "geometry": true,
-      "date_fin": true,
-      "date_debut": true,
-      "commentaire": true,
-      "libelle": true,
-      "proprietes": true,
-      "gestions": true,
-      "photos": true,
-      "destinationId": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ff9b64"
-      },
-      "line": {
-        "color": "#ff9b64",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ff9b64",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "RefFonctionnementOAAH": {
-    "attributes": {
-      "libelle": true,
-      "dateMaj": true,
-      "author": true,
-      "designation": true,
-      "valid": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ffa659"
-      },
-      "line": {
-        "color": "#ffa659",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ffa659",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "RefOuvrageAssocieAH": {
-    "attributes": {
-      "libelle": true,
-      "dateMaj": true,
-      "author": true,
-      "designation": true,
-      "valid": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ffb24d"
-      },
-      "line": {
-        "color": "#ffb24d",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ffb24d",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "OuvrageVoirieDependance": {
-    "attributes": {
-      "valid": true,
-      "designation": true,
-      "author": true,
-      "geometry": true,
-      "date_fin": true,
-      "date_debut": true,
-      "commentaire": true,
-      "libelle": true,
-      "proprietes": true,
-      "gestions": true,
-      "photos": true,
-      "typeId": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ffbd42"
-      },
-      "line": {
-        "color": "#ffbd42",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ffbd42",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "MateriauDependance": {
-    "attributes": {
-      "valid": true,
-      "author": true,
-      "designation": true,
-      "volume": true,
-      "date": true,
-      "typeMateriauId": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ffc837"
-      },
-      "line": {
-        "color": "#ffc837",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ffc837",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "TraitAmenagementHydraulique": {
-    "attributes": {
-      "author": true,
-      "valid": true,
-      "designation": true,
-      "geometry": true,
-      "amenagementHydrauliqueId": true,
-      "date_debut": true,
-      "date_fin": true,
-      "dateMaj": true,
-      "commentaire": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ffd32c"
-      },
-      "line": {
-        "color": "#ffd32c",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ffd32c",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "RefTypeAmenagementHydraulique": {
-    "attributes": {
-      "libelle": true,
-      "dateMaj": true,
-      "author": true,
-      "designation": true,
-      "valid": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ffde21"
-      },
-      "line": {
-        "color": "#ffde21",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ffde21",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "RefDestinationDependance": {
-    "attributes": {
-      "libelle": true,
-      "dateMaj": true,
-      "author": true,
-      "designation": true,
-      "valid": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#ffe916"
-      },
-      "line": {
-        "color": "#ffe916",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#ffe916",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "AbstractDependance": {
-    "attributes": {
-      "valid": true,
-      "designation": true,
-      "author": true,
-      "geometry": true,
-      "date_fin": true,
-      "date_debut": true,
-      "commentaire": true,
-      "libelle": true,
-      "proprietes": true,
-      "gestions": true,
-      "photos": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#fff4b"
-      },
-      "line": {
-        "color": "#fff4b",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#fff4b",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "OrganeProtectionCollective": {
-    "attributes": {
-      "author": true,
-      "valid": true,
-      "designation": true,
-      "geometry": true,
-      "amenagementHydrauliqueId": true,
-      "date_debut": true,
-      "date_fin": true,
-      "dateMaj": true,
-      "commentaire": true,
-      "cote": true,
-      "observations": true,
-      "typeId": true,
-      "photos": true,
-      "etatId": true
-    },
-    "style": {
-      "point": {
-        "name": "circle",
-        "color": "#100ff0"
-      },
-      "line": {
-        "color": "#100ff0",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#100ff0",
         "outline_color": "black"
       }
     },
@@ -6679,17 +6101,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#f4ffb"
+        "color": "#ffbf4"
       },
       "line": {
-        "color": "#f4ffb",
+        "color": "#ffbf4",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#f4ffb",
+        "color": "#ffbf4",
         "outline_color": "black"
       }
     },
@@ -6706,17 +6128,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#e9ff16"
+        "color": "#ff17e8"
       },
       "line": {
-        "color": "#e9ff16",
+        "color": "#ff17e8",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#e9ff16",
+        "color": "#ff17e8",
         "outline_color": "black"
       }
     },
@@ -6735,17 +6157,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#deff21"
+        "color": "#ff22dd"
       },
       "line": {
-        "color": "#deff21",
+        "color": "#ff22dd",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#deff21",
+        "color": "#ff22dd",
         "outline_color": "black"
       }
     },
@@ -6762,17 +6184,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#d3ff2c"
+        "color": "#ff2ed1"
       },
       "line": {
-        "color": "#d3ff2c",
+        "color": "#ff2ed1",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#d3ff2c",
+        "color": "#ff2ed1",
         "outline_color": "black"
       }
     },
@@ -6804,17 +6226,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#c8ff37"
+        "color": "#ff3ac5"
       },
       "line": {
-        "color": "#c8ff37",
+        "color": "#ff3ac5",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#c8ff37",
+        "color": "#ff3ac5",
         "outline_color": "black"
       }
     },
@@ -6833,17 +6255,821 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#bdff42"
+        "color": "#ff45ba"
       },
       "line": {
-        "color": "#bdff42",
+        "color": "#ff45ba",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#bdff42",
+        "color": "#ff45ba",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefEtat": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ff51ae"
+      },
+      "line": {
+        "color": "#ff51ae",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ff51ae",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "OuvrageAssocieAmenagementHydraulique": {
+    "attributes": {
+      "author": true,
+      "valid": true,
+      "designation": true,
+      "geometry": true,
+      "amenagementHydrauliqueId": true,
+      "date_debut": true,
+      "date_fin": true,
+      "dateMaj": true,
+      "commentaire": true,
+      "libelle": true,
+      "superficie": true,
+      "hauteur": true,
+      "profondeur": true,
+      "nombre": true,
+      "typeId": true,
+      "ouvrageDeversant": true,
+      "materiauId": true,
+      "amenagementHydrauliqueAssocieIds": true,
+      "desordreDependanceAssocieIds": true,
+      "proprietaireIds": true,
+      "gestionnaireIds": true,
+      "observations": true,
+      "photos": true,
+      "numCouche": true,
+      "sourceId": true,
+      "diametre": true,
+      "cote": true,
+      "section": true,
+      "etatId": true,
+      "fonctionnementId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ff5da2"
+      },
+      "line": {
+        "color": "#ff5da2",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ff5da2",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "AireStockageDependance": {
+    "attributes": {
+      "valid": true,
+      "designation": true,
+      "author": true,
+      "geometry": true,
+      "date_fin": true,
+      "date_debut": true,
+      "commentaire": true,
+      "libelle": true,
+      "proprietes": true,
+      "gestions": true,
+      "photos": true,
+      "materiaux": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ff6897"
+      },
+      "line": {
+        "color": "#ff6897",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ff6897",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "PhotoDependance": {
+    "attributes": {
+      "author": true,
+      "designation": true,
+      "valid": true,
+      "date": true,
+      "commentaire": true,
+      "chemin": true,
+      "libelle": true,
+      "photographeId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ff748b"
+      },
+      "line": {
+        "color": "#ff748b",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ff748b",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefFonctionnementAH": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ff8080"
+      },
+      "line": {
+        "color": "#ff8080",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ff8080",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefOuvrageVoirieDependance": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ff8b74"
+      },
+      "line": {
+        "color": "#ff8b74",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ff8b74",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefTypeOrganeProtectionCollective": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ff9768"
+      },
+      "line": {
+        "color": "#ff9768",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ff9768",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "PrestationAmenagementHydraulique": {
+    "attributes": {
+      "author": true,
+      "valid": true,
+      "designation": true,
+      "geometry": true,
+      "amenagementHydrauliqueId": true,
+      "date_debut": true,
+      "date_fin": true,
+      "dateMaj": true,
+      "commentaire": true,
+      "libelle": true,
+      "coutMetre": true,
+      "coutGlobal": true,
+      "realisationInterne": true,
+      "cote": true,
+      "sourceId": true,
+      "mesureDiverse": true,
+      "typePrestationId": true,
+      "marcheId": true,
+      "desordreIds": true,
+      "ouvrageAssocieAmenagementHydrauliqueIds": true,
+      "photos": true,
+      "intervenantIds": true,
+      "rapportEtudeIds": true,
+      "evenementHydrauliqueIds": true,
+      "observations": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ffa25d"
+      },
+      "line": {
+        "color": "#ffa25d",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ffa25d",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "AmenagementHydraulique": {
+    "attributes": {
+      "valid": true,
+      "designation": true,
+      "author": true,
+      "geometry": true,
+      "date_fin": true,
+      "date_debut": true,
+      "commentaire": true,
+      "libelle": true,
+      "proprietes": true,
+      "gestions": true,
+      "photos": true,
+      "superficie": true,
+      "capaciteStockage": true,
+      "profondeurMoyenne": true,
+      "gestionnaireIds": true,
+      "fonctionnementId": true,
+      "typeId": true,
+      "tronconIds": true,
+      "observations": true,
+      "proprietaireIds": true,
+      "organismeId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ffae51"
+      },
+      "line": {
+        "color": "#ffae51",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ffae51",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "ObservationDependance": {
+    "attributes": {
+      "evolution": true,
+      "author": true,
+      "valid": true,
+      "date": true,
+      "suite": true,
+      "designation": true,
+      "dateMaj": true,
+      "nombreDesordres": true,
+      "photos": true,
+      "urgenceId": true,
+      "suiteApporterId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ffba45"
+      },
+      "line": {
+        "color": "#ffba45",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ffba45",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "DesordreDependance": {
+    "attributes": {
+      "author": true,
+      "valid": true,
+      "designation": true,
+      "geometry": true,
+      "amenagementHydrauliqueId": true,
+      "date_debut": true,
+      "date_fin": true,
+      "dateMaj": true,
+      "commentaire": true,
+      "libelle": true,
+      "dependanceId": true,
+      "lieuDit": true,
+      "cote": true,
+      "sourceId": true,
+      "positionId": true,
+      "categorieDesordreId": true,
+      "typeDesordreId": true,
+      "observations": true,
+      "evenementHydrauliqueIds": true,
+      "ouvrageAssocieIds": true,
+      "prestationIds": true,
+      "articleIds": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ffc53a"
+      },
+      "line": {
+        "color": "#ffc53a",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ffc53a",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "CheminAccesDependance": {
+    "attributes": {
+      "valid": true,
+      "designation": true,
+      "author": true,
+      "geometry": true,
+      "date_fin": true,
+      "date_debut": true,
+      "commentaire": true,
+      "libelle": true,
+      "proprietes": true,
+      "gestions": true,
+      "photos": true,
+      "largeur": true,
+      "statut": true,
+      "revetementId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ffd12e"
+      },
+      "line": {
+        "color": "#ffd12e",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ffd12e",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "StructureAmenagementHydraulique": {
+    "attributes": {
+      "author": true,
+      "valid": true,
+      "designation": true,
+      "geometry": true,
+      "amenagementHydrauliqueId": true,
+      "date_debut": true,
+      "date_fin": true,
+      "dateMaj": true,
+      "commentaire": true,
+      "libelle": true,
+      "numCouche": true,
+      "materiauId": true,
+      "observations": true,
+      "sourceId": true,
+      "photos": true,
+      "epaisseur": true,
+      "fonctionId": true,
+      "natureId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ffdd22"
+      },
+      "line": {
+        "color": "#ffdd22",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ffdd22",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "AbstractAmenagementHydraulique": {
+    "attributes": {
+      "author": true,
+      "valid": true,
+      "designation": true,
+      "geometry": true,
+      "amenagementHydrauliqueId": true,
+      "date_debut": true,
+      "date_fin": true,
+      "dateMaj": true,
+      "commentaire": true,
+      "libelle": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ffe817"
+      },
+      "line": {
+        "color": "#ffe817",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ffe817",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "AutreDependance": {
+    "attributes": {
+      "valid": true,
+      "designation": true,
+      "author": true,
+      "geometry": true,
+      "date_fin": true,
+      "date_debut": true,
+      "commentaire": true,
+      "libelle": true,
+      "proprietes": true,
+      "gestions": true,
+      "photos": true,
+      "destinationId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#fff4b"
+      },
+      "line": {
+        "color": "#fff4b",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#fff4b",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefFonctionnementOAAH": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#100ff0"
+      },
+      "line": {
+        "color": "#100ff0",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#100ff0",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefOuvrageAssocieAH": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#f4ffb"
+      },
+      "line": {
+        "color": "#f4ffb",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#f4ffb",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "OuvrageVoirieDependance": {
+    "attributes": {
+      "valid": true,
+      "designation": true,
+      "author": true,
+      "geometry": true,
+      "date_fin": true,
+      "date_debut": true,
+      "commentaire": true,
+      "libelle": true,
+      "proprietes": true,
+      "gestions": true,
+      "photos": true,
+      "typeId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#e8ff17"
+      },
+      "line": {
+        "color": "#e8ff17",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#e8ff17",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "MateriauDependance": {
+    "attributes": {
+      "valid": true,
+      "author": true,
+      "designation": true,
+      "volume": true,
+      "date": true,
+      "typeMateriauId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#ddff22"
+      },
+      "line": {
+        "color": "#ddff22",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#ddff22",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "TraitAmenagementHydraulique": {
+    "attributes": {
+      "author": true,
+      "valid": true,
+      "designation": true,
+      "geometry": true,
+      "amenagementHydrauliqueId": true,
+      "date_debut": true,
+      "date_fin": true,
+      "dateMaj": true,
+      "commentaire": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#d1ff2e"
+      },
+      "line": {
+        "color": "#d1ff2e",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#d1ff2e",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefTypeAmenagementHydraulique": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#c5ff3a"
+      },
+      "line": {
+        "color": "#c5ff3a",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#c5ff3a",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "RefDestinationDependance": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#baff45"
+      },
+      "line": {
+        "color": "#baff45",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#baff45",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "AbstractDependance": {
+    "attributes": {
+      "valid": true,
+      "designation": true,
+      "author": true,
+      "geometry": true,
+      "date_fin": true,
+      "date_debut": true,
+      "commentaire": true,
+      "libelle": true,
+      "proprietes": true,
+      "gestions": true,
+      "photos": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#aeff51"
+      },
+      "line": {
+        "color": "#aeff51",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#aeff51",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
+  "OrganeProtectionCollective": {
+    "attributes": {
+      "author": true,
+      "valid": true,
+      "designation": true,
+      "geometry": true,
+      "amenagementHydrauliqueId": true,
+      "date_debut": true,
+      "date_fin": true,
+      "dateMaj": true,
+      "commentaire": true,
+      "libelle": true,
+      "cote": true,
+      "observations": true,
+      "typeId": true,
+      "photos": true,
+      "etatId": true
+    },
+    "style": {
+      "point": {
+        "name": "circle",
+        "color": "#a2ff5d"
+      },
+      "line": {
+        "color": "#a2ff5d",
+        "width": "1.0",
+        "capstyle": "round",
+        "line_style": "solid",
+        "joinstyle": "round"
+      },
+      "polygon": {
+        "color": "#a2ff5d",
         "outline_color": "black"
       }
     },
@@ -6860,17 +7086,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#b2ff4d"
+        "color": "#97ff68"
       },
       "line": {
-        "color": "#b2ff4d",
+        "color": "#97ff68",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#b2ff4d",
+        "color": "#97ff68",
         "outline_color": "black"
       }
     },
@@ -6887,17 +7113,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#a6ff59"
+        "color": "#8bff74"
       },
       "line": {
-        "color": "#a6ff59",
+        "color": "#8bff74",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#a6ff59",
+        "color": "#8bff74",
         "outline_color": "black"
       }
     },
@@ -6913,17 +7139,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#9bff64"
+        "color": "#80ff80"
       },
       "line": {
-        "color": "#9bff64",
+        "color": "#80ff80",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#9bff64",
+        "color": "#80ff80",
         "outline_color": "black"
       }
     },
@@ -6962,17 +7188,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#90ff6f"
+        "color": "#74ff8b"
       },
       "line": {
-        "color": "#90ff6f",
+        "color": "#74ff8b",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#90ff6f",
+        "color": "#74ff8b",
         "outline_color": "black"
       }
     },
@@ -6989,17 +7215,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#85ff7a"
+        "color": "#68ff97"
       },
       "line": {
-        "color": "#85ff7a",
+        "color": "#68ff97",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#85ff7a",
+        "color": "#68ff97",
         "outline_color": "black"
       }
     },
@@ -7016,17 +7242,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#7aff85"
+        "color": "#5dffa2"
       },
       "line": {
-        "color": "#7aff85",
+        "color": "#5dffa2",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#7aff85",
+        "color": "#5dffa2",
         "outline_color": "black"
       }
     },
@@ -7065,17 +7291,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#6fff90"
+        "color": "#51ffae"
       },
       "line": {
-        "color": "#6fff90",
+        "color": "#51ffae",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#6fff90",
+        "color": "#51ffae",
         "outline_color": "black"
       }
     },
@@ -7093,17 +7319,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#64ff9b"
+        "color": "#45ffba"
       },
       "line": {
-        "color": "#64ff9b",
+        "color": "#45ffba",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#64ff9b",
+        "color": "#45ffba",
         "outline_color": "black"
       }
     },
@@ -7120,17 +7346,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#59ffa6"
+        "color": "#3affc5"
       },
       "line": {
-        "color": "#59ffa6",
+        "color": "#3affc5",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#59ffa6",
+        "color": "#3affc5",
         "outline_color": "black"
       }
     },
@@ -7147,17 +7373,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#4dffb2"
+        "color": "#2effd1"
       },
       "line": {
-        "color": "#4dffb2",
+        "color": "#2effd1",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#4dffb2",
+        "color": "#2effd1",
         "outline_color": "black"
       }
     },
@@ -7203,17 +7429,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#42ffbd"
+        "color": "#22ffdd"
       },
       "line": {
-        "color": "#42ffbd",
+        "color": "#22ffdd",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#42ffbd",
+        "color": "#22ffdd",
         "outline_color": "black"
       }
     },
@@ -7252,17 +7478,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#37ffc8"
+        "color": "#17ffe8"
       },
       "line": {
-        "color": "#37ffc8",
+        "color": "#17ffe8",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#37ffc8",
+        "color": "#17ffe8",
         "outline_color": "black"
       }
     },
@@ -7279,17 +7505,17 @@
     "style": {
       "point": {
         "name": "circle",
-        "color": "#2cffd3"
+        "color": "#bfff4"
       },
       "line": {
-        "color": "#2cffd3",
+        "color": "#bfff4",
         "width": "1.0",
         "capstyle": "round",
         "line_style": "solid",
         "joinstyle": "round"
       },
       "polygon": {
-        "color": "#2cffd3",
+        "color": "#bfff4",
         "outline_color": "black"
       }
     },
@@ -7331,32 +7557,6 @@
     },
     "style": {
       "point": {
-        "name": "circle",
-        "color": "#21ffde"
-      },
-      "line": {
-        "color": "#21ffde",
-        "width": "1.0",
-        "capstyle": "round",
-        "line_style": "solid",
-        "joinstyle": "round"
-      },
-      "polygon": {
-        "color": "#21ffde",
-        "outline_color": "black"
-      }
-    },
-    "crs": "EPSG:2154"
-  },
-  "AutreOuvrageRegulationLit": {
-    "attributes": {
-      "author": true,
-      "designation": true,
-      "valid": true,
-      "typeId": true
-    },
-    "style": {
-      "point": {
         "name": "cross",
         "color": "#0100ff"
       },
@@ -7374,13 +7574,12 @@
     },
     "crs": "EPSG:2154"
   },
-  "RefFermeturePlageDepotLit": {
+  "AutreOuvrageRegulationLit": {
     "attributes": {
-      "libelle": true,
-      "dateMaj": true,
       "author": true,
       "designation": true,
-      "valid": true
+      "valid": true,
+      "typeId": true
     },
     "style": {
       "point": {
@@ -7401,6 +7600,33 @@
     },
     "crs": "EPSG:2154"
   },
+  "RefFermeturePlageDepotLit": {
+    "attributes": {
+      "libelle": true,
+      "dateMaj": true,
+      "author": true,
+      "designation": true,
+      "valid": true
+    },
+    "style": {
+      "point": {
+        "name": "cross",
+        "color": "#16e9ff"
+      },
+      "line": {
+        "color": "#16e9ff",
+        "width": "1.0",
+        "capstyle": "square",
+        "line_style": "dash",
+        "joinstyle": "bevel"
+      },
+      "polygon": {
+        "color": "#16e9ff",
+        "outline_color": "black"
+      }
+    },
+    "crs": "EPSG:2154"
+  },
   "RefTypeBarrageLit": {
     "attributes": {
       "libelle": true,
@@ -7412,17 +7638,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#17e8ff"
+        "color": "#21deff"
       },
       "line": {
-        "color": "#17e8ff",
+        "color": "#21deff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#17e8ff",
+        "color": "#21deff",
         "outline_color": "black"
       }
     },
@@ -7446,22 +7672,23 @@
       "valid": true,
       "gestions": true,
       "amenagementHydrauliqueId": true,
+      "photos": true,
       "litId": true
     },
     "style": {
       "point": {
         "name": "cross",
-        "color": "#22ddff"
+        "color": "#2cd3ff"
       },
       "line": {
-        "color": "#22ddff",
+        "color": "#2cd3ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#22ddff",
+        "color": "#2cd3ff",
         "outline_color": "black"
       }
     },
@@ -7500,17 +7727,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#2ed1ff"
+        "color": "#37c8ff"
       },
       "line": {
-        "color": "#2ed1ff",
+        "color": "#37c8ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#2ed1ff",
+        "color": "#37c8ff",
         "outline_color": "black"
       }
     },
@@ -7527,17 +7754,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#3ac5ff"
+        "color": "#42bdff"
       },
       "line": {
-        "color": "#3ac5ff",
+        "color": "#42bdff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#3ac5ff",
+        "color": "#42bdff",
         "outline_color": "black"
       }
     },
@@ -7554,17 +7781,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#45baff"
+        "color": "#4db2ff"
       },
       "line": {
-        "color": "#45baff",
+        "color": "#4db2ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#45baff",
+        "color": "#4db2ff",
         "outline_color": "black"
       }
     },
@@ -7581,17 +7808,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#51aeff"
+        "color": "#59a6ff"
       },
       "line": {
-        "color": "#51aeff",
+        "color": "#59a6ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#51aeff",
+        "color": "#59a6ff",
         "outline_color": "black"
       }
     },
@@ -7608,17 +7835,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#5da2ff"
+        "color": "#649bff"
       },
       "line": {
-        "color": "#5da2ff",
+        "color": "#649bff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#5da2ff",
+        "color": "#649bff",
         "outline_color": "black"
       }
     },
@@ -7694,17 +7921,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#6897ff"
+        "color": "#6f90ff"
       },
       "line": {
-        "color": "#6897ff",
+        "color": "#6f90ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#6897ff",
+        "color": "#6f90ff",
         "outline_color": "black"
       }
     },
@@ -7743,17 +7970,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#748bff"
+        "color": "#7a85ff"
       },
       "line": {
-        "color": "#748bff",
+        "color": "#7a85ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#748bff",
+        "color": "#7a85ff",
         "outline_color": "black"
       }
     },
@@ -7768,17 +7995,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#8080ff"
+        "color": "#857aff"
       },
       "line": {
-        "color": "#8080ff",
+        "color": "#857aff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#8080ff",
+        "color": "#857aff",
         "outline_color": "black"
       }
     },
@@ -7800,17 +8027,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#8b74ff"
+        "color": "#906fff"
       },
       "line": {
-        "color": "#8b74ff",
+        "color": "#906fff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#8b74ff",
+        "color": "#906fff",
         "outline_color": "black"
       }
     },
@@ -7828,17 +8055,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#9768ff"
+        "color": "#9b64ff"
       },
       "line": {
-        "color": "#9768ff",
+        "color": "#9b64ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#9768ff",
+        "color": "#9b64ff",
         "outline_color": "black"
       }
     },
@@ -7855,17 +8082,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#a25dff"
+        "color": "#a659ff"
       },
       "line": {
-        "color": "#a25dff",
+        "color": "#a659ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#a25dff",
+        "color": "#a659ff",
         "outline_color": "black"
       }
     },
@@ -7906,17 +8133,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ae51ff"
+        "color": "#b24dff"
       },
       "line": {
-        "color": "#ae51ff",
+        "color": "#b24dff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ae51ff",
+        "color": "#b24dff",
         "outline_color": "black"
       }
     },
@@ -7933,17 +8160,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ba45ff"
+        "color": "#bd42ff"
       },
       "line": {
-        "color": "#ba45ff",
+        "color": "#bd42ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ba45ff",
+        "color": "#bd42ff",
         "outline_color": "black"
       }
     },
@@ -7960,17 +8187,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#c53aff"
+        "color": "#c837ff"
       },
       "line": {
-        "color": "#c53aff",
+        "color": "#c837ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#c53aff",
+        "color": "#c837ff",
         "outline_color": "black"
       }
     },
@@ -7987,17 +8214,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#d12eff"
+        "color": "#d32cff"
       },
       "line": {
-        "color": "#d12eff",
+        "color": "#d32cff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#d12eff",
+        "color": "#d32cff",
         "outline_color": "black"
       }
     },
@@ -8037,17 +8264,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#dd22ff"
+        "color": "#de21ff"
       },
       "line": {
-        "color": "#dd22ff",
+        "color": "#de21ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#dd22ff",
+        "color": "#de21ff",
         "outline_color": "black"
       }
     },
@@ -8064,17 +8291,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#e817ff"
+        "color": "#e916ff"
       },
       "line": {
-        "color": "#e817ff",
+        "color": "#e916ff",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#e817ff",
+        "color": "#e916ff",
         "outline_color": "black"
       }
     },
@@ -8311,17 +8538,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff16e9"
+        "color": "#ff17e8"
       },
       "line": {
-        "color": "#ff16e9",
+        "color": "#ff17e8",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff16e9",
+        "color": "#ff17e8",
         "outline_color": "black"
       }
     },
@@ -8342,17 +8569,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff21de"
+        "color": "#ff22dd"
       },
       "line": {
-        "color": "#ff21de",
+        "color": "#ff22dd",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff21de",
+        "color": "#ff22dd",
         "outline_color": "black"
       }
     },
@@ -8399,17 +8626,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff2cd3"
+        "color": "#ff2ed1"
       },
       "line": {
-        "color": "#ff2cd3",
+        "color": "#ff2ed1",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff2cd3",
+        "color": "#ff2ed1",
         "outline_color": "black"
       }
     },
@@ -8460,17 +8687,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff37c8"
+        "color": "#ff3ac5"
       },
       "line": {
-        "color": "#ff37c8",
+        "color": "#ff3ac5",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff37c8",
+        "color": "#ff3ac5",
         "outline_color": "black"
       }
     },
@@ -8493,22 +8720,23 @@
       "designation": true,
       "valid": true,
       "gestions": true,
-      "amenagementHydrauliqueId": true
+      "amenagementHydrauliqueId": true,
+      "photos": true
     },
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff42bd"
+        "color": "#ff45ba"
       },
       "line": {
-        "color": "#ff42bd",
+        "color": "#ff45ba",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff42bd",
+        "color": "#ff45ba",
         "outline_color": "black"
       }
     },
@@ -8553,17 +8781,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff4db2"
+        "color": "#ff51ae"
       },
       "line": {
-        "color": "#ff4db2",
+        "color": "#ff51ae",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff4db2",
+        "color": "#ff51ae",
         "outline_color": "black"
       }
     },
@@ -8619,17 +8847,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff59a6"
+        "color": "#ff5da2"
       },
       "line": {
-        "color": "#ff59a6",
+        "color": "#ff5da2",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff59a6",
+        "color": "#ff5da2",
         "outline_color": "black"
       }
     },
@@ -8674,17 +8902,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff649b"
+        "color": "#ff6897"
       },
       "line": {
-        "color": "#ff649b",
+        "color": "#ff6897",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff649b",
+        "color": "#ff6897",
         "outline_color": "black"
       }
     },
@@ -8736,17 +8964,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff6f90"
+        "color": "#ff748b"
       },
       "line": {
-        "color": "#ff6f90",
+        "color": "#ff748b",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff6f90",
+        "color": "#ff748b",
         "outline_color": "black"
       }
     },
@@ -8792,17 +9020,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff7a85"
+        "color": "#ff8080"
       },
       "line": {
-        "color": "#ff7a85",
+        "color": "#ff8080",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff7a85",
+        "color": "#ff8080",
         "outline_color": "black"
       }
     },
@@ -8822,17 +9050,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff857a"
+        "color": "#ff8b74"
       },
       "line": {
-        "color": "#ff857a",
+        "color": "#ff8b74",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff857a",
+        "color": "#ff8b74",
         "outline_color": "black"
       }
     },
@@ -8881,17 +9109,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff906f"
+        "color": "#ff9768"
       },
       "line": {
-        "color": "#ff906f",
+        "color": "#ff9768",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff906f",
+        "color": "#ff9768",
         "outline_color": "black"
       }
     },
@@ -8908,17 +9136,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ff9b64"
+        "color": "#ffa25d"
       },
       "line": {
-        "color": "#ff9b64",
+        "color": "#ffa25d",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ff9b64",
+        "color": "#ffa25d",
         "outline_color": "black"
       }
     },
@@ -8936,17 +9164,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ffa659"
+        "color": "#ffae51"
       },
       "line": {
-        "color": "#ffa659",
+        "color": "#ffae51",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffa659",
+        "color": "#ffae51",
         "outline_color": "black"
       }
     },
@@ -8965,17 +9193,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ffb24d"
+        "color": "#ffba45"
       },
       "line": {
-        "color": "#ffb24d",
+        "color": "#ffba45",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffb24d",
+        "color": "#ffba45",
         "outline_color": "black"
       }
     },
@@ -8993,17 +9221,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ffbd42"
+        "color": "#ffc53a"
       },
       "line": {
-        "color": "#ffbd42",
+        "color": "#ffc53a",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffbd42",
+        "color": "#ffc53a",
         "outline_color": "black"
       }
     },
@@ -9024,17 +9252,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ffc837"
+        "color": "#ffd12e"
       },
       "line": {
-        "color": "#ffc837",
+        "color": "#ffd12e",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffc837",
+        "color": "#ffd12e",
         "outline_color": "black"
       }
     },
@@ -9053,17 +9281,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ffd32c"
+        "color": "#ffdd22"
       },
       "line": {
-        "color": "#ffd32c",
+        "color": "#ffdd22",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffd32c",
+        "color": "#ffdd22",
         "outline_color": "black"
       }
     },
@@ -9084,17 +9312,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ffde21"
+        "color": "#ffe817"
       },
       "line": {
-        "color": "#ffde21",
+        "color": "#ffe817",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffde21",
+        "color": "#ffe817",
         "outline_color": "black"
       }
     },
@@ -9117,17 +9345,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#ffe916"
+        "color": "#fff4b"
       },
       "line": {
-        "color": "#ffe916",
+        "color": "#fff4b",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#ffe916",
+        "color": "#fff4b",
         "outline_color": "black"
       }
     },
@@ -9144,17 +9372,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#fff4b"
+        "color": "#100ff0"
       },
       "line": {
-        "color": "#fff4b",
+        "color": "#100ff0",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#fff4b",
+        "color": "#100ff0",
         "outline_color": "black"
       }
     },
@@ -9194,17 +9422,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#100ff0"
+        "color": "#f4ffb"
       },
       "line": {
-        "color": "#100ff0",
+        "color": "#f4ffb",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#100ff0",
+        "color": "#f4ffb",
         "outline_color": "black"
       }
     },
@@ -9222,17 +9450,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#f4ffb"
+        "color": "#e8ff17"
       },
       "line": {
-        "color": "#f4ffb",
+        "color": "#e8ff17",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#f4ffb",
+        "color": "#e8ff17",
         "outline_color": "black"
       }
     },
@@ -9278,17 +9506,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#e9ff16"
+        "color": "#ddff22"
       },
       "line": {
-        "color": "#e9ff16",
+        "color": "#ddff22",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#e9ff16",
+        "color": "#ddff22",
         "outline_color": "black"
       }
     },
@@ -9305,17 +9533,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#deff21"
+        "color": "#d1ff2e"
       },
       "line": {
-        "color": "#deff21",
+        "color": "#d1ff2e",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#deff21",
+        "color": "#d1ff2e",
         "outline_color": "black"
       }
     },
@@ -9361,17 +9589,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#d3ff2c"
+        "color": "#c5ff3a"
       },
       "line": {
-        "color": "#d3ff2c",
+        "color": "#c5ff3a",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#d3ff2c",
+        "color": "#c5ff3a",
         "outline_color": "black"
       }
     },
@@ -9414,17 +9642,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#c8ff37"
+        "color": "#baff45"
       },
       "line": {
-        "color": "#c8ff37",
+        "color": "#baff45",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#c8ff37",
+        "color": "#baff45",
         "outline_color": "black"
       }
     },
@@ -9444,17 +9672,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#bdff42"
+        "color": "#aeff51"
       },
       "line": {
-        "color": "#bdff42",
+        "color": "#aeff51",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#bdff42",
+        "color": "#aeff51",
         "outline_color": "black"
       }
     },
@@ -9504,17 +9732,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#b2ff4d"
+        "color": "#a2ff5d"
       },
       "line": {
-        "color": "#b2ff4d",
+        "color": "#a2ff5d",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#b2ff4d",
+        "color": "#a2ff5d",
         "outline_color": "black"
       }
     },
@@ -9531,17 +9759,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#a6ff59"
+        "color": "#97ff68"
       },
       "line": {
-        "color": "#a6ff59",
+        "color": "#97ff68",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#a6ff59",
+        "color": "#97ff68",
         "outline_color": "black"
       }
     },
@@ -9559,17 +9787,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#9bff64"
+        "color": "#8bff74"
       },
       "line": {
-        "color": "#9bff64",
+        "color": "#8bff74",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#9bff64",
+        "color": "#8bff74",
         "outline_color": "black"
       }
     },
@@ -9587,17 +9815,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#90ff6f"
+        "color": "#80ff80"
       },
       "line": {
-        "color": "#90ff6f",
+        "color": "#80ff80",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#90ff6f",
+        "color": "#80ff80",
         "outline_color": "black"
       }
     },
@@ -9645,17 +9873,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#85ff7a"
+        "color": "#74ff8b"
       },
       "line": {
-        "color": "#85ff7a",
+        "color": "#74ff8b",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#85ff7a",
+        "color": "#74ff8b",
         "outline_color": "black"
       }
     },
@@ -9672,17 +9900,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#7aff85"
+        "color": "#68ff97"
       },
       "line": {
-        "color": "#7aff85",
+        "color": "#68ff97",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#7aff85",
+        "color": "#68ff97",
         "outline_color": "black"
       }
     },
@@ -9703,17 +9931,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#6fff90"
+        "color": "#5dffa2"
       },
       "line": {
-        "color": "#6fff90",
+        "color": "#5dffa2",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#6fff90",
+        "color": "#5dffa2",
         "outline_color": "black"
       }
     },
@@ -9730,17 +9958,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#64ff9b"
+        "color": "#51ffae"
       },
       "line": {
-        "color": "#64ff9b",
+        "color": "#51ffae",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#64ff9b",
+        "color": "#51ffae",
         "outline_color": "black"
       }
     },
@@ -9760,17 +9988,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#59ffa6"
+        "color": "#45ffba"
       },
       "line": {
-        "color": "#59ffa6",
+        "color": "#45ffba",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#59ffa6",
+        "color": "#45ffba",
         "outline_color": "black"
       }
     },
@@ -9787,17 +10015,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#4dffb2"
+        "color": "#3affc5"
       },
       "line": {
-        "color": "#4dffb2",
+        "color": "#3affc5",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#4dffb2",
+        "color": "#3affc5",
         "outline_color": "black"
       }
     },
@@ -9818,17 +10046,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#42ffbd"
+        "color": "#2effd1"
       },
       "line": {
-        "color": "#42ffbd",
+        "color": "#2effd1",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#42ffbd",
+        "color": "#2effd1",
         "outline_color": "black"
       }
     },
@@ -9846,17 +10074,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#37ffc8"
+        "color": "#22ffdd"
       },
       "line": {
-        "color": "#37ffc8",
+        "color": "#22ffdd",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#37ffc8",
+        "color": "#22ffdd",
         "outline_color": "black"
       }
     },
@@ -9904,17 +10132,17 @@
     "style": {
       "point": {
         "name": "cross",
-        "color": "#2cffd3"
+        "color": "#17ffe8"
       },
       "line": {
-        "color": "#2cffd3",
+        "color": "#17ffe8",
         "width": "1.0",
         "capstyle": "square",
         "line_style": "dash",
         "joinstyle": "bevel"
       },
       "polygon": {
-        "color": "#2cffd3",
+        "color": "#17ffe8",
         "outline_color": "black"
       }
     },
