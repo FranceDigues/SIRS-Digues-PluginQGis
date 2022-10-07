@@ -244,7 +244,8 @@ class CouchdbBuilder(object):
             else:
                 lv = self.__treat_primitive_type_values(conf, val, database, connector)
                 if lv is not None:
-                    out.append([QStandardItem(lv[0]), QStandardItem(lv[1])])
+                    # conversion to string to avoid exception TypeError:  QStandardItem(): too many arguments   QStandardItem(str): argument 1 has unexpected type 'float'   QStandardItem(QIcon, str): argument 1 has unexpected type 'float'   QStandardItem(int, columns: int = 1): argument 1 has unexpected type 'float'   QStandardItem(QStandardItem): argument 1 has unexpected type 'float'
+                    out.append([QStandardItem(str(lv[0])), QStandardItem(str(lv[1]))])
         return out
 
     def __treat_containment(self, values, val, containment_values, label):
