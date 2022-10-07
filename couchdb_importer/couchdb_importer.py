@@ -627,9 +627,9 @@ class CouchdbImporter:
         # reset connection
         self.connector = None
         # reset url, login and password fields
-        self.dlg.url.setText("")
-        self.dlg.login.setText("")
-        self.dlg.password.setText("")
+        # self.dlg.url.setText("")
+        # self.dlg.login.setText("")
+        # self.dlg.password.setText("")
         # reset database combobox
         self.dlg.database.clear()
         # reset positionable class list
