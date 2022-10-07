@@ -226,6 +226,7 @@ class CouchdbImporter:
                     attributes = ["_id", "@class"] + attributes
                     result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
+                    self.connector.replace_id_by_label_in_result(database, result)
                     Utils.filter_positionable_list_attribute(result)
                     self.loadedPositionable.extend(result)
                 completed = int(completed + lu)
