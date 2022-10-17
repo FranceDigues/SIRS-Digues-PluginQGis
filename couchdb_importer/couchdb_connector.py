@@ -230,5 +230,5 @@ class CouchdbConnector(object):
                 elif type(elem[attr]) == dict:
                     self.replace_id_by_label(database, elem[attr])
         else:
-            logging.warning(f" An attribute is not type dictionary or list of dictionaries")
+            logging.warning("An attribute is not type dictionary or list of dictionaries")
 
