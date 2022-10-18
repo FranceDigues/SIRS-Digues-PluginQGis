@@ -29,6 +29,7 @@ couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
 if couchdb_dir not in sys.path:
     sys.path.append(couchdb_dir)
 import couchdb
+import logging
 from .utils import Utils
 from functools import lru_cache
 
@@ -175,7 +176,7 @@ class CouchdbConnector(object):
 
         return target
 
-    @lru_cache(maxsize=None)
+    @lru_cache(maxsize=1000)
     def get_label_from_id(self, database, Id):
         """
         Care with the usage of this methods, it can cause memory saturation problems.
@@ -183,7 +184,7 @@ class CouchdbConnector(object):
         result = list(self.request_database(database, single=Id))
         return Id if len(result) == 0 else Utils.get_label_reference(result[0])
 
-    @lru_cache(maxsize=None)
+    @lru_cache(maxsize=1000)
     def get_value_or_id_from_id(self, database, Id, attribute):
         """
         Care with the usage of this methods, it can cause memory saturation problems.
@@ -193,3 +194,41 @@ class CouchdbConnector(object):
             return Id
         else:
             return result[0][attribute] if attribute in result[0] else Id
+
+
+    def replace_id_by_label_in_result(self, database, target):
+        for elem in target:
+            self.replace_id_by_label(database, elem)
+
+    def replace_id_by_label(self, database, elem):
+        if type(elem) == dict:
+            for attr in elem:
+                if attr[-2:] == 'Id' or attr in ['author', 'orientationPhoto', 'Author', 'Type', 'type']:
+                    if elem[attr] is not None:
+                        if attr in ['borneDebutId', 'borneFinId', 'tronconId']:
+                            elem[attr] = self.get_label_from_id(database, elem[attr])
+                            # elem[attr] = self.get_and_save_label_from_id(database, elem[attr], True)
+                        else:
+                            elem[attr] = self.get_label_from_id(database, elem[attr])
+                            # elem[attr] = self.get_and_save_label_from_id(database, elem[attr], False)
+                elif attr[-3:] == 'Ids' and type(elem[attr]) == list:
+                    labelList = []
+                    for val in elem[attr]:
+                        label = val
+                        if val is not None:
+                            if attr == 'prestationIds':
+                                label = self.get_label_from_id(database, val)
+                                # label = self.get_and_save_label_from_id(database, val, True)
+                            else:
+                                label = self.get_label_from_id(database, val)
+                                # label = self.get_and_save_label_from_id(database, val, False)
+                        labelList.append(label)
+                    elem[attr] = labelList
+                elif type(elem[attr]) == list:
+                    for elem2 in elem[attr]:
+                        self.replace_id_by_label(database, elem2)
+                elif type(elem[attr]) == dict:
+                    self.replace_id_by_label(database, elem[attr])
+        else:
+            logging.warning("An attribute is not type dictionary or list of dictionaries")
+

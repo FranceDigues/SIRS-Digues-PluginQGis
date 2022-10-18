@@ -226,9 +226,10 @@ class CouchdbImporter:
                     attributes = ["_id", "@class"] + attributes
                     result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
+                    self.connector.replace_id_by_label_in_result(database, result)
                     Utils.filter_positionable_list_attribute(result)
                     self.loadedPositionable.extend(result)
-                completed = completed + lu
+                completed = int(completed + lu)
                 self.dlg.progressBar.setValue(completed)
         except couchdb.http.Unauthorized:
             self.simple_message("Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
@@ -481,7 +482,7 @@ class CouchdbImporter:
             else:
                 item1.setCheckState(Qt.Unchecked)
             model.appendRow([item1, item2, item3, item4, item5])
-            completed = completed + lu
+            completed = int(completed + lu)
             self.dlg.progressBar.setValue(completed)
         model.itemChanged.connect(self.on_positionable_list_changed)
         model.sort(0, Qt.AscendingOrder)
@@ -627,9 +628,9 @@ class CouchdbImporter:
         # reset connection
         self.connector = None
         # reset url, login and password fields
-        self.dlg.url.setText("")
-        self.dlg.login.setText("")
-        self.dlg.password.setText("")
+        # self.dlg.url.setText("")
+        # self.dlg.login.setText("")
+        # self.dlg.password.setText("")
         # reset database combobox
         self.dlg.database.clear()
         # reset positionable class list
@@ -804,7 +805,7 @@ class CouchdbImporter:
                 le type de géométrie a changé et n'est plus celle de\
                  sa couche actuelle. Veuillez supprimer puis réimporter\
                   l'objet de la couche correspondant à cette donnée\
-                   pour éffectuer sa mise à jour."
+                   pour effectuer sa mise à jour."
                 self.basic_message(msg, "couche: " + layer.name() + "donnée: " + str(id), Qgis.Warning)
                 continue
 
@@ -901,7 +902,7 @@ class CouchdbImporter:
             if group is None:
                 group = root.addGroup(className)
             # progress bar
-            completed = completed + lu
+            completed = int(completed + lu)
             self.dlg.progressBar.setValue(completed)
         # complete group
         for className in allLayers:
