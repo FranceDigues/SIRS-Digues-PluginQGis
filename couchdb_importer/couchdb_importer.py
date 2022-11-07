@@ -50,6 +50,20 @@ from .utils import Utils
 from http.client import InvalidURL
 
 
+def check_indexes(model, indexes, check_state):
+    for index in indexes:
+        item_check = model.item(index.row(), 0)
+        if item_check.isCheckable():
+            item_check.setCheckState(check_state)
+
+"""
+Check checkBoxes associated with all items selected for the input QTableView
+"""
+
+
+def check_all_selected_item(q_table_view):
+    check_indexes(q_table_view.model(), q_table_view.selectedIndexes(), Qt.Checked)
+
 class CouchdbImporter:
     """QGIS Plugin Implementation."""
 
@@ -430,6 +444,11 @@ class CouchdbImporter:
             model.appendRow(item)
         model.itemChanged.connect(self.on_positionable_class_list_changed)
         self.dlg.positionableClass.setModel(model)
+        # MULTI_SELECTION_COMMENT :Not sure if it's the best place to add this connection but seems to work
+        # -> create an error when add at the self.run(...) method as the selectionModel seems unset
+        self.dlg.positionableClass.selectionModel().selectionChanged.connect(self.on_positionable_class_selection)
+        # self.dlg.positionableClass.selectionModel().selectionChanged.connect(
+        #         check_all_selected_item(self.dlg.positionableClass))
 
     def build_list_attribute(self):
         model = QStandardItemModel()
@@ -450,6 +469,8 @@ class CouchdbImporter:
         model.itemChanged.connect(self.on_attribute_list_changed)
         self.dlg.attribute.setModel(model)
         self.dlg.attribute.setColumnHidden(1, True)
+        # see MULTI_SELECTION_COMMENT
+        self.dlg.attribute.selectionModel().selectionChanged.connect(self.on_attribute_selection)
 
     def build_list_positionable(self, keyword=None):
         model = QStandardItemModel()
@@ -492,6 +513,8 @@ class CouchdbImporter:
         self.dlg.positionable.resizeColumnsToContents()
         self.dlg.positionable.setColumnHidden(4, True)
         self.dlg.progressBar.setValue(0)
+        # see MULTI_SELECTION_COMMENT
+        self.dlg.positionable.selectionModel().selectionChanged.connect(self.on_positionable_selection)
 
     def build_list_detail(self, pos):
         database = self.dlg.database.currentText()
@@ -582,6 +605,15 @@ class CouchdbImporter:
         self.complete_data_with_ids(False)
         self.build_list_positionable()
         self.set_ui_access_detail()
+
+    def on_positionable_class_selection(self, newSelection, oldSelection):
+        check_all_selected_item(self.dlg.positionableClass)
+
+    def on_positionable_selection(self, newSelection, oldSelection):
+        check_all_selected_item(self.dlg.positionable)
+
+    def on_attribute_selection(self, newSelection, oldSelection):
+        check_all_selected_item(self.dlg.attribute)
 
     def on_positionable_class_click(self, item):
         self.dlg.selectAllAttribute.setCheckable(True)
@@ -711,7 +743,8 @@ class CouchdbImporter:
 
     def on_update_layers_click(self):
         # Confirmation popup
-        isYes = self.confirmation_message("La mise à jour va s'éffectuer sur toutes les couches de données Sirs déjà importées.")
+        isYes = self.confirmation_message(
+            "La mise à jour va s'effectuer sur toutes les couches de données Sirs déjà importées.")
         if not isYes:
             return
 
