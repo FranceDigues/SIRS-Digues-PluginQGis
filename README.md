@@ -43,3 +43,10 @@ Mapping between interface components (like buttons) and implemented python metho
 `couchdb_importer#run()`
 
 Connection to couchdb service is done with ` couchdb_connector.py` file.
+
+# Release
+
+In order to release a new version :
+- Edit to match the version to release in `couchdb_importer/metadata.txt`
+- Run the manual step `release` of the Gitlab pipeline
+A new tag should be created, matching the version specified

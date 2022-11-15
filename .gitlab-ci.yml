@@ -1,0 +1,33 @@
+stages:
+  - package
+  - release
+
+package:
+  image: alpine:latest
+  stage: package
+  script:
+    # Install ZIP package
+    - apk add zip
+    # Build and push
+    - zip -r couchdb_importer_$CI_COMMIT_REF_NAME.zip ./couchdb_importer
+  artifacts:
+    paths:
+      - "*.zip"
+
+release:
+  image: alpine:latest
+  stage: release
+  when: manual
+  except:
+    - tags
+  script:
+    # Install Git
+    - apk add git
+    # Configure Git credentials
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    # Find version in source
+    - tag=v$(grep "version=" couchdb_importer/metadata.txt | cut -d= -f2)
+    # Tag and push
+    - git tag "$tag"
+    - git push https://gitlab-ci-token:$ACCESS_TOKEN@$CI_SERVER_HOST/$CI_PROJECT_PATH.git $tag
