@@ -25,7 +25,7 @@ import os.path
 import sys
 import socket
 
-from PyQt5.QtWidgets import QMessageBox
+from .message_utils import simple_message, basic_message, stacked_message, confirmation_message
 
 couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
 if couchdb_dir not in sys.path:
@@ -105,7 +105,7 @@ class CouchdbImporter:
         self.currentPositionableClass = ""
         self.loadedPositionable = []
         self.data = CouchdbData()
-        self.provider = CouchdbBuilder()
+        self.provider = CouchdbBuilder(iface)
         self.lengthParameter = 1  # unit meter
         self.projection = "projeté"
         self.alwaysSelectedAttribute = ["_id", "geometry", "@class", "libelle", "designation", "positionDebut", "positionFin"]
@@ -246,9 +246,9 @@ class CouchdbImporter:
                 completed = int(completed + lu)
                 self.dlg.progressBar.setValue(completed)
         except couchdb.http.Unauthorized:
-            self.simple_message("Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
-        except (ConnectionRefusedError, ValueError):
-            self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base.", Qgis.Critical)
+            simple_message(self.iface, "Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
+        except (ConnectionRefusedError, ValueError) as e:
+            simple_message(self.iface, "Connexion refusée Ou value error. Veuillez vérifier l'url ou l'ouverture de la base. Exception :"+str(e), Qgis.Critical)
 
     def collect_data_from_layers_ids(self, database):
         try:
@@ -970,27 +970,16 @@ class CouchdbImporter:
         self.errorMsg = {'noproj': {}, 'noabs': {}, 'nogeom': {}, 'alreadyloaded': {}}
 
     def simple_message(self, msg, level):
-        widget = self.iface.messageBar().createMessage(msg)
-        self.iface.messageBar().pushWidget(widget, level, 5)
+        simple_message(self.iface, msg, level)
 
     def basic_message(self, msg1, msg2, level):
-        widget = self.iface.messageBar().createMessage(msg1, msg2)
-        self.iface.messageBar().pushWidget(widget, level, 5)
+        basic_message(self.iface, msg1, msg2, level)
 
     def stacked_message(self, msg1, dictClassName, level):
-        msg2 = ""
-        for className in dictClassName:
-            msg2 = msg2 + "\n" + className + " ("
-            for ref in dictClassName[className]:
-                msg2 = msg2 + ref + ", "
-            msg2 = msg2[:-2]
-            msg2 = msg2 + ")"
-        widget = self.iface.messageBar().createMessage(msg1, msg2)
-        self.iface.messageBar().pushWidget(widget, level, 5)
+        stacked_message(self.iface, msg1, dictClassName, level)
 
     def confirmation_message(self, msg):
-        reply = QMessageBox.question(self.iface.mainWindow(), 'Continuez?', msg, QMessageBox.Yes, QMessageBox.No)
-        return reply == QMessageBox.Yes
+        confirmation_message(self.iface, msg)
 
     """
     /****************************************************************

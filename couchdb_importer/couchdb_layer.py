@@ -27,14 +27,21 @@ import json
 
 from qgis.PyQt.QtCore import QVariant
 from qgis.PyQt.QtGui import QStandardItem
+from qgis._core import Qgis
 from qgis.core import QgsFeature, QgsVectorLayer, QgsField, QgsLineSymbol, QgsMarkerSymbol, QgsWkbTypes, QgsFillSymbol
 
 from .couchdb_data import CouchdbData
 from .couchdb_connector import CouchdbConnector
+from .message_utils import simple_message
+
+
+# TODO (REPLACE all 'print(...)' by use of method in message_utils.py -> print doesn't work in qgis
+
 
 
 class CouchdbBuilder(object):
-    def __init__(self):
+    def __init__(self, iface):
+        self.iface = iface
         self.gender_map = self.init_gender_map()
         __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
         with open(os.path.join(__location__, 'formTemplatePilote.json')) as confFile:
@@ -147,9 +154,8 @@ class CouchdbBuilder(object):
             if pref[attr]:
                 conf = fields.get(attr, None)
                 if conf is None:
-                    print("[NOT FOUND IN FIELDS]: class: " + className + "; attribute: " + attr)
+                    simple_message(self.iface, "[NOT FOUND IN FIELDS]: class: " + className + "; attribute: " + attr, Qgis.Warning)
                     continue
-
                 val = content.get(attr, None)
                 if val is None:
                     continue
@@ -244,7 +250,7 @@ class CouchdbBuilder(object):
             else:
                 lv = self.__treat_primitive_type_values(conf, val, database, connector)
                 if lv is not None:
-                    # conversion to string to avoid exception TypeError:  QStandardItem(): too many arguments   QStandardItem(str): argument 1 has unexpected type 'float'   QStandardItem(QIcon, str): argument 1 has unexpected type 'float'   QStandardItem(int, columns: int = 1): argument 1 has unexpected type 'float'   QStandardItem(QStandardItem): argument 1 has unexpected type 'float'
+                    # Explicit conversion in string QStandardItem(str): argument 1 has unexpected type 'float'
                     out.append([QStandardItem(str(lv[0])), QStandardItem(str(lv[1]))])
         return out
 
