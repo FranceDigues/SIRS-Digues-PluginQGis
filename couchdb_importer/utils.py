@@ -21,10 +21,10 @@
  *                                                                         *
  ***************************************************************************/
 """
-
-from qgis.PyQt.QtGui import QStandardItem, QStandardItemModel
+from time import strptime
 from qgis.core import QgsGeometry, QgsProject, QgsPoint
 from qgis.PyQt.QtCore import Qt
+from couchdb_importer.message_utils import simple_message
 
 
 class Utils:
@@ -112,7 +112,6 @@ class Utils:
                 return 'no data ||| ' + positionable['designation']
             else:
                 return 'no data ||| no data'
-
 
     @staticmethod
     def collect_ids_from_layers():
@@ -248,9 +247,9 @@ class Utils:
     def build_query_one_id_with_class(className, id):
         mango = {
             "selector": {
-                    "@class": "fr.sirs.core.model." + className,
-                    "_id": id
-                }
+                "@class": "fr.sirs.core.model." + className,
+                "_id": id
+            }
         }
         return mango
 
@@ -288,14 +287,21 @@ class Utils:
             return elements[-n:]
 
     @staticmethod
-    def filter_positionable_list_attribute(target):
+    def filter_positionable_list_attribute(target, iface):
+        """
+        Replace all attribute of type list by a single value;
+        for example all observations of a 'Desordre' are replace by the most recent observation.
+        """
         for elem in target:
             for attr in elem:
                 if type(elem[attr]) == list and len(elem[attr]) != 0:
                     if attr == 'prestationIds':
                         elem[attr] = Utils.filter_last_n_elements(elem[attr], 3)
                     else:
-                        elem[attr] = [elem[attr][-1]]
+                        if len(elem[attr]) > 1:
+                            elem[attr] = [try_extract_most_recent(elem[attr], iface)]
+                        else:
+                            elem[attr] = [elem[attr][0]]
 
     @staticmethod
     def filter_object_by_attributes(obj, attributes):
@@ -304,3 +310,33 @@ class Utils:
         for attr in target:
             if attr not in attributes:
                 del obj[attr]
+
+
+# @staticmethod
+def try_extract_most_recent(list_attribute: list, iface, date_attribute_name: str = "date",
+                            date_format: str = "%Y-%m-%d"):
+    """
+    Try to return most recent object from the input list
+    :param iface: iface in order to be able do display messages in qgis
+    :param date_attribute_name: key to retrieve date in the list's elements; default value 'date'
+    :param date_format: expected format of the date attribute; default value '%Y-%m-%d' for yyyy-mm-dd format
+    :param list_attribute: List to reduce
+    :return: None if empty list ; last element if objects of the list doesn't have a date attribute with format
+            yyyy-MM-dd; else the last object of the list according to the 'date' attribute
+    """
+    if len(list_attribute) == 0:
+        return None
+    most_recent = list_attribute[-1]
+    most_recent_date = None
+
+    for obj in list_attribute:
+        if date_attribute_name in most_recent:
+            try:
+                current_date = strptime(obj[date_attribute_name], date_format)
+                if most_recent_date is None or most_recent_date < current_date:
+                    most_recent = obj
+                    most_recent_date = current_date
+            except Exception as e:
+                simple_message(iface, "error on date parsing : " + str(e))
+
+    return most_recent

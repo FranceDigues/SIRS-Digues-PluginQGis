@@ -241,7 +241,8 @@ class CouchdbImporter:
                     result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
                     self.connector.replace_id_by_label_in_result(database, result)
-                    Utils.filter_positionable_list_attribute(result)
+                    # replace all attribute of type list by a single value
+                    Utils.filter_positionable_list_attribute(result, self.iface)
                     self.loadedPositionable.extend(result)
                 completed = int(completed + lu)
                 self.dlg.progressBar.setValue(completed)
