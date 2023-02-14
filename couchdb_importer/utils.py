@@ -329,14 +329,17 @@ def try_extract_most_recent(list_attribute: list, iface, date_attribute_name: st
     most_recent = list_attribute[-1]
     most_recent_date = None
 
-    for obj in list_attribute:
-        if date_attribute_name in most_recent:
-            try:
-                current_date = strptime(obj[date_attribute_name], date_format)
-                if most_recent_date is None or most_recent_date < current_date:
-                    most_recent = obj
-                    most_recent_date = current_date
-            except Exception as e:
-                simple_message(iface, "error on date parsing : " + str(e))
-
-    return most_recent
+    try:
+        for obj in list_attribute:
+            if date_attribute_name in most_recent:
+                try:
+                    current_date = strptime(obj[date_attribute_name], date_format)
+                    if most_recent_date is None or most_recent_date < current_date:
+                        most_recent = obj
+                        most_recent_date = current_date
+                except Exception as e:
+                    simple_message(iface, "error on date parsing : " + str(e))
+        return most_recent
+    except Exception as e:
+        #     simple_message(iface, "e") # debug purpose
+        return most_recent

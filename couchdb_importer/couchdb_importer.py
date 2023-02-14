@@ -248,8 +248,10 @@ class CouchdbImporter:
                 self.dlg.progressBar.setValue(completed)
         except couchdb.http.Unauthorized:
             simple_message(self.iface, "Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
-        except (ConnectionRefusedError, ValueError) as e:
-            simple_message(self.iface, "Connexion refusée Ou value error. Veuillez vérifier l'url ou l'ouverture de la base. Exception :"+str(e), Qgis.Critical)
+        except ConnectionRefusedError as e:
+            simple_message(self.iface, "Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base. Exception :"+str(e), Qgis.Critical)
+        except ValueError as ve:
+            self.simple_message("Value error : "+str(ve), Qgis.Critical)
 
     def collect_data_from_layers_ids(self, database):
         try:
@@ -258,8 +260,10 @@ class CouchdbImporter:
             return self.connector.request_database(database, ids=ids)
         except couchdb.http.Unauthorized:
             self.simple_message("Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
-        except (ConnectionRefusedError, ValueError):
-            self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base.", Qgis.Critical)
+        except ConnectionRefusedError as e:
+            self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base."+str(e), Qgis.Critical)
+        except ValueError as ve:
+            self.simple_message("Value error : "+str(ve), Qgis.Critical)
 
     """
     /****************************************************************
