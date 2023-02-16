@@ -317,7 +317,7 @@ def try_extract_most_recent(list_attribute: list, iface, date_attribute_name: st
                             date_format: str = "%Y-%m-%d"):
     """
     Try to return most recent object from the input list
-    :param iface: iface in order to be able do display messages in qgis
+    :param iface: iface in order to be able to display messages in qgis
     :param date_attribute_name: key to retrieve date in the list's elements; default value 'date'
     :param date_format: expected format of the date attribute; default value '%Y-%m-%d' for yyyy-mm-dd format
     :param list_attribute: List to reduce
@@ -331,7 +331,7 @@ def try_extract_most_recent(list_attribute: list, iface, date_attribute_name: st
 
     try:
         for obj in list_attribute:
-            if date_attribute_name in most_recent:
+            if date_attribute_name in obj:
                 try:
                     current_date = strptime(obj[date_attribute_name], date_format)
                     if most_recent_date is None or most_recent_date < current_date:
