@@ -28,5 +28,25 @@ Usage:
 You can import the zip package directly through Qgis plugin manager.
 1. In QGIS, navigate to menu **Plugins** > **Manage and Install Plugins...** > **Install from ZIP**, then select the downloaded zip file.
 2. Switch to tab **Installed**, make sure the plugin `Couchdb importer` is enabled.
-3. Activate the plugin (with the checkbox).  
+3. Activate the plugin (with the checkbox).
 4. You can see the Couchdb Importer icon at the QGIS action bar, if plugin is activated.
+
+# Development notes
+
+Main python class and method are implemented in `couchdb_importer/couchdb_importer.py`
+
+UI interface is developed using QGIS .ui files :
+`couchdb_importer/couchdb_importer_dialog_base.ui` and
+`couchdb_importer/couchdb_summary_dialog_base.ui`
+
+Mapping between interface components (like buttons) and implemented python method is done in le method :
+`couchdb_importer#run()`
+
+Connection to couchdb service is done with ` couchdb_connector.py` file.
+
+# Release
+
+In order to release a new version :
+- Edit to match the version to release in `couchdb_importer/metadata.txt`
+- Run the manual step `release` of the Gitlab pipeline
+A new tag should be created, matching the version specified

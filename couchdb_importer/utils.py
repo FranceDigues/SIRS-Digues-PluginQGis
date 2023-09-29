@@ -21,85 +21,13 @@
  *                                                                         *
  ***************************************************************************/
 """
-
-from qgis.PyQt.QtGui import QStandardItem
+from time import strptime
 from qgis.core import QgsGeometry, QgsProject, QgsPoint
+from qgis.PyQt.QtCore import Qt
+from couchdb_importer.message_utils import simple_message
 
 
 class Utils:
-    @staticmethod
-    def parse_url(url):
-        split_url = url.split("://")
-        if len(split_url) == 2:
-            http = split_url[0]
-            addr = split_url[1]
-        else:
-            http = "localhost"
-            addr = "5984"
-        return http, addr
-
-    @staticmethod
-    def build_query(className, attributes=None, ids=None):
-        if ids is not None and type(ids) == list:
-            orList = []
-            for id in ids:
-                orList.append({
-                    "@class": "fr.sirs.core.model." + className,
-                    "_id": id
-                })
-            mango = {
-                "selector": {
-                    "$or": orList
-                }
-            }
-            if attributes is not None:
-                mango["fields"]=attributes
-        else:
-            mango = {
-                "selector": {
-                    "@class": "fr.sirs.core.model." + className
-                }
-            }
-            if attributes is not None:
-                mango["fields"] = attributes
-        return mango
-
-    @staticmethod
-    def build_query_only_id(ids):
-        orList = []
-        for id in ids:
-            orList.append({
-                "_id": id
-            })
-        mango = {
-            "selector": {
-                "$or": orList
-            }
-        }
-        return mango
-
-    @staticmethod
-    def is_str_start_by_underscore(var):
-        if type(var) is str:
-            return var.find('_') == 0
-        return False
-
-    @staticmethod
-    def get_label(positionable):
-        if 'libelle' in positionable:
-            return positionable['libelle']
-        elif 'designation' in positionable:
-            return positionable['designation']
-        else:
-            return 'NULL'
-
-    @staticmethod
-    def build_row_name_positionable(positionable):
-        className = positionable["@class"].split("fr.sirs.core.model.")[1]
-        label = Utils.get_label(positionable)
-        id = positionable["_id"]
-        name = className + " - " + label + " - " + id
-        return name
 
     @staticmethod
     def build_list_from_selection(obj):
@@ -110,12 +38,96 @@ class Utils:
         return result
 
     @staticmethod
-    def is_point(listPoint, param):
-        for p1 in listPoint:
-            for p2 in listPoint:
-                if p1.distance(p2) > param:
-                    return False
-        return True
+    def parse_url(url):
+        split_url = url.split("://")
+        if len(split_url) == 2:
+            http = split_url[0]
+            addr = split_url[1]
+            if http == "http" or http == "https":
+                return [http, addr]
+            else:
+                return None
+        else:
+            return None
+
+    @staticmethod
+    def collect_ids_from_layers_filtered_by_positionable_class(positionable):
+        result = []
+        layers = QgsProject.instance().mapLayers()
+        for l in layers:
+            if layers[l].name() in positionable:
+                ids = Utils.collect_ids_from_layer(layers[l])
+                result.extend(ids)
+        return result
+
+    @staticmethod
+    def debut_fin_to_wkt_linestring(wktdebut, wktfin):
+        coordDebut = wktdebut.split('(')[1]
+        coordFin = wktfin.split('(')[1]
+        coordDebut = coordDebut.split(')')[0]
+        coordFin = coordFin.split(')')[0]
+
+        return "LINESTRING (" + coordDebut + ", " + coordFin + ")"
+
+    @staticmethod
+    def get_label(positionable):
+        if 'libelle' in positionable:
+            return positionable['libelle']
+        return ''
+
+    @staticmethod
+    def get_designation(positionable):
+        if 'designation' in positionable:
+            return positionable['designation']
+        return ''
+
+    @staticmethod
+    def get_label_reference(positionable):
+        if 'libelle' in positionable:
+            return positionable['libelle']
+        elif 'designation' in positionable:
+            return positionable['designation']
+        elif 'login' in positionable:
+            return positionable['login']
+        elif '_id' in positionable:
+            return positionable['_id']
+        else:
+            return "Aucune donnée"
+
+    @staticmethod
+    def get_label_and_designation_reference(positionable):
+        if 'libelle' in positionable and 'designation' in positionable:
+            return positionable['libelle'] + ' ||| ' + positionable['designation']
+        elif '_id' in positionable:
+            if 'libelle' in positionable and 'designation' not in positionable:
+                return positionable['libelle'] + ' ||| ' + positionable['_id']
+            elif 'libelle' not in positionable and 'designation' in positionable:
+                return positionable['_id'] + ' ||| ' + positionable['designation']
+            else:
+                return positionable['_id'] + ' ||| ' + positionable['_id']
+        else:
+            if 'libelle' in positionable and 'designation' not in positionable:
+                return positionable['libelle'] + ' ||| no data'
+            elif 'libelle' not in positionable and 'designation' in positionable:
+                return 'no data ||| ' + positionable['designation']
+            else:
+                return 'no data ||| no data'
+
+    @staticmethod
+    def collect_ids_from_layers():
+        result = []
+        layers = QgsProject.instance().mapLayers()
+        for l in layers:
+            ids = Utils.collect_ids_from_layer(layers[l])
+            result.extend(ids)
+        return result
+
+    @staticmethod
+    def collect_ids_from_layer(layer):
+        if layer.type() != 0 or layer.fields().indexFromName("_id (ne pas modifier/supprimer)") == -1:
+            return []
+        features = layer.getFeatures()
+        return [f["_id (ne pas modifier/supprimer)"] for f in features]
 
     @staticmethod
     def build_geometry(wkt, param):
@@ -158,6 +170,14 @@ class Utils:
             return None
 
     @staticmethod
+    def is_point(listPoint, param):
+        for p1 in listPoint:
+            for p2 in listPoint:
+                if p1.distance(p2) > param:
+                    return False
+        return True
+
+    @staticmethod
     def filter_layers_by_name_and_geometry_type(name, type):
         layers = QgsProject.instance().mapLayers()
         for l in layers:
@@ -166,51 +186,160 @@ class Utils:
         return None
 
     @staticmethod
-    def collect_ids_from_layers_filtered_by_user_selection(listCurrentId):
-        result = []
-        layers = QgsProject.instance().mapLayers()
-        for l in layers:
-            ids = Utils.collect_ids_from_layer(layers[l])
-            result.extend([id for id in ids if id in listCurrentId])
-        return result
+    def is_str_start_by_underscore(var):
+        if type(var) is str:
+            return var.find('_') == 0
+        return False
 
     @staticmethod
-    def collect_ids_from_layers_filtered_by_positionable_class(positionable):
-        result = []
-        layers = QgsProject.instance().mapLayers()
-        for l in layers:
-            if layers[l].name() in positionable:
-                ids = Utils.collect_ids_from_layer(layers[l])
-                result.extend(ids)
-        return result
-
-    @staticmethod
-    def collect_ids_from_layer(layer):
-        if layer.type() != 0 or layer.fields().indexFromName("_id") == -1:
-            return []
-        features = layer.getFeatures()
-        return [f["_id"] for f in features]
-
-    @staticmethod
-    def complete_model_from_positionable(name, obj, out):
-        if type(obj) is str:
-            it = QStandardItem(name + " : " + obj)
-            out.append(it)
-        elif type(obj) is int:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is float:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is bool:
-            it = QStandardItem(name + " : " + str(obj))
-            out.append(it)
-        elif type(obj) is list:
-            for index in range(len(obj)):
-                Utils.complete_model_from_positionable(name + "_" + str(index), obj[index], out)
-        elif type(obj) is dict:
-            for it in obj:
-                Utils.complete_model_from_positionable(name + "_" + it, obj[it], out)
+    def build_query(className, attributes=None, ids=None):
+        if ids is not None and type(ids) == list:
+            orList = []
+            for id in ids:
+                orList.append({
+                    "@class": "fr.sirs.core.model." + className,
+                    "_id": id
+                })
+            mango = {
+                "selector": {
+                    "$or": orList
+                },
+                "limit": 50000
+            }
+            if attributes is not None:
+                mango["fields"] = attributes
         else:
-            it = QStandardItem(name + " : unknown type")
-            out.append(it)
+            mango = {
+                "selector": {
+                    "@class": "fr.sirs.core.model." + className
+                },
+                "limit": 50000
+            }
+            if attributes is not None:
+                mango["fields"] = attributes
+        return mango
+
+    @staticmethod
+    def build_query_only_id(ids):
+        orList = []
+        for id in ids:
+            orList.append({
+                "_id": id
+            })
+        mango = {
+            "selector": {
+                "$or": orList
+            },
+            "limit": 50000
+        }
+        return mango
+
+    @staticmethod
+    def build_query_one_id(id):
+        mango = {
+            "selector": {
+                "_id": id
+            }
+        }
+        return mango
+
+    @staticmethod
+    def build_query_one_id_with_class(className, id):
+        mango = {
+            "selector": {
+                "@class": "fr.sirs.core.model." + className,
+                "_id": id
+            }
+        }
+        return mango
+
+    @staticmethod
+    def create_specific_view():
+        doc = {
+            "_id": "_design/SpecQgis",
+            "views": {
+                "byClass": {
+                    "map": "function(doc) {if(doc['@class']) {emit(doc['@class'], doc)}}"
+                },
+                "byId": {
+                    "map": "function(doc) {if(doc['_id']) {emit(doc['_id'], doc)}}"
+                },
+                "byClassAndId": {
+                    "map": "function(doc) {if(doc['@class'] && doc['_id']) {emit([doc['@class'], doc['_id']], doc)}}"
+                }
+            }
+        }
+        return doc
+
+    @staticmethod
+    def is_all_selected_in_model(model):
+        for i in range(model.rowCount()):
+            item = model.itemFromIndex(model.index(i, 0))
+            if item.checkState() == Qt.Unchecked:
+                return False
+        return True
+
+    @staticmethod
+    def filter_last_n_elements(elements, n):
+        if len(elements) in range(n + 1):
+            return elements
+        else:
+            return elements[-n:]
+
+    @staticmethod
+    def filter_positionable_list_attribute(target, iface):
+        """
+        Replace all attribute of type list by a single value;
+        for example all observations of a 'Desordre' are replace by the most recent observation.
+        """
+        for elem in target:
+            for attr in elem:
+                if type(elem[attr]) == list and len(elem[attr]) != 0:
+                    if attr == 'prestationIds':
+                        elem[attr] = Utils.filter_last_n_elements(elem[attr], 3)
+                    else:
+                        if len(elem[attr]) > 1:
+                            elem[attr] = [try_extract_most_recent(elem[attr], iface)]
+                        else:
+                            elem[attr] = [elem[attr][0]]
+
+    @staticmethod
+    def filter_object_by_attributes(obj, attributes):
+        target = obj.copy()
+
+        for attr in target:
+            if attr not in attributes:
+                del obj[attr]
+
+
+# @staticmethod
+def try_extract_most_recent(list_attribute: list, iface, date_attribute_name: str = "date",
+                            date_format: str = "%Y-%m-%d"):
+    """
+    Try to return most recent object from the input list
+    :param iface: iface in order to be able to display messages in qgis
+    :param date_attribute_name: key to retrieve date in the list's elements; default value 'date'
+    :param date_format: expected format of the date attribute; default value '%Y-%m-%d' for yyyy-mm-dd format
+    :param list_attribute: List to reduce
+    :return: None if empty list ; last element if objects of the list doesn't have a date attribute with format
+            yyyy-MM-dd; else the last object of the list according to the 'date' attribute
+    """
+    if len(list_attribute) == 0:
+        return None
+    most_recent = list_attribute[-1]
+    most_recent_date = None
+
+    try:
+        for obj in list_attribute:
+            if date_attribute_name in obj:
+                try:
+                    current_date = strptime(obj[date_attribute_name], date_format)
+                    if most_recent_date is None or most_recent_date < current_date:
+                        most_recent = obj
+                        most_recent_date = current_date
+                except Exception as e:
+                    simple_message(iface, "error on date parsing : " + str(e))
+        return most_recent
+    except Exception as e:
+        #     simple_message(iface, "e") # debug purpose
+        return most_recent
