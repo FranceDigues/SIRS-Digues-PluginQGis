@@ -307,9 +307,15 @@ class Utils:
     def filter_object_by_attributes(obj, attributes):
         target = obj.copy()
 
+        linear_id = None
+
         for attr in target:
             if attr not in attributes:
                 del obj[attr]
+            else:
+                if attr == "linearId":
+                    linear_id = obj[attr]
+        return linear_id
 
 
 # @staticmethod

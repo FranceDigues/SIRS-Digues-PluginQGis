@@ -88,20 +88,24 @@ class CouchdbConnector(object):
         if self.is_not_existing_specific_view(database):
             self.create_specific_view(database)
 
-    def request_database(self, database, className=None, attributes=None, ids=None, single=None):
-        if className is not None and attributes is not None and ids is None and single is None:
+    def request_database(self, database, className=None, attributes=None, ids=None, single_id=None):
+        if className is not None and attributes is not None and ids is None and single_id is None:
             result = self.request_by_class_and_attributes(database, className, attributes)
-        elif className is not None and attributes is not None and ids is not None and single is None:
+        elif className is not None and attributes is not None and ids is not None and single_id is None:
             result = self.request_by_class_attributes_and_ids(database, className, attributes, ids)
-        elif className is None and attributes is None and ids is not None and single is None:
+        elif className is None and attributes is None and ids is not None and single_id is None:
             result = self.request_by_multiple_id(database, ids)
-        elif className is not None and attributes is None and ids is None and single is not None:
-            result = self.request_by_class_and_id(database, className, single)
-        elif className is None and attributes is None and ids is None and single is not None:
-            result = self.request_by_id(database, single)
+        elif className is not None and attributes is None and ids is None and single_id is not None:
+            result = self.request_by_class_and_id(database, className, single_id)
+        elif className is None and attributes is None and ids is None and single_id is not None:
+            result = self.request_by_id(database, single_id)
         else:
             raise CouchdbConnectorException("Requète inexistante.")
         return result
+
+    def clear_se_cache(self):
+        self.find_se_from_linear_id.cache_clear()
+        self.find_se_from_digue_id.cache_clear()
 
     def request_by_class_and_attributes(self, database, className, attributes):
         target = []
@@ -111,10 +115,37 @@ class CouchdbConnector(object):
 
         for item in row:
             t = item.value
-            Utils.filter_object_by_attributes(t, attributes)
+            linear_id = Utils.filter_object_by_attributes(t, attributes)
+            if linear_id is not None:
+                # todo merge it with troncon's label search?
+                t["SE"] = self.find_se_from_linear_id(database, linear_id)
             target.append(t)
 
         return target
+
+    @lru_cache(maxsize=500)
+    def find_se_from_linear_id(self, database, linear_id):
+        # Todo use a view instead to speed up the loading.
+        troncon = self.request_database(database, className="TronconDigue", attributes=["digueId"], ids=[linear_id])
+        if len(troncon) > 0:
+            tr = troncon[0]
+            dig_key = "digueId"
+            if dig_key in tr:
+                return self.find_se_from_digue_id(database, troncon[0][dig_key])
+        else:
+            return None
+
+    @lru_cache(maxsize=50)
+    def find_se_from_digue_id(self, database, digue_id):
+
+        digue = self.request_database(database, className="Digue", attributes=["systemeEndiguementId"], ids=[digue_id])
+
+        if len(digue) > 0:
+            dig = digue[0]
+            se_key = "systemeEndiguementId"
+            if se_key in dig:
+                return self.get_label_from_id(database=database, id=digue[0][se_key])
+        return None
 
     def request_by_class_attributes_and_ids(self, database, className, attributes, ids):
         target = []
@@ -176,25 +207,28 @@ class CouchdbConnector(object):
 
         return target
 
-    @lru_cache(maxsize=1000)
-    def get_label_from_id(self, database, Id):
+    @lru_cache(maxsize=500)
+    def get_label_from_id(self, database, id):
         """
         Care with the usage of this methods, it can cause memory saturation problems.
         """
-        result = list(self.request_database(database, single=Id))
-        return Id if len(result) == 0 else Utils.get_label_reference(result[0])
+        result = list(self.request_database(database, single_id=id))
+        return id if len(result) == 0 else Utils.get_label_reference(result[0])
 
-    @lru_cache(maxsize=1000)
+    @lru_cache(maxsize=500)
     def get_value_or_id_from_id(self, database, Id, attribute):
         """
         Care with the usage of this methods, it can cause memory saturation problems.
         """
-        result = list(self.request_database(database, single=Id))
+        result = list(self.request_database(database, single_id=Id))
         if len(result) == 0:
             return Id
         else:
             return result[0][attribute] if attribute in result[0] else Id
 
+    def clear_ids_cache(self):
+        self.get_label_from_id.cache_clear
+        self.get_value_or_id_from_id.cache_clear
 
     def replace_id_by_label_in_result(self, database, target):
         for elem in target:
@@ -231,4 +265,3 @@ class CouchdbConnector(object):
                     self.replace_id_by_label(database, elem[attr])
         else:
             logging.warning("An attribute is not type dictionary or list of dictionaries")
-

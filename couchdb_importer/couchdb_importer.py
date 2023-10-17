@@ -56,6 +56,7 @@ def check_indexes(model, indexes, check_state):
         if item_check.isCheckable():
             item_check.setCheckState(check_state)
 
+
 """
 Check checkBoxes associated with all items selected for the input QTableView
 """
@@ -63,6 +64,7 @@ Check checkBoxes associated with all items selected for the input QTableView
 
 def check_all_selected_item(q_table_view):
     check_indexes(q_table_view.model(), q_table_view.selectedIndexes(), Qt.Checked)
+
 
 class CouchdbImporter:
     """QGIS Plugin Implementation."""
@@ -76,6 +78,7 @@ class CouchdbImporter:
         :type iface: QgsInterface
         """
         # Save reference to the QGIS interface
+        self.details_idx = None
         self.iface = iface
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
@@ -127,16 +130,16 @@ class CouchdbImporter:
         return QCoreApplication.translate('CouchdbImporter', message)
 
     def add_action(
-        self,
-        icon_path,
-        text,
-        callback,
-        enabled_flag=True,
-        add_to_menu=True,
-        add_to_toolbar=True,
-        status_tip=None,
-        whats_this=None,
-        parent=None):
+            self,
+            icon_path,
+            text,
+            callback,
+            enabled_flag=True,
+            add_to_menu=True,
+            add_to_toolbar=True,
+            status_tip=None,
+            whats_this=None,
+            parent=None):
         """Add a toolbar icon to the toolbar.
 
         :param icon_path: Path to the icon for this action. Can be a resource
@@ -241,6 +244,7 @@ class CouchdbImporter:
                     result = self.connector.request_database(database, className=className, attributes=attributes)
                     result = list(result)
                     self.connector.replace_id_by_label_in_result(database, result)
+                    self.connector.clear_ids_cache()
                     # replace all attribute of type list by a single value
                     Utils.filter_positionable_list_attribute(result, self.iface)
                     self.loadedPositionable.extend(result)
@@ -251,7 +255,7 @@ class CouchdbImporter:
         except ConnectionRefusedError as e:
             simple_message(self.iface, "Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base. Exception :"+str(e), Qgis.Critical)
         except ValueError as ve:
-            self.simple_message("Value error : "+str(ve), Qgis.Critical)
+            self.simple_message("Value error : " + str(ve), Qgis.Critical)
 
     def collect_data_from_layers_ids(self, database):
         try:
@@ -263,13 +267,14 @@ class CouchdbImporter:
         except ConnectionRefusedError as e:
             self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base."+str(e), Qgis.Critical)
         except ValueError as ve:
-            self.simple_message("Value error : "+str(ve), Qgis.Critical)
+            self.simple_message("Value error : " + str(ve), Qgis.Critical)
 
     """
     /****************************************************************
     * Utils
     ****************************************************************/  
     """
+
     def change_select_all_button(self, sab):
         if sab == "type":
             self.dlg.selectAllPositionableClass.blockSignals(True)
@@ -491,6 +496,9 @@ class CouchdbImporter:
             troncon = ""
             if "linearId" in pos:
                 troncon = pos["linearId"]
+            se = ""
+            if "SE" in pos:
+                se = pos["SE"]
 
             if keyword is not None:
                 if keyword not in label and keyword not in className and keyword not in designation and keyword not in label:
@@ -498,25 +506,27 @@ class CouchdbImporter:
 
             item1 = QStandardItem(className)
             item2 = QStandardItem(designation)
-            item3 = QStandardItem(troncon)
-            item4 = QStandardItem(label)
-            item5 = QStandardItem(id)
+            item3 = QStandardItem(se)
+            item4 = QStandardItem(troncon)
+            item5 = QStandardItem(label)
+            item6 = QStandardItem(id)
+            self.details_idx = {"class_name": 0, "designation": 1, "se": 2, "troncon": 3, "label": 4, "id": 5}
             item1.setCheckable(True)
 
             if self.data.getIdValue(className, id):
                 item1.setCheckState(Qt.Checked)
             else:
                 item1.setCheckState(Qt.Unchecked)
-            model.appendRow([item1, item2, item3, item4, item5])
+            model.appendRow([item1, item2, item3, item4, item5, item6])
             completed = int(completed + lu)
             self.dlg.progressBar.setValue(completed)
         model.itemChanged.connect(self.on_positionable_list_changed)
         model.sort(0, Qt.AscendingOrder)
-        model.setHorizontalHeaderLabels(["Objet", "Désignation", "Tronçon", "Libellé"])
+        model.setHorizontalHeaderLabels(["Objet", "Désignation", "Système d'endiguement", "Tronçon", "Libellé", "id"])
         self.dlg.positionable.setSortingEnabled(True)
         self.dlg.positionable.setModel(model)
         self.dlg.positionable.resizeColumnsToContents()
-        self.dlg.positionable.setColumnHidden(4, True)
+        self.dlg.positionable.setColumnHidden(self.details_idx["id"], True)
         self.dlg.progressBar.setValue(0)
         # see MULTI_SELECTION_COMMENT
         self.dlg.positionable.selectionModel().selectionChanged.connect(self.on_positionable_selection)
@@ -630,7 +640,7 @@ class CouchdbImporter:
     def on_positionable_click(self, it):
         model = self.dlg.positionable.model()
         row = it.row()
-        id = model.item(row, 4).text()
+        id = model.item(row, self.details_idx["id"]).text()
         selected = None
 
         for pos in self.loadedPositionable:
@@ -704,7 +714,7 @@ class CouchdbImporter:
     def on_attribute_list_changed(self, item):
         model: QStandardItemModel = self.dlg.attribute.model()
         row = model.indexFromItem(item).row()
-        attributeName = model.item(row, 1).text()
+        attributeName = model.item(row, self.details_idx["designation"]).text()
 
         if item.checkState() == Qt.Checked:
             self.data.setAttributeValue(self.currentPositionableClass, attributeName, True)
@@ -715,8 +725,8 @@ class CouchdbImporter:
     def on_positionable_list_changed(self, item):
         model: QStandardItemModel = self.dlg.positionable.model()
         row = model.indexFromItem(item).row()
-        id = model.item(row, 4).text()
-        className = model.item(row, 0).text()
+        id = model.item(row, self.details_idx["id"]).text()
+        className = model.item(row, self.details_idx["class_name"]).text()
 
         if item.checkState() == Qt.Checked:
             self.data.setIdValue(className, id, True)
@@ -763,6 +773,7 @@ class CouchdbImporter:
 
         # Request the data layers from the ids present into Qgis data layers
         result_list = list(self.collect_data_from_layers_ids(database))
+        self.connector.clear_se_cache()
         size_result_list = len(result_list)
 
         if size_result_list == 0:
@@ -847,7 +858,7 @@ class CouchdbImporter:
                 self.basic_message(msg, "couche: " + layer.name() + "donnée: " + str(id), Qgis.Warning)
                 continue
 
-            cn.add(className+str(typ))
+            cn.add(className + str(typ))
             ou = ou + 1
 
             provider = layer.dataProvider()
