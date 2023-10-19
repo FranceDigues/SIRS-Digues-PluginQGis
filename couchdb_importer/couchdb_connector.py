@@ -88,9 +88,9 @@ class CouchdbConnector(object):
         if self.is_not_existing_specific_view(database):
             self.create_specific_view(database)
 
-    def request_database(self, database, className=None, attributes=None, ids=None, single_id=None):
+    def request_database(self, database, className=None, attributes=None, ids=None, single_id=None, preload=False):
         if className is not None and attributes is not None and ids is None and single_id is None:
-            result = self.request_by_class_and_attributes(database, className, attributes)
+            result = self.request_by_class_and_attributes(database, className, attributes, preload)
         elif className is not None and attributes is not None and ids is not None and single_id is None:
             result = self.request_by_class_attributes_and_ids(database, className, attributes, ids)
         elif className is None and attributes is None and ids is not None and single_id is None:
@@ -103,11 +103,15 @@ class CouchdbConnector(object):
             raise CouchdbConnectorException("Requète inexistante.")
         return result
 
+    def clear_cache(self):
+        self.clear_se_cache()
+        self.clear_ids_cache()
+
     def clear_se_cache(self):
         self.find_se_from_linear_id.cache_clear()
         self.find_se_from_digue_id.cache_clear()
 
-    def request_by_class_and_attributes(self, database, className, attributes):
+    def request_by_class_and_attributes(self, database, className, attributes, preload=False):
         target = []
         db = self.connection[database]
         fullClassName = "fr.sirs.core.model." + className
@@ -116,7 +120,7 @@ class CouchdbConnector(object):
         for item in row:
             t = item.value
             linear_id = Utils.filter_object_by_attributes(t, attributes)
-            if linear_id is not None:
+            if preload and linear_id is not None:
                 # todo merge it with troncon's label search?
                 t["SE"] = self.find_se_from_linear_id(database, linear_id)
             target.append(t)
@@ -135,7 +139,7 @@ class CouchdbConnector(object):
         else:
             return None
 
-    @lru_cache(maxsize=50)
+    @lru_cache(maxsize=100)
     def find_se_from_digue_id(self, database, digue_id):
 
         digue = self.request_database(database, className="Digue", attributes=["systemeEndiguementId"], ids=[digue_id])
@@ -207,7 +211,7 @@ class CouchdbConnector(object):
 
         return target
 
-    @lru_cache(maxsize=500)
+    @lru_cache(maxsize=1000)
     def get_label_from_id(self, database, id):
         """
         Care with the usage of this methods, it can cause memory saturation problems.

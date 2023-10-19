@@ -24,6 +24,7 @@
 import os.path
 import sys
 import socket
+from math import floor
 
 from .message_utils import simple_message, basic_message, stacked_message, confirmation_message
 
@@ -232,24 +233,27 @@ class CouchdbImporter:
 
     def collect_data_from_user_selection(self):
         self.loadedPositionable.clear()
-        lu = 75 / len(self.data.getPositionable())
         completed = 0
         database = self.dlg.database.currentText()
 
         try:
-            for className in self.data.getClassName():
+            names = self.data.getClassName()
+            demi_step = 50/len(names)
+            for className in names:
+                completed += demi_step
+                self.dlg.progressBar.setValue(max(0, floor(completed)))
                 if self.data.getSelected(className):
                     attributes = Utils.build_list_from_selection(self.data.getAttributes(className))
                     attributes = ["_id", "@class"] + attributes
-                    result = self.connector.request_database(database, className=className, attributes=attributes)
+                    result = self.connector.request_database(database, className=className, attributes=attributes, preload=self.isPreLoad)
                     result = list(result)
                     self.connector.replace_id_by_label_in_result(database, result)
-                    self.connector.clear_ids_cache()
                     # replace all attribute of type list by a single value
                     Utils.filter_positionable_list_attribute(result, self.iface)
                     self.loadedPositionable.extend(result)
-                completed = int(completed + lu)
-                self.dlg.progressBar.setValue(completed)
+                completed += demi_step
+                self.dlg.progressBar.setValue(floor(completed))
+            self.connector.clear_cache()
         except couchdb.http.Unauthorized:
             simple_message(self.iface, "Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
         except ConnectionRefusedError as e:
@@ -773,7 +777,6 @@ class CouchdbImporter:
 
         # Request the data layers from the ids present into Qgis data layers
         result_list = list(self.collect_data_from_layers_ids(database))
-        self.connector.clear_se_cache()
         size_result_list = len(result_list)
 
         if size_result_list == 0:
