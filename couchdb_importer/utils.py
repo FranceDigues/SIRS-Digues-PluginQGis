@@ -21,6 +21,7 @@
  *                                                                         *
  ***************************************************************************/
 """
+from functools import lru_cache
 from time import strptime
 from qgis.core import QgsGeometry, QgsProject, QgsPoint
 from qgis.PyQt.QtCore import Qt
@@ -180,11 +181,27 @@ class Utils:
 
     @staticmethod
     def filter_layers_by_name_and_geometry_type(name, type):
+        # layers = QgsProject.instance().mapLayers()
+        # for l in layers:
+        #     if layers[l].name() == name and layers[l].wkbType() == type:
+        #         return layers[l]
+        # return None
+
+        layer_id = Utils.get_layer_id_by_name_and_geometry_type(name, type)
+        if layer_id is None:
+            return None
+        return QgsProject.instance().mapLayer(layer_id)
+
+    @staticmethod
+    def match_name_and_type(layer, name, type):
+        return layer.name() == name and layer.wkbType() == type
+
+    @staticmethod
+    @lru_cache(30)
+    def get_layer_id_by_name_and_geometry_type(name, type):
         layers = QgsProject.instance().mapLayers()
-        for l in layers:
-            if layers[l].name() == name and layers[l].wkbType() == type:
-                return layers[l]
-        return None
+        mapped = map(lambda layer: layer.id, filter(lambda layer: Utils.match_name_and_type(layer, name, type),layers))
+        return next(mapped, None)
 
     @staticmethod
     def is_str_start_by_underscore(var):

@@ -47,8 +47,12 @@ class CouchdbBuilder(object):
         with open(os.path.join(__location__, 'formTemplatePilote.json')) as confFile:
             self.configuration = json.load(confFile)
 
-    def build_layer(self, className, geom, data: CouchdbData):
-        crs = data.getCrs(className)
+    def build_layer(self, className, geom, database_crs, data: CouchdbData):
+        if database_crs is None:
+            crs = data.getCrs(className)
+        else:
+            crs = database_crs
+
         fields = self.build_layer_fields(className)
         layer = QgsVectorLayer(QgsWkbTypes.displayString(geom.wkbType()) + "?crs=" + crs, className, "memory")
 

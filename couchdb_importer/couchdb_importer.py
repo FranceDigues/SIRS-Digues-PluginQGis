@@ -26,6 +26,8 @@ import sys
 import socket
 from math import floor
 
+from qgis._core import QgsCoordinateReferenceSystem, QgsCoordinateTransform
+
 from .message_utils import simple_message, basic_message, stacked_message, confirmation_message
 
 couchdb_dir = os.path.join(os.path.dirname(__file__), 'couchdb')
@@ -893,6 +895,20 @@ class CouchdbImporter:
         pp = 0
         wp = 0
 
+        # source_crs = QgsCoordinateReferenceSystem(layer.crs().authid())
+
+        request_database = self.connector.request_database(database, single_id="$sirs")
+        if request_database is not None and len(request_database) > 0:
+            database_ = request_database[0]
+            database_crs = database_["epsgCode"]
+        else:
+            database_crs = "EPSG:2154"
+
+        source_crs = QgsCoordinateReferenceSystem("EPSG:2154") # todo not sur how to be sure that all coordinates are by default is in 2154
+        target_crs = QgsCoordinateReferenceSystem(database_crs)
+
+        qgs_coordinate_transform = QgsCoordinateTransform(source_crs, target_crs, QgsProject.instance())
+
         for data in self.loadedPositionable:
             try:
                 id = data["_id"]
@@ -913,7 +929,10 @@ class CouchdbImporter:
             if wkt is None:
                 wp = wp + 1
                 continue
+
             geom = Utils.build_geometry(wkt, self.lengthParameter)
+            geom.transform(qgs_coordinate_transform)
+
             if geom is None:
                 print("[UNKNOWN GEOM TYPE]: " + str(wkt))
                 self.basic_message("Type de géométrie non reconnu", str(id), Qgis.Warning)
@@ -931,7 +950,7 @@ class CouchdbImporter:
                 if className not in allLayers:
                     allLayers[className] = {}
                 if typ not in allLayers[className]:
-                    layerBuild = self.provider.build_layer(className, geom, self.data)
+                    layerBuild = self.provider.build_layer(className, geom, database_crs, self.data)
                     if layerBuild is None:
                         self.simple_message("Type de géométrie non traité. class: " + className + ", id: " + id, Qgis.Warning)
                         continue
