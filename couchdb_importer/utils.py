@@ -85,10 +85,11 @@ class Utils:
     def get_label_reference(positionable):
         if 'libelle' in positionable:
             return positionable['libelle']
-        elif 'designation' in positionable:
-            return positionable['designation']
+        # FDSIRTMA23-33 : display name for authors
         elif 'login' in positionable:
             return positionable['login']
+        elif 'designation' in positionable:
+            return positionable['designation']
         elif '_id' in positionable:
             return positionable['_id']
         else:
