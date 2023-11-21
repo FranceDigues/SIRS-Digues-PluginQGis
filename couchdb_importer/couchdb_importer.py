@@ -905,6 +905,7 @@ class CouchdbImporter:
             database_crs = "EPSG:2154"
 
         source_crs = QgsCoordinateReferenceSystem("EPSG:2154") # todo not sur how to be sure that all coordinates are by default is in 2154
+        simple_message(self.iface, "Database crs "+database_crs, Qgis.MessageLevel.Warning)
         target_crs = QgsCoordinateReferenceSystem(database_crs)
 
         qgs_coordinate_transform = QgsCoordinateTransform(source_crs, target_crs, QgsProject.instance())
@@ -931,7 +932,6 @@ class CouchdbImporter:
                 continue
 
             geom = Utils.build_geometry(wkt, self.lengthParameter)
-            geom.transform(qgs_coordinate_transform)
 
             if geom is None:
                 print("[UNKNOWN GEOM TYPE]: " + str(wkt))
@@ -949,6 +949,8 @@ class CouchdbImporter:
                 # build layer if not exist
                 if className not in allLayers:
                     allLayers[className] = {}
+                # convert geom in database's crs
+                geom.transform(qgs_coordinate_transform)
                 if typ not in allLayers[className]:
                     layerBuild = self.provider.build_layer(className, geom, database_crs, self.data)
                     if layerBuild is None:
@@ -958,6 +960,12 @@ class CouchdbImporter:
                 layer = allLayers[className][typ]
             else:
                 layer = currentLayer
+                if layer.crs() != target_crs:
+                    self.simple_message("Database crs is different than the crs of the existing layer. Keep the layer's crs to avoid recomputing all geometries.", Qgis.Warning)
+                target_crs = layer.crs()
+                qgs_coordinate_transform = QgsCoordinateTransform(source_crs, target_crs, QgsProject.instance())
+                # convert geom in layer's crs
+                geom.transform(qgs_coordinate_transform)
             if layer is None:
                 print(className)
                 print(currentLayer)

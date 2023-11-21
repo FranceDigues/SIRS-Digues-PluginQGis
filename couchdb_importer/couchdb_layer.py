@@ -54,16 +54,17 @@ class CouchdbBuilder(object):
             crs = database_crs
 
         fields = self.build_layer_fields(className)
-        layer = QgsVectorLayer(QgsWkbTypes.displayString(geom.wkbType()) + "?crs=" + crs, className, "memory")
+        wkb_type = geom.wkbType()
+        layer = QgsVectorLayer(QgsWkbTypes.displayString(wkb_type) + "?crs=" + crs, className, "memory")
 
-        if geom.wkbType() == QgsWkbTypes.Point:
+        if wkb_type == QgsWkbTypes.Point:
             props = data.getStylePoint(className)
             symbol = QgsMarkerSymbol.createSimple(props)
-        elif geom.wkbType() == QgsWkbTypes.LineString:
+        elif wkb_type == QgsWkbTypes.LineString:
             props = data.getStyleLine(className)
             symbol = QgsLineSymbol.createSimple(props)
             symbol.setOpacity(0.7)
-        elif geom.wkbType() == QgsWkbTypes.Polygon:
+        elif wkb_type == QgsWkbTypes.Polygon:
             props = data.getStylePolygon(className)
             symbol = QgsFillSymbol.createSimple(props)
             symbol.setOpacity(0.4)
