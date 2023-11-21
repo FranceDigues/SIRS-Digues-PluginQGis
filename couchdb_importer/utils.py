@@ -180,28 +180,13 @@ class Utils:
         return True
 
     @staticmethod
-    def filter_layers_by_name_and_geometry_type(name, type):
-        # layers = QgsProject.instance().mapLayers()
-        # for l in layers:
-        #     if layers[l].name() == name and layers[l].wkbType() == type:
-        #         return layers[l]
-        # return None
-
-        layer_id = Utils.get_layer_id_by_name_and_geometry_type(name, type)
-        if layer_id is None:
-            return None
-        return QgsProject.instance().mapLayer(layer_id)
+    def filter_layers_by_name_and_geometry_type(name, geom_type):
+        filtered = filter(lambda layer: Utils.match_type(layer, geom_type), QgsProject.instance().mapLayersByName(name))
+        return next(filtered, None)
 
     @staticmethod
-    def match_name_and_type(layer, name, type):
-        return layer.name() == name and layer.wkbType() == type
-
-    @staticmethod
-    @lru_cache(30)
-    def get_layer_id_by_name_and_geometry_type(name, type):
-        layers = QgsProject.instance().mapLayers()
-        mapped = map(lambda layer: layer.id, filter(lambda layer: Utils.match_name_and_type(layer, name, type),layers))
-        return next(mapped, None)
+    def match_type(layer, geom_type):
+        return layer is not None and layer.wkbType() == geom_type
 
     @staticmethod
     def is_str_start_by_underscore(var):
