@@ -897,6 +897,7 @@ class CouchdbImporter:
 
         # source_crs = QgsCoordinateReferenceSystem(layer.crs().authid())
 
+        # 'Anomalie'#7940 : search database crs use this crs to create new qgis' layers
         request_database = self.connector.request_database(database, single_id="$sirs")
         if request_database is not None and len(request_database) > 0:
             database_ = request_database[0]
@@ -960,12 +961,15 @@ class CouchdbImporter:
                 layer = allLayers[className][typ]
             else:
                 layer = currentLayer
-                if layer.crs() != target_crs:
-                    self.simple_message("Database crs is different than the crs of the existing layer. Keep the layer's crs to avoid recomputing all geometries.", Qgis.Warning)
-                target_crs = layer.crs()
-                qgs_coordinate_transform = QgsCoordinateTransform(source_crs, target_crs, QgsProject.instance())
-                # convert geom in layer's crs
-                geom.transform(qgs_coordinate_transform)
+                layer_crs = layer.crs()
+                # 'Anomalie'#7940 : if the imported layer already exists ; reuse the layer's crs.
+                if layer_crs is not None and layer_crs != target_crs:
+                    self.simple_message("Database crs is different from the crs of the existing layer. Keep the layer's crs to avoid recomputing all geometries.", Qgis.Warning)
+                    layer_transform = QgsCoordinateTransform(source_crs, layer_crs, QgsProject.instance())
+                    geom.transform(layer_transform)
+                else:
+                    # convert geom in layer's crs
+                    geom.transform(qgs_coordinate_transform)
             if layer is None:
                 print(className)
                 print(currentLayer)
