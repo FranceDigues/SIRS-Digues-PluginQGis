@@ -89,6 +89,8 @@ class Utils:
         # FDSIRTMA23-33 : display name for authors
         elif 'login' in positionable:
             return positionable['login']
+        elif 'nom' in positionable:# Anomalie#8060
+            return positionable['nom']
         elif 'designation' in positionable:
             return positionable['designation']
         elif '_id' in positionable:
