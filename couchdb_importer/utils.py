@@ -322,7 +322,6 @@ class Utils:
                     linear_id = obj[attr]
         return linear_id
 
-
 # @staticmethod
 def try_extract_most_recent(list_attribute: list, iface, date_attribute_name: str = "date",
                             date_format: str = "%Y-%m-%d"):

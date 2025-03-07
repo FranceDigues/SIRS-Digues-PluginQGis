@@ -59,7 +59,7 @@ def check_indexes(model, indexes, check_state):
         if item_check.isCheckable():
             item_check.setCheckState(check_state)
 
-
+            
 """
 Check checkBoxes associated with all items selected for the input QTableView
 """
@@ -280,6 +280,28 @@ class CouchdbImporter:
     * Utils
     ****************************************************************/  
     """
+    def change_select_all_button(self, sab):
+        if sab == "type":
+            self.dlg.selectAllPositionableClass.blockSignals(True)
+            if Utils.is_all_selected_in_model(self.dlg.positionableClass.model()):
+                self.dlg.selectAllPositionableClass.setCheckState(Qt.Checked)
+            else:
+                self.dlg.selectAllPositionableClass.setCheckState(Qt.Unchecked)
+            self.dlg.selectAllPositionableClass.blockSignals(False)
+        elif sab == "attribute":
+            self.dlg.selectAllAttribute.blockSignals(True)
+            if Utils.is_all_selected_in_model(self.dlg.attribute.model()):
+                self.dlg.selectAllAttribute.setCheckState(Qt.Checked)
+            else:
+                self.dlg.selectAllAttribute.setCheckState(Qt.Unchecked)
+            self.dlg.selectAllAttribute.blockSignals(False)
+        elif sab == "object":
+            self.dlg.selectAllPositionable.blockSignals(True)
+            if Utils.is_all_selected_in_model(self.dlg.positionable.model()):
+                self.dlg.selectAllPositionable.setCheckState(Qt.Checked)
+            else:
+                self.dlg.selectAllPositionable.setCheckState(Qt.Unchecked)
+            self.dlg.selectAllPositionable.blockSignals(False)
 
     def change_select_all_button(self, sab):
         if sab == "type":
