@@ -21,6 +21,7 @@
  *                                                                         *
  ***************************************************************************/
 """
+from functools import lru_cache
 from time import strptime
 from qgis.core import QgsGeometry, QgsProject, QgsPoint
 from qgis.PyQt.QtCore import Qt
@@ -85,10 +86,13 @@ class Utils:
     def get_label_reference(positionable):
         if 'libelle' in positionable:
             return positionable['libelle']
-        elif 'designation' in positionable:
-            return positionable['designation']
+        # FDSIRTMA23-33 : display name for authors
         elif 'login' in positionable:
             return positionable['login']
+        elif 'nom' in positionable:# Anomalie#8060
+            return positionable['nom']
+        elif 'designation' in positionable:
+            return positionable['designation']
         elif '_id' in positionable:
             return positionable['_id']
         else:
@@ -178,12 +182,13 @@ class Utils:
         return True
 
     @staticmethod
-    def filter_layers_by_name_and_geometry_type(name, type):
-        layers = QgsProject.instance().mapLayers()
-        for l in layers:
-            if layers[l].name() == name and layers[l].wkbType() == type:
-                return layers[l]
-        return None
+    def filter_layers_by_name_and_geometry_type(name, geom_type):
+        filtered = filter(lambda layer: Utils.match_type(layer, geom_type), QgsProject.instance().mapLayersByName(name))
+        return next(filtered, None)
+
+    @staticmethod
+    def match_type(layer, geom_type):
+        return layer is not None and layer.wkbType() == geom_type
 
     @staticmethod
     def is_str_start_by_underscore(var):
@@ -307,10 +312,15 @@ class Utils:
     def filter_object_by_attributes(obj, attributes):
         target = obj.copy()
 
+        linear_id = None
+
         for attr in target:
             if attr not in attributes:
                 del obj[attr]
-
+            else:
+                if attr == "linearId":
+                    linear_id = obj[attr]
+        return linear_id
 
 # @staticmethod
 def try_extract_most_recent(list_attribute: list, iface, date_attribute_name: str = "date",

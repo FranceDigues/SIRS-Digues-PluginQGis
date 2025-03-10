@@ -47,19 +47,24 @@ class CouchdbBuilder(object):
         with open(os.path.join(__location__, 'formTemplatePilote.json')) as confFile:
             self.configuration = json.load(confFile)
 
-    def build_layer(self, className, geom, data: CouchdbData):
-        crs = data.getCrs(className)
-        fields = self.build_layer_fields(className)
-        layer = QgsVectorLayer(QgsWkbTypes.displayString(geom.wkbType()) + "?crs=" + crs, className, "memory")
+    def build_layer(self, className, geom, database_crs, data: CouchdbData):
+        if database_crs is None:
+            crs = data.getCrs(className)
+        else:
+            crs = database_crs
 
-        if geom.wkbType() == QgsWkbTypes.Point:
+        fields = self.build_layer_fields(className)
+        wkb_type = geom.wkbType()
+        layer = QgsVectorLayer(QgsWkbTypes.displayString(wkb_type) + "?crs=" + crs, className, "memory")
+
+        if wkb_type == QgsWkbTypes.Point:
             props = data.getStylePoint(className)
             symbol = QgsMarkerSymbol.createSimple(props)
-        elif geom.wkbType() == QgsWkbTypes.LineString:
+        elif wkb_type == QgsWkbTypes.LineString:
             props = data.getStyleLine(className)
             symbol = QgsLineSymbol.createSimple(props)
             symbol.setOpacity(0.7)
-        elif geom.wkbType() == QgsWkbTypes.Polygon:
+        elif wkb_type == QgsWkbTypes.Polygon:
             props = data.getStylePolygon(className)
             symbol = QgsFillSymbol.createSimple(props)
             symbol.setOpacity(0.4)

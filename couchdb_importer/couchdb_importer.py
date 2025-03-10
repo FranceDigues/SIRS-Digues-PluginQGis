@@ -24,6 +24,9 @@
 import os.path
 import sys
 import socket
+from math import floor
+
+from qgis._core import QgsCoordinateReferenceSystem, QgsCoordinateTransform
 
 from .message_utils import simple_message, basic_message, stacked_message, confirmation_message
 
@@ -56,6 +59,7 @@ def check_indexes(model, indexes, check_state):
         if item_check.isCheckable():
             item_check.setCheckState(check_state)
 
+            
 """
 Check checkBoxes associated with all items selected for the input QTableView
 """
@@ -63,6 +67,7 @@ Check checkBoxes associated with all items selected for the input QTableView
 
 def check_all_selected_item(q_table_view):
     check_indexes(q_table_view.model(), q_table_view.selectedIndexes(), Qt.Checked)
+
 
 class CouchdbImporter:
     """QGIS Plugin Implementation."""
@@ -76,6 +81,7 @@ class CouchdbImporter:
         :type iface: QgsInterface
         """
         # Save reference to the QGIS interface
+        self.details_idx = None
         self.iface = iface
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
@@ -127,16 +133,16 @@ class CouchdbImporter:
         return QCoreApplication.translate('CouchdbImporter', message)
 
     def add_action(
-        self,
-        icon_path,
-        text,
-        callback,
-        enabled_flag=True,
-        add_to_menu=True,
-        add_to_toolbar=True,
-        status_tip=None,
-        whats_this=None,
-        parent=None):
+            self,
+            icon_path,
+            text,
+            callback,
+            enabled_flag=True,
+            add_to_menu=True,
+            add_to_toolbar=True,
+            status_tip=None,
+            whats_this=None,
+            parent=None):
         """Add a toolbar icon to the toolbar.
 
         :param icon_path: Path to the icon for this action. Can be a resource
@@ -229,29 +235,33 @@ class CouchdbImporter:
 
     def collect_data_from_user_selection(self):
         self.loadedPositionable.clear()
-        lu = 75 / len(self.data.getPositionable())
         completed = 0
         database = self.dlg.database.currentText()
 
         try:
-            for className in self.data.getClassName():
+            names = self.data.getClassName()
+            demi_step = 50/len(names)
+            for className in names:
+                completed += demi_step
+                self.dlg.progressBar.setValue(max(0, floor(completed)))
                 if self.data.getSelected(className):
                     attributes = Utils.build_list_from_selection(self.data.getAttributes(className))
                     attributes = ["_id", "@class"] + attributes
-                    result = self.connector.request_database(database, className=className, attributes=attributes)
+                    result = self.connector.request_database(database, className=className, attributes=attributes, preload=self.isPreLoad)
                     result = list(result)
                     self.connector.replace_id_by_label_in_result(database, result)
                     # replace all attribute of type list by a single value
                     Utils.filter_positionable_list_attribute(result, self.iface)
                     self.loadedPositionable.extend(result)
-                completed = int(completed + lu)
-                self.dlg.progressBar.setValue(completed)
+                completed += demi_step
+                self.dlg.progressBar.setValue(floor(completed))
+            self.connector.clear_cache()
         except couchdb.http.Unauthorized:
             simple_message(self.iface, "Nom d'utilisateur ou mot de passe incorrect.", Qgis.Warning)
         except ConnectionRefusedError as e:
             simple_message(self.iface, "Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base. Exception :"+str(e), Qgis.Critical)
         except ValueError as ve:
-            self.simple_message("Value error : "+str(ve), Qgis.Critical)
+            self.simple_message("Value error : " + str(ve), Qgis.Critical)
 
     def collect_data_from_layers_ids(self, database):
         try:
@@ -263,13 +273,36 @@ class CouchdbImporter:
         except ConnectionRefusedError as e:
             self.simple_message("Connexion refusée. Veuillez vérifier l'url ou l'ouverture de la base."+str(e), Qgis.Critical)
         except ValueError as ve:
-            self.simple_message("Value error : "+str(ve), Qgis.Critical)
+            self.simple_message("Value error : " + str(ve), Qgis.Critical)
 
     """
     /****************************************************************
     * Utils
     ****************************************************************/  
     """
+    def change_select_all_button(self, sab):
+        if sab == "type":
+            self.dlg.selectAllPositionableClass.blockSignals(True)
+            if Utils.is_all_selected_in_model(self.dlg.positionableClass.model()):
+                self.dlg.selectAllPositionableClass.setCheckState(Qt.Checked)
+            else:
+                self.dlg.selectAllPositionableClass.setCheckState(Qt.Unchecked)
+            self.dlg.selectAllPositionableClass.blockSignals(False)
+        elif sab == "attribute":
+            self.dlg.selectAllAttribute.blockSignals(True)
+            if Utils.is_all_selected_in_model(self.dlg.attribute.model()):
+                self.dlg.selectAllAttribute.setCheckState(Qt.Checked)
+            else:
+                self.dlg.selectAllAttribute.setCheckState(Qt.Unchecked)
+            self.dlg.selectAllAttribute.blockSignals(False)
+        elif sab == "object":
+            self.dlg.selectAllPositionable.blockSignals(True)
+            if Utils.is_all_selected_in_model(self.dlg.positionable.model()):
+                self.dlg.selectAllPositionable.setCheckState(Qt.Checked)
+            else:
+                self.dlg.selectAllPositionable.setCheckState(Qt.Unchecked)
+            self.dlg.selectAllPositionable.blockSignals(False)
+
     def change_select_all_button(self, sab):
         if sab == "type":
             self.dlg.selectAllPositionableClass.blockSignals(True)
@@ -491,6 +524,9 @@ class CouchdbImporter:
             troncon = ""
             if "linearId" in pos:
                 troncon = pos["linearId"]
+            se = ""
+            if "SE" in pos:
+                se = pos["SE"]
 
             if keyword is not None:
                 if keyword not in label and keyword not in className and keyword not in designation and keyword not in label:
@@ -498,25 +534,27 @@ class CouchdbImporter:
 
             item1 = QStandardItem(className)
             item2 = QStandardItem(designation)
-            item3 = QStandardItem(troncon)
-            item4 = QStandardItem(label)
-            item5 = QStandardItem(id)
+            item3 = QStandardItem(se)
+            item4 = QStandardItem(troncon)
+            item5 = QStandardItem(label)
+            item6 = QStandardItem(id)
+            self.details_idx = {"class_name": 0, "designation": 1, "se": 2, "troncon": 3, "label": 4, "id": 5}
             item1.setCheckable(True)
 
             if self.data.getIdValue(className, id):
                 item1.setCheckState(Qt.Checked)
             else:
                 item1.setCheckState(Qt.Unchecked)
-            model.appendRow([item1, item2, item3, item4, item5])
+            model.appendRow([item1, item2, item3, item4, item5, item6])
             completed = int(completed + lu)
             self.dlg.progressBar.setValue(completed)
         model.itemChanged.connect(self.on_positionable_list_changed)
         model.sort(0, Qt.AscendingOrder)
-        model.setHorizontalHeaderLabels(["Objet", "Désignation", "Tronçon", "Libellé"])
+        model.setHorizontalHeaderLabels(["Objet", "Désignation", "Système d'endiguement", "Tronçon", "Libellé", "id"])
         self.dlg.positionable.setSortingEnabled(True)
         self.dlg.positionable.setModel(model)
         self.dlg.positionable.resizeColumnsToContents()
-        self.dlg.positionable.setColumnHidden(4, True)
+        self.dlg.positionable.setColumnHidden(self.details_idx["id"], True)
         self.dlg.progressBar.setValue(0)
         # see MULTI_SELECTION_COMMENT
         self.dlg.positionable.selectionModel().selectionChanged.connect(self.on_positionable_selection)
@@ -630,7 +668,7 @@ class CouchdbImporter:
     def on_positionable_click(self, it):
         model = self.dlg.positionable.model()
         row = it.row()
-        id = model.item(row, 4).text()
+        id = model.item(row, self.details_idx["id"]).text()
         selected = None
 
         for pos in self.loadedPositionable:
@@ -704,7 +742,7 @@ class CouchdbImporter:
     def on_attribute_list_changed(self, item):
         model: QStandardItemModel = self.dlg.attribute.model()
         row = model.indexFromItem(item).row()
-        attributeName = model.item(row, 1).text()
+        attributeName = model.item(row, self.details_idx["designation"]).text()
 
         if item.checkState() == Qt.Checked:
             self.data.setAttributeValue(self.currentPositionableClass, attributeName, True)
@@ -715,8 +753,8 @@ class CouchdbImporter:
     def on_positionable_list_changed(self, item):
         model: QStandardItemModel = self.dlg.positionable.model()
         row = model.indexFromItem(item).row()
-        id = model.item(row, 4).text()
-        className = model.item(row, 0).text()
+        id = model.item(row, self.details_idx["id"]).text()
+        className = model.item(row, self.details_idx["class_name"]).text()
 
         if item.checkState() == Qt.Checked:
             self.data.setIdValue(className, id, True)
@@ -847,7 +885,7 @@ class CouchdbImporter:
                 self.basic_message(msg, "couche: " + layer.name() + "donnée: " + str(id), Qgis.Warning)
                 continue
 
-            cn.add(className+str(typ))
+            cn.add(className + str(typ))
             ou = ou + 1
 
             provider = layer.dataProvider()
@@ -879,6 +917,22 @@ class CouchdbImporter:
         pp = 0
         wp = 0
 
+        # source_crs = QgsCoordinateReferenceSystem(layer.crs().authid())
+
+        # 'Anomalie'#7940 : search database crs use this crs to create new qgis' layers
+        request_database = self.connector.request_database(database, single_id="$sirs")
+        if request_database is not None and len(request_database) > 0:
+            database_ = request_database[0]
+            database_crs = database_["epsgCode"]
+        else:
+            database_crs = "EPSG:2154"
+
+        source_crs = QgsCoordinateReferenceSystem("EPSG:2154") # todo not sur how to be sure that all coordinates are by default is in 2154
+        simple_message(self.iface, "Database crs "+database_crs, Qgis.MessageLevel.Warning)
+        target_crs = QgsCoordinateReferenceSystem(database_crs)
+
+        qgs_coordinate_transform = QgsCoordinateTransform(source_crs, target_crs, QgsProject.instance())
+
         for data in self.loadedPositionable:
             try:
                 id = data["_id"]
@@ -899,7 +953,9 @@ class CouchdbImporter:
             if wkt is None:
                 wp = wp + 1
                 continue
+
             geom = Utils.build_geometry(wkt, self.lengthParameter)
+
             if geom is None:
                 print("[UNKNOWN GEOM TYPE]: " + str(wkt))
                 self.basic_message("Type de géométrie non reconnu", str(id), Qgis.Warning)
@@ -916,8 +972,10 @@ class CouchdbImporter:
                 # build layer if not exist
                 if className not in allLayers:
                     allLayers[className] = {}
+                # convert geom in database's crs
+                geom.transform(qgs_coordinate_transform)
                 if typ not in allLayers[className]:
-                    layerBuild = self.provider.build_layer(className, geom, self.data)
+                    layerBuild = self.provider.build_layer(className, geom, database_crs, self.data)
                     if layerBuild is None:
                         self.simple_message("Type de géométrie non traité. class: " + className + ", id: " + id, Qgis.Warning)
                         continue
@@ -925,6 +983,15 @@ class CouchdbImporter:
                 layer = allLayers[className][typ]
             else:
                 layer = currentLayer
+                layer_crs = layer.crs()
+                # 'Anomalie'#7940 : if the imported layer already exists ; reuse the layer's crs.
+                if layer_crs is not None and layer_crs != target_crs:
+                    self.simple_message("Database crs is different from the crs of the existing layer. Keep the layer's crs to avoid recomputing all geometries.", Qgis.Warning)
+                    layer_transform = QgsCoordinateTransform(source_crs, layer_crs, QgsProject.instance())
+                    geom.transform(layer_transform)
+                else:
+                    # convert geom in layer's crs
+                    geom.transform(qgs_coordinate_transform)
             if layer is None:
                 print(className)
                 print(currentLayer)

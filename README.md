@@ -44,6 +44,8 @@ Mapping between interface components (like buttons) and implemented python metho
 
 Connection to couchdb service is done with ` couchdb_connector.py` file.
 
+Debug : use of First Aid qgis' plugin. Install it from qgis' base extensions; open it in parallele of your plugin in qgis; place your breakpoints in the first-aid's interface; crush your finger ;)
+
 # Release
 
 In order to release a new version :
