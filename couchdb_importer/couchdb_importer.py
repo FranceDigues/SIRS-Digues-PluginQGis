@@ -971,6 +971,8 @@ class CouchdbImporter:
                 # build layer if not exist
                 if className not in allLayers:
                     allLayers[className] = {}
+                # convert geom in database's crs
+                geom.transform(qgs_coordinate_transform)
                 if typ not in allLayers[className]:
                     layerBuild = self.provider.build_layer(className, geom, database_crs, self.data)
                     if layerBuild is None:
